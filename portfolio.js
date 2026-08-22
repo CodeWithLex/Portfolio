@@ -14,11 +14,16 @@
 
   chips.forEach(function (chip) {
     chip.addEventListener("click", function () {
-      chips.forEach(function (c) { c.classList.remove("is-active"); });
+      chips.forEach(function (c) {
+        c.classList.remove("is-active");
+      });
       chip.classList.add("is-active");
       var f = chip.getAttribute("data-filter");
       items.forEach(function (it) {
-        it.classList.toggle("is-hidden", f !== "all" && it.getAttribute("data-cat") !== f);
+        it.classList.toggle(
+          "is-hidden",
+          f !== "all" && it.getAttribute("data-cat") !== f,
+        );
       });
     });
   });
@@ -36,7 +41,12 @@
   };
 
   var catFileKey = function (it) {
-    return it.querySelector("img").getAttribute("src").split("/").pop().replace(/\.jpg$/, "");
+    return it
+      .querySelector("img")
+      .getAttribute("src")
+      .split("/")
+      .pop()
+      .replace(/\.jpg$/, "");
   };
 
   var show = function (list, index) {
@@ -44,7 +54,10 @@
     var img = it.querySelector("img");
     lbImg.src = "assets/photos/full/" + catFileKey(it) + ".jpg";
     lbImg.alt = img.alt;
-    lbCap.textContent = it.getAttribute("data-caption") + " · " + it.getAttribute("data-cat").toUpperCase();
+    lbCap.textContent =
+      it.getAttribute("data-caption") +
+      " · " +
+      it.getAttribute("data-cat").toUpperCase();
     current = index;
   };
 
@@ -70,9 +83,15 @@
   };
 
   lightbox.querySelector(".lb-close").addEventListener("click", close);
-  lightbox.querySelector(".lb-prev").addEventListener("click", function () { step(-1); });
-  lightbox.querySelector(".lb-next").addEventListener("click", function () { step(1); });
-  lightbox.addEventListener("click", function (e) { if (e.target === lightbox) close(); });
+  lightbox.querySelector(".lb-prev").addEventListener("click", function () {
+    step(-1);
+  });
+  lightbox.querySelector(".lb-next").addEventListener("click", function () {
+    step(1);
+  });
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) close();
+  });
   document.addEventListener("keydown", function (e) {
     if (lightbox.hidden) return;
     if (e.key === "Escape") close();
@@ -100,7 +119,9 @@
 
   var setMode = function (mode) {
     if (switching || mode === body.getAttribute("data-mode")) return;
-    var reducedNow = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var reducedNow = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (!window.gsap || reducedNow || !wipe) {
       applyMode(mode);
       window.scrollTo(0, 0);
@@ -108,25 +129,45 @@
     }
     switching = true;
     wipeWord.textContent = mode === "create" ? "Create" : "Code";
-    gsap.timeline({
-      onComplete: function () { switching = false; }
-    })
+    gsap
+      .timeline({
+        onComplete: function () {
+          switching = false;
+        },
+      })
       .set(wipe, { display: "flex" })
-      .fromTo(wipe,
+      .fromTo(
+        wipe,
         { clipPath: "inset(100% 0 0 0)" },
-        { clipPath: "inset(0% 0 0 0)", duration: 0.45, ease: "power3.in" })
-      .add(function () { applyMode(mode); window.scrollTo(0, 0); })
-      .fromTo(wipeWord,
+        { clipPath: "inset(0% 0 0 0)", duration: 0.45, ease: "power3.in" },
+      )
+      .add(function () {
+        applyMode(mode);
+        window.scrollTo(0, 0);
+      })
+      .fromTo(
+        wipeWord,
         { yPercent: 40, autoAlpha: 0 },
-        { yPercent: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" }, "-=0.05")
-      .to(wipeWord, { yPercent: -20, autoAlpha: 0, duration: 0.25, ease: "power2.in" }, "+=0.4")
-      .to(wipe,
-        { clipPath: "inset(0 0 100% 0)", duration: 0.5, ease: "power3.out" })
+        { yPercent: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" },
+        "-=0.05",
+      )
+      .to(
+        wipeWord,
+        { yPercent: -20, autoAlpha: 0, duration: 0.25, ease: "power2.in" },
+        "+=0.4",
+      )
+      .to(wipe, {
+        clipPath: "inset(0 0 100% 0)",
+        duration: 0.5,
+        ease: "power3.out",
+      })
       .set(wipe, { display: "none", clipPath: "inset(100% 0 0 0)" });
   };
 
   modeBtns.forEach(function (b) {
-    b.addEventListener("click", function () { setMode(b.getAttribute("data-mode-btn")); });
+    b.addEventListener("click", function () {
+      setMode(b.getAttribute("data-mode-btn"));
+    });
   });
 
   document.querySelectorAll("[data-mode-switch]").forEach(function (el) {
@@ -139,7 +180,9 @@
   if (location.hash === "#create") applyMode("create");
 
   /* ---- motion (optional, progressive) ---- */
-  var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   if (prefersReduced || !window.gsap) return;
 
   gsap.registerPlugin(ScrollTrigger);
@@ -152,24 +195,38 @@
     .from(
       ".hero-title .line",
       { yPercent: 70, autoAlpha: 0, stagger: 0.12, clearProps: "all" },
-      "-=0.25"
+      "-=0.25",
     )
     .from(".hero-sub", { y: 16, autoAlpha: 0, clearProps: "all" }, "-=0.2")
-    .from(".hero-cta a", { y: 14, autoAlpha: 0, stagger: 0.08, clearProps: "all" }, "-=0.25")
+    .from(
+      ".hero-cta a",
+      { y: 14, autoAlpha: 0, stagger: 0.08, clearProps: "all" },
+      "-=0.25",
+    )
     .from(".hero-clients", { y: 12, autoAlpha: 0, clearProps: "all" }, "-=0.25")
     .from(".mockup", { y: 28, autoAlpha: 0, clearProps: "transform" }, "-=0.8")
-    .from(".float-card, .gen-pill, .mock-person", { autoAlpha: 0, stagger: 0.12, duration: 0.4 }, "-=0.3");
+    .from(
+      ".float-card, .gen-pill, .mock-person",
+      { autoAlpha: 0, stagger: 0.12, duration: 0.4 },
+      "-=0.3",
+    );
 
   /* ---- scroll reveals ---- */
   var reveal = function (targets, vars) {
-    gsap.from(targets, Object.assign({
-      y: 28,
-      autoAlpha: 0,
-      duration: 0.5,
-      ease: "power3.out",
-      stagger: 0.08,
-      scrollTrigger: { trigger: targets, start: "top 85%", once: true }
-    }, vars));
+    gsap.from(
+      targets,
+      Object.assign(
+        {
+          y: 28,
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: targets, start: "top 85%", once: true },
+        },
+        vars,
+      ),
+    );
   };
 
   reveal(".section-head");
@@ -190,7 +247,7 @@
       duration: 0.6,
       ease: "power2.out",
       stagger: 0.06,
-      scrollTrigger: { trigger: chart, start: "top 85%", once: true }
+      scrollTrigger: { trigger: chart, start: "top 85%", once: true },
     });
   });
 
@@ -198,15 +255,26 @@
   gsap.from(".watermark", {
     yPercent: 40,
     ease: "none",
-    scrollTrigger: { trigger: ".footer", start: "top bottom", end: "bottom bottom", scrub: true }
+    scrollTrigger: {
+      trigger: ".footer",
+      start: "top bottom",
+      end: "bottom bottom",
+      scrub: true,
+    },
   });
 
   /* ---- pointer tilt on the mockup shell ---- */
   var mockup = document.querySelector(".mockup");
   var visual = document.querySelector(".hero-visual");
   if (mockup && visual && window.matchMedia("(pointer: fine)").matches) {
-    var tiltX = gsap.quickTo(mockup, "rotationX", { duration: 0.5, ease: "power2.out" });
-    var tiltY = gsap.quickTo(mockup, "rotationY", { duration: 0.5, ease: "power2.out" });
+    var tiltX = gsap.quickTo(mockup, "rotationX", {
+      duration: 0.5,
+      ease: "power2.out",
+    });
+    var tiltY = gsap.quickTo(mockup, "rotationY", {
+      duration: 0.5,
+      ease: "power2.out",
+    });
 
     visual.addEventListener("pointermove", function (e) {
       var rect = visual.getBoundingClientRect();
@@ -221,4 +289,91 @@
       tiltY(0);
     });
   }
+})();
+
+/* ---- testimonial deck ---------------------------------------------------- */
+(function () {
+  "use strict";
+
+  var stage = document.getElementById("tdeck-stage");
+  if (!stage) return; /* section not in this page */
+
+  var cards = Array.from(stage.querySelectorAll(".tcard"));
+  var pipsEl = document.getElementById("tdeck-pips");
+  var prevBtn = document.getElementById("tdeck-prev");
+  var nextBtn = document.getElementById("tdeck-next");
+  var N = cards.length;
+  var active = 0;
+
+  /* build pip dots */
+  var pips = [];
+  if (pipsEl) {
+    for (var i = 0; i < N; i++) {
+      var p = document.createElement("span");
+      p.className = "tdeck-pip";
+      pipsEl.appendChild(p);
+      pips.push(p);
+    }
+  }
+
+  /* wrapped signed distance from active index */
+  function wdist(idx) {
+    var d = idx - active;
+    if (d > N / 2) d -= N;
+    if (d < -N / 2) d += N;
+    return d;
+  }
+
+  function update() {
+    cards.forEach(function (card, idx) {
+      var d = wdist(idx);
+      var ad = Math.abs(d);
+      card.style.setProperty("--dist", d);
+      card.style.setProperty("--adist", ad);
+      var act = idx === active;
+      card.classList.toggle("is-active", act);
+      card.setAttribute("aria-hidden", act ? "false" : "true");
+      card.setAttribute("tabindex", act ? "0" : "-1");
+    });
+    pips.forEach(function (p, i) {
+      p.classList.toggle("is-active", i === active);
+    });
+  }
+
+  function goNext() {
+    active = (active + 1) % N;
+    update();
+  }
+  function goPrev() {
+    active = (active - 1 + N) % N;
+    update();
+  }
+
+  if (nextBtn) nextBtn.addEventListener("click", goNext);
+  if (prevBtn) prevBtn.addEventListener("click", goPrev);
+
+  /* clicking an off-center card jumps to it */
+  cards.forEach(function (card, idx) {
+    card.addEventListener("click", function () {
+      if (idx !== active) {
+        active = idx;
+        update();
+      }
+    });
+  });
+
+  /* arrow keys active when deck is on-screen */
+  document.addEventListener("keydown", function (e) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goNext();
+    }
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goPrev();
+    }
+  });
+
+  update(); /* initialise */
 })();

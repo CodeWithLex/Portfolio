@@ -202,71 +202,264 @@ p { margin: 0; }
   will-change: transform;
 }
 
-.hero-card {
+.terminal-card {
   border-radius: var(--radius-lg);
-  padding: var(--space-10);
-  background: rgba(12, 12, 12, 0.6);
+  overflow: hidden;
+  background: rgba(12, 12, 12, 0.85);
   -webkit-backdrop-filter: blur(var(--blur-glass));
   backdrop-filter: blur(var(--blur-glass));
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.02);
 }
 
-.code-lines {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Terminal window header */
+.terminal-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.tdot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.tdot.red { background: #ff5f56; }
+.tdot.yellow { background: #ffbd2e; }
+.tdot.green { background: #27c93f; }
+
+.terminal-title {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.terminal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.t-badge-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+/* Terminal workspace body */
+.terminal-body {
+  padding: 24px;
+  min-height: 280px;
+  max-height: 460px;
+  overflow-y: auto;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 16px;
 }
 
-.line {
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.terminal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.terminal-welcome {
+  color: var(--color-text-secondary);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  padding-left: 14px;
+}
+
+.t-ascii {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.t-intro {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* Quick command chips */
+.terminal-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+}
+
+.ts-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dim);
+  margin-right: 4px;
+}
+
+.ts-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.ts-btn:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+
+.ts-btn[data-cmd="explore"] {
+  background: rgba(74, 222, 128, 0.12);
+  border-color: rgba(74, 222, 128, 0.35);
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.ts-btn[data-cmd="explore"]:hover {
+  background: #4ade80;
+  color: #000;
+  border-color: #4ade80;
+}
+
+/* Dynamic history output */
+.terminal-history {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.t-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.t-entry-cmd {
   display: flex;
   align-items: baseline;
-  gap: var(--space-2);
-  font-size: clamp(14px, 0.6vw + 12px, 19px);
-  line-height: 1.65;
+  gap: 6px;
+  color: #fff;
+  font-weight: 600;
 }
 
-.num {
-  flex: none;
-  font-size: 0.85em;
-  color: var(--color-text-dim);
-  transition: color var(--duration-fast) ease;
+.t-entry-out {
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
+  font-size: 12px;
 }
 
-.chevron {
-  flex: none;
-  color: var(--color-text-dim);
-  transition: color var(--duration-fast) ease;
+.t-out-title {
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 2px;
 }
 
-.line .text { color: var(--color-text-primary); }
-
-.line em {
-  font-style: normal;
-  color: var(--color-primary);
+.t-out-row {
+  margin: 3px 0;
 }
 
-.line:hover .num,
-.line:hover .chevron { color: var(--color-secondary); }
-
-.line-accent .text { color: var(--color-primary); }
-
-.cursor {
+.t-tag {
   display: inline-block;
-  width: 0.55em;
-  height: 1em;
-  margin-left: 6px;
-  vertical-align: text-bottom;
-  border-radius: 2px;
-  background: var(--color-primary);
-  animation: blink 1.1s steps(2, start) infinite;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  margin-right: 4px;
+  color: #fff;
 }
 
-@keyframes blink {
-  to { visibility: hidden; }
+.t-highlight {
+  color: #4ade80;
+}
+
+.t-accent {
+  color: #e8a952;
+}
+
+/* Active prompt line */
+.terminal-prompt-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.terminal-prompt {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-weight: 700;
+  flex: none;
+}
+
+.t-user { color: #4ade80; }
+.t-sep { color: rgba(255, 255, 255, 0.4); }
+.t-path { color: #38bdf8; }
+.t-dollar { color: rgba(255, 255, 255, 0.6); }
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #fff;
+  padding: 0;
+  caret-color: #4ade80;
+}
+
+.terminal-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 /* ---- buttons --------------------------------------------------------------- */

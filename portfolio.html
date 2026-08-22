@@ -24,11 +24,17 @@
         <span class="logo-word">Lex</span>
       </a>
 
-      <nav class="nav-pill" aria-label="Sections">
+      <nav class="nav-pill mode-code-nav" aria-label="Code Sections">
         <a href="#work">Work</a>
-        <a href="#photography">Photos</a>
-        <a href="#method">Method</a>
+        <a href="#method">Principles</a>
         <a href="#contact">Contact</a>
+      </nav>
+
+      <nav class="nav-pill mode-create-nav" aria-label="Creative Sections">
+        <a href="#photography">Gallery</a>
+        <a href="#testimonials">Highlights</a>
+        <a href="#method">Philosophy</a>
+        <a href="#contact">Book Shoot</a>
       </nav>
 
       <div class="nav-right">
@@ -36,8 +42,10 @@
           <button type="button" data-mode-btn="code" class="is-active" aria-pressed="true">Code</button>
           <button type="button" data-mode-btn="create" aria-pressed="false">Create</button>
         </div>
-        <p class="status" role="status"><span class="status-dot" aria-hidden="true"></span>System v2.4 — live</p>
-        <a class="btn-white-pill" href="mailto:lexmatondo@g.cjc.edu.ph">Let’s talk</a>
+        <p class="status mode-code" role="status"><span class="status-dot" aria-hidden="true"></span>System v2.4 — live</p>
+        <p class="status mode-create" role="status"><span class="status-dot" aria-hidden="true"></span>LowBud Photography</p>
+        <a class="btn-white-pill mode-code" href="mailto:lexmatondo@g.cjc.edu.ph">Let’s talk</a>
+        <a class="btn-white-pill mode-create" href="mailto:lexmatondo@g.cjc.edu.ph">Book a shoot</a>
       </div>
     </header>
 
@@ -140,13 +148,12 @@
       <!-- ================= BENTO ================= -->
       <section class="bento" id="work">
         <header class="section-head">
-          <p class="section-label mode-code-only">Selected work — live &amp; deployed</p>
-          <h2 class="mode-code-only">Engineered for <em>impact &amp; scale.</em></h2>
-          <p class="section-label mode-create-only">The other side</p>
-          <h2 class="mode-create-only">Yes, I also <em>build</em> things.</h2>
+          <p class="section-label">Selected work — live &amp; deployed</p>
+          <h2>Engineered for <em>impact &amp; scale.</em></h2>
         </header>
 
-        <div class="bento-grid">
+        <!-- Top Flagship Projects (clean, un-overwhelming) -->
+        <div class="bento-grid bento-featured">
           <article class="bcard b-large">
             <div class="bcard-top">
               <div class="bcard-header-row">
@@ -191,7 +198,18 @@
             <p>Modernizing barangay services through accessible digital governance.</p>
             <p class="bcard-meta-ink">JavaScript · May 2026</p>
           </article>
+        </div>
 
+        <!-- Progressive Disclosure Toggle -->
+        <div class="bento-reveal-row">
+          <button type="button" class="btn-reveal-more" id="btn-toggle-more-projects" aria-expanded="false" aria-controls="bento-drawer">
+            <span class="reveal-text">Explore 4 more projects &amp; hardware</span>
+            <svg class="reveal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <!-- Collapsible Drawer with remaining projects -->
+        <div class="bento-drawer is-collapsed" id="bento-drawer">
           <article class="bcard">
             <div class="bcard-header-row">
               <p class="bcard-label">Java · Desktop</p>
@@ -486,8 +504,9 @@
       <!-- ================= METHOD (light contrast section) ================= -->
       <section class="method" id="method">
         <div class="method-grid">
-          <div class="method-copy">
-            <p class="section-label dark">Engineering &amp; Visual Principles</p>
+          <!-- Code Method -->
+          <div class="method-copy mode-code">
+            <p class="section-label dark">Engineering Principles</p>
             <h2 class="method-title">Simplicity is the <em>ultimate</em> sophistication.</h2>
             <ol class="steps">
               <li>
@@ -505,12 +524,37 @@
             </ol>
           </div>
 
+          <!-- Create Method -->
+          <div class="method-copy mode-create">
+            <p class="section-label dark">Creative Philosophy</p>
+            <h2 class="method-title">Observe first, <em>shoot</em> second.</h2>
+            <ol class="steps">
+              <li>
+                <span class="step-num">01</span>
+                <div><h3>Authenticity over polish</h3><p>The best frames aren't staged — they're discovered. Waiting patiently for the honest, unforced moment.</p></div>
+              </li>
+              <li>
+                <span class="step-num">02</span>
+                <div><h3>Light tells the story</h3><p>Shooting with prime lenses at wide apertures so ambient light and genuine mood carry the emotion.</p></div>
+              </li>
+              <li>
+                <span class="step-num">03</span>
+                <div><h3>Edit with restraint</h3><p>Post-processing removes distractions, never alters truth. What was felt stays felt.</p></div>
+              </li>
+            </ol>
+          </div>
+
           <figure class="portrait-wrap">
             <div class="portrait"><img src="assets/photos/thumb/me-1.jpg" alt="Portrait of Lex Matondo" loading="lazy" decoding="async"></div>
-            <figcaption class="testimonial">
-              <p class="t-label">Creator Ethos</p>
-              <blockquote>“Build what serves the community first — whether it's replacing paper forms with real-time digital portals, or preserving authentic life milestones frame by frame.”</blockquote>
-              <cite>Lex Matondo · Developer &amp; Photographer</cite>
+            <figcaption class="testimonial mode-code">
+              <p class="t-label">Engineering Ethos</p>
+              <blockquote>“Build what serves the community first — replacing manual paper queues with real-time digital portals, one system at a time.”</blockquote>
+              <cite>Lex Matondo · CPE Student &amp; Developer</cite>
+            </figcaption>
+            <figcaption class="testimonial mode-create">
+              <p class="t-label">Visual Ethos</p>
+              <blockquote>“Preserving authentic life milestones frame by frame — whether it's a wedding vow, a christening blessing, or a quiet campus story.”</blockquote>
+              <cite>Lex Matondo · Photographer, LowBud Photography</cite>
             </figcaption>
           </figure>
         </div>
@@ -520,7 +564,8 @@
       <footer class="footer" id="contact">
         <div class="watermark" aria-hidden="true">LEX</div>
 
-        <div class="footer-cta">
+        <!-- Code CTA -->
+        <div class="footer-cta mode-code">
           <h2>Have an idea or<br>project to build?</h2>
           <a class="btn-mega" href="mailto:lexmatondo@g.cjc.edu.ph">
             <span class="mega-text">Let’s build it</span>
@@ -535,12 +580,34 @@
           </div>
         </div>
 
+        <!-- Create CTA -->
+        <div class="footer-cta mode-create">
+          <h2>Looking for a<br>photographer?</h2>
+          <a class="btn-mega" href="mailto:lexmatondo@g.cjc.edu.ph">
+            <span class="mega-text">Book a shoot</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+          <div class="footer-email-row">
+            <span class="email-text">lexmatondo@g.cjc.edu.ph</span>
+            <button class="btn-copy-email" type="button" aria-label="Copy email address" data-email="lexmatondo@g.cjc.edu.ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <span class="copy-label">Copy Email</span>
+            </button>
+          </div>
+        </div>
+
         <div class="footer-cols">
-          <nav class="footer-policies" aria-label="Profiles">
+          <nav class="footer-policies mode-code" aria-label="Dev Profiles">
             <a href="https://github.com/CodeWithLex" target="_blank" rel="noopener">GitHub</a>
             <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography</a>
             <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">TikTok</a>
             <a href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener">YouTube</a>
+          </nav>
+          <nav class="footer-policies mode-create" aria-label="Creative Profiles">
+            <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography</a>
+            <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://github.com/CodeWithLex" target="_blank" rel="noopener">GitHub</a>
           </nav>
           <div class="socials" aria-label="Social profiles">
             <a class="social" href="https://github.com/CodeWithLex" target="_blank" rel="noopener" aria-label="GitHub">GH</a>

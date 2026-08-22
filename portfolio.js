@@ -448,3 +448,28 @@
     });
   });
 })();
+
+/* ---- Bento Drawer Progressive Disclosure Toggle ---- */
+(function () {
+  "use strict";
+
+  var toggleBtn = document.getElementById("btn-toggle-more-projects");
+  var drawer = document.getElementById("bento-drawer");
+  if (!toggleBtn || !drawer) return;
+
+  var label = toggleBtn.querySelector(".reveal-text");
+
+  toggleBtn.addEventListener("click", function () {
+    var isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+    if (isExpanded) {
+      drawer.classList.add("is-collapsed");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      if (label) label.textContent = "Explore 4 more projects & hardware";
+    } else {
+      drawer.classList.remove("is-collapsed");
+      toggleBtn.setAttribute("aria-expanded", "true");
+      if (label) label.textContent = "Show fewer projects";
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    }
+  });
+})();

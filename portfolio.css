@@ -867,6 +867,45 @@ body[data-mode="create"] .section-head h2 em {
   color: var(--text-60);
 }
 
+/* Deep Case Study Typography & Structure */
+.case-study-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.cs-point {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--text-60);
+}
+
+.cs-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 3px;
+}
+
+.cs-point p {
+  margin: 0;
+  color: rgba(235, 235, 235, 0.75);
+}
+
+.cs-point code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #fff;
+}
+
 .bcard-label {
   font-size: 9px;
   color: var(--text-30);

@@ -3,35 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lex Matondo — Computer Engineering &amp; Developer</title>
-  <meta name="description" content="Portfolio entry of Lex Matondo — Computer Engineering student building production systems, embedded solutions, and documentary storytelling.">
+  <title>Lex Matondo — CODE × CREATE</title>
+  <meta name="description" content="Entry portal of Lex Matondo — Computer Engineering student building production software & hardware systems, and documentary photojournalism.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c0c0c'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='16' font-weight='600' fill='%23ffffff' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="split-page">
 
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
 
-  <!-- Identity topbar -->
+  <!-- Global Header Bar -->
   <header class="topbar">
-    <a class="brand" href="portfolio.html">
+    <a class="brand" href="index.html" aria-label="Lex Matondo Home">
       <span class="avatar" aria-hidden="true">L</span>
       <span class="brand-text">
-        <span class="brand-name">CodeWithLex.exe</span>
-        <span class="brand-role">Computer Engineering · Dev &amp; Photo</span>
+        <span class="brand-name">Lex Matondo</span>
+        <span class="brand-role">Computer Engineering · Cor Jesu College</span>
       </span>
     </a>
 
-    <nav class="topbar-actions" aria-label="Profiles">
-      <a class="icon-link" href="mailto:lexmatondo@g.cjc.edu.ph" aria-label="Email Lex" title="Email: lexmatondo@g.cjc.edu.ph">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/>
-        </svg>
-      </a>
+    <div class="topbar-center">
+      <span class="capsule-tag"><span class="live-dot" aria-hidden="true"></span>CHOOSE YOUR PATH</span>
+    </div>
+
+    <nav class="topbar-actions" aria-label="Quick Links">
+      <a class="nav-btn-link" href="resume.html" target="_blank" rel="noopener">Resume (CV)</a>
       <a class="icon-link" href="https://github.com/CodeWithLex" target="_blank" rel="noopener" aria-label="GitHub Profile" title="GitHub: CodeWithLex">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
@@ -45,88 +44,114 @@
     </nav>
   </header>
 
-  <main class="hero" id="top">
-    <div class="card-shell">
-      <section class="terminal-card" aria-label="Interactive Terminal">
+  <!-- 50/50 Split Main Experience -->
+  <main class="split-viewport" id="split-container">
 
-        <!-- Terminal Window Header -->
-        <div class="terminal-chrome">
-          <div class="terminal-dots" aria-hidden="true">
-            <span class="tdot red"></span>
-            <span class="tdot yellow"></span>
-            <span class="tdot green"></span>
-          </div>
-          <div class="terminal-title">lex@cjc-workstation: ~ (zsh)</div>
-          <div class="terminal-badge"><span class="t-badge-dot"></span>CPE · ACTIVE</div>
+    <!-- LEFT HALF: CODE -->
+    <section class="split-side side-code" id="panel-code" aria-label="Engineering & Code Portal">
+      <div class="side-backdrop code-bg" aria-hidden="true">
+        <div class="grid-mesh"></div>
+        <div class="glow-sphere cyan-glow"></div>
+      </div>
+
+      <div class="side-content">
+        <div class="panel-badge code-badge">
+          <span class="badge-icon">&lt;/&gt;</span>
+          <span>DISCIPLINE 01 · ENGINEERING</span>
         </div>
 
-        <!-- Terminal Workspace Body -->
-        <div class="terminal-body" id="terminal-screen" role="region" aria-live="polite">
-          
-          <div class="terminal-welcome">
-            <p class="t-ascii">LEX MATONDO · COMPUTER ENGINEERING &amp; CREATIVE STORYTELLING</p>
-            <p class="t-intro">Welcome to my workstation environment. Type a command or click any shortcut below to inspect systems &amp; visual media.</p>
+        <h1 class="side-title">
+          <span>Software Systems</span>
+          <em>&amp; Embedded Hardware.</em>
+        </h1>
+
+        <p class="side-sub">
+          Production student council governance portals, chemistry lab apparatus queues, and microcontroller hardware built for real institutional impact.
+        </p>
+
+        <div class="side-telemetry">
+          <div class="tel-item">
+            <strong>3+ Live Systems</strong>
+            <span>Deployed &amp; In Active Use</span>
           </div>
-
-          <!-- Clickable quick-command shortcuts -->
-          <div class="terminal-shortcuts" role="toolbar" aria-label="Quick Terminal Commands">
-            <span class="ts-label">Quick Commands:</span>
-            <button type="button" class="ts-btn" data-cmd="explore">&gt; explore portfolio</button>
-            <button type="button" class="ts-btn" data-cmd="projects">projects</button>
-            <button type="button" class="ts-btn" data-cmd="skills">skills</button>
-            <button type="button" class="ts-btn" data-cmd="photo">photo</button>
-            <button type="button" class="ts-btn" data-cmd="help">help</button>
-            <button type="button" class="ts-btn" data-cmd="clear">clear</button>
+          <div class="tel-item">
+            <strong>Flagship</strong>
+            <span>coelgu-system.engineer</span>
           </div>
-
-          <!-- Dynamic history output -->
-          <div class="terminal-history" id="terminal-history"></div>
-
-          <!-- Active Prompt input line -->
-          <form class="terminal-prompt-form" id="terminal-form" autocomplete="off">
-            <label class="terminal-prompt" for="terminal-input">
-              <span class="t-user">lex@cjc</span><span class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar">$</span>
-            </label>
-            <input
-              type="text"
-              id="terminal-input"
-              class="terminal-input"
-              spellcheck="false"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"
-              placeholder="type 'explore' or click above..."
-              aria-label="Terminal command input"
-            >
-          </form>
         </div>
 
-        <!-- Action row below terminal -->
-        <div class="cta-row">
-          <a class="btn btn-primary" href="portfolio.html">
-            Launch Full Portfolio
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>
-            </svg>
+        <div class="side-pills">
+          <span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Arduino C++</span><span>Java Swing</span>
+        </div>
+
+        <div class="side-action">
+          <a class="btn-split btn-code" href="portfolio.html?mode=code" id="btn-enter-code">
+            <span>Explore Engineering Work</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a class="btn btn-secondary" href="mailto:lexmatondo@g.cjc.edu.ph">Get in Touch</a>
+          <span class="key-hint">Press <kbd>C</kbd> or <kbd>1</kbd></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER FLOATING BADGE -->
+    <div class="split-divider" aria-hidden="true">
+      <div class="divider-capsule">
+        <span class="div-arrow">←</span>
+        <span class="div-text">CODE × CREATE</span>
+        <span class="div-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- RIGHT HALF: CREATE -->
+    <section class="split-side side-create" id="panel-create" aria-label="Photography & Editorial Portal">
+      <div class="side-backdrop create-bg" aria-hidden="true">
+        <div class="film-grain"></div>
+        <div class="glow-sphere amber-glow"></div>
+      </div>
+
+      <div class="side-content">
+        <div class="panel-badge create-badge">
+          <span class="badge-icon">📷</span>
+          <span>DISCIPLINE 02 · PHOTOGRAPHY</span>
         </div>
 
-      </section>
-    </div>
+        <h2 class="side-title">
+          <span>Documentary Frames</span>
+          <em>&amp; Intimate Vows.</em>
+        </h2>
+
+        <p class="side-sub">
+          Editorial photojournalism shot for the student publication and the College of Engineering, capturing honest, unforced moments and community milestones.
+        </p>
+
+        <div class="side-telemetry">
+          <div class="tel-item">
+            <strong>Prime Optics</strong>
+            <span>85mm ƒ/1.4 · 50mm ƒ/1.8</span>
+          </div>
+          <div class="tel-item">
+            <strong>Affiliation</strong>
+            <span>LowBud Photography · Publication</span>
+          </div>
+        </div>
+
+        <div class="side-pills">
+          <span>Portraits</span><span>Weddings</span><span>Christening</span><span>Editorial Media</span>
+        </div>
+
+        <div class="side-action">
+          <a class="btn-split btn-create" href="portfolio.html?mode=create" id="btn-enter-create">
+            <span>Explore Visual Archive</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <span class="key-hint">Press <kbd>P</kbd> or <kbd>2</kbd></span>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="site-footer">
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="portfolio.html#work">Engineering Work</a>
-      <a href="portfolio.html#method">Approach</a>
-      <a href="portfolio.html#photography">Photography</a>
-      <a href="mailto:lexmatondo@g.cjc.edu.ph">Email Direct</a>
-    </nav>
-    <p class="footer-copy">© 2026 Lex Matondo · Cor Jesu College</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>

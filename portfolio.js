@@ -175,9 +175,14 @@
       e.preventDefault();
       setMode(el.getAttribute("data-mode-switch"));
     });
-  });
-
-  if (location.hash === "#create") applyMode("create");
+  // Initial mode detection from query params and hash
+  var urlParams = new URLSearchParams(window.location.search);
+  var modeParam = urlParams.get("mode");
+  if (modeParam === "create" || location.hash === "#create" || location.hash === "#photography") {
+    applyMode("create");
+  } else if (modeParam === "code" || location.hash === "#code" || location.hash === "#work") {
+    applyMode("code");
+  }
 
   /* ---- motion (optional, progressive) ---- */
   var prefersReduced = window.matchMedia(

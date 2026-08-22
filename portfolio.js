@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 4. Global Motion Observer (Calm, Editorial & Non-repetitive)
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealElements = document.querySelectorAll(
-    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow"
+    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow, .philosophy-flow"
   );
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {

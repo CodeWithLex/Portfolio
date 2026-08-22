@@ -3,682 +3,297 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lex — Selected Work</title>
-  <meta name="description" content="Main portfolio of Lex — design systems, motion and production front-end. Dark-mode-first, AI-assisted, human-led.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' text-anchor='middle' fill='%23000'%3EL%3C/text%3E%3C/svg%3E">
+  <title>Lex Matondo — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Lex Matondo — Computer Engineering student, developer, and photographer.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-size='14' font-weight='600' fill='%23F2F2F0' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="portfolio.css">
 </head>
 <body data-mode="code">
 
-  <div class="noise" aria-hidden="true"></div>
+  <div class="portfolio-container">
 
-  <!-- Floating shell: everything lives inside this rounded obsidian container -->
-  <div class="shell">
+    <!-- Compact Editorial Navigation -->
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Lex Matondo Home">LEX MATONDO</a>
 
-    <header class="nav">
-      <a class="logo" href="index.html" aria-label="Lex — back to intro">
-        <span class="logo-box" aria-hidden="true">L</span>
-        <span class="logo-word">Lex</span>
-      </a>
-
-      <nav class="nav-pill mode-code-nav" aria-label="Code Sections">
-        <a href="#work">Case Studies</a>
-        <a href="#method">How I Build</a>
-        <a href="resume.html" target="_blank" rel="noopener">Resume</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <nav class="nav-pill mode-create-nav" aria-label="Creative Sections">
-        <a href="#photography">Gallery</a>
-        <a href="#testimonials">Highlights</a>
-        <a href="#method">Philosophy</a>
-        <a href="#contact">Book Shoot</a>
-      </nav>
-
-      <div class="nav-right">
-        <div class="mode-toggle" role="group" aria-label="Portfolio mode">
-          <button type="button" data-mode-btn="code" class="is-active" aria-pressed="true">Code</button>
-          <button type="button" data-mode-btn="create" aria-pressed="false">Create</button>
-        </div>
-        <p class="status mode-code" role="status"><span class="status-dot" aria-hidden="true"></span>System v2.4 — live</p>
-        <p class="status mode-create" role="status"><span class="status-dot" aria-hidden="true"></span>LowBud Photography</p>
-        <a class="btn-white-pill mode-code" href="mailto:lexmatondo@g.cjc.edu.ph">Let’s talk</a>
-        <a class="btn-white-pill mode-create" href="mailto:lexmatondo@g.cjc.edu.ph">Book a shoot</a>
+      <div class="mode-switch-group" role="group" aria-label="Discipline Selector">
+        <button type="button" class="mode-btn is-active" data-mode-btn="code" aria-pressed="true">TECH</button>
+        <span class="mode-sep">/</span>
+        <button type="button" class="mode-btn" data-mode-btn="create" aria-pressed="false">CREATE</button>
       </div>
+
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+        <a href="resume.html" target="_blank" rel="noopener">RESUME</a>
+      </nav>
     </header>
 
-    <main>
-      <!-- ================= HERO ================= -->
-      <section class="hero">
-        <div class="hero-copy mode-code">
-          <p class="ai-label"><span class="ai-dot" aria-hidden="true"></span>Computer Engineering · Cor Jesu College · Production Systems</p>
-          <h1 class="hero-title">
-            <span class="line">Engineering systems with</span>
-            <span class="line"><em>real community impact.</em></span>
+    <main class="portfolio-main">
+
+      <!-- ================= TECH VIEW ================= -->
+      <div class="discipline-view view-tech" id="view-tech">
+
+        <!-- Tech Intro -->
+        <section class="editorial-hero">
+          <span class="hero-kicker">TECH</span>
+          <h1 class="hero-heading">
+            I build software and<br>
+            embedded systems for<br>
+            real-world problems.
           </h1>
-          <p class="hero-sub">
-            I’m Lex — a Computer Engineering student building production student council governance portals, chemistry lab apparatus queue systems, and embedded hardware for real institutions.
-          </p>
-          <div class="hero-cta">
-            <a class="btn-accent" href="#work">
-              View Case Studies
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
-            </a>
-            <a class="btn-dark" href="#method">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>
-              How I Build
-            </a>
-            <a class="btn-dark" href="resume.html" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              Resume
+        </section>
+
+        <!-- 01 / Primary Featured Project (COE LGU Portal) -->
+        <section class="featured-project" id="work" aria-labelledby="featured-title">
+          <div class="featured-meta">
+            <span class="featured-index">01 / SELECTED WORK</span>
+            <h2 class="featured-title" id="featured-title">COE LGU Transparency Portal</h2>
+            <p class="featured-tagline">Institutional governance, made digital.</p>
+          </div>
+
+          <div class="featured-visual">
+            <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener" aria-label="Open COE LGU Portal in new tab">
+              <img src="assets/projects/coelgu-system.png" alt="COE LGU Portal — student governance interface" loading="eager" decoding="async">
             </a>
           </div>
-          <!-- Real Institutional Contexts -->
-          <p class="hero-clients">
-            <span>College of Engineering</span><span>CJC ChemLab</span><span>Student Publication</span><span>eBarangay LGU</span>
-          </p>
-        </div>
 
-        <div class="hero-visual mode-code" aria-hidden="true">
-          <div class="mockup">
-            <div class="mock-chrome">
-              <span class="m-dot r"></span><span class="m-dot y"></span><span class="m-dot g"></span>
-              <span class="mock-file">coelgu-system.engineer — Production v2.4</span>
+          <div class="featured-footer">
+            <span class="featured-stack">JavaScript · REST · Authentication · Database</span>
+            <div class="featured-actions">
+              <a class="action-link" href="https://www.coelgu-system.engineer" target="_blank" rel="noopener">VIEW LIVE PORTAL →</a>
+              <a class="action-link secondary" href="https://github.com/CodeWithLex/LGU-SYSTEM" target="_blank" rel="noopener">SOURCE CODE ↗</a>
             </div>
-            <div class="mock-screen-real">
-              <img class="mock-screen-img" src="assets/projects/coelgu-system.png" alt="COE LGU Portal Interface" loading="lazy" decoding="async">
-            </div>
-
-            <img class="mock-person" src="assets/img/lex-cutout.webp" alt="Lex Matondo" loading="lazy" decoding="async">
-
-            <div class="float-card fc-a">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              <div><strong>Live Campus Portals</strong><span>Deployed &amp; In Active Use</span></div>
-            </div>
-            <div class="gen-pill">Full-Stack &amp; Embedded</div>
           </div>
-        </div>
+        </section>
 
-        <div class="hero-copy mode-create">
-          <p class="ai-label"><span class="ai-dot" aria-hidden="true"></span>Events · Portraits · Documentary</p>
-          <h1 class="hero-title">
-            <span class="line">Documentary, Portraits</span>
-            <span class="line"><em>&amp; Intimate Vows.</em></span>
+        <!-- Compact Project Archive Index -->
+        <section class="project-archive" aria-labelledby="archive-heading">
+          <h3 class="archive-heading" id="archive-heading">OTHER WORK</h3>
+          <div class="archive-index">
+
+            <a class="archive-item" href="https://chemlab-system.me" target="_blank" rel="noopener">
+              <div class="archive-col-title">
+                <span class="archive-name">ChemLab Apparatus System</span>
+                <span class="archive-sub">Laboratory apparatus queue &amp; QR verification</span>
+              </div>
+              <span class="archive-tech">PHP · MySQL · QR Auth</span>
+              <span class="archive-year">2026 ↗</span>
+            </a>
+
+            <div class="archive-item" tabindex="0">
+              <div class="archive-col-title">
+                <span class="archive-name">Automated Medicine Dispenser</span>
+                <span class="archive-sub">Healthcare smart assistant &amp; actuator hardware</span>
+              </div>
+              <span class="archive-tech">Arduino C++ · Java Swing</span>
+              <span class="archive-year">2026</span>
+            </div>
+
+            <a class="archive-item" href="https://github.com/CodeWithLex/eBarangay-Portal" target="_blank" rel="noopener">
+              <div class="archive-col-title">
+                <span class="archive-name">eBarangay Citizen Portal</span>
+                <span class="archive-sub">Digital document requests &amp; civic governance</span>
+              </div>
+              <span class="archive-tech">JavaScript · REST API</span>
+              <span class="archive-year">2026 ↗</span>
+            </a>
+
+            <a class="archive-item" href="https://reviewer-coach.onrender.com" target="_blank" rel="noopener">
+              <div class="archive-col-title">
+                <span class="archive-name">PMAEE CadetCoach</span>
+                <span class="archive-sub">Cloud-hosted military entrance exam preparation</span>
+              </div>
+              <span class="archive-tech">Node.js · Render Cloud</span>
+              <span class="archive-year">2026 ↗</span>
+            </a>
+
+            <a class="archive-item" href="https://github.com/CodeWithLex/Content-Creation-Manager" target="_blank" rel="noopener">
+              <div class="archive-col-title">
+                <span class="archive-name">Content Creation Manager</span>
+                <span class="archive-sub">Standalone asset organizer &amp; preset parser</span>
+              </div>
+              <span class="archive-tech">Java Swing · File I/O</span>
+              <span class="archive-year">2025 ↗</span>
+            </a>
+
+            <a class="archive-item" href="https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y" target="_blank" rel="noopener">
+              <div class="archive-col-title">
+                <span class="archive-name">F.R.I.D.A.Y Assistant</span>
+                <span class="archive-sub">Experimental voice NLP &amp; computer vision</span>
+              </div>
+              <span class="archive-tech">Python · SpeechRecognition</span>
+              <span class="archive-year">2025 ↗</span>
+            </a>
+
+          </div>
+        </section>
+
+      </div><!-- /view-tech -->
+
+      <!-- ================= CREATE VIEW ================= -->
+      <div class="discipline-view view-create" id="view-create">
+
+        <!-- Create Intro -->
+        <section class="editorial-hero">
+          <span class="hero-kicker">CREATE</span>
+          <h1 class="hero-heading">
+            Photography,<br>
+            documentary,<br>
+            and quiet moments.
           </h1>
-          <p class="hero-sub">
-            Programming is how I build — photography is how I observe. Events, portraits and
-            documentary moments, shot for the student publication and the College of Engineering,
-            edited frame by frame.
-          </p>
-          <div class="hero-cta">
-            <a class="btn-accent" href="#photography">
-              View the gallery
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
-            </a>
-            <button class="btn-dark" type="button" data-mode-switch="code">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              See the code side
+        </section>
+
+        <!-- Consolidated Photography Archive -->
+        <section class="photo-archive" id="photography" aria-labelledby="photo-archive-title">
+          <div class="photo-controls">
+            <span class="archive-label" id="photo-archive-title">VISUAL ARCHIVE</span>
+            <div class="photo-filters" role="group" aria-label="Filter photography by category">
+              <button class="filter-btn is-active" data-filter="all" type="button">ALL</button>
+              <button class="filter-btn" data-filter="portraits" type="button">PORTRAITS</button>
+              <button class="filter-btn" data-filter="wedding" type="button">WEDDING</button>
+              <button class="filter-btn" data-filter="christening" type="button">CHRISTENING</button>
+              <button class="filter-btn" data-filter="documentary" type="button">DOCUMENTARY</button>
+            </div>
+          </div>
+
+          <div class="photo-grid" id="gallery">
+
+            <button class="photo-tile tile-wide" data-cat="portraits" data-caption="Bebe — Portrait Session" data-meta="Natural Light · 85mm ƒ/1.4" type="button">
+              <img src="assets/photos/full/portraits-4.jpg" alt="Portrait session — Bebe" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">BEBE — PORTRAIT SESSION</span>
+                <span class="caption-meta">Natural Light · 85mm ƒ/1.4</span>
+              </div>
             </button>
-          </div>
-          <p class="hero-clients">
-            <span>Student Publication</span><span>College of Engineering</span><span>Weddings &amp; Debuts</span><span>LowBud Photography</span>
-          </p>
-        </div>
 
-        <div class="hero-visual mode-create" aria-hidden="true">
-          <div class="photo-hero">
-            <img src="assets/photos/full/portraits-2.jpg" alt="Portrait session" loading="lazy" decoding="async">
-            <div class="float-card fc-exif">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/><circle cx="12" cy="12" r="2.5"/></svg>
-              <div><strong>85mm ƒ/1.4</strong><span>Prime Lens Photojournalism</span></div>
-            </div>
-            <div class="gen-pill">LowBud Photography</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================= BENTO / CASE STUDIES ================= -->
-      <section class="bento" id="work">
-        <header class="section-head">
-          <p class="section-label">Primary Flagship Case Study</p>
-          <h2>Architected for <em>institutional transparency.</em></h2>
-        </header>
-
-        <!-- Main Flagship Spotlight: COE LGU Portal -->
-        <article class="flagship-case-study">
-          <div class="fcs-grid">
-            <div class="fcs-content">
-              <div class="bcard-header-row">
-                <p class="bcard-label">coelgu-system.engineer · Campus Deployed</p>
-                <span class="badge-status badge-live"><span class="bdot"></span>Live on .engineer TLD</span>
+            <button class="photo-tile tile-tall" data-cat="wedding" data-caption="Golden Hour Vows" data-meta="Intimate Ceremony · 50mm ƒ/1.8" type="button">
+              <img src="assets/photos/full/wedding-7.jpg" alt="Wedding portrait by Lex" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">GOLDEN HOUR VOWS</span>
+                <span class="caption-meta">Intimate Ceremony · 50mm ƒ/1.8</span>
               </div>
-              <h3 class="fcs-title">COE LGU Transparency &amp; Student Portal</h3>
-              
-              <div class="case-study-details">
-                <div class="cs-point">
-                  <strong class="cs-label">The Problem &amp; Stakeholders:</strong>
-                  <p>Student council finances (₱) and fee allocations at the College of Engineering were managed through chaotic spreadsheets and manual receipts, causing student distrust and slow administrative approvals.</p>
-                </div>
-                <div class="cs-point">
-                  <strong class="cs-label">What I Built &amp; Architectural Role:</strong>
-                  <p>A full-stack governance portal with institutional <code>@g.cjc.edu.ph</code> authentication, real-time Philippine Peso (₱) financial ledger with over-budget alerts, CSV bulk student roster import, and an immutable admin audit log.</p>
-                </div>
-                <div class="cs-point">
-                  <strong class="cs-label">Hard Technical Problem Solved:</strong>
-                  <p>Engineered client-side computation for the Philippine 1.0–5.0 grading scale and instant financial balance reconciliations without expensive server recalculation overhead.</p>
-                </div>
-                <div class="cs-point">
-                  <strong class="cs-label">Real Outcome &amp; Impact:</strong>
-                  <p>Live deployment on a custom <code>.engineer</code> domain serving the College of Engineering council and student body.</p>
-                </div>
-              </div>
-
-              <div class="card-tech-pills">
-                <span>JavaScript</span><span>CSV Ledger</span><span>Audit Logging</span><span>Institutional Auth</span><span>REST APIs</span>
-              </div>
-
-              <div class="bcard-links fcs-links">
-                <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener">Live Portal ↗</a>
-                <a href="https://github.com/CodeWithLex/LGU-SYSTEM" target="_blank" rel="noopener">Source Code ↗</a>
-              </div>
-            </div>
-
-            <div class="fcs-visual">
-              <div class="fcs-shot-frame">
-                <img src="assets/projects/coelgu-system.png" alt="COE LGU Portal — student governance system" loading="lazy" decoding="async">
-              </div>
-              <div class="fcs-caption">
-                <span>Institution: Cor Jesu College · College of Engineering</span>
-                <span>Role: Lead Student Developer</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Capability Showcase: What Else I Can Build -->
-        <header class="section-head capability-head">
-          <p class="section-label">Engineering Capability</p>
-          <h2>I build across <em>web, embedded &amp; AI.</em></h2>
-        </header>
-
-        <div class="bento-grid capability-grid">
-          
-          <!-- ChemLab System -->
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">chemlab-system.me</p>
-              <span class="badge-status badge-live"><span class="bdot"></span>Live Deployment</span>
-            </div>
-            <h3>ChemLab Apparatus System</h3>
-            <p class="bcard-capability"><strong>I can build:</strong> Multi-user chemistry lab reservation queues with dynamic QR-code physical ID deposit receipts and session collision handling.</p>
-            <div class="card-tech-pills">
-              <span>PHP</span><span>MySQL</span><span>QR Auth</span><span>Tailwind</span>
-            </div>
-            <div class="bcard-links">
-              <a href="https://chemlab-system.me" target="_blank" rel="noopener">Live Portal ↗</a>
-              <a href="https://github.com/CodeWithLex/CodeWithLex.github.io" target="_blank" rel="noopener">Source Code ↗</a>
-            </div>
-          </article>
-
-          <!-- Medicine Dispenser -->
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">Hardware × Software</p>
-              <span class="badge-status badge-hw"><span class="bdot"></span>Embedded Hardware</span>
-            </div>
-            <h3>Automated Medicine Dispenser</h3>
-            <p class="bcard-capability"><strong>I can build:</strong> Java desktop management applications driving physical Arduino microcontroller stepper motor actuators over USB serial protocols.</p>
-            <div class="card-tech-pills">
-              <span>Arduino C++</span><span>Java Swing</span><span>Serial I/O</span>
-            </div>
-            <p class="bcard-meta-ink">Validated Hardware Prototype · Cor Jesu College</p>
-          </article>
-
-          <!-- eBarangay Portal -->
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">Civic Tech</p>
-              <span class="badge-status badge-gov"><span class="bdot"></span>Public Pipeline</span>
-            </div>
-            <h3>eBarangay Citizen Portal</h3>
-            <p class="bcard-capability"><strong>I can build:</strong> Digital governance pipelines that replace manual in-person queues with online barangay document requests and status tracking.</p>
-            <div class="card-tech-pills">
-              <span>JavaScript</span><span>REST API</span><span>Citizen Forms</span>
-            </div>
-            <div class="bcard-links">
-              <a href="https://github.com/CodeWithLex/eBarangay-Portal" target="_blank" rel="noopener">Source Code ↗</a>
-            </div>
-          </article>
-
-          <!-- PMAEE CadetCoach -->
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">AI Prep Tool</p>
-              <span class="badge-status badge-ai"><span class="bdot"></span>AI Cloud Portal</span>
-            </div>
-            <h3>PMAEE CadetCoach</h3>
-            <p class="bcard-capability"><strong>I can build:</strong> Cloud-hosted entrance exam coaching portals powered by an AI-assisted review engine and user progress telemetry.</p>
-            <div class="card-tech-pills">
-              <span>Node.js</span><span>Render Cloud</span><span>NLP Engine</span>
-            </div>
-            <div class="bcard-links">
-              <a href="https://reviewer-coach.onrender.com" target="_blank" rel="noopener">Visit Portal ↗</a>
-            </div>
-          </article>
-
-          <!-- Content Creation Manager -->
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">Desktop Utility</p>
-              <span class="badge-status badge-dev"><span class="bdot"></span>Offline Utility</span>
-            </div>
-            <h3>Content Creation Manager</h3>
-            <p class="bcard-capability"><strong>I can build:</strong> Standalone Java desktop applications for local video asset management, preset parsing, and creator automation without cloud lock-in.</p>
-            <div class="card-tech-pills">
-              <span>Java Swing</span><span>File I/O</span><span>Preset Parser</span>
-            </div>
-            <div class="bcard-links">
-              <a href="https://github.com/CodeWithLex/Content-Creation-Manager" target="_blank" rel="noopener">Source Code ↗</a>
-            </div>
-          </article>
-
-          <!-- F.R.I.D.A.Y -->
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">Experimental AI</p>
-              <span class="badge-status badge-exp"><span class="bdot"></span>Voice &amp; Vision</span>
-            </div>
-            <h3>F.R.I.D.A.Y Assistant</h3>
-            <p class="bcard-capability"><strong>I can build:</strong> Interactive Python voice and computer vision assistants experimenting with NLP speech recognition and custom intent dispatching.</p>
-            <div class="card-tech-pills">
-              <span>Python</span><span>SpeechRecognition</span><span>Vision API</span>
-            </div>
-            <div class="bcard-links">
-              <a href="https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y" target="_blank" rel="noopener">Source Code ↗</a>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <!-- ================= PHOTOGRAPHY ================= -->
-      <section class="photography" id="photography">
-        <header class="section-head">
-          <p class="section-label">Visual Archive</p>
-          <h2>Documentary &amp; <em>Portrait</em> Frames.</h2>
-          <p class="section-sub">
-            Programming is how I build. Photography is how I observe — events, portraits and
-            documentary moments shot for the student publication, weddings, and local communities.
-          </p>
-        </header>
-
-        <div class="filter-row" role="group" aria-label="Filter photos by category">
-          <button class="chip is-active" data-filter="all" type="button">All</button>
-          <button class="chip" data-filter="portraits" type="button">Portraits</button>
-          <button class="chip" data-filter="wedding" type="button">Wedding</button>
-          <button class="chip" data-filter="christening" type="button">Christening</button>
-        </div>
-
-        <div class="gallery" id="gallery">
-          <button class="gitem big" data-cat="portraits" data-caption="Bebe — portrait session" type="button">
-            <img src="assets/photos/thumb/portraits-4.jpg" alt="Portrait session — Bebe" loading="lazy" decoding="async">
-            <span class="cap">Bebe — portrait session</span>
-          </button>
-          <button class="gitem tall" data-cat="wedding" data-caption="Wedding — portrait" type="button">
-            <img src="assets/photos/thumb/wedding-7.jpg" alt="Wedding portrait" loading="lazy" decoding="async">
-            <span class="cap">Wedding — portrait</span>
-          </button>
-          <button class="gitem tall" data-cat="portraits" data-caption="Portrait session" type="button">
-            <img src="assets/photos/thumb/portraits-2.jpg" alt="Portrait session" loading="lazy" decoding="async">
-            <span class="cap">Portrait session</span>
-          </button>
-          <button class="gitem wide" data-cat="christening" data-caption="Christening — ceremony" type="button">
-            <img src="assets/photos/thumb/christening-3.jpg" alt="Christening ceremony" loading="lazy" decoding="async">
-            <span class="cap">Christening — ceremony</span>
-          </button>
-          <button class="gitem" data-cat="portraits" data-caption="Portrait session" type="button">
-            <img src="assets/photos/thumb/portraits-1.jpg" alt="Portrait session" loading="lazy" decoding="async">
-            <span class="cap">Portrait session</span>
-          </button>
-          <button class="gitem" data-cat="wedding" data-caption="Wedding — ceremony" type="button">
-            <img src="assets/photos/thumb/wedding-2.jpg" alt="Wedding ceremony" loading="lazy" decoding="async">
-            <span class="cap">Wedding — ceremony</span>
-          </button>
-          <button class="gitem wide" data-cat="wedding" data-caption="Wedding — ceremony" type="button">
-            <img src="assets/photos/thumb/wedding-3.jpg" alt="Wedding ceremony" loading="lazy" decoding="async">
-            <span class="cap">Wedding — ceremony</span>
-          </button>
-          <button class="gitem wide" data-cat="christening" data-caption="Christening — family" type="button">
-            <img src="assets/photos/thumb/christening-5.jpg" alt="Christening family portrait" loading="lazy" decoding="async">
-            <span class="cap">Christening — family</span>
-          </button>
-        </div>
-
-        <div class="photo-links">
-          <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography — Facebook ↗</a>
-          <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">@edrickvisuals.mov — TikTok ↗</a>
-        </div>
-      </section>
-
-      <!-- ================= FEATURED PHOTO STACK ================= -->
-      <section class="tdecksection" id="testimonials" aria-labelledby="tdeck-heading">
-
-        <div class="tdeck-inner">
-
-          <header class="tdeck-header">
-            <p class="tdeck-eyebrow"><span class="tdeck-dot" aria-hidden="true"></span>Featured Captures</p>
-            <h2 id="tdeck-heading">Moments in focus,<br>stories in frames</h2>
-            <p class="tdeck-sub">A curated stack of portraits, weddings, and documentary captures.</p>
-          </header>
-
-          <!-- default: fanned stack photo deck -->
-          <div class="tdeck-wrap" id="tdeck-wrap">
-            <div class="tdeck-stage" id="tdeck-stage" aria-live="polite" aria-atomic="true">
-
-              <!-- Card 0 -->
-              <article class="tcard" data-idx="0" tabindex="-1" data-caption="Bebe — Portrait Session" data-cat="portraits">
-                <div class="tcard-photo">
-                  <span class="tcard-tag"><span class="tcard-tag-dot" aria-hidden="true"></span>Portraits</span>
-                  <img src="assets/photos/full/portraits-4.jpg" alt="Portrait session — Bebe by Lex" loading="lazy" decoding="async">
-                  <div class="tcard-zoom" title="View Full" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-                  </div>
-                </div>
-                <div class="tcard-details">
-                  <h3 class="tcard-title">Bebe — Portrait Session</h3>
-                  <div class="tcard-meta">
-                    <span>Natural Light &amp; Studio</span>
-                    <span>85mm f/1.4</span>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Card 1 -->
-              <article class="tcard" data-idx="1" tabindex="-1" data-caption="Golden Hour Vows" data-cat="wedding">
-                <div class="tcard-photo">
-                  <span class="tcard-tag"><span class="tcard-tag-dot" aria-hidden="true"></span>Wedding</span>
-                  <img src="assets/photos/full/wedding-7.jpg" alt="Wedding portrait by Lex" loading="lazy" decoding="async">
-                  <div class="tcard-zoom" title="View Full" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-                  </div>
-                </div>
-                <div class="tcard-details">
-                  <h3 class="tcard-title">Golden Hour Vows</h3>
-                  <div class="tcard-meta">
-                    <span>Intimate Ceremony</span>
-                    <span>50mm f/1.8</span>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Card 2 -->
-              <article class="tcard" data-idx="2" tabindex="-1" data-caption="Christening Ceremony" data-cat="christening">
-                <div class="tcard-photo">
-                  <span class="tcard-tag"><span class="tcard-tag-dot" aria-hidden="true"></span>Christening</span>
-                  <img src="assets/photos/full/christening-3.jpg" alt="Christening ceremony by Lex" loading="lazy" decoding="async">
-                  <div class="tcard-zoom" title="View Full" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-                  </div>
-                </div>
-                <div class="tcard-details">
-                  <h3 class="tcard-title">Baptismal Blessings</h3>
-                  <div class="tcard-meta">
-                    <span>Family &amp; Documentary</span>
-                    <span>35mm f/1.8</span>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Card 3 -->
-              <article class="tcard" data-idx="3" tabindex="-1" data-caption="Editorial Expression" data-cat="portraits">
-                <div class="tcard-photo">
-                  <span class="tcard-tag"><span class="tcard-tag-dot" aria-hidden="true"></span>Portraits</span>
-                  <img src="assets/photos/full/portraits-2.jpg" alt="Editorial portrait by Lex" loading="lazy" decoding="async">
-                  <div class="tcard-zoom" title="View Full" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-                  </div>
-                </div>
-                <div class="tcard-details">
-                  <h3 class="tcard-title">Editorial Expression</h3>
-                  <div class="tcard-meta">
-                    <span>Student Publication</span>
-                    <span>85mm f/1.4</span>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Card 4 -->
-              <article class="tcard" data-idx="4" tabindex="-1" data-caption="Wedding Processional" data-cat="wedding">
-                <div class="tcard-photo">
-                  <span class="tcard-tag"><span class="tcard-tag-dot" aria-hidden="true"></span>Wedding</span>
-                  <img src="assets/photos/full/wedding-3.jpg" alt="Wedding ceremony by Lex" loading="lazy" decoding="async">
-                  <div class="tcard-zoom" title="View Full" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-                  </div>
-                </div>
-                <div class="tcard-details">
-                  <h3 class="tcard-title">Processional Elegance</h3>
-                  <div class="tcard-meta">
-                    <span>Ceremony Moments</span>
-                    <span>35mm f/2.0</span>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Card 5 -->
-              <article class="tcard" data-idx="5" tabindex="-1" data-caption="Campus Life &amp; Stories" data-cat="documentary">
-                <div class="tcard-photo">
-                  <span class="tcard-tag"><span class="tcard-tag-dot" aria-hidden="true"></span>Documentary</span>
-                  <img src="assets/photos/full/portraits-1.jpg" alt="Campus life photo by Lex" loading="lazy" decoding="async">
-                  <div class="tcard-zoom" title="View Full" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-                  </div>
-                </div>
-                <div class="tcard-details">
-                  <h3 class="tcard-title">Campus Stories</h3>
-                  <div class="tcard-meta">
-                    <span>College of Engineering</span>
-                    <span>50mm f/1.8</span>
-                  </div>
-                </div>
-              </article>
-
-            </div><!-- /tdeck-stage -->
-
-            <div class="tdeck-controls">
-              <button class="tdeck-btn" id="tdeck-prev" type="button" aria-label="Previous photo">
-                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-              </button>
-              <div class="tdeck-pips" id="tdeck-pips" aria-hidden="true"></div>
-              <button class="tdeck-btn" id="tdeck-next" type="button" aria-label="Next photo">
-                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-              </button>
-            </div>
-          </div><!-- /tdeck-wrap -->
-
-          <!-- prefers-reduced-motion: plain readable grid -->
-          <div class="tdeck-list" aria-label="Featured Photography List">
-            <div class="tlist-card">
-              <img class="tlist-img" src="assets/photos/thumb/portraits-4.jpg" alt="Bebe — Portrait Session" loading="lazy">
-              <div class="tlist-info">
-                <span class="tcard-tag sm"><span class="tcard-tag-dot" aria-hidden="true"></span>Portraits</span>
-                <h4>Bebe — Portrait Session</h4>
-                <p>Natural Light &amp; Studio · 85mm f/1.4</p>
-              </div>
-            </div>
-            <div class="tlist-card">
-              <img class="tlist-img" src="assets/photos/thumb/wedding-7.jpg" alt="Golden Hour Vows" loading="lazy">
-              <div class="tlist-info">
-                <span class="tcard-tag sm"><span class="tcard-tag-dot" aria-hidden="true"></span>Wedding</span>
-                <h4>Golden Hour Vows</h4>
-                <p>Intimate Ceremony · 50mm f/1.8</p>
-              </div>
-            </div>
-            <div class="tlist-card">
-              <img class="tlist-img" src="assets/photos/thumb/christening-3.jpg" alt="Baptismal Blessings" loading="lazy">
-              <div class="tlist-info">
-                <span class="tcard-tag sm"><span class="tcard-tag-dot" aria-hidden="true"></span>Christening</span>
-                <h4>Baptismal Blessings</h4>
-                <p>Family &amp; Documentary · 35mm f/1.8</p>
-              </div>
-            </div>
-            <div class="tlist-card">
-              <img class="tlist-img" src="assets/photos/thumb/portraits-2.jpg" alt="Editorial Expression" loading="lazy">
-              <div class="tlist-info">
-                <span class="tcard-tag sm"><span class="tcard-tag-dot" aria-hidden="true"></span>Portraits</span>
-                <h4>Editorial Expression</h4>
-                <p>Student Publication · 85mm f/1.4</p>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /tdeck-inner -->
-      </section>
-
-      <!-- ================= METHOD (light contrast section) ================= -->
-      <section class="method" id="method">
-        <div class="method-grid">
-          <!-- Code Method -->
-          <div class="method-copy mode-code">
-            <p class="section-label dark">Process &amp; Engineering Craft</p>
-            <h2 class="method-title">Disciplined engineering, <em>zero fluff.</em></h2>
-            <ol class="steps">
-              <li>
-                <span class="step-num">01</span>
-                <div><h3>Spec &amp; schema before code</h3><p>Model data structures, state transitions, and edge-case contracts on paper before opening the IDE.</p></div>
-              </li>
-              <li>
-                <span class="step-num">02</span>
-                <div><h3>Phase-gated validation</h3><p>Build in discrete, testable milestones — database schemas first, API/logic second, UI ergonomics third.</p></div>
-              </li>
-              <li>
-                <span class="step-num">03</span>
-                <div><h3>Zero-bloat execution</h3><p>Favor clean web APIs, custom CSS properties, and direct database queries over heavy runtime bundle dependencies.</p></div>
-              </li>
-              <li>
-                <span class="step-num">04</span>
-                <div><h3>Community utility first</h3><p>Build what solves an actual institutional bottleneck — for student orgs, lab managers, and local communities.</p></div>
-              </li>
-            </ol>
-          </div>
-
-          <!-- Create Method -->
-          <div class="method-copy mode-create">
-            <p class="section-label dark">Creative Philosophy</p>
-            <h2 class="method-title">Observe first, <em>shoot</em> second.</h2>
-            <ol class="steps">
-              <li>
-                <span class="step-num">01</span>
-                <div><h3>Authenticity over polish</h3><p>The best frames aren't staged — they're discovered. Waiting patiently for the honest, unforced moment.</p></div>
-              </li>
-              <li>
-                <span class="step-num">02</span>
-                <div><h3>Light tells the story</h3><p>Shooting with prime lenses at wide apertures so ambient light and genuine mood carry the emotion.</p></div>
-              </li>
-              <li>
-                <span class="step-num">03</span>
-                <div><h3>Edit with restraint</h3><p>Post-processing removes distractions, never alters truth. What was felt stays felt.</p></div>
-              </li>
-            </ol>
-          </div>
-
-          <figure class="portrait-wrap">
-            <div class="portrait"><img src="assets/photos/thumb/me-1.jpg" alt="Portrait of Lex Matondo" loading="lazy" decoding="async"></div>
-            <figcaption class="testimonial mode-code">
-              <p class="t-label">Engineering Ethos</p>
-              <blockquote>“Build what serves the community first — replacing manual paper queues with real-time digital portals, one system at a time.”</blockquote>
-              <cite>Lex Matondo · CPE Student &amp; Developer</cite>
-            </figcaption>
-            <figcaption class="testimonial mode-create">
-              <p class="t-label">Visual Ethos</p>
-              <blockquote>“Preserving authentic life milestones frame by frame — whether it's a wedding vow, a christening blessing, or a quiet campus story.”</blockquote>
-              <cite>Lex Matondo · Photographer, LowBud Photography</cite>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- ================= FOOTER ================= -->
-      <footer class="footer" id="contact">
-        <div class="watermark" aria-hidden="true">LEX</div>
-
-        <!-- Code CTA -->
-        <div class="footer-cta mode-code">
-          <h2>Have an idea or<br>project to build?</h2>
-          <a class="btn-mega" href="mailto:lexmatondo@g.cjc.edu.ph">
-            <span class="mega-text">Let’s build it</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-          </a>
-          <div class="footer-email-row">
-            <span class="email-text">lexmatondo@g.cjc.edu.ph</span>
-            <button class="btn-copy-email" id="btn-copy-email" type="button" aria-label="Copy email address" data-email="lexmatondo@g.cjc.edu.ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-              <span class="copy-label">Copy Email</span>
             </button>
-          </div>
-        </div>
 
-        <!-- Create CTA -->
-        <div class="footer-cta mode-create">
-          <h2>Looking for a<br>photographer?</h2>
-          <a class="btn-mega" href="mailto:lexmatondo@g.cjc.edu.ph">
-            <span class="mega-text">Book a shoot</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-          </a>
-          <div class="footer-email-row">
-            <span class="email-text">lexmatondo@g.cjc.edu.ph</span>
-            <button class="btn-copy-email" type="button" aria-label="Copy email address" data-email="lexmatondo@g.cjc.edu.ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-              <span class="copy-label">Copy Email</span>
+            <button class="photo-tile" data-cat="portraits" data-caption="Editorial Expression" data-meta="Student Publication · 85mm ƒ/1.4" type="button">
+              <img src="assets/photos/full/portraits-2.jpg" alt="Editorial portrait" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">EDITORIAL EXPRESSION</span>
+                <span class="caption-meta">Student Publication · 85mm ƒ/1.4</span>
+              </div>
             </button>
+
+            <button class="photo-tile tile-wide" data-cat="christening" data-caption="Baptismal Blessings" data-meta="Family &amp; Documentary · 35mm ƒ/1.8" type="button">
+              <img src="assets/photos/full/christening-3.jpg" alt="Christening ceremony" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">BAPTISMAL BLESSINGS</span>
+                <span class="caption-meta">Family &amp; Documentary · 35mm ƒ/1.8</span>
+              </div>
+            </button>
+
+            <button class="photo-tile" data-cat="portraits" data-caption="Natural Light Portrait" data-meta="Portrait Session · 50mm ƒ/1.8" type="button">
+              <img src="assets/photos/full/portraits-1.jpg" alt="Natural light portrait" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">CAMPUS PORTRAIT</span>
+                <span class="caption-meta">Natural Light · 50mm ƒ/1.8</span>
+              </div>
+            </button>
+
+            <button class="photo-tile" data-cat="wedding" data-caption="Wedding Processional" data-meta="Ceremony Moments · 35mm ƒ/2.0" type="button">
+              <img src="assets/photos/full/wedding-2.jpg" alt="Wedding ceremony" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">CEREMONY ENTRANCE</span>
+                <span class="caption-meta">Wedding · 35mm ƒ/2.0</span>
+              </div>
+            </button>
+
+            <button class="photo-tile tile-wide" data-cat="wedding" data-caption="Vow Exchange" data-meta="Intimate Wedding · 50mm ƒ/1.8" type="button">
+              <img src="assets/photos/full/wedding-3.jpg" alt="Wedding ceremony" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">VOW EXCHANGE</span>
+                <span class="caption-meta">Intimate Ceremony · 50mm ƒ/1.8</span>
+              </div>
+            </button>
+
+            <button class="photo-tile tile-wide" data-cat="christening" data-caption="Family Gathering" data-meta="Documentary · 35mm ƒ/1.8" type="button">
+              <img src="assets/photos/full/christening-5.jpg" alt="Christening family portrait" loading="lazy" decoding="async">
+              <div class="tile-caption">
+                <span class="caption-title">FAMILY GATHERING</span>
+                <span class="caption-meta">Documentary · 35mm ƒ/1.8</span>
+              </div>
+            </button>
+
+          </div>
+        </section>
+
+      </div><!-- /view-create -->
+
+      <!-- ================= HOW I WORK / PHILOSOPHY ================= -->
+      <section class="philosophy-section" id="about" aria-labelledby="phil-title">
+        <h3 class="philosophy-label" id="phil-title">HOW I WORK</h3>
+        <div class="philosophy-content">
+          <div class="philosophy-column">
+            <span class="column-tag">ENGINEERING</span>
+            <p class="philosophy-principles">
+              Build carefully.<br>
+              Keep things useful.<br>
+              Make it last.
+            </p>
+          </div>
+          <div class="philosophy-divider" aria-hidden="true">—</div>
+          <div class="philosophy-column">
+            <span class="column-tag">PHOTOGRAPHY</span>
+            <p class="philosophy-principles">
+              Observe first.<br>
+              Shoot second.<br>
+              Edit with restraint.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= UNIFIED FOOTER ================= -->
+      <footer class="site-footer" id="contact">
+        <div class="footer-cta">
+          <h2 class="cta-headline">LET’S MAKE SOMETHING.</h2>
+          <p class="cta-prompt">Have a system to build? Have a story to document?</p>
+          <a class="cta-email" href="mailto:lexmatondo@g.cjc.edu.ph">lexmatondo@g.cjc.edu.ph</a>
+
+          <div class="cta-switches">
+            <button type="button" class="cta-switch-link" data-mode-switch="code">EXPLORE TECH →</button>
+            <span class="cta-sep">·</span>
+            <button type="button" class="cta-switch-link" data-mode-switch="create">EXPLORE CREATE →</button>
           </div>
         </div>
 
-        <div class="footer-cols">
-          <nav class="footer-policies mode-code" aria-label="Dev Profiles">
-            <a href="resume.html" target="_blank" rel="noopener">Resume (CV)</a>
+        <div class="footer-bar">
+          <div class="footer-links">
             <a href="https://github.com/CodeWithLex" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography</a>
+            <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">Facebook</a>
             <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">TikTok</a>
             <a href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener">YouTube</a>
-          </nav>
-          <nav class="footer-policies mode-create" aria-label="Creative Profiles">
-            <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography</a>
-            <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">TikTok</a>
-            <a href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener">YouTube</a>
-            <a href="https://github.com/CodeWithLex" target="_blank" rel="noopener">GitHub</a>
-          </nav>
-          <div class="socials" aria-label="Social profiles">
-            <a class="social" href="https://github.com/CodeWithLex" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-            <a class="social" href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener" aria-label="LowBud Photography on Facebook">FB</a>
-            <a class="social" href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener" aria-label="Edrick Visuals on TikTok">TT</a>
-            <a class="social" href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+            <a href="resume.html" target="_blank" rel="noopener">Resume</a>
           </div>
-          <p class="copyright">© 2026 Lex Matondo — All rights reserved</p>
+          <span class="footer-copy">© 2026 Lex Matondo</span>
         </div>
       </footer>
+
     </main>
-  </div>
 
-  <!-- CODE / CREATE shutter transition overlay -->
-  <div class="mode-wipe" aria-hidden="true"><span class="wipe-word"></span></div>
+  </div><!-- /portfolio-container -->
 
-  <!-- photo lightbox -->
+  <!-- Minimal Photo Lightbox -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
-    <button class="lb-btn lb-close" aria-label="Close viewer" type="button">✕</button>
-    <button class="lb-btn lb-prev" aria-label="Previous photo" type="button">‹</button>
-    <figure class="lb-figure">
+    <button class="lb-close" id="lb-close" aria-label="Close viewer" type="button">✕</button>
+    <figure class="lb-body">
       <img id="lb-img" src="" alt="">
-      <figcaption id="lb-cap"></figcaption>
+      <figcaption id="lb-cap" class="lb-caption"></figcaption>
     </figure>
-    <button class="lb-btn lb-next" aria-label="Next photo" type="button">›</button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="portfolio.js" defer></script>
 </body>
 </html>

@@ -444,35 +444,89 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 8. Interactive Duo-Portrait (Smooth Hover Fade on Desktop & Tap/Scroll on Mobile)
+  // 8. Soft Feathered Radial Color Lens (Mouse Tracking & Mobile Touch/Scroll)
   const portraitStages = document.querySelectorAll("[data-interactive-portrait]");
   portraitStages.forEach((stage) => {
-    // Tap to toggle on touch devices
-    stage.addEventListener("click", () => {
-      stage.classList.toggle("is-color-revealed");
+    const frame = stage.querySelector(".portrait-frame");
+    if (!frame) return;
+
+    const setLensPos = (x, y, radius = 135) => {
+      frame.style.setProperty("--lens-x", `${x}px`);
+      frame.style.setProperty("--lens-y", `${y}px`);
+      frame.style.setProperty("--lens-r", `${radius}px`);
+    };
+
+    // Desktop Mouse Tracking
+    frame.addEventListener("mousemove", (e) => {
+      const rect = frame.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      setLensPos(x, y, 135);
+      stage.classList.add("is-lens-active");
     });
 
-    // Mobile scroll auto-reveal
+    frame.addEventListener("mouseenter", (e) => {
+      const rect = frame.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      setLensPos(x, y, 135);
+      stage.classList.add("is-lens-active");
+    });
+
+    frame.addEventListener("mouseleave", () => {
+      stage.classList.remove("is-lens-active");
+    });
+
+    // Mobile / Touch Drag Lens & Tap
+    let touchTimeout = null;
+    const handleTouch = (e) => {
+      const touch = e.touches[0] || e.changedTouches[0];
+      if (!touch) return;
+      const rect = frame.getBoundingClientRect();
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      setLensPos(x, y, 120);
+      stage.classList.add("is-lens-active");
+
+      if (touchTimeout) clearTimeout(touchTimeout);
+    };
+
+    frame.addEventListener("touchstart", (e) => {
+      handleTouch(e);
+    }, { passive: true });
+
+    frame.addEventListener("touchmove", (e) => {
+      handleTouch(e);
+    }, { passive: true });
+
+    frame.addEventListener("touchend", () => {
+      touchTimeout = setTimeout(() => {
+        stage.classList.remove("is-lens-active");
+      }, 2500);
+    }, { passive: true });
+
+    // Mobile Scroll Ambient Pulse: softly illuminates center face when scrolled past
     if ("IntersectionObserver" in window) {
-      const portraitObserver = new IntersectionObserver(
+      let hasPreviewed = false;
+      const ambientObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             const isTouch = window.matchMedia("(hover: none) or (pointer: coarse)").matches;
-            if (isTouch) {
-              if (entry.isIntersecting) {
-                stage.classList.add("is-color-revealed");
-              } else {
-                stage.classList.remove("is-color-revealed");
-              }
+            if (isTouch && entry.isIntersecting && !hasPreviewed && !stage.classList.contains("is-lens-active")) {
+              hasPreviewed = true;
+              const rect = frame.getBoundingClientRect();
+              setLensPos(rect.width * 0.5, rect.height * 0.38, 120);
+              stage.classList.add("is-lens-active");
+
+              setTimeout(() => {
+                stage.classList.remove("is-lens-active");
+              }, 2200);
             }
           });
         },
-        {
-          threshold: 0.45,
-          rootMargin: "-10% 0px -10% 0px"
-        }
+        { threshold: 0.5 }
       );
-      portraitObserver.observe(stage);
+      ambientObserver.observe(stage);
     }
   });
 });

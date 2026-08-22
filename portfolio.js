@@ -193,6 +193,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } catch (_) {}
 
+  // Smooth Return to Landing Page on Brand Click
+  const siteBrand = document.querySelector(".site-brand");
+  if (siteBrand) {
+    siteBrand.addEventListener("click", (e) => {
+      e.preventDefault();
+      const currentMode = body.getAttribute("data-mode") || "code";
+
+      try {
+        sessionStorage.setItem("landing-entrance", currentMode);
+      } catch (_) {}
+
+      if (prefersReducedMotion || !wipeLayer) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      const inClass = (currentMode === "create") ? "wipe-to-tech-in" : "wipe-to-create-in";
+      wipeLayer.className = `discipline-wipe-layer ${inClass}`;
+      if (mainContainer) mainContainer.classList.add("is-switching");
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 350);
+    });
+  }
+
+  // Handle browser Back/Forward (bfcache)
+  window.addEventListener("pageshow", () => {
+    isTransitioning = false;
+    if (mainContainer) mainContainer.classList.remove("is-switching");
+    if (wipeLayer) wipeLayer.className = "discipline-wipe-layer";
+  });
+
   // 4. Photography Category Filtering
   const filterBtns = document.querySelectorAll(".filter-btn");
   const photoTiles = document.querySelectorAll(".photo-tile");

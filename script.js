@@ -84,4 +84,32 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     handleTransition("portfolio.html?mode=create", false);
   });
+
+  // Smooth Shutter Reveal When Returning Back from Portfolio
+  try {
+    const fromMode = sessionStorage.getItem("landing-entrance");
+    if (fromMode && shutter && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      sessionStorage.removeItem("landing-entrance");
+      const isCreate = (fromMode === "create");
+      const outClass = isCreate ? "shutter-to-right-out" : "shutter-to-left-out";
+
+      shutter.className = `landing-shutter-layer ${isCreate ? "shutter-from-right" : "shutter-from-left"}`;
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          shutter.className = `landing-shutter-layer ${outClass}`;
+          setTimeout(() => {
+            shutter.className = "landing-shutter-layer";
+          }, 380);
+        }, 50);
+      });
+    }
+  } catch (_) {}
+
+  // Handle browser Back/Forward (bfcache)
+  window.addEventListener("pageshow", (event) => {
+    isNavigating = false;
+    if (container) container.classList.remove("is-exiting");
+    if (hero) hero.classList.remove("expand-tech", "expand-create", "hover-tech", "hover-create");
+    if (shutter) shutter.className = "landing-shutter-layer";
+  });
 });

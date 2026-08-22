@@ -1,16 +1,26 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lex Matondo — Resume / Curriculum Vitae</title>
-  <meta name="description" content="Resume of Lex Matondo — Computer Engineering student, full-stack developer, and hardware builder.">
+  <meta name="description"
+    content="Resume of Lex Matondo — Computer Engineering student, full-stack developer, and hardware builder.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --bg: #09090b;
       --surface: #121215;
@@ -39,7 +49,7 @@
       border: 1px solid var(--border);
       border-radius: 1.5rem;
       padding: clamp(2rem, 5vw, 3.5rem);
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
     /* Actions bar */
@@ -226,25 +236,70 @@
 
     /* Print styles */
     @media print {
-      body { background: #fff; color: #000; padding: 0; }
-      .resume-container { border: none; box-shadow: none; padding: 0; background: #fff; max-width: 100%; }
-      .resume-actions { display: none; }
-      .resume-title, .item-sub, .item-bullets li::before { color: #000; }
-      .item-bullets, .resume-contact-row, .item-date, .sec-title, .skill-category { color: #333; }
-      .skill-card { border-color: #ddd; background: #fafafa; }
-      .skill-list, .item-title, .resume-name { color: #000; }
-      .resume-section { margin-bottom: 1.5rem; page-break-inside: avoid; }
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+      }
+
+      .resume-container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        background: #fff;
+        max-width: 100%;
+      }
+
+      .resume-actions {
+        display: none;
+      }
+
+      .resume-title,
+      .item-sub,
+      .item-bullets li::before {
+        color: #000;
+      }
+
+      .item-bullets,
+      .resume-contact-row,
+      .item-date,
+      .sec-title,
+      .skill-category {
+        color: #333;
+      }
+
+      .skill-card {
+        border-color: #ddd;
+        background: #fafafa;
+      }
+
+      .skill-list,
+      .item-title,
+      .resume-name {
+        color: #000;
+      }
+
+      .resume-section {
+        margin-bottom: 1.5rem;
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="resume-container">
-    
+
     <div class="resume-actions">
       <a class="btn-action" href="portfolio.html">← Back to Portfolio</a>
       <button class="btn-action primary" onclick="window.print()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" width="14" height="14" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9" />
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+          <rect width="12" height="8" x="6" y="14" />
+        </svg>
         Print / Save PDF
       </button>
     </div>
@@ -252,12 +307,14 @@
     <header class="resume-header">
       <h1 class="resume-name">Lex Matondo</h1>
       <p class="resume-title">Computer Engineering Student · Full-Stack &amp; Embedded Systems Builder</p>
-      
+
       <div class="resume-contact-row">
         <span>Digos City, Philippines</span>
         <span>Email: <a href="mailto:lexmatondo@g.cjc.edu.ph">lexmatondo@g.cjc.edu.ph</a></span>
-        <span>GitHub: <a href="https://github.com/CodeWithLex" target="_blank" rel="noopener">github.com/CodeWithLex</a></span>
-        <span>Photography: <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography</a></span>
+        <span>GitHub: <a href="https://github.com/CodeWithLex" target="_blank"
+            rel="noopener">github.com/CodeWithLex</a></span>
+        <span>Photography: <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank"
+            rel="noopener">Leavian Visuals</a></span>
       </div>
     </header>
 
@@ -271,7 +328,8 @@
         </div>
         <p class="item-sub">Bachelor of Science in Computer Engineering (BSCPE)</p>
         <ul class="item-bullets">
-          <li>Core coursework: Data Structures &amp; Algorithms, Object-Oriented Programming (Java), Microcontroller Systems &amp; Embedded C++, Computer Architecture, Database Management Systems.</li>
+          <li>Core coursework: Data Structures &amp; Algorithms, Object-Oriented Programming (Java), Microcontroller
+            Systems &amp; Embedded C++, Computer Architecture, Database Management Systems.</li>
           <li>Lead Student Developer for College of Engineering student council portals and campus systems.</li>
         </ul>
       </div>
@@ -288,9 +346,12 @@
         </div>
         <p class="item-sub">Full-Stack Web Portal · JavaScript, CSV Audit Engine, Institutional Auth</p>
         <ul class="item-bullets">
-          <li>Engineered institutional governance portal for the College of Engineering student council with <code>@g.cjc.edu.ph</code> authentication.</li>
-          <li>Implemented real-time Philippine Peso (₱) financial ledger with over-budget alerts, CSV bulk student import, and an immutable admin audit log.</li>
-          <li>Built client-side grading compute engine (Philippine 1.0–5.0 scale) and instant transaction reconciliations.</li>
+          <li>Engineered institutional governance portal for the College of Engineering student council with
+            <code>@g.cjc.edu.ph</code> authentication.</li>
+          <li>Implemented real-time Philippine Peso (₱) financial ledger with over-budget alerts, CSV bulk student
+            import, and an immutable admin audit log.</li>
+          <li>Built client-side grading compute engine (Philippine 1.0–5.0 scale) and instant transaction
+            reconciliations.</li>
         </ul>
       </div>
 
@@ -301,8 +362,10 @@
         </div>
         <p class="item-sub">Full-Stack Lab Management · PHP, MySQL, QR Code Engine, Tailwind CSS</p>
         <ul class="item-bullets">
-          <li>Built automated chemistry lab queue replacing physical paper logbooks with 30-minute interval session queues (Mon–Sat) and group logins.</li>
-          <li>Implemented dynamic activity receipts with generated QR codes for physical student ID deposit verification and automated returns tracking.</li>
+          <li>Built automated chemistry lab queue replacing physical paper logbooks with 30-minute interval session
+            queues (Mon–Sat) and group logins.</li>
+          <li>Implemented dynamic activity receipts with generated QR codes for physical student ID deposit verification
+            and automated returns tracking.</li>
         </ul>
       </div>
 
@@ -313,8 +376,10 @@
         </div>
         <p class="item-sub">Embedded Systems · Arduino C++, Java Swing GUI, Serial Protocol</p>
         <ul class="item-bullets">
-          <li>Developed desktop management interface controlling Arduino microcontroller hardware with multi-chamber stepper actuators.</li>
-          <li>Engineered thread-safe bidirectional serial protocol over USB with parity verification to eliminate dropped packets during scheduled dispensing.</li>
+          <li>Developed desktop management interface controlling Arduino microcontroller hardware with multi-chamber
+            stepper actuators.</li>
+          <li>Engineered thread-safe bidirectional serial protocol over USB with parity verification to eliminate
+            dropped packets during scheduled dispensing.</li>
         </ul>
       </div>
 
@@ -325,7 +390,8 @@
         </div>
         <p class="item-sub">Civic Tech Platform · JavaScript, REST APIs</p>
         <ul class="item-bullets">
-          <li>Created digital governance pipeline enabling citizens to submit online document requests and track real-time clearance processing.</li>
+          <li>Created digital governance pipeline enabling citizens to submit online document requests and track
+            real-time clearance processing.</li>
         </ul>
       </div>
     </section>
@@ -364,7 +430,7 @@
         <p class="item-sub">Documentary Photography &amp; Editorial Media</p>
         <ul class="item-bullets">
           <li>Lead photographer documenting university milestones, ceremonies, and engineering symposiums.</li>
-          <li>Founder &amp; Principal at LowBud Photography (events, weddings, portraits).</li>
+          <li>Founder &amp; Principal at Leavian Visuals (events, weddings, portraits).</li>
         </ul>
       </div>
     </section>
@@ -372,4 +438,5 @@
   </div>
 
 </body>
+
 </html>

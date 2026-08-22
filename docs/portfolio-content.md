@@ -19,7 +19,7 @@ Verified facts for the accuracy pass. Everything implemented on the site must tr
 |---|---|---|
 | CodeWithLex | https://github.com/CodeWithLex | Dev identity. 15 public repos. |
 | @edrickvisuals.mov | https://www.tiktok.com/@edrickvisuals.mov | TikTok — creative/video industry (user-provided) |
-| LowBud Photography | https://www.facebook.com/Lowbudphotography27/ | Facebook photography page (user-provided) |
+| Leavian Visuals | https://www.facebook.com/Lowbudphotography27/ | Facebook photography page (user-provided) |
 | @makinglifecinematic | https://www.tiktok.com/@makinglifecinematic | Personal TikTok (found on GitHub profile) — may be redundant with edrickvisuals |
 | @lexmatondo27 | https://www.youtube.com/@lexmatondo27 | YouTube (found on GitHub profile) |
 | chemlab-system.me | http://chemlab-system.me/ | Custom domain wired to CodeWithLex.github.io — currently **503/down** |
@@ -62,7 +62,7 @@ Verified facts for the accuracy pass. Everything implemented on the site must tr
 
 - Photographer for a **student publication**; photography work for the **College of Engineering** (real affiliations — replaces the fake testimonial).
 - Focus: events, people, documentary moments, student/community events, visual storytelling, editing/color grading (Photoshop, After Effects).
-- Channels: LowBud Photography (FB), @edrickvisuals.mov (TikTok), YouTube @lexmatondo27.
+- Channels: Leavian Visuals (FB), @edrickvisuals.mov (TikTok), YouTube @lexmatondo27.
 - **Photos integrated (2026-08-22):** 22 originals from `Desktop/Portfolio Pics` (Christening ×6, Me ×2, Portraits ×7, Wedding ×7), optimized via `build/optimize_photos.py` (1600px fulls q80 / 700px thumbs q72; originals 2–22 MB → 100–264 KB). Optimized set kept in `build/opt/` for re-curation.
 - **Curated gallery (live in `assets/photos/`):** christening-3, christening-5 · portraits-1, portraits-2, portraits-4 (hero tile — "Bebe" session) · wedding-2, wedding-3, wedding-7. **Removed on request:** portraits-6 ("Silver — 18th birthday") — deleted from assets and gallery; optimized copy still in `build/opt/` if ever needed.
 - **Portrait of Lex:** me-1 (grayscale, circular, method section) — replaced the "LEX" monogram. **Hero mockup:** Kamera-11876.png cutout (transparent RGBA) as `assets/img/lex-cutout.webp` (700×1050, 70 KB WebP w/ alpha) — LARGE + CENTERED over the mockup window (130% of window height desktop / 105% mobile; head above top edge, feet below), grayscale + drop-shadow, float 6s w/ -2s offset; fc-a card and gen-pill layer in front; reduced-motion safe. (Earlier bottom-left placement and a Neural-engine bars attempt were superseded per user direction.)

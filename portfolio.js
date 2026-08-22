@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7. Featured Project Screenshot Crossfade Showcase
+  // 7. Featured Project Screenshot Showcase with Right-to-Left Shutter Wipe
   const crossfadeStage = document.getElementById("coelgu-crossfade-stage");
   if (crossfadeStage) {
     const slides = crossfadeStage.querySelectorAll(".crossfade-slide");
@@ -303,38 +303,75 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("cf-prev-btn");
     const nextBtn = document.getElementById("cf-next-btn");
     const container = crossfadeStage.querySelector(".crossfade-container");
+    const shutterBlade = document.getElementById("cf-shutter");
 
     let currentSlide = 0;
     let crossfadeTimer = null;
-    let userInteracted = false;
+    let isWiping = false;
     let isVisible = true;
 
-    const showSlide = (index) => {
-      currentSlide = (index + slides.length) % slides.length;
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("is-active", i === currentSlide);
-      });
-      dots.forEach((dot, i) => {
-        const active = (i === currentSlide);
-        dot.classList.toggle("is-active", active);
-        dot.setAttribute("aria-selected", active ? "true" : "false");
-      });
+    const transitionToSlide = (targetIndex, direction = "rtl") => {
+      const nextIndex = (targetIndex + slides.length) % slides.length;
+      if (nextIndex === currentSlide) return;
+
+      if (prefersReducedMotion || !shutterBlade) {
+        slides.forEach((slide, i) => slide.classList.toggle("is-active", i === nextIndex));
+        dots.forEach((dot, i) => {
+          const active = (i === nextIndex);
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        currentSlide = nextIndex;
+        return;
+      }
+
+      if (isWiping) return;
+      isWiping = true;
+
+      const inClass = direction === "rtl" ? "wipe-rtl-in" : "wipe-ltr-in";
+      const outClass = direction === "rtl" ? "wipe-rtl-out" : "wipe-ltr-out";
+
+      // 1. Shutter sweeps across screenshot frame from right to left
+      shutterBlade.className = "cf-shutter-blade";
+      shutterBlade.classList.add(inClass);
+
+      setTimeout(() => {
+        // 2. Switch slide while completely covered by black blade
+        slides.forEach((slide, i) => slide.classList.toggle("is-active", i === nextIndex));
+        dots.forEach((dot, i) => {
+          const active = (i === nextIndex);
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        currentSlide = nextIndex;
+
+        // 3. Shutter blade sweeps out to left, revealing new screenshot
+        setTimeout(() => {
+          shutterBlade.classList.remove(inClass);
+          shutterBlade.classList.add(outClass);
+
+          setTimeout(() => {
+            shutterBlade.className = "cf-shutter-blade";
+            isWiping = false;
+          }, 240);
+        }, 60);
+      }, 180);
     };
 
     const nextSlide = () => {
-      if (!isVisible || prefersReducedMotion) return;
-      showSlide(currentSlide + 1);
+      if (!isVisible) return;
+      transitionToSlide(currentSlide + 1, "rtl");
     };
 
     const prevSlide = () => {
-      if (!isVisible || prefersReducedMotion) return;
-      showSlide(currentSlide - 1);
+      if (!isVisible) return;
+      transitionToSlide(currentSlide - 1, "ltr");
     };
 
     const startTimer = () => {
       stopTimer();
       if (!prefersReducedMotion) {
-        crossfadeTimer = setInterval(nextSlide, 3500);
+        crossfadeTimer = setInterval(nextSlide, 3600);
       }
     };
 
@@ -349,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
       stopTimer();
       setTimeout(() => {
         startTimer();
-      }, 4000);
+      }, 4500);
     };
 
     if (prevBtn) {
@@ -371,21 +408,21 @@ document.addEventListener("DOMContentLoaded", () => {
     dots.forEach((dot, i) => {
       dot.addEventListener("click", (e) => {
         e.stopPropagation();
-        showSlide(i);
+        const dir = i > currentSlide ? "rtl" : "ltr";
+        transitionToSlide(i, dir);
         restartTimerAfterDelay();
       });
     });
 
     if (container) {
       container.addEventListener("click", (e) => {
-        // Only advance if not clicking the badge, arrows, or dots
         if (e.target.closest(".crossfade-badge, .cf-nav-btn, .cf-dot")) return;
         nextSlide();
         restartTimerAfterDelay();
       });
     }
 
-    // Never stay permanently paused when switching tabs
+    // Reset when tab regains focus
     window.addEventListener("focus", () => {
       if (isVisible) startTimer();
     });

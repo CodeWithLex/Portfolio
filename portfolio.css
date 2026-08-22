@@ -325,6 +325,43 @@ body[data-mode="create"] .view-tech {
   pointer-events: auto;
 }
 
+/* Internal Right-to-Left Monochrome Shutter Blade */
+.cf-shutter-blade {
+  position: absolute;
+  inset: 0;
+  background: #050505;
+  z-index: 12;
+  pointer-events: none;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.cf-shutter-blade.wipe-rtl-in {
+  transform: scaleX(1);
+  transform-origin: right center;
+  box-shadow: -2px 0 0 rgba(255, 255, 255, 0.18);
+  transition: transform 230ms var(--ease-smooth);
+}
+
+.cf-shutter-blade.wipe-rtl-out {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 230ms var(--ease-smooth);
+}
+
+.cf-shutter-blade.wipe-ltr-in {
+  transform: scaleX(1);
+  transform-origin: left center;
+  box-shadow: 2px 0 0 rgba(255, 255, 255, 0.18);
+  transition: transform 230ms var(--ease-smooth);
+}
+
+.cf-shutter-blade.wipe-ltr-out {
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 230ms var(--ease-smooth);
+}
+
 .crossfade-badge {
   position: absolute;
   top: 1rem;

@@ -418,3 +418,33 @@
 
   update(); /* initialise */
 })();
+
+/* ---- Copy Email Action with Toast Notification ---- */
+(function () {
+  "use strict";
+
+  var copyBtn = document.getElementById("btn-copy-email");
+  if (!copyBtn) return;
+
+  var toast = document.createElement("div");
+  toast.className = "copy-toast";
+  toast.setAttribute("role", "status");
+  toast.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg> <span>Email copied to clipboard!</span>';
+  document.body.appendChild(toast);
+
+  var toastTimer = null;
+
+  copyBtn.addEventListener("click", function () {
+    var email = copyBtn.getAttribute("data-email") || "lexmatondo@g.cjc.edu.ph";
+    navigator.clipboard.writeText(email).then(function () {
+      toast.classList.add("is-visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toast.classList.remove("is-visible");
+      }, 2500);
+    }).catch(function () {
+      /* fallback */
+      window.location.href = "mailto:" + email;
+    });
+  });
+})();

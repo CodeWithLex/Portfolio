@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lex — Selected Work</title>
+  <meta name="description" content="Main portfolio of Lex — design systems, motion and production front-end. Dark-mode-first, AI-assisted, human-led.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' text-anchor='middle' fill='%23000'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body data-mode="code">
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Floating shell: everything lives inside this rounded obsidian container -->
+  <div class="shell">
+
+    <header class="nav">
+      <a class="logo" href="index.html" aria-label="Lex — back to intro">
+        <span class="logo-box" aria-hidden="true">L</span>
+        <span class="logo-word">Lex</span>
+      </a>
+
+      <nav class="nav-pill" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#photography">Photos</a>
+        <a href="#method">Method</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="mode-toggle" role="group" aria-label="Portfolio mode">
+          <button type="button" data-mode-btn="code" class="is-active" aria-pressed="true">Code</button>
+          <button type="button" data-mode-btn="create" aria-pressed="false">Create</button>
+        </div>
+        <p class="status" role="status"><span class="status-dot" aria-hidden="true"></span>System v2.4 — live</p>
+        <a class="btn-white-pill" href="#contact">Let’s talk</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+        <div class="hero-copy mode-code">
+          <p class="ai-label"><span class="ai-dot" aria-hidden="true"></span>AI-powered design studio</p>
+          <h1 class="hero-title">
+            <span class="line">Design at the</span>
+            <span class="line"><em>Speed</em> of thought.</span>
+          </h1>
+          <p class="hero-sub">
+            I’m Lex — product designer &amp; front-end developer. I build high-contrast,
+            high-impact digital products: strategy to design system to shipped code.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-accent" href="#work">
+              View work
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
+            </a>
+            <!-- ✏️ Point "Watch reel" at your showreel video -->
+            <a class="btn-dark" href="#method">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>
+              Watch reel
+            </a>
+          </div>
+          <!-- ✏️ Your clients -->
+          <p class="hero-clients">
+            <span>Northwind</span><span>Helix Labs</span><span>Orbital</span><span>Vanta Co.</span>
+          </p>
+        </div>
+
+        <div class="hero-visual mode-code" aria-hidden="true">
+          <div class="mockup">
+            <div class="mock-chrome">
+              <span class="m-dot r"></span><span class="m-dot y"></span><span class="m-dot g"></span>
+              <span class="mock-file">lex—studio.v2</span>
+            </div>
+            <div class="mock-screen">
+              <div class="mock-id">
+                <span class="mock-avatar"></span>
+                <span class="mock-line w40"></span>
+              </div>
+              <div class="mock-stack">
+                <span class="mock-line w90"></span>
+                <span class="mock-line w65"></span>
+                <span class="mock-line w80"></span>
+              </div>
+              <div class="mock-cta"></div>
+            </div>
+
+            <img class="mock-person" src="assets/img/lex-cutout.webp" alt="Lex Matondo" loading="lazy" decoding="async">
+
+            <div class="float-card fc-a">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8z"/></svg>
+              <div><strong>+128%</strong><span>Conversion lift</span></div>
+            </div>
+            <div class="gen-pill">Generating…</div>
+          </div>
+        </div>
+
+        <div class="hero-copy mode-create">
+          <p class="ai-label"><span class="ai-dot" aria-hidden="true"></span>Events · Portraits · Documentary</p>
+          <h1 class="hero-title">
+            <span class="line">The other half,</span>
+            <span class="line"><em>full-frame.</em></span>
+          </h1>
+          <p class="hero-sub">
+            Programming is how I build — photography is how I observe. Events, portraits and
+            documentary moments, shot for the student publication and the College of Engineering,
+            edited frame by frame.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-accent" href="#photography">
+              View the gallery
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
+            </a>
+            <button class="btn-dark" type="button" data-mode-switch="code">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              See the code side
+            </button>
+          </div>
+          <p class="hero-clients">
+            <span>Student Publication</span><span>College of Engineering</span><span>Weddings</span><span>Debuts</span>
+          </p>
+        </div>
+
+        <div class="hero-visual mode-create" aria-hidden="true">
+          <div class="photo-hero">
+            <img src="assets/photos/full/portraits-2.jpg" alt="Portrait session" loading="lazy" decoding="async">
+            <div class="float-card fc-exif">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/><circle cx="12" cy="12" r="2.5"/></svg>
+              <div><strong>ƒ1.8</strong><span>35mm · ISO 400</span></div>
+            </div>
+            <div class="gen-pill">Shot on 35mm</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BENTO ================= -->
+      <section class="bento" id="work">
+        <header class="section-head">
+          <p class="section-label mode-code-only">System architecture</p>
+          <h2 class="mode-code-only">Built for the <em>unconventional.</em></h2>
+          <p class="section-label mode-create-only">The other side</p>
+          <h2 class="mode-create-only">Yes, I also <em>build</em> things.</h2>
+        </header>
+
+        <div class="bento-grid">
+          <article class="bcard b-large">
+            <div class="bcard-top">
+              <p class="bcard-label">Intelligence — 01</p>
+              <h3>Neural engine</h3>
+              <p class="bcard-copy">A proprietary workflow that understands design context, accessibility and brand — and turns briefs into production-ready systems.</p>
+            </div>
+            <div class="b-viz" aria-hidden="true">
+              <div class="b-bar" style="--h:40%"></div>
+              <div class="b-bar" style="--h:55%"></div>
+              <div class="b-bar" style="--h:45%"></div>
+              <div class="b-bar" style="--h:70%"></div>
+              <div class="b-bar" style="--h:60%"></div>
+              <div class="b-bar" style="--h:82%"></div>
+              <div class="b-bar dim" style="--h:75%"></div>
+              <div class="b-bar" style="--h:100%"></div>
+            </div>
+            <p class="b-stat"><strong>+212%</strong><span>team velocity after system adoption</span></p>
+          </article>
+
+          <article class="bcard b-tall">
+            <p class="bcard-label">Design tokens</p>
+            <h3>Atomic tokens</h3>
+            <div class="specimen" aria-hidden="true">Aa</div>
+            <ul class="swatches">
+              <li><span class="swatch" style="--sw:#ffffff"></span>White<span class="hex">#FFFFFF</span></li>
+              <li><span class="swatch" style="--sw:#ebebeb"></span>Porcelain<span class="hex">#EBEBEB</span></li>
+              <li><span class="swatch" style="--sw:#555555"></span>Graphite<span class="hex">#555555</span></li>
+              <li><span class="swatch" style="--sw:#0c0c0c"></span>Obsidian<span class="hex">#0C0C0C</span></li>
+            </ul>
+            <p class="bcard-copy">Space Grotesk 300–700 · JetBrains Mono</p>
+          </article>
+
+          <article class="bcard b-accent">
+            <div class="card-noise" aria-hidden="true"></div>
+            <svg class="arrow-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+            <strong class="big-num">40+</strong>
+            <p>projects shipped since 2020 — zero templates</p>
+          </article>
+
+          <article class="bcard">
+            <svg class="bcard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>
+            <h3>Product design</h3>
+            <p class="bcard-copy">End-to-end UX/UI for web products.</p>
+            <p class="bcard-meta">Figma · Systems</p>
+          </article>
+
+          <article class="bcard">
+            <svg class="bcard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>
+            <h3>Motion &amp; interaction</h3>
+            <p class="bcard-copy">GSAP choreography that guides, never distracts.</p>
+            <p class="bcard-meta">ScrollTrigger</p>
+          </article>
+
+          <article class="bcard">
+            <svg class="bcard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <h3>Front-end build</h3>
+            <p class="bcard-copy">Production HTML/CSS/JS, tuned for speed.</p>
+            <p class="bcard-meta">0.9s LCP</p>
+          </article>
+
+          <article class="bcard b-statcard">
+            <strong class="big-num">10×</strong>
+            <p class="bcard-meta">Faster deployment</p>
+            <p class="bcard-copy">From brief to production in days, not quarters.</p>
+          </article>
+
+          <a class="bcard b-avail" href="#contact">
+            <p class="bcard-label">Availability</p>
+            <h3>One slot open<span class="avail-arrow" aria-hidden="true">→</span></h3>
+            <p class="bcard-copy">Booking Q4 2026. Bring the weird briefs.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= PHOTOGRAPHY ================= -->
+      <section class="photography" id="photography">
+        <header class="section-head">
+          <p class="section-label">Photography</p>
+          <h2>The <em>other</em> half.</h2>
+          <p class="section-sub">
+            Programming is how I build. Photography is how I observe — events, portraits and
+            documentary moments, shot for the student publication and the College of Engineering.
+          </p>
+        </header>
+
+        <div class="filter-row" role="group" aria-label="Filter photos by category">
+          <button class="chip is-active" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="portraits" type="button">Portraits</button>
+          <button class="chip" data-filter="wedding" type="button">Wedding</button>
+          <button class="chip" data-filter="christening" type="button">Christening</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+          <button class="gitem big" data-cat="portraits" data-caption="Bebe — portrait session" type="button">
+            <img src="assets/photos/thumb/portraits-4.jpg" alt="Portrait session — Bebe" loading="lazy" decoding="async">
+            <span class="cap">Bebe — portrait session</span>
+          </button>
+          <button class="gitem tall" data-cat="wedding" data-caption="Wedding — portrait" type="button">
+            <img src="assets/photos/thumb/wedding-7.jpg" alt="Wedding portrait" loading="lazy" decoding="async">
+            <span class="cap">Wedding — portrait</span>
+          </button>
+          <button class="gitem tall" data-cat="portraits" data-caption="Portrait session" type="button">
+            <img src="assets/photos/thumb/portraits-2.jpg" alt="Portrait session" loading="lazy" decoding="async">
+            <span class="cap">Portrait session</span>
+          </button>
+          <button class="gitem wide" data-cat="christening" data-caption="Christening — ceremony" type="button">
+            <img src="assets/photos/thumb/christening-3.jpg" alt="Christening ceremony" loading="lazy" decoding="async">
+            <span class="cap">Christening — ceremony</span>
+          </button>
+          <button class="gitem" data-cat="portraits" data-caption="Portrait session" type="button">
+            <img src="assets/photos/thumb/portraits-1.jpg" alt="Portrait session" loading="lazy" decoding="async">
+            <span class="cap">Portrait session</span>
+          </button>
+          <button class="gitem" data-cat="wedding" data-caption="Wedding — ceremony" type="button">
+            <img src="assets/photos/thumb/wedding-2.jpg" alt="Wedding ceremony" loading="lazy" decoding="async">
+            <span class="cap">Wedding — ceremony</span>
+          </button>
+          <button class="gitem wide" data-cat="wedding" data-caption="Wedding — ceremony" type="button">
+            <img src="assets/photos/thumb/wedding-3.jpg" alt="Wedding ceremony" loading="lazy" decoding="async">
+            <span class="cap">Wedding — ceremony</span>
+          </button>
+          <button class="gitem wide" data-cat="christening" data-caption="Christening — family" type="button">
+            <img src="assets/photos/thumb/christening-5.jpg" alt="Christening family portrait" loading="lazy" decoding="async">
+            <span class="cap">Christening — family</span>
+          </button>
+        </div>
+
+        <div class="photo-links">
+          <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">LowBud Photography — Facebook ↗</a>
+          <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">@edrickvisuals.mov — TikTok ↗</a>
+        </div>
+      </section>
+
+      <!-- ================= METHOD (light contrast section) ================= -->
+      <section class="method" id="method">
+        <div class="method-grid">
+          <div class="method-copy">
+            <p class="section-label dark">Methodology</p>
+            <h2 class="method-title">Simplicity is the <em>ultimate</em> sophistication.</h2>
+            <ol class="steps">
+              <li>
+                <span class="step-num">01</span>
+                <div><h3>Subtract until it breaks</h3><p>We remove everything that isn’t essential to the user’s intent — then stop one step before it breaks.</p></div>
+              </li>
+              <li>
+                <span class="step-num">02</span>
+                <div><h3>Motion adds meaning</h3><p>Animation explains relationships and hierarchy. It never just decorates.</p></div>
+              </li>
+              <li>
+                <span class="step-num">03</span>
+                <div><h3>Content is interface</h3><p>The best interface is no interface — the content does the talking.</p></div>
+              </li>
+            </ol>
+          </div>
+
+          <figure class="portrait-wrap">
+            <div class="portrait"><img src="assets/photos/thumb/me-1.jpg" alt="Portrait of Lex Matondo" loading="lazy" decoding="async"></div>
+            <figcaption class="testimonial">
+              <p class="t-label">Client note</p>
+              <blockquote>“Lex took us from brief to launch in six weeks — and the product still outperforms everything we’ve shipped since.”</blockquote>
+              <cite>S. Carter · CEO, Northwind</cite>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="footer" id="contact">
+        <div class="watermark" aria-hidden="true">LEX</div>
+
+        <div class="footer-cta">
+          <h2>Have an idea<br>worth building?</h2>
+          <a class="btn-mega" href="mailto:hello@example.com">
+            <span class="mega-text">Let’s build it</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="footer-cols">
+          <nav class="footer-policies" aria-label="Policies">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Imprint</a>
+          </nav>
+          <div class="socials" aria-label="Social profiles">
+            <a class="social" href="https://github.com/CodeWithLex" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+            <a class="social" href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener" aria-label="LowBud Photography on Facebook">FB</a>
+            <a class="social" href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener" aria-label="Edrick Visuals on TikTok">TT</a>
+            <a class="social" href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+          </div>
+          <p class="copyright">© 2026 Lex — All rights reserved</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- CODE / CREATE shutter transition overlay -->
+  <div class="mode-wipe" aria-hidden="true"><span class="wipe-word"></span></div>
+
+  <!-- photo lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lb-btn lb-close" aria-label="Close viewer" type="button">✕</button>
+    <button class="lb-btn lb-prev" aria-label="Previous photo" type="button">‹</button>
+    <figure class="lb-figure">
+      <img id="lb-img" src="" alt="">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" aria-label="Next photo" type="button">›</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="portfolio.js" defer></script>
+</body>
+</html>

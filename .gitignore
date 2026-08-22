@@ -1,0 +1,10 @@
+# generated photo optimizations (keep the script, not the output)
+build/opt/
+
+# tooling artifacts
+.playwright-mcp/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini

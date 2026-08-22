@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 4. Global Motion Observer (Calm, Editorial & Non-repetitive)
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const revealElements = document.querySelectorAll(".reveal-on-scroll, .reveal-image, .reveal-group");
+  const revealElements = document.querySelectorAll(
+    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow"
+  );
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     revealElements.forEach((el) => el.classList.add("is-revealed"));
@@ -125,11 +127,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: 0.1,
+        threshold: 0.08,
         rootMargin: "0px 0px -30px 0px"
       }
     );
 
     revealElements.forEach((el) => revealObserver.observe(el));
+
+    // Subtle scroll displacement on hero exit (capped at -25px)
+    const heroHeading = document.querySelector(".hero-elem-heading");
+    const heroKicker = document.querySelector(".hero-elem-kicker");
+
+    if (heroHeading && heroKicker) {
+      let ticking = false;
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            if (scrollY < 400) {
+              const moveY = Math.min(scrollY * 0.12, 28);
+              const kickerOpacity = Math.max(1 - scrollY * 0.005, 0.2);
+              heroHeading.style.transform = `translateY(-${moveY}px)`;
+              heroKicker.style.opacity = kickerOpacity;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
   }
 });

@@ -803,13 +803,81 @@ body[data-mode="create"] .view-tech {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   HERO → SELECTED WORK CINEMATIC TRANSITION
+--------------------------------------------------------------------------- */
+.hero-flow {
+  will-change: transform, opacity;
+  transition: transform 600ms var(--ease-smooth), opacity 600ms var(--ease-smooth);
+}
+
+.hero-elem-kicker {
+  transition: opacity 400ms var(--ease-smooth);
+}
+
+.hero-elem-heading {
+  transition: transform 550ms var(--ease-smooth);
+}
+
+.reveal-seq {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 600ms var(--ease-smooth),
+              transform 600ms var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.selected-work-flow.is-revealed .reveal-seq.seq-1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 150ms;
+}
+
+.selected-work-flow.is-revealed .reveal-seq.seq-2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 280ms;
+}
+
+.selected-work-flow.is-revealed .reveal-seq.seq-3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 400ms;
+}
+
+.reveal-clip {
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 850ms var(--ease-smooth),
+              opacity 600ms var(--ease-smooth);
+  will-change: clip-path, opacity;
+}
+
+.selected-work-flow.is-revealed .reveal-clip.seq-4 {
+  opacity: 1;
+  clip-path: inset(0% 0 0 0);
+  transition-delay: 550ms;
+}
+
+.selected-work-flow.is-revealed .reveal-seq.seq-5 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 700ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
   .reveal-image,
   .reveal-group > *,
-  .discipline-view {
+  .discipline-view,
+  .hero-flow,
+  .hero-elem-kicker,
+  .hero-elem-heading,
+  .reveal-seq,
+  .reveal-clip {
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
     transition: none !important;
     animation: none !important;
   }

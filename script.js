@@ -1,44 +1,61 @@
 /* ---------------------------------------------------------------------------
-   Lex Matondo — Dual-Discipline Landing Controller
-   Handles subtle panel weight expansion and direct navigation
+   Lex Matondo — Minimal Editorial Landing Controller
+   Smooth 65/35 hover dynamics + Fullscreen expansion wipe on click
 --------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("split-container");
-  const panelEng = document.getElementById("panel-code");
-  const panelPhoto = document.getElementById("panel-create");
+  const hero = document.getElementById("split-hero");
+  const sideTech = document.getElementById("side-tech");
+  const sideCreate = document.getElementById("side-create");
 
-  if (!container || !panelEng || !panelPhoto) return;
+  if (!hero || !sideTech || !sideCreate) return;
 
-  // Hover expansion weight
-  panelEng.addEventListener("mouseenter", () => {
-    container.classList.add("hover-code");
-    container.classList.remove("hover-create");
+  // Desktop Hover Dynamics
+  sideTech.addEventListener("mouseenter", () => {
+    hero.classList.add("hover-tech");
+    hero.classList.remove("hover-create");
   });
 
-  panelEng.addEventListener("mouseleave", () => {
-    container.classList.remove("hover-code");
+  sideTech.addEventListener("mouseleave", () => {
+    hero.classList.remove("hover-tech");
   });
 
-  panelPhoto.addEventListener("mouseenter", () => {
-    container.classList.add("hover-create");
-    container.classList.remove("hover-code");
+  sideCreate.addEventListener("mouseenter", () => {
+    hero.classList.add("hover-create");
+    hero.classList.remove("hover-tech");
   });
 
-  panelPhoto.addEventListener("mouseleave", () => {
-    container.classList.remove("hover-create");
+  sideCreate.addEventListener("mouseleave", () => {
+    hero.classList.remove("hover-create");
   });
 
-  // Direct panel click navigation
-  panelEng.addEventListener("click", (e) => {
-    if (!e.target.closest("a, button")) {
-      window.location.href = "portfolio.html?mode=code";
+  // Intentional Full-Screen Expansion Wipe Transition on Click
+  const handleTransition = (targetHref, isTech) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.location.href = targetHref;
+      return;
     }
+
+    if (isTech) {
+      hero.classList.add("expand-tech");
+      hero.classList.remove("hover-tech", "hover-create");
+    } else {
+      hero.classList.add("expand-create");
+      hero.classList.remove("hover-tech", "hover-create");
+    }
+
+    setTimeout(() => {
+      window.location.href = targetHref;
+    }, 420);
+  };
+
+  sideTech.addEventListener("click", (e) => {
+    e.preventDefault();
+    handleTransition("portfolio.html?mode=code", true);
   });
 
-  panelPhoto.addEventListener("click", (e) => {
-    if (!e.target.closest("a, button")) {
-      window.location.href = "portfolio.html?mode=create";
-    }
+  sideCreate.addEventListener("click", (e) => {
+    e.preventDefault();
+    handleTransition("portfolio.html?mode=create", false);
   });
 });

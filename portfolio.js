@@ -352,15 +352,56 @@
   if (nextBtn) nextBtn.addEventListener("click", goNext);
   if (prevBtn) prevBtn.addEventListener("click", goPrev);
 
-  /* clicking an off-center card jumps to it */
+  /* clicking an off-center card jumps to it; clicking active card opens lightbox */
+  var lightbox = document.getElementById("lightbox");
+  var lbImg = document.getElementById("lb-img");
+  var lbCap = document.getElementById("lb-cap");
+
   cards.forEach(function (card, idx) {
     card.addEventListener("click", function () {
       if (idx !== active) {
         active = idx;
         update();
+      } else if (lightbox && lbImg) {
+        var img = card.querySelector("img");
+        if (img) {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          var cap = card.getAttribute("data-caption") || "";
+          var cat = card.getAttribute("data-cat") || "";
+          lbCap.textContent = cap + (cat ? " · " + cat.toUpperCase() : "");
+          lightbox.hidden = false;
+          document.body.style.overflow = "hidden";
+          var closeBtn = lightbox.querySelector(".lb-close");
+          if (closeBtn) closeBtn.focus();
+        }
       }
     });
   });
+
+  /* Touch swiping support on mobile */
+  var startX = 0;
+  var startY = 0;
+  stage.addEventListener("touchstart", function (e) {
+    if (e.touches.length === 1) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  stage.addEventListener("touchend", function (e) {
+    if (e.changedTouches.length === 1) {
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) {
+          goNext();
+        } else {
+          goPrev();
+        }
+      }
+    }
+  }, { passive: true });
 
   /* arrow keys active when deck is on-screen */
   document.addEventListener("keydown", function (e) {

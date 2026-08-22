@@ -1821,29 +1821,30 @@ body[data-mode="create"] .mode-code-only {
 
 .tdeck-stage {
   position: relative;
-  width: 320px;
-  height: 400px;
+  width: 340px;
+  height: 450px;
 }
 
-/* ----------- individual cards ----------- */
+/* ----------- individual photo cards ----------- */
 .tcard {
   position: absolute;
   inset: 0;
   background: #ffffff;
   border: 1px solid #e4e4e7;
-  border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(9, 9, 11, 0.06);
-  padding: 2rem 1.75rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(9, 9, 11, 0.05);
+  padding: 0.875rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  text-align: center;
+  align-items: stretch;
+  gap: 0.875rem;
+  text-align: left;
   transform-origin: 50% 100%;
   will-change: transform, opacity;
   transition:
     transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 250ms cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateX(calc(var(--dist, 0) * 52px))
     translateY(calc(var(--adist, 0) * 10px)) rotate(calc(var(--dist, 0) * 7deg))
@@ -1852,112 +1853,130 @@ body[data-mode="create"] .mode-code-only {
   opacity: calc(1 - var(--adist, 0) * 0.28);
   pointer-events: none;
   cursor: pointer;
+  user-select: none;
 }
 
 .tcard.is-active {
-  box-shadow: 0 4px 16px rgba(9, 9, 11, 0.07);
+  box-shadow: 0 16px 36px -8px rgba(9, 9, 11, 0.14), 0 4px 12px rgba(9, 9, 11, 0.06);
   pointer-events: auto;
-  cursor: default;
+  cursor: pointer;
 }
 
 .tcard.is-active:focus-visible {
   outline: 2px solid #4f46e5;
   outline-offset: 2px;
-  border-radius: 16px;
+  border-radius: 20px;
 }
 
-/* ----------- portrait placeholder (SVG silhouette + initials badge) ----------- */
-.tcard-portrait-wrap {
+/* ----------- photo container ----------- */
+.tcard-photo {
   position: relative;
-  flex-shrink: 0;
-}
-
-.tcard-disc {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
+  width: 100%;
+  height: 310px;
+  border-radius: 14px;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  color: #d4d4d8;
+  background: #18181b;
 }
 
-.tcard-disc.sm {
-  width: 52px;
-  height: 52px;
-}
-
-.tcard-disc svg {
-  width: 60px;
-  height: 60px;
+.tcard-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-}
-.tcard-disc.sm svg {
-  width: 36px;
-  height: 36px;
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tcard-badge {
+.tcard.is-active:hover .tcard-photo img {
+  transform: scale(1.04);
+}
+
+/* category tag badge */
+.tcard-tag {
   position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-  color: #fff;
-  font-size: 9px;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(9, 9, 11, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.tcard-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4f46e5;
+}
+
+.tcard-tag.sm {
+  font-size: 9px;
+  padding: 2px 8px;
+  position: static;
+  background: #f4f4f5;
+  color: #4f46e5;
+  border: 1px solid #e4e4e7;
+}
+
+/* zoom / full view icon */
+.tcard-zoom {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
-}
-
-.tcard-badge.sm {
-  width: 22px;
-  height: 22px;
-  font-size: 7px;
-  bottom: -3px;
-  right: -3px;
-}
-
-/* ----------- quote + author ----------- */
-.tcard-quote {
-  font-size: 0.9375rem;
-  line-height: 1.65;
   color: #09090b;
-  font-weight: 400;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  font-style: normal;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 200ms ease, background 200ms ease;
 }
 
-.tcard-quote.sm {
-  font-size: 0.875rem;
+.tcard.is-active:hover .tcard-zoom {
+  transform: scale(1.1);
+  background: #ffffff;
 }
 
-.tcard-author {
+/* ----------- card text details ----------- */
+.tcard-details {
+  padding: 0.125rem 0.25rem 0.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  flex-shrink: 0;
+  gap: 0.25rem;
 }
 
-.tcard-name {
-  font-size: 0.9375rem;
-  font-weight: 600;
+.tcard-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
   color: #09090b;
-  font-style: normal;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.25;
 }
 
-.tcard-role {
+.tcard-meta {
   font-size: 0.8125rem;
   color: #71717a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.4;
 }
 
 /* ----------- controls ----------- */
@@ -2042,21 +2061,51 @@ body[data-mode="create"] .mode-code-only {
   border: 1px solid #e4e4e7;
   border-radius: 16px;
   box-shadow: 0 1px 2px rgba(9, 9, 11, 0.06);
-  padding: 1.5rem;
+  padding: 1rem;
   display: flex;
   gap: 1rem;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.tlist-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.tlist-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tlist-info h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #09090b;
+  margin: 0;
+}
+
+.tlist-info p {
+  font-size: 0.8125rem;
+  color: #71717a;
+  margin: 0;
 }
 
 /* ----------- responsive reflow ----------- */
 @media (max-width: 420px) {
   .tdeck-stage {
-    width: 288px;
-    height: 400px;
+    width: 290px;
+    height: 420px;
+  }
+  .tcard-photo {
+    height: 280px;
   }
   .tcard {
-    padding: 1.375rem 1.25rem;
-    transform: translateX(calc(var(--dist, 0) * 40px))
+    padding: 0.75rem;
+    transform: translateX(calc(var(--dist, 0) * 36px))
       translateY(calc(var(--adist, 0) * 8px))
       rotate(calc(var(--dist, 0) * 5deg))
       scale(calc(1 - var(--adist, 0) * 0.07));

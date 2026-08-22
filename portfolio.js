@@ -1,19 +1,19 @@
 /* ---------------------------------------------------------------------------
    Lex Matondo — Minimal Editorial Portfolio Controller
-   Mode switching, photography filter & minimal lightbox
+   Mode switching, scroll reveals, photography gallery & crossfade loop
 --------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const modeBtns = document.querySelectorAll("[data-mode-btn]");
   const modeSwitches = document.querySelectorAll("[data-mode-switch]");
-
   const wipeLayer = document.getElementById("discipline-wipe");
   const mainContainer = document.querySelector(".portfolio-main");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let isTransitioning = false;
 
+  // 1. Navigation and URL updates
   const updateNav = (mode) => {
     modeBtns.forEach((btn) => {
       const active = btn.getAttribute("data-mode-btn") === mode;
@@ -28,7 +28,49 @@ document.addEventListener("DOMContentLoaded", () => {
     window.history.pushState({ mode }, "", newUrl);
   };
 
-  // 1. Mode Switching Function with Horizontal Monochrome Shutter Wipe
+  // 2. Global Motion Observer
+  let revealObserver = null;
+  const refreshMotionObservers = () => {
+    const revealElements = document.querySelectorAll(
+      ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow, .philosophy-flow, .contact-flow, .create-hero-flow, .photo-archive"
+    );
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      revealElements.forEach((el) => el.classList.add("is-revealed"));
+      return;
+    }
+
+    if (revealObserver) {
+      revealObserver.disconnect();
+    }
+
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -30px 0px"
+      }
+    );
+
+    revealElements.forEach((el) => {
+      // If element is already in viewport, reveal it immediately
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add("is-revealed");
+      } else {
+        revealObserver.observe(el);
+      }
+    });
+  };
+
+  // 3. Mode Switching with Horizontal Monochrome Shutter Wipe
   const setMode = (mode, isInitial = false) => {
     const currentMode = body.getAttribute("data-mode");
     if (!isInitial && currentMode === mode) {
@@ -43,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateUrl(mode);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+      refreshMotionObservers();
       return;
     }
 
@@ -66,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wipeLayer.classList.remove("wipe-in");
         wipeLayer.classList.add("wipe-out");
         mainContainer.classList.remove("is-switching");
+        refreshMotionObservers();
         isTransitioning = false;
       }, 120);
     }, 240);
@@ -85,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Handle browser back/forward buttons
-  window.addEventListener("popstate", (e) => {
+  window.addEventListener("popstate", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const mode = urlParams.get("mode") || "code";
     setMode(mode, true);
@@ -100,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setMode("code", true);
   }
 
-  // 2. Photography Category Filtering
+  // 4. Photography Category Filtering
   const filterBtns = document.querySelectorAll(".filter-btn");
   const photoTiles = document.querySelectorAll(".photo-tile");
 
@@ -122,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 3. Minimal Lightbox
+  // 5. Minimal Lightbox
   const lightbox = document.getElementById("lightbox");
   const lbImg = document.getElementById("lb-img");
   const lbCap = document.getElementById("lb-cap");
@@ -162,36 +206,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 4. Global Motion Observer (Calm, Editorial & Non-repetitive)
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const revealElements = document.querySelectorAll(
-    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow, .philosophy-flow, .contact-flow"
-  );
-
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-    revealElements.forEach((el) => el.classList.add("is-revealed"));
-  } else {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.05,
-        rootMargin: "0px 0px -30px 0px"
-      }
-    );
-
-    revealElements.forEach((el) => revealObserver.observe(el));
-
-    // Monitor Selected Work exiting into Other Work
+  // 6. Section Exit Monitoring & Scroll Displacement
+  if (!prefersReducedMotion && "IntersectionObserver" in window) {
     const selectedWork = document.getElementById("work");
     const archiveSection = document.getElementById("archive-section");
-
     if (selectedWork && archiveSection) {
       const exitObserver = new IntersectionObserver(
         (entries) => {
@@ -203,18 +221,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           });
         },
-        {
-          threshold: 0.05,
-          rootMargin: "0px 0px -80px 0px"
-        }
+        { threshold: 0.05, rootMargin: "0px 0px -80px 0px" }
       );
       exitObserver.observe(archiveSection);
     }
 
-    // Monitor Philosophy Section exiting into Contact Climax
     const philosophySection = document.getElementById("about");
     const contactSection = document.getElementById("contact");
-
     if (philosophySection && contactSection) {
       const philExitObserver = new IntersectionObserver(
         (entries) => {
@@ -226,18 +239,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           });
         },
-        {
-          threshold: 0.05,
-          rootMargin: "0px 0px -80px 0px"
-        }
+        { threshold: 0.05, rootMargin: "0px 0px -80px 0px" }
       );
       philExitObserver.observe(contactSection);
     }
 
-    // Subtle scroll displacement on hero exit (capped at -28px)
     const heroHeading = document.querySelector(".hero-elem-heading");
     const heroKicker = document.querySelector(".hero-elem-kicker");
-
     if (heroHeading && heroKicker) {
       let ticking = false;
       window.addEventListener("scroll", () => {
@@ -258,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 5. Featured Project Screenshot Crossfade Loop
+  // 7. Featured Project Screenshot Crossfade Loop
   const crossfadeStage = document.getElementById("coelgu-crossfade-stage");
   if (crossfadeStage) {
     const slides = crossfadeStage.querySelectorAll(".crossfade-slide");
@@ -314,17 +322,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          startTimer();
-        } else {
-          stopTimer();
-        }
-      });
-    }, { threshold: 0.1 });
-
-    visibilityObserver.observe(crossfadeStage);
+    if ("IntersectionObserver" in window) {
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            startTimer();
+          } else {
+            stopTimer();
+          }
+        });
+      }, { threshold: 0.1 });
+      visibilityObserver.observe(crossfadeStage);
+    } else {
+      startTimer();
+    }
   }
 });

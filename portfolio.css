@@ -865,6 +865,91 @@ body[data-mode="create"] .view-tech {
   transition-delay: 700ms;
 }
 
+/* ---------------------------------------------------------------------------
+   SELECTED WORK → OTHER WORK TRANSITION
+--------------------------------------------------------------------------- */
+.featured-visual img {
+  transform-origin: center top;
+  transition: transform 450ms var(--ease-smooth), opacity 450ms var(--ease-smooth);
+}
+
+.selected-work-flow.is-exiting .featured-visual img {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+.selected-work-flow.is-exiting .featured-title {
+  transform: translateY(-15px);
+  transition: transform 450ms var(--ease-smooth);
+}
+
+.selected-work-flow.is-exiting .featured-footer {
+  opacity: 0.45;
+  transition: opacity 400ms ease;
+}
+
+.label-slide-left {
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 550ms var(--ease-smooth),
+              transform 550ms var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.archive-flow.is-revealed .label-slide-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.archive-flow .archive-item {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms var(--ease-smooth),
+              transform 500ms var(--ease-smooth),
+              background-color 200ms ease,
+              padding-left 250ms var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.archive-flow.is-revealed .archive-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 80ms; }
+.archive-flow.is-revealed .archive-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 180ms; }
+.archive-flow.is-revealed .archive-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 280ms; }
+.archive-flow.is-revealed .archive-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 380ms; }
+.archive-flow.is-revealed .archive-item:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 480ms; }
+.archive-flow.is-revealed .archive-item:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 580ms; }
+
+/* Editorial Hover Interaction */
+.archive-item .archive-col-title,
+.archive-item .archive-tech {
+  transition: transform 250ms var(--ease-smooth);
+}
+
+.archive-item .archive-arrow {
+  display: inline-block;
+  opacity: 0.6;
+  transform: translateX(0);
+  transition: transform 250ms var(--ease-smooth), opacity 250ms ease;
+  font-size: 11px;
+  margin-left: 3px;
+}
+
+.archive-item:hover .archive-col-title,
+.archive-item:hover .archive-tech,
+.archive-item:focus-visible .archive-col-title,
+.archive-item:focus-visible .archive-tech {
+  transform: translateX(6px);
+}
+
+.archive-item:hover .archive-arrow,
+.archive-item:focus-visible .archive-arrow {
+  transform: translate(3px, -2px);
+  opacity: 1;
+}
+
+.archive-item .archive-year {
+  transform: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
   .reveal-image,
@@ -874,7 +959,12 @@ body[data-mode="create"] .view-tech {
   .hero-elem-kicker,
   .hero-elem-heading,
   .reveal-seq,
-  .reveal-clip {
+  .reveal-clip,
+  .label-slide-left,
+  .archive-flow .archive-item,
+  .archive-item .archive-col-title,
+  .archive-item .archive-tech,
+  .archive-item .archive-arrow {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;

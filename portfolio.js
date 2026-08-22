@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 4. Global Motion Observer (Calm, Editorial & Non-repetitive)
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealElements = document.querySelectorAll(
-    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow"
+    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow"
   );
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -127,14 +127,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: 0.08,
+        threshold: 0.06,
         rootMargin: "0px 0px -30px 0px"
       }
     );
 
     revealElements.forEach((el) => revealObserver.observe(el));
 
-    // Subtle scroll displacement on hero exit (capped at -25px)
+    // Monitor Selected Work exiting into Other Work
+    const selectedWork = document.getElementById("work");
+    const archiveSection = document.getElementById("archive-section");
+
+    if (selectedWork && archiveSection) {
+      const exitObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              selectedWork.classList.add("is-exiting");
+            } else if (entry.boundingClientRect.top > 0) {
+              selectedWork.classList.remove("is-exiting");
+            }
+          });
+        },
+        {
+          threshold: 0.05,
+          rootMargin: "0px 0px -80px 0px"
+        }
+      );
+      exitObserver.observe(archiveSection);
+    }
+
+    // Subtle scroll displacement on hero exit (capped at -28px)
     const heroHeading = document.querySelector(".hero-elem-heading");
     const heroKicker = document.querySelector(".hero-elem-kicker");
 

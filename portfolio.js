@@ -182,19 +182,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const outClass = isCreate ? "wipe-to-create-out" : "wipe-to-tech-out";
 
       wipeLayer.className = `discipline-wipe-layer ${isCreate ? "wipe-to-create-in" : "wipe-to-tech-in"}`;
+      document.documentElement.classList.remove("has-portfolio-entrance");
+
       requestAnimationFrame(() => {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
           wipeLayer.className = `discipline-wipe-layer ${outClass}`;
           setTimeout(() => {
             wipeLayer.className = "discipline-wipe-layer";
-          }, 320);
-        }, 50);
+          }, 380);
+        });
       });
+    } else {
+      document.documentElement.classList.remove("has-portfolio-entrance");
     }
-  } catch (_) {}
+  } catch (_) {
+    document.documentElement.classList.remove("has-portfolio-entrance");
+  }
 
   // Smooth Return to Landing Page on Brand Click
   const siteBrand = document.querySelector(".site-brand");
+  const portfolioWrapper = document.querySelector(".portfolio-container");
   if (siteBrand) {
     siteBrand.addEventListener("click", (e) => {
       e.preventDefault();
@@ -211,17 +218,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const inClass = (currentMode === "create") ? "wipe-to-tech-in" : "wipe-to-create-in";
       wipeLayer.className = `discipline-wipe-layer ${inClass}`;
-      if (mainContainer) mainContainer.classList.add("is-switching");
+      if (portfolioWrapper) portfolioWrapper.classList.add("is-exiting-to-landing");
 
       setTimeout(() => {
         window.location.href = "index.html";
-      }, 350);
+      }, 360);
     });
   }
 
   // Handle browser Back/Forward (bfcache)
   window.addEventListener("pageshow", () => {
     isTransitioning = false;
+    document.documentElement.classList.remove("has-portfolio-entrance");
+    if (portfolioWrapper) portfolioWrapper.classList.remove("is-exiting-to-landing");
     if (mainContainer) mainContainer.classList.remove("is-switching");
     if (wipeLayer) wipeLayer.className = "discipline-wipe-layer";
   });

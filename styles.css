@@ -228,6 +228,12 @@ a {
   pointer-events: none;
 }
 
+/* Immediate Pre-paint coverage when arriving from portfolio */
+html.has-landing-entrance .landing-shutter-layer {
+  transform: scaleX(1) !important;
+  transition: none !important;
+}
+
 /* Full Viewport Directional Shutter Layer */
 .landing-shutter-layer {
   position: fixed;

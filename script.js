@@ -94,20 +94,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const outClass = isCreate ? "shutter-to-right-out" : "shutter-to-left-out";
 
       shutter.className = `landing-shutter-layer ${isCreate ? "shutter-from-right" : "shutter-from-left"}`;
+      document.documentElement.classList.remove("has-landing-entrance");
+
       requestAnimationFrame(() => {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
           shutter.className = `landing-shutter-layer ${outClass}`;
           setTimeout(() => {
             shutter.className = "landing-shutter-layer";
-          }, 380);
-        }, 50);
+          }, 400);
+        });
       });
+    } else {
+      document.documentElement.classList.remove("has-landing-entrance");
     }
-  } catch (_) {}
+  } catch (_) {
+    document.documentElement.classList.remove("has-landing-entrance");
+  }
 
   // Handle browser Back/Forward (bfcache)
   window.addEventListener("pageshow", (event) => {
     isNavigating = false;
+    document.documentElement.classList.remove("has-landing-entrance");
     if (container) container.classList.remove("is-exiting");
     if (hero) hero.classList.remove("expand-tech", "expand-create", "hover-tech", "hover-create");
     if (shutter) shutter.className = "landing-shutter-layer";

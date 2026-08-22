@@ -98,46 +98,18 @@ a {
   justify-content: center;
   pointer-events: none;
   z-index: 15;
-}
-
-.prompt-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(5, 5, 5, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 0.4rem 1.15rem;
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
-}
-
-.prompt-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--text-primary);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-  animation: pulse-dot 2s infinite ease-in-out;
-}
-
-@keyframes pulse-dot {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(0.9);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+  opacity: 0.85;
 }
 
 .prompt-text {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-muted);
+  background: var(--bg-primary);
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--border-subtle);
 }
 
 /* ---------------------------------------------------------------------------
@@ -459,13 +431,11 @@ a {
   .prompt-bar {
     position: static;
     border-bottom: 1px solid var(--border-subtle);
-    padding: 0.75rem 1.25rem;
   }
 
-  .prompt-pill {
+  .prompt-text {
     border: none;
-    background: transparent;
-    padding: 0;
+    padding: 0.75rem 1.5rem;
   }
 
   .landing-split {

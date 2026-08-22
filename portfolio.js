@@ -13,14 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isTransitioning = false;
 
+  const modeSlider = document.getElementById("mode-slider");
+  const modeGroup = document.querySelector(".mode-switch-group");
+
   // 1. Navigation and URL updates
   const updateNav = (mode) => {
+    let activeBtn = null;
     modeBtns.forEach((btn) => {
       const active = btn.getAttribute("data-mode-btn") === mode;
       btn.classList.toggle("is-active", active);
       btn.setAttribute("aria-pressed", active ? "true" : "false");
+      if (active) activeBtn = btn;
     });
+
+    if (modeSlider && activeBtn && modeGroup) {
+      const groupRect = modeGroup.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      const leftOffset = btnRect.left - groupRect.left;
+      modeSlider.style.transform = `translateX(${leftOffset}px)`;
+      modeSlider.style.width = `${btnRect.width}px`;
+    }
   };
+
+  window.addEventListener("resize", () => {
+    const currentMode = body.getAttribute("data-mode") || "code";
+    updateNav(currentMode);
+  });
 
   const updateUrl = (mode) => {
     const newUrl = new URL(window.location);
@@ -70,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // 3. Mode Switching with Horizontal Monochrome Shutter Wipe
+  // 3. Directional Mode Switching with Horizontal Monochrome Shutter Wipe
   const setMode = (mode, isInitial = false) => {
     const currentMode = body.getAttribute("data-mode");
     if (!isInitial && currentMode === mode) {
@@ -92,27 +110,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isTransitioning) return;
     isTransitioning = true;
 
-    // Sequence 1: Content fades & wipe layer scales across viewport
+    const goingToCreate = (mode === "create");
+    const inClass = goingToCreate ? "wipe-to-create-in" : "wipe-to-tech-in";
+    const outClass = goingToCreate ? "wipe-to-create-out" : "wipe-to-tech-out";
+
+    // Reset wipe state
+    wipeLayer.className = "discipline-wipe-layer";
+
+    // Sequence 1: Content softens, wipe blade sweeps across screen
     mainContainer.classList.add("is-switching");
-    wipeLayer.classList.remove("wipe-out");
-    wipeLayer.classList.add("wipe-in");
+    wipeLayer.classList.add(inClass);
     updateNav(mode);
 
     setTimeout(() => {
-      // Sequence 2: Switch view while shutter is closed & reset scroll
+      // Sequence 2: Switch discipline while covered, reset scroll to top
       body.setAttribute("data-mode", mode);
       window.scrollTo({ top: 0 });
       updateUrl(mode);
 
-      // Sequence 3: Shutter exits to right, revealing new content smoothly
+      // Sequence 3: Wipe blade sweeps out to destination side
       setTimeout(() => {
-        wipeLayer.classList.remove("wipe-in");
-        wipeLayer.classList.add("wipe-out");
+        wipeLayer.classList.remove(inClass);
+        wipeLayer.classList.add(outClass);
         mainContainer.classList.remove("is-switching");
+
         refreshMotionObservers();
-        isTransitioning = false;
-      }, 120);
-    }, 240);
+
+        setTimeout(() => {
+          wipeLayer.className = "discipline-wipe-layer";
+          isTransitioning = false;
+        }, 280);
+      }, 100);
+    }, 220);
   };
 
   modeBtns.forEach((btn) => {

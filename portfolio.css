@@ -97,19 +97,21 @@ button {
 .mode-switch-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   position: relative;
+  padding-bottom: 4px;
 }
 
 .mode-btn {
   color: var(--text-muted);
-  padding: 0.25rem 0.35rem;
+  padding: 0.25rem 0.4rem;
   position: relative;
-  transition: color 250ms ease;
+  transition: color 220ms ease;
   outline: none;
+  z-index: 2;
 }
 
 .mode-btn:hover {
@@ -121,22 +123,15 @@ button {
   font-weight: 700;
 }
 
-.mode-btn::after {
-  content: "";
+.mode-slider-indicator {
   position: absolute;
-  bottom: -2px;
-  left: 0.35rem;
-  right: 0.35rem;
+  bottom: 0;
+  left: 0;
   height: 1.5px;
   background: var(--text-primary);
-  opacity: 0;
-  transform: scaleX(0);
-  transition: opacity 250ms ease, transform 250ms var(--ease-smooth);
-}
-
-.mode-btn.is-active::after {
-  opacity: 1;
-  transform: scaleX(1);
+  transition: transform 280ms var(--ease-smooth), width 280ms var(--ease-smooth);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .mode-sep {
@@ -148,29 +143,54 @@ button {
 .discipline-wipe-layer {
   position: fixed;
   inset: 0;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
-  z-index: 90;
+  background: #050505;
+  z-index: 95;
   pointer-events: none;
   transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 280ms var(--ease-smooth);
+  transition: transform 260ms var(--ease-smooth);
   will-change: transform;
 }
 
-.discipline-wipe-layer.wipe-in {
+.discipline-wipe-layer.wipe-to-create-in {
   transform: scaleX(1);
   transform-origin: left center;
+  box-shadow: 2px 0 0 rgba(255, 255, 255, 0.15);
 }
 
-.discipline-wipe-layer.wipe-out {
+.discipline-wipe-layer.wipe-to-create-out {
   transform: scaleX(0);
   transform-origin: right center;
 }
 
+.discipline-wipe-layer.wipe-to-tech-in {
+  transform: scaleX(1);
+  transform-origin: right center;
+  box-shadow: -2px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+.discipline-wipe-layer.wipe-to-tech-out {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
 .portfolio-main.is-switching {
-  opacity: 0;
+  opacity: 0.15;
   transition: opacity 180ms ease;
+}
+
+.discipline-view {
+  animation: disciplineViewEntrance 420ms var(--ease-smooth) forwards;
+}
+
+@keyframes disciplineViewEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .site-nav {

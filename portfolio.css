@@ -431,7 +431,29 @@ body[data-mode="create"] .view-tech {
   background: var(--bg-secondary);
   display: block;
   text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  clip-path: inset(10% 0 0 0);
+  transition: opacity 700ms var(--ease-smooth),
+              transform 700ms var(--ease-smooth),
+              clip-path 750ms var(--ease-smooth);
+  will-change: opacity, transform, clip-path;
 }
+
+.photo-grid.is-revealed .photo-tile {
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: inset(0% 0 0 0);
+}
+
+.photo-grid.is-revealed .photo-tile:nth-child(1) { transition-delay: 80ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(2) { transition-delay: 200ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(3) { transition-delay: 320ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(4) { transition-delay: 440ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(5) { transition-delay: 560ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(6) { transition-delay: 680ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(7) { transition-delay: 800ms; }
+.photo-grid.is-revealed .photo-tile:nth-child(8) { transition-delay: 920ms; }
 
 .photo-tile.is-hidden {
   display: none !important;
@@ -447,8 +469,8 @@ body[data-mode="create"] .view-tech {
   object-fit: cover;
   display: block;
   aspect-ratio: 16 / 10;
-  filter: grayscale(15%);
-  transition: filter 400ms ease, transform 500ms var(--ease-smooth);
+  transform: scale(1);
+  transition: transform 450ms var(--ease-smooth);
 }
 
 .photo-tile.tile-tall img {
@@ -456,25 +478,26 @@ body[data-mode="create"] .view-tech {
 }
 
 .photo-tile:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.02);
+  transform: scale(1.025);
 }
 
 .tile-caption {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(5, 5, 5, 0.95) 100%);
+  background: linear-gradient(180deg, transparent 55%, rgba(5, 5, 5, 0.85) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 1.5rem;
   opacity: 0;
-  transition: opacity 300ms ease;
+  transform: translateY(6px);
+  transition: opacity 350ms ease, transform 350ms var(--ease-smooth);
 }
 
 .photo-tile:hover .tile-caption,
 .photo-tile:focus-visible .tile-caption {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .caption-title {
@@ -720,6 +743,19 @@ body[data-mode="create"] .view-tech {
 
   .photo-tile.tile-wide {
     grid-column: span 1;
+  }
+
+  .photo-tile:hover img {
+    transform: none !important;
+  }
+
+  .tile-caption {
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative !important;
+    background: var(--bg-secondary) !important;
+    padding: 0.875rem 1rem !important;
+    border-top: 1px solid var(--border-subtle);
   }
 
   .philosophy-content {

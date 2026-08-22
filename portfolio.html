@@ -143,171 +143,124 @@
       <!-- ================= BENTO / CASE STUDIES ================= -->
       <section class="bento" id="work">
         <header class="section-head">
-          <p class="section-label">Featured Case Studies — Live &amp; Proven</p>
-          <h2>Architected for <em>transparency &amp; utility.</em></h2>
+          <p class="section-label">Primary Flagship Case Study</p>
+          <h2>Architected for <em>institutional transparency.</em></h2>
         </header>
 
-        <!-- Top Flagship Case Studies -->
-        <div class="bento-grid bento-featured">
-          
-          <!-- Case Study 1: COE LGU Portal -->
-          <article class="bcard b-large case-study-card">
-            <div class="bcard-top">
+        <!-- Main Flagship Spotlight: COE LGU Portal -->
+        <article class="flagship-case-study">
+          <div class="fcs-grid">
+            <div class="fcs-content">
               <div class="bcard-header-row">
-                <p class="bcard-label">coelgu-system.engineer · Flagship System</p>
-                <span class="badge-status badge-live"><span class="bdot"></span>Campus Deployed</span>
+                <p class="bcard-label">coelgu-system.engineer · Campus Deployed</p>
+                <span class="badge-status badge-live"><span class="bdot"></span>Live on .engineer TLD</span>
               </div>
-              <h3>COE LGU Transparency &amp; Academic Portal</h3>
+              <h3 class="fcs-title">COE LGU Transparency &amp; Student Portal</h3>
               
               <div class="case-study-details">
                 <div class="cs-point">
-                  <strong class="cs-label">The Problem:</strong>
-                  <p>Student council finances (₱) and fee allocations were managed via chaotic spreadsheets, causing student distrust and slow budget approvals.</p>
+                  <strong class="cs-label">The Problem &amp; Stakeholders:</strong>
+                  <p>Student council finances (₱) and fee allocations at the College of Engineering were managed through chaotic spreadsheets and manual receipts, causing student distrust and slow administrative approvals.</p>
                 </div>
                 <div class="cs-point">
-                  <strong class="cs-label">What I Built:</strong>
-                  <p>A full-stack governance portal with institutional <code>@g.cjc.edu.ph</code> authentication, dynamic income/expense ledgers with over-budget flags, CSV bulk student import, and an immutable admin audit log.</p>
+                  <strong class="cs-label">What I Built &amp; Architectural Role:</strong>
+                  <p>A full-stack governance portal with institutional <code>@g.cjc.edu.ph</code> authentication, real-time Philippine Peso (₱) financial ledger with over-budget alerts, CSV bulk student roster import, and an immutable admin audit log.</p>
                 </div>
                 <div class="cs-point">
-                  <strong class="cs-label">Technical Challenge Solved:</strong>
+                  <strong class="cs-label">Hard Technical Problem Solved:</strong>
                   <p>Engineered client-side computation for the Philippine 1.0–5.0 grading scale and instant financial balance reconciliations without expensive server recalculation overhead.</p>
                 </div>
-              </div>
-
-              <div class="card-tech-pills">
-                <span>JavaScript</span><span>CSV Ledger</span><span>Audit Logging</span><span>Institutional Auth</span>
-              </div>
-            </div>
-
-            <div class="b-shot">
-              <img src="assets/projects/coelgu-system.png" alt="COE LGU Portal — student governance system" loading="lazy" decoding="async">
-            </div>
-
-            <div class="bcard-links">
-              <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener">Live Portal ↗</a>
-              <a href="https://github.com/CodeWithLex/LGU-SYSTEM" target="_blank" rel="noopener">Source Code ↗</a>
-            </div>
-          </article>
-
-          <!-- Case Study 2: ChemLab System -->
-          <article class="bcard b-tall case-study-card">
-            <div class="bcard-top">
-              <div class="bcard-header-row">
-                <p class="bcard-label">chemlab-system.me</p>
-                <span class="badge-status badge-live"><span class="bdot"></span>Live Deployment</span>
-              </div>
-              <h3>ChemLab Apparatus Management System</h3>
-
-              <div class="case-study-details">
                 <div class="cs-point">
-                  <strong class="cs-label">The Problem:</strong>
-                  <p>Laboratory equipment borrowing relied on paper logbooks, leading to lost glassware, scheduling collisions, and unverified ID deposits.</p>
-                </div>
-                <div class="cs-point">
-                  <strong class="cs-label">What I Built:</strong>
-                  <p>Automated apparatus queue with group logins, 30-min slot session queues (Mon–Sat), and printable activity receipts with dynamic QR codes for physical ID-deposit verification.</p>
-                </div>
-                <div class="cs-point">
-                  <strong class="cs-label">Technical Challenge:</strong>
-                  <p>Concurrency reservation locks for shared apparatus kits and client-side QR generation for physical lab deposit validation.</p>
+                  <strong class="cs-label">Real Outcome &amp; Impact:</strong>
+                  <p>Live deployment on a custom <code>.engineer</code> domain serving the College of Engineering council and student body.</p>
                 </div>
               </div>
 
               <div class="card-tech-pills">
-                <span>PHP</span><span>MySQL</span><span>QR Auth</span><span>Tailwind</span>
+                <span>JavaScript</span><span>CSV Ledger</span><span>Audit Logging</span><span>Institutional Auth</span><span>REST APIs</span>
+              </div>
+
+              <div class="bcard-links fcs-links">
+                <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener">Live Portal ↗</a>
+                <a href="https://github.com/CodeWithLex/LGU-SYSTEM" target="_blank" rel="noopener">Source Code ↗</a>
               </div>
             </div>
 
-            <div class="b-shot">
-              <img src="assets/projects/chemlab-system.png" alt="ChemLab System — laboratory portal" loading="lazy" decoding="async">
+            <div class="fcs-visual">
+              <div class="fcs-shot-frame">
+                <img src="assets/projects/coelgu-system.png" alt="COE LGU Portal — student governance system" loading="lazy" decoding="async">
+              </div>
+              <div class="fcs-caption">
+                <span>Institution: Cor Jesu College · College of Engineering</span>
+                <span>Role: Lead Student Developer</span>
+              </div>
             </div>
+          </div>
+        </article>
 
+        <!-- Capability Showcase: What Else I Can Build -->
+        <header class="section-head capability-head">
+          <p class="section-label">Engineering Capability</p>
+          <h2>I build across <em>web, embedded &amp; AI.</em></h2>
+        </header>
+
+        <div class="bento-grid capability-grid">
+          
+          <!-- ChemLab System -->
+          <article class="bcard">
+            <div class="bcard-header-row">
+              <p class="bcard-label">chemlab-system.me</p>
+              <span class="badge-status badge-live"><span class="bdot"></span>Live Deployment</span>
+            </div>
+            <h3>ChemLab Apparatus System</h3>
+            <p class="bcard-capability"><strong>I can build:</strong> Multi-user chemistry lab reservation queues with dynamic QR-code physical ID deposit receipts and session collision handling.</p>
+            <div class="card-tech-pills">
+              <span>PHP</span><span>MySQL</span><span>QR Auth</span><span>Tailwind</span>
+            </div>
             <div class="bcard-links">
               <a href="https://chemlab-system.me" target="_blank" rel="noopener">Live Portal ↗</a>
               <a href="https://github.com/CodeWithLex/CodeWithLex.github.io" target="_blank" rel="noopener">Source Code ↗</a>
             </div>
           </article>
 
-          <!-- Case Study 3: Medicine Dispenser (Hardware x Software) -->
-          <article class="bcard b-accent case-study-card">
-            <div class="card-noise" aria-hidden="true"></div>
+          <!-- Medicine Dispenser -->
+          <article class="bcard">
             <div class="bcard-header-row">
-              <p class="bcard-label">Hardware × Software Prototype</p>
+              <p class="bcard-label">Hardware × Software</p>
               <span class="badge-status badge-hw"><span class="bdot"></span>Embedded Hardware</span>
             </div>
-            <strong class="accent-title">Automated Healthcare Medicine Dispenser</strong>
-            
-            <div class="case-study-details">
-              <div class="cs-point">
-                <strong class="cs-label">The Problem:</strong>
-                <p>Medication schedule errors and manual pill handling in healthcare environments.</p>
-              </div>
-              <div class="cs-point">
-                <strong class="cs-label">What I Built:</strong>
-                <p>Java Swing desktop controller application driving an Arduino Uno microcontroller with multi-chamber stepper actuators and optical sensors.</p>
-              </div>
-              <div class="cs-point">
-                <strong class="cs-label">Technical Challenge Solved:</strong>
-                <p>Thread-safe bidirectional serial protocol over USB with parity verification to prevent dropped commands during time-critical dispensing cycles.</p>
-              </div>
-            </div>
-
+            <h3>Automated Medicine Dispenser</h3>
+            <p class="bcard-capability"><strong>I can build:</strong> Java desktop management applications driving physical Arduino microcontroller stepper motor actuators over USB serial protocols.</p>
             <div class="card-tech-pills">
-              <span>Arduino C++</span><span>Java Swing</span><span>Serial I/O</span><span>Actuator Circuitry</span>
+              <span>Arduino C++</span><span>Java Swing</span><span>Serial I/O</span>
             </div>
             <p class="bcard-meta-ink">Validated Hardware Prototype · Cor Jesu College</p>
           </article>
 
-        </div>
-
-        <!-- Progressive Disclosure Toggle -->
-        <div class="bento-reveal-row">
-          <button type="button" class="btn-reveal-more" id="btn-toggle-more-projects" aria-expanded="false" aria-controls="bento-drawer">
-            <span class="reveal-text">Explore 4 more systems &amp; tools</span>
-            <svg class="reveal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-        </div>
-
-        <!-- Collapsible Drawer with remaining projects -->
-        <div class="bento-drawer is-collapsed" id="bento-drawer">
-          
+          <!-- eBarangay Portal -->
           <article class="bcard">
             <div class="bcard-header-row">
-              <p class="bcard-label">eBarangay Portal</p>
-              <span class="badge-status badge-gov"><span class="bdot"></span>Civic Tech</span>
+              <p class="bcard-label">Civic Tech</p>
+              <span class="badge-status badge-gov"><span class="bdot"></span>Public Pipeline</span>
             </div>
             <h3>eBarangay Citizen Portal</h3>
-            <p class="bcard-copy">Digital governance pipeline replacing long physical queues with online barangay document requests and status tracking.</p>
+            <p class="bcard-capability"><strong>I can build:</strong> Digital governance pipelines that replace manual in-person queues with online barangay document requests and status tracking.</p>
             <div class="card-tech-pills">
-              <span>Civic Tech</span><span>REST API</span><span>Citizen Forms</span>
+              <span>JavaScript</span><span>REST API</span><span>Citizen Forms</span>
             </div>
             <div class="bcard-links">
               <a href="https://github.com/CodeWithLex/eBarangay-Portal" target="_blank" rel="noopener">Source Code ↗</a>
             </div>
           </article>
 
-          <article class="bcard">
-            <div class="bcard-header-row">
-              <p class="bcard-label">Java · Desktop Utility</p>
-              <span class="badge-status badge-dev"><span class="bdot"></span>Utility</span>
-            </div>
-            <h3>Content Creation Manager</h3>
-            <p class="bcard-copy">A Java desktop app built to organize video assets, presets, and creator workflows without cloud dependency.</p>
-            <div class="card-tech-pills">
-              <span>Java Swing</span><span>File I/O</span><span>Presets</span>
-            </div>
-            <div class="bcard-links">
-              <a href="https://github.com/CodeWithLex/Content-Creation-Manager" target="_blank" rel="noopener">Source Code ↗</a>
-            </div>
-          </article>
-
+          <!-- PMAEE CadetCoach -->
           <article class="bcard">
             <div class="bcard-header-row">
               <p class="bcard-label">AI Prep Tool</p>
-              <span class="badge-status badge-ai"><span class="bdot"></span>AI Portal</span>
+              <span class="badge-status badge-ai"><span class="bdot"></span>AI Cloud Portal</span>
             </div>
             <h3>PMAEE CadetCoach</h3>
-            <p class="bcard-copy">AI prep portal for the Philippine Military Academy Entrance Exam hosted on Render cloud.</p>
+            <p class="bcard-capability"><strong>I can build:</strong> Cloud-hosted entrance exam coaching portals powered by an AI-assisted review engine and user progress telemetry.</p>
             <div class="card-tech-pills">
               <span>Node.js</span><span>Render Cloud</span><span>NLP Engine</span>
             </div>
@@ -316,26 +269,38 @@
             </div>
           </article>
 
+          <!-- Content Creation Manager -->
+          <article class="bcard">
+            <div class="bcard-header-row">
+              <p class="bcard-label">Desktop Utility</p>
+              <span class="badge-status badge-dev"><span class="bdot"></span>Offline Utility</span>
+            </div>
+            <h3>Content Creation Manager</h3>
+            <p class="bcard-capability"><strong>I can build:</strong> Standalone Java desktop applications for local video asset management, preset parsing, and creator automation without cloud lock-in.</p>
+            <div class="card-tech-pills">
+              <span>Java Swing</span><span>File I/O</span><span>Preset Parser</span>
+            </div>
+            <div class="bcard-links">
+              <a href="https://github.com/CodeWithLex/Content-Creation-Manager" target="_blank" rel="noopener">Source Code ↗</a>
+            </div>
+          </article>
+
+          <!-- F.R.I.D.A.Y -->
           <article class="bcard">
             <div class="bcard-header-row">
               <p class="bcard-label">Experimental AI</p>
-              <span class="badge-status badge-exp"><span class="bdot"></span>Prototype</span>
+              <span class="badge-status badge-exp"><span class="bdot"></span>Voice &amp; Vision</span>
             </div>
-            <h3>F.R.I.D.A.Y</h3>
-            <p class="bcard-copy">“Replicating Tony Stark’s F.R.I.D.A.Y.” — building an interactive voice and visual assistant.</p>
+            <h3>F.R.I.D.A.Y Assistant</h3>
+            <p class="bcard-capability"><strong>I can build:</strong> Interactive Python voice and computer vision assistants experimenting with NLP speech recognition and custom intent dispatching.</p>
             <div class="card-tech-pills">
-              <span>Python</span><span>Speech AI</span><span>NLP</span>
+              <span>Python</span><span>SpeechRecognition</span><span>Vision API</span>
             </div>
             <div class="bcard-links">
               <a href="https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y" target="_blank" rel="noopener">Source Code ↗</a>
             </div>
           </article>
 
-          <a class="bcard b-avail" href="mailto:lexmatondo@g.cjc.edu.ph">
-            <p class="bcard-label">Availability</p>
-            <h3>Open to internships &amp; engineering collabs<span class="avail-arrow" aria-hidden="true">→</span></h3>
-            <p class="bcard-copy">Computer Engineering student at Cor Jesu College. Let's build.</p>
-          </a>
         </div>
       </section>
 

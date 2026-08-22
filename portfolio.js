@@ -235,29 +235,73 @@ document.addEventListener("DOMContentLoaded", () => {
     if (wipeLayer) wipeLayer.className = "discipline-wipe-layer";
   });
 
-  // 4. Photography Category Filtering
+  // 4. Photography Category Filtering (Smooth Stagger & Soft Transition)
   const filterBtns = document.querySelectorAll(".filter-btn");
   const photoTiles = document.querySelectorAll(".photo-tile");
+  let isFiltering = false;
 
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      if (isFiltering || btn.classList.contains("is-active")) return;
+      isFiltering = true;
+
       filterBtns.forEach((b) => b.classList.remove("is-active"));
       btn.classList.add("is-active");
 
       const selectedCategory = btn.getAttribute("data-filter");
 
+      if (prefersReducedMotion) {
+        photoTiles.forEach((tile) => {
+          const tileCategory = tile.getAttribute("data-cat");
+          const match = (selectedCategory === "all" || tileCategory === selectedCategory);
+          tile.classList.toggle("is-hidden", !match);
+        });
+        isFiltering = false;
+        return;
+      }
+
+      // Step 1: Smoothly fade out tiles that won't match
       photoTiles.forEach((tile) => {
         const tileCategory = tile.getAttribute("data-cat");
-        if (selectedCategory === "all" || tileCategory === selectedCategory) {
-          tile.classList.remove("is-hidden");
-        } else {
-          tile.classList.add("is-hidden");
+        const match = (selectedCategory === "all" || tileCategory === selectedCategory);
+        if (!match && !tile.classList.contains("is-hidden")) {
+          tile.classList.add("is-filtering-out");
         }
       });
+
+      setTimeout(() => {
+        // Step 2: Toggle hidden states and animate in matching tiles
+        let delayIndex = 0;
+        photoTiles.forEach((tile) => {
+          const tileCategory = tile.getAttribute("data-cat");
+          const match = (selectedCategory === "all" || tileCategory === selectedCategory);
+          const wasHidden = tile.classList.contains("is-hidden");
+
+          tile.classList.remove("is-filtering-out");
+          tile.classList.toggle("is-hidden", !match);
+
+          if (match) {
+            tile.classList.remove("is-filtering-in");
+            tile.style.animationDelay = `${delayIndex * 50}ms`;
+            delayIndex++;
+            requestAnimationFrame(() => {
+              tile.classList.add("is-filtering-in");
+            });
+          }
+        });
+
+        setTimeout(() => {
+          photoTiles.forEach((tile) => {
+            tile.classList.remove("is-filtering-in");
+            tile.style.animationDelay = "";
+          });
+          isFiltering = false;
+        }, 500);
+      }, 180);
     });
   });
 
-  // 5. Minimal Lightbox
+  // 5. Cinematic Minimal Lightbox (Smooth Scale & Blur Transition)
   const lightbox = document.getElementById("lightbox");
   const lbImg = document.getElementById("lb-img");
   const lbCap = document.getElementById("lb-cap");
@@ -275,13 +319,22 @@ document.addEventListener("DOMContentLoaded", () => {
           lbImg.alt = img.alt || caption;
           lbCap.textContent = meta ? `${caption} — ${meta}` : caption;
           lightbox.removeAttribute("hidden");
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              lightbox.classList.add("is-open");
+            });
+          });
         }
       });
     });
 
     const closeLightbox = () => {
-      lightbox.setAttribute("hidden", "");
-      lbImg.src = "";
+      lightbox.classList.remove("is-open");
+      setTimeout(() => {
+        lightbox.setAttribute("hidden", "");
+        lbImg.src = "";
+      }, 260);
     };
 
     if (lbClose) lbClose.addEventListener("click", closeLightbox);

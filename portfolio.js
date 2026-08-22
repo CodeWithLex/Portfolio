@@ -8,19 +8,67 @@ document.addEventListener("DOMContentLoaded", () => {
   const modeBtns = document.querySelectorAll("[data-mode-btn]");
   const modeSwitches = document.querySelectorAll("[data-mode-switch]");
 
-  // 1. Mode Switching Function
-  const setMode = (mode) => {
-    body.setAttribute("data-mode", mode);
+  const wipeLayer = document.getElementById("discipline-wipe");
+  const mainContainer = document.querySelector(".portfolio-main");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  let isTransitioning = false;
+
+  const updateNav = (mode) => {
     modeBtns.forEach((btn) => {
       const active = btn.getAttribute("data-mode-btn") === mode;
       btn.classList.toggle("is-active", active);
       btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
+  };
 
+  const updateUrl = (mode) => {
     const newUrl = new URL(window.location);
     newUrl.searchParams.set("mode", mode);
-    window.history.replaceState({}, "", newUrl);
+    window.history.pushState({ mode }, "", newUrl);
+  };
+
+  // 1. Mode Switching Function with Horizontal Monochrome Shutter Wipe
+  const setMode = (mode, isInitial = false) => {
+    const currentMode = body.getAttribute("data-mode");
+    if (!isInitial && currentMode === mode) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (isInitial || prefersReducedMotion || !wipeLayer || !mainContainer) {
+      body.setAttribute("data-mode", mode);
+      updateNav(mode);
+      if (!isInitial) {
+        updateUrl(mode);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
+
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    // Sequence 1: Content fades & wipe layer scales across viewport
+    mainContainer.classList.add("is-switching");
+    wipeLayer.classList.remove("wipe-out");
+    wipeLayer.classList.add("wipe-in");
+    updateNav(mode);
+
+    setTimeout(() => {
+      // Sequence 2: Switch view while shutter is closed & reset scroll
+      body.setAttribute("data-mode", mode);
+      window.scrollTo({ top: 0 });
+      updateUrl(mode);
+
+      // Sequence 3: Shutter exits to right, revealing new content smoothly
+      setTimeout(() => {
+        wipeLayer.classList.remove("wipe-in");
+        wipeLayer.classList.add("wipe-out");
+        mainContainer.classList.remove("is-switching");
+        isTransitioning = false;
+      }, 120);
+    }, 240);
   };
 
   modeBtns.forEach((btn) => {
@@ -33,17 +81,23 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       const targetMode = btn.getAttribute("data-mode-switch");
       setMode(targetMode);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     });
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener("popstate", (e) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get("mode") || "code";
+    setMode(mode, true);
   });
 
   // Initial Mode Detection (Query Param or Hash)
   const urlParams = new URLSearchParams(window.location.search);
   const initialMode = urlParams.get("mode");
   if (initialMode === "create" || window.location.hash === "#create" || window.location.hash === "#photography") {
-    setMode("create");
+    setMode("create", true);
   } else {
-    setMode("code");
+    setMode("code", true);
   }
 
   // 2. Photography Category Filtering

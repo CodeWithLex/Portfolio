@@ -273,18 +273,66 @@ body[data-mode="create"] .view-tech {
   border: 1px solid var(--border);
   overflow: hidden;
   background: var(--bg-secondary);
+  position: relative;
 }
 
-.featured-visual img {
-  width: 100%;
-  height: auto;
+.crossfade-container {
+  position: relative;
   display: block;
-  object-fit: cover;
-  transition: transform 600ms var(--ease-smooth);
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-secondary);
+  overflow: hidden;
 }
 
-.featured-visual:hover img {
+.crossfade-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
   transform: scale(1.015);
+  transition: opacity 800ms var(--ease-smooth), transform 850ms var(--ease-smooth);
+  pointer-events: none;
+  display: block;
+}
+
+.crossfade-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.crossfade-indicators {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 15;
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.cf-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--text-muted);
+  opacity: 0.4;
+  transition: opacity 300ms ease, transform 300ms var(--ease-smooth), background-color 300ms ease;
+}
+
+.cf-dot.is-active {
+  opacity: 1;
+  background: var(--text-primary);
+  transform: scale(1.4);
 }
 
 .featured-footer {

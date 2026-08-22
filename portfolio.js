@@ -257,4 +257,74 @@ document.addEventListener("DOMContentLoaded", () => {
       }, { passive: true });
     }
   }
+
+  // 5. Featured Project Screenshot Crossfade Loop
+  const crossfadeStage = document.getElementById("coelgu-crossfade-stage");
+  if (crossfadeStage) {
+    const slides = crossfadeStage.querySelectorAll(".crossfade-slide");
+    const dots = crossfadeStage.querySelectorAll(".cf-dot");
+    let currentSlide = 0;
+    let crossfadeTimer = null;
+    let isHovered = false;
+    let isVisible = true;
+
+    const showSlide = (index) => {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("is-active", i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === index);
+      });
+      currentSlide = index;
+    };
+
+    const nextSlide = () => {
+      if (isHovered || !isVisible || prefersReducedMotion) return;
+      const nextIndex = (currentSlide + 1) % slides.length;
+      showSlide(nextIndex);
+    };
+
+    const startTimer = () => {
+      if (!crossfadeTimer && !prefersReducedMotion) {
+        crossfadeTimer = setInterval(nextSlide, 3400);
+      }
+    };
+
+    const stopTimer = () => {
+      if (crossfadeTimer) {
+        clearInterval(crossfadeTimer);
+        crossfadeTimer = null;
+      }
+    };
+
+    crossfadeStage.addEventListener("mouseenter", () => {
+      isHovered = true;
+    });
+
+    crossfadeStage.addEventListener("mouseleave", () => {
+      isHovered = false;
+    });
+
+    dots.forEach((dot, i) => {
+      dot.style.cursor = "pointer";
+      dot.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        showSlide(i);
+      });
+    });
+
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startTimer();
+        } else {
+          stopTimer();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    visibilityObserver.observe(crossfadeStage);
+  }
 });

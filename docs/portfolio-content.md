@@ -1,5 +1,7 @@
 # Portfolio Content — Source of Truth (Lex Matondo)
 
+**Deployment:** Vercel — https://lex-portfolio-swart.vercel.app (project `lex-portfolio`, account `codewithlex`). Update flow: push to GitHub + `vercel --prod`. GitHub Pages also enabled on the repo but serves under `chemlab-system.me/Portfolio` (inherited custom domain) — Vercel is canonical.
+
 Verified facts for the accuracy pass. Everything implemented on the site must trace back to this file. Fictional/placeholder content is explicitly listed under "Banned".
 
 ## Identity

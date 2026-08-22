@@ -1,4 +1,6 @@
-# Portfolio — Lex
+# Portfolio — Lex Matondo
+
+**Live:** https://lex-portfolio-swart.vercel.app · **Repo:** https://github.com/CodeWithLex/Portfolio
 
 Two pages:
 
@@ -9,11 +11,11 @@ No build step — plain HTML/CSS/JS.
 
 ## Run
 
-Just open `index.html` in a browser, or serve the folder:
+Open `index.html`, or serve the folder (`npx serve .`).
 
-```bash
-npx serve .
-```
+## Deploy
+
+Deployed on Vercel (static, no build step). To ship updates: commit + push to GitHub, then run `vercel --prod` in the project folder. (For full auto-deploy-on-push: link GitHub under Vercel → Settings → Login Connections, then `vercel git connect`.) GitHub Pages is also enabled on the repo but inherits the `chemlab-system.me` custom domain — Vercel is the canonical host.
 
 ## Make it yours
 

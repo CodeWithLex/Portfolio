@@ -325,6 +325,75 @@ body[data-mode="create"] .view-tech {
   pointer-events: auto;
 }
 
+.crossfade-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  z-index: 15;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(5, 5, 5, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.crossfade-badge:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+  background: rgba(17, 17, 17, 0.95);
+}
+
+.crossfade-controls {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cf-nav-btn {
+  pointer-events: auto;
+  width: 36px;
+  height: 36px;
+  background: rgba(5, 5, 5, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 250ms ease, color 200ms ease, background-color 200ms ease, border-color 200ms ease;
+}
+
+.crossfade-container:hover .cf-nav-btn {
+  opacity: 0.85;
+}
+
+.cf-nav-btn:hover {
+  opacity: 1 !important;
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+  background: rgba(17, 17, 17, 0.95);
+}
+
 .crossfade-indicators {
   position: absolute;
   bottom: 1.25rem;
@@ -333,7 +402,7 @@ body[data-mode="create"] .view-tech {
   align-items: center;
   gap: 0.5rem;
   z-index: 15;
-  background: rgba(5, 5, 5, 0.7);
+  background: rgba(5, 5, 5, 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 0.4rem 0.75rem;
@@ -341,18 +410,26 @@ body[data-mode="create"] .view-tech {
 }
 
 .cf-dot {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: none;
   border-radius: 9999px;
   background: var(--text-muted);
   opacity: 0.4;
-  transition: opacity 300ms ease, transform 300ms var(--ease-smooth), background-color 300ms ease;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 250ms ease, transform 250ms var(--ease-smooth), background-color 250ms ease;
 }
 
 .cf-dot.is-active {
   opacity: 1;
   background: var(--text-primary);
-  transform: scale(1.4);
+  transform: scale(1.3);
+}
+
+.cf-dot:hover {
+  opacity: 0.85;
 }
 
 .featured-footer {

@@ -295,35 +295,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7. Featured Project Screenshot Crossfade Loop
+  // 7. Featured Project Screenshot Crossfade Showcase
   const crossfadeStage = document.getElementById("coelgu-crossfade-stage");
   if (crossfadeStage) {
     const slides = crossfadeStage.querySelectorAll(".crossfade-slide");
     const dots = crossfadeStage.querySelectorAll(".cf-dot");
+    const prevBtn = document.getElementById("cf-prev-btn");
+    const nextBtn = document.getElementById("cf-next-btn");
+    const container = crossfadeStage.querySelector(".crossfade-container");
+
     let currentSlide = 0;
     let crossfadeTimer = null;
-    let isHovered = false;
+    let userInteracted = false;
     let isVisible = true;
 
     const showSlide = (index) => {
+      currentSlide = (index + slides.length) % slides.length;
       slides.forEach((slide, i) => {
-        slide.classList.toggle("is-active", i === index);
+        slide.classList.toggle("is-active", i === currentSlide);
       });
       dots.forEach((dot, i) => {
-        dot.classList.toggle("is-active", i === index);
+        const active = (i === currentSlide);
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-selected", active ? "true" : "false");
       });
-      currentSlide = index;
     };
 
     const nextSlide = () => {
-      if (isHovered || !isVisible || prefersReducedMotion) return;
-      const nextIndex = (currentSlide + 1) % slides.length;
-      showSlide(nextIndex);
+      if (!isVisible || prefersReducedMotion) return;
+      showSlide(currentSlide + 1);
+    };
+
+    const prevSlide = () => {
+      if (!isVisible || prefersReducedMotion) return;
+      showSlide(currentSlide - 1);
     };
 
     const startTimer = () => {
-      if (!crossfadeTimer && !prefersReducedMotion) {
-        crossfadeTimer = setInterval(nextSlide, 3400);
+      stopTimer();
+      if (!prefersReducedMotion) {
+        crossfadeTimer = setInterval(nextSlide, 3500);
       }
     };
 
@@ -334,21 +345,49 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    crossfadeStage.addEventListener("mouseenter", () => {
-      isHovered = true;
-    });
+    const restartTimerAfterDelay = () => {
+      stopTimer();
+      setTimeout(() => {
+        startTimer();
+      }, 4000);
+    };
 
-    crossfadeStage.addEventListener("mouseleave", () => {
-      isHovered = false;
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        prevSlide();
+        restartTimerAfterDelay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        nextSlide();
+        restartTimerAfterDelay();
+      });
+    }
 
     dots.forEach((dot, i) => {
-      dot.style.cursor = "pointer";
       dot.addEventListener("click", (e) => {
-        e.preventDefault();
         e.stopPropagation();
         showSlide(i);
+        restartTimerAfterDelay();
       });
+    });
+
+    if (container) {
+      container.addEventListener("click", (e) => {
+        // Only advance if not clicking the badge, arrows, or dots
+        if (e.target.closest(".crossfade-badge, .cf-nav-btn, .cf-dot")) return;
+        nextSlide();
+        restartTimerAfterDelay();
+      });
+    }
+
+    // Never stay permanently paused when switching tabs
+    window.addEventListener("focus", () => {
+      if (isVisible) startTimer();
     });
 
     if ("IntersectionObserver" in window) {

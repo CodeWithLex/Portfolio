@@ -57,21 +57,33 @@
           </div>
 
           <div class="featured-visual reveal-clip seq-4" id="coelgu-crossfade-stage" aria-label="COE LGU Portal Screenshots Showcase">
-            <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener" aria-label="Open COE LGU Portal in new tab" class="crossfade-container">
+            <div class="crossfade-container" role="region" aria-label="Interactive Screenshot Carousel">
               <img class="crossfade-slide is-active" src="assets/projects/coelgu/screen-1.png" alt="COE LGU Portal — Authentication &amp; Login" loading="eager" decoding="async">
               <img class="crossfade-slide" src="assets/projects/coelgu/screen-2.png" alt="COE LGU Portal — Treasury &amp; Balance Ledger" loading="lazy" decoding="async">
               <img class="crossfade-slide" src="assets/projects/coelgu/screen-3.png" alt="COE LGU Portal — Budget Breakdown &amp; Transactions" loading="lazy" decoding="async">
               <img class="crossfade-slide" src="assets/projects/coelgu/screen-4.png" alt="COE LGU Portal — Student Roster &amp; CSV Import" loading="lazy" decoding="async">
               <img class="crossfade-slide" src="assets/projects/coelgu/screen-5.png" alt="COE LGU Portal — Audit Log &amp; System Analytics" loading="lazy" decoding="async">
 
-              <div class="crossfade-indicators" aria-hidden="true">
-                <span class="cf-dot is-active"></span>
-                <span class="cf-dot"></span>
-                <span class="cf-dot"></span>
-                <span class="cf-dot"></span>
-                <span class="cf-dot"></span>
+              <!-- Direct Link Badge -->
+              <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener" class="crossfade-badge" aria-label="Open live system in new tab">
+                <span>LIVE PORTAL</span> ↗
+              </a>
+
+              <!-- Clickable side navigation -->
+              <div class="crossfade-controls" aria-label="Carousel navigation">
+                <button type="button" class="cf-nav-btn cf-prev" id="cf-prev-btn" aria-label="Previous screenshot">←</button>
+                <button type="button" class="cf-nav-btn cf-next" id="cf-next-btn" aria-label="Next screenshot">→</button>
               </div>
-            </a>
+
+              <!-- Indicators / dots -->
+              <div class="crossfade-indicators" role="tablist" aria-label="Screenshot selectors">
+                <button type="button" class="cf-dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Authentication"></button>
+                <button type="button" class="cf-dot" role="tab" aria-selected="false" aria-label="Slide 2: Treasury Ledger"></button>
+                <button type="button" class="cf-dot" role="tab" aria-selected="false" aria-label="Slide 3: Budget Breakdown"></button>
+                <button type="button" class="cf-dot" role="tab" aria-selected="false" aria-label="Slide 4: Student Roster"></button>
+                <button type="button" class="cf-dot" role="tab" aria-selected="false" aria-label="Slide 5: Audit Log"></button>
+              </div>
+            </div>
           </div>
 
           <div class="featured-footer reveal-seq seq-5">

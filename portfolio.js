@@ -443,4 +443,36 @@ document.addEventListener("DOMContentLoaded", () => {
       startTimer();
     }
   }
+
+  // 8. Interactive Duo-Portrait (Hover on Desktop, Tap & Viewport Auto-Reveal on Mobile)
+  const portraitStages = document.querySelectorAll("[data-interactive-portrait]");
+  portraitStages.forEach((stage) => {
+    // Tap to toggle on touch devices
+    stage.addEventListener("click", () => {
+      stage.classList.toggle("is-color-revealed");
+    });
+
+    // Mobile scroll-in auto-reveal (subtle breathing reveal as user scrolls past)
+    if ("IntersectionObserver" in window) {
+      const portraitObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const isTouch = window.matchMedia("(hover: none) or (pointer: coarse)").matches;
+            if (isTouch) {
+              if (entry.isIntersecting) {
+                stage.classList.add("is-color-revealed");
+              } else {
+                stage.classList.remove("is-color-revealed");
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.45,
+          rootMargin: "-10% 0px -10% 0px"
+        }
+      );
+      portraitObserver.observe(stage);
+    }
+  });
 });

@@ -616,9 +616,12 @@ body[data-mode="create"] .view-tech {
   overflow: hidden;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  cursor: pointer;
+  cursor: crosshair;
   user-select: none;
   -webkit-user-select: none;
+  --lens-x: 50%;
+  --lens-y: 40%;
+  --lens-r: 0px;
 }
 
 .portrait-layer {
@@ -629,47 +632,51 @@ body[data-mode="create"] .view-tech {
   object-fit: cover;
   object-position: center top;
   display: block;
-  will-change: opacity, transform;
-  transition: transform 650ms var(--ease-smooth);
+  pointer-events: none;
 }
 
-.portrait-colored {
+.portrait-bnw {
   z-index: 1;
   opacity: 1;
 }
 
-.portrait-bnw {
+.portrait-colored {
   z-index: 2;
-  opacity: 1;
-  transition: opacity 600ms var(--ease-smooth), transform 650ms var(--ease-smooth);
-}
-
-/* Desktop Hover: reveal color underneath */
-@media (hover: hover) and (pointer: fine) {
-  .duo-portrait-stage:hover .portrait-bnw {
-    opacity: 0;
-  }
-
-  .duo-portrait-stage:hover .portrait-layer {
-    transform: scale(1.025);
-  }
-
-  .duo-portrait-stage:hover .portrait-tag-pill {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-}
-
-/* Touch & Mobile Active Color Reveal */
-.duo-portrait-stage.is-color-revealed .portrait-bnw {
   opacity: 0;
+  clip-path: circle(var(--lens-r, 0px) at var(--lens-x, 50%) var(--lens-y, 40%));
+  -webkit-clip-path: circle(var(--lens-r, 0px) at var(--lens-x, 50%) var(--lens-y, 40%));
+  transition: opacity 280ms ease;
+  will-change: clip-path, -webkit-clip-path, opacity;
 }
 
-.duo-portrait-stage.is-color-revealed .portrait-layer {
-  transform: scale(1.02);
+/* Subtle optical lens ring boundary */
+.portrait-lens-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--lens-r, 0px) * 2);
+  height: calc(var(--lens-r, 0px) * 2);
+  transform: translate(calc(var(--lens-x, 50%) - var(--lens-r, 0px)), calc(var(--lens-y, 40%) - var(--lens-r, 0px)));
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  will-change: transform, opacity;
 }
 
-.duo-portrait-stage.is-color-revealed .portrait-tag-pill {
+/* Active circular lens state (Desktop mouse hover & Mobile touch) */
+.duo-portrait-stage.is-lens-active .portrait-colored {
+  opacity: 1;
+}
+
+.duo-portrait-stage.is-lens-active .portrait-lens-ring {
+  opacity: 1;
+}
+
+.duo-portrait-stage.is-lens-active .portrait-tag-pill {
   opacity: 0;
   transform: translateY(4px);
 }

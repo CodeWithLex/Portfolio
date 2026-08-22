@@ -567,34 +567,73 @@ body[data-mode="create"] .view-tech {
 }
 
 /* ---------------------------------------------------------------------------
-   UNIFIED FOOTER
+   UNIFIED FOOTER / CONTACT CLIMAX
 --------------------------------------------------------------------------- */
 .site-footer {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 5rem;
   border-top: 1px solid var(--border);
-  padding: 5rem 0 3rem;
-  margin-top: 2rem;
+  padding: 9rem 0 3.5rem;
+  margin-top: 3rem;
+}
+
+.philosophy-section.is-exiting .philosophy-principles {
+  transform: translateY(-16px);
+  transition: transform 450ms var(--ease-smooth);
+}
+
+.philosophy-section.is-exiting .phil-label-quiet {
+  opacity: 0.4;
+  transition: opacity 400ms ease;
 }
 
 .footer-cta {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .cta-headline {
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.25rem, 5vw, 4rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   line-height: 1.05;
   color: var(--text-primary);
 }
 
+.climax-heading {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 800ms var(--ease-smooth),
+              transform 800ms var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.contact-flow.is-revealed .climax-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+
 .cta-prompt {
   font-size: 15px;
+  line-height: 1.6;
   color: var(--text-muted);
+}
+
+.climax-sub {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms var(--ease-smooth),
+              transform 600ms var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.contact-flow.is-revealed .climax-sub {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 240ms;
 }
 
 .cta-email {
@@ -604,30 +643,78 @@ body[data-mode="create"] .view-tech {
   border-bottom: 1px solid var(--border);
   width: fit-content;
   padding-bottom: 4px;
-  transition: opacity 150ms ease;
 }
 
-.cta-email:hover {
-  opacity: 0.7;
+.climax-email {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms var(--ease-smooth),
+              transform 600ms var(--ease-smooth),
+              opacity 150ms ease,
+              border-color 150ms ease;
+  will-change: opacity, transform;
+}
+
+.contact-flow.is-revealed .climax-email {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 380ms;
+}
+
+.climax-email:hover {
+  opacity: 0.75;
+  border-color: var(--text-primary);
 }
 
 .cta-switches {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
+  gap: 1rem;
   margin-top: 0.5rem;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.1em;
 }
 
-.cta-switch-link {
-  color: var(--text-muted);
-  transition: color 150ms ease;
+.climax-links {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms var(--ease-smooth),
+              transform 600ms var(--ease-smooth);
+  will-change: opacity, transform;
 }
 
-.cta-switch-link:hover {
+.contact-flow.is-revealed .climax-links {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 500ms;
+}
+
+.cta-switch-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.cta-switch-link .cta-arrow {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 250ms var(--ease-smooth);
+}
+
+.cta-switch-link:hover,
+.cta-switch-link:focus-visible {
   color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+.cta-switch-link:hover .cta-arrow,
+.cta-switch-link:focus-visible .cta-arrow {
+  transform: translateX(7px);
 }
 
 .cta-sep {

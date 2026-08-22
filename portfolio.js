@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 4. Global Motion Observer (Calm, Editorial & Non-repetitive)
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealElements = document.querySelectorAll(
-    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow, .philosophy-flow"
+    ".reveal-on-scroll, .reveal-image, .reveal-group, .selected-work-flow, .archive-flow, .philosophy-flow, .contact-flow"
   );
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: 0.06,
+        threshold: 0.05,
         rootMargin: "0px 0px -30px 0px"
       }
     );
@@ -155,6 +155,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       );
       exitObserver.observe(archiveSection);
+    }
+
+    // Monitor Philosophy Section exiting into Contact Climax
+    const philosophySection = document.getElementById("about");
+    const contactSection = document.getElementById("contact");
+
+    if (philosophySection && contactSection) {
+      const philExitObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              philosophySection.classList.add("is-exiting");
+            } else if (entry.boundingClientRect.top > 0) {
+              philosophySection.classList.remove("is-exiting");
+            }
+          });
+        },
+        {
+          threshold: 0.05,
+          rootMargin: "0px 0px -80px 0px"
+        }
+      );
+      philExitObserver.observe(contactSection);
     }
 
     // Subtle scroll displacement on hero exit (capped at -28px)

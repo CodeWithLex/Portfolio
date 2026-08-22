@@ -107,4 +107,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // 4. Global Motion Observer (Calm, Editorial & Non-repetitive)
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealElements = document.querySelectorAll(".reveal-on-scroll, .reveal-image, .reveal-group");
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealElements.forEach((el) => el.classList.add("is-revealed"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -30px 0px"
+      }
+    );
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  }
 });

@@ -4,44 +4,70 @@
 --------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".landing-container");
   const hero = document.getElementById("split-hero");
   const sideTech = document.getElementById("side-tech");
   const sideCreate = document.getElementById("side-create");
+  const shutter = document.getElementById("landing-shutter");
 
   if (!hero || !sideTech || !sideCreate) return;
 
   // Desktop Hover Dynamics
   sideTech.addEventListener("mouseenter", () => {
+    if (hero.classList.contains("expand-tech") || hero.classList.contains("expand-create")) return;
     hero.classList.add("hover-tech");
     hero.classList.remove("hover-create");
   });
 
   sideTech.addEventListener("mouseleave", () => {
+    if (hero.classList.contains("expand-tech") || hero.classList.contains("expand-create")) return;
     hero.classList.remove("hover-tech");
   });
 
   sideCreate.addEventListener("mouseenter", () => {
+    if (hero.classList.contains("expand-tech") || hero.classList.contains("expand-create")) return;
     hero.classList.add("hover-create");
     hero.classList.remove("hover-tech");
   });
 
   sideCreate.addEventListener("mouseleave", () => {
+    if (hero.classList.contains("expand-tech") || hero.classList.contains("expand-create")) return;
     hero.classList.remove("hover-create");
   });
 
-  // Intentional Full-Screen Expansion Wipe Transition on Click
+  // Intentional Full-Screen Directional Wipe Transition on Click
+  let isNavigating = false;
   const handleTransition = (targetHref, isTech) => {
+    if (isNavigating) return;
+    isNavigating = true;
+
+    try {
+      sessionStorage.setItem("portfolio-entrance", isTech ? "tech" : "create");
+    } catch (_) {}
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       window.location.href = targetHref;
       return;
     }
 
+    if (container) container.classList.add("is-exiting");
+
     if (isTech) {
       hero.classList.add("expand-tech");
       hero.classList.remove("hover-tech", "hover-create");
+      if (shutter) {
+        setTimeout(() => {
+          shutter.classList.add("shutter-from-left");
+        }, 120);
+      }
     } else {
       hero.classList.add("expand-create");
       hero.classList.remove("hover-tech", "hover-create");
+      if (shutter) {
+        setTimeout(() => {
+          shutter.classList.add("shutter-from-right");
+        }, 120);
+      }
     }
 
     setTimeout(() => {

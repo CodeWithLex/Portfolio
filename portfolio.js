@@ -173,6 +173,26 @@ document.addEventListener("DOMContentLoaded", () => {
     setMode("code", true);
   }
 
+  // Cinematic Entrance Handoff from Landing Page
+  try {
+    const entranceFlag = sessionStorage.getItem("portfolio-entrance");
+    if (entranceFlag && wipeLayer && !prefersReducedMotion) {
+      sessionStorage.removeItem("portfolio-entrance");
+      const isCreate = (entranceFlag === "create");
+      const outClass = isCreate ? "wipe-to-create-out" : "wipe-to-tech-out";
+
+      wipeLayer.className = `discipline-wipe-layer ${isCreate ? "wipe-to-create-in" : "wipe-to-tech-in"}`;
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          wipeLayer.className = `discipline-wipe-layer ${outClass}`;
+          setTimeout(() => {
+            wipeLayer.className = "discipline-wipe-layer";
+          }, 320);
+        }, 50);
+      });
+    }
+  } catch (_) {}
+
   // 4. Photography Category Filtering
   const filterBtns = document.querySelectorAll(".filter-btn");
   const photoTiles = document.querySelectorAll(".photo-tile");

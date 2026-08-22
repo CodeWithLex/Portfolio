@@ -190,27 +190,94 @@ a {
   opacity: 0.45;
 }
 
+/* ---------------------------------------------------------------------------
+   CINEMATIC EXIT & SHUTTER TRANSITION TO PORTFOLIO
+--------------------------------------------------------------------------- */
+.landing-container {
+  transition: opacity 300ms ease;
+}
+
+.landing-container.is-exiting .landing-header {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 280ms var(--ease-smooth), transform 280ms var(--ease-smooth);
+}
+
+.landing-container.is-exiting .prompt-bar {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 240ms var(--ease-smooth), transform 240ms var(--ease-smooth);
+}
+
+.landing-container.is-exiting .landing-footer {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 280ms var(--ease-smooth), transform 280ms var(--ease-smooth);
+}
+
 /* Fullscreen Expansion Wipe on Click */
 .landing-split.expand-tech .side-tech {
   flex-basis: 100% !important;
+  background: var(--bg-secondary) !important;
   opacity: 1 !important;
   z-index: 30;
+}
+.landing-split.expand-tech .side-tech .side-media {
+  opacity: 0.25 !important;
+}
+.landing-split.expand-tech .side-tech .side-media img {
+  transform: scale(1.02);
 }
 .landing-split.expand-tech .side-create {
   flex-basis: 0% !important;
   opacity: 0 !important;
   padding: 0 !important;
+  transform: scale(0.96);
+  pointer-events: none;
 }
 
 .landing-split.expand-create .side-create {
   flex-basis: 100% !important;
+  background: var(--bg-secondary) !important;
   opacity: 1 !important;
   z-index: 30;
+}
+.landing-split.expand-create .side-create .side-media {
+  opacity: 0.25 !important;
+}
+.landing-split.expand-create .side-create .side-media img {
+  transform: scale(1.02);
 }
 .landing-split.expand-create .side-tech {
   flex-basis: 0% !important;
   opacity: 0 !important;
   padding: 0 !important;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+/* Full Viewport Directional Shutter Layer */
+.landing-shutter-layer {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  z-index: 90;
+  pointer-events: none;
+  transform: scaleX(0);
+  will-change: transform;
+  transition: transform 380ms var(--ease-smooth);
+}
+
+.landing-shutter-layer.shutter-from-left {
+  transform-origin: left center;
+  transform: scaleX(1);
+  box-shadow: 2px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+.landing-shutter-layer.shutter-from-right {
+  transform-origin: right center;
+  transform: scaleX(1);
+  box-shadow: -2px 0 0 rgba(255, 255, 255, 0.15);
 }
 
 /* Vertical Line Divider */
@@ -228,7 +295,9 @@ a {
 }
 
 .landing-split.hover-tech .split-divider,
-.landing-split.hover-create .split-divider {
+.landing-split.hover-create .split-divider,
+.landing-split.expand-tech .split-divider,
+.landing-split.expand-create .split-divider {
   opacity: 0;
 }
 

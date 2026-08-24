@@ -3,48 +3,54 @@
   "fullName": "Lex Edrick Asherjesse C. Matondo",
   "role": "Computer Engineering (BSCPE) Student, Developer & Photographer",
   "university": "Cor Jesu College (CJC), Digos City, Philippines",
-  "location": "Digos City, Philippines",
+  "location": "Digos City, Davao del Sur, Philippines",
+  "email": "Matondolex@gmail.com",
   "philosophy": "CODE × CREATE — One person, two disciplines. I build things. I also photograph them.",
+  "journey": "Started coding in September 2024 as a freshman CpE student, progressing to deploying full-stack production portals by 2026.",
   "skills": {
-    "languages": ["Java", "JavaScript", "HTML", "CSS", "Kotlin", "SQL", "Python"],
-    "frameworks": ["Java Swing", "JavaFX", "Node.js", "Express.js", "Supabase", "PostgreSQL", "MySQL", "Android / Jetpack Compose"],
-    "tools": ["Git", "GitHub", "Figma", "NetBeans", "Android Studio", "VS Code", "Photoshop", "After Effects", "TouchDesigner"]
+    "languages": ["Java", "JavaScript", "TypeScript", "Kotlin", "SQL", "HTML5", "CSS3", "Python"],
+    "frameworks": ["Java Swing", "JavaFX", "Node.js", "Express.js", "Supabase", "PostgreSQL", "MySQL", "Android / Jetpack Compose", "Vercel Serverless"],
+    "tools": ["Git", "GitHub", "Figma", "NetBeans", "Android Studio", "VS Code", "Photoshop", "Lightroom", "After Effects", "TouchDesigner"]
   },
   "projects": [
     {
       "name": "ChemLab System",
-      "tagline": "Chemistry laboratory apparatus & scheduling portal",
+      "tagline": "Chemistry laboratory apparatus reservation & session scheduling portal",
       "url": "https://chemlab-system.me",
       "repo": "https://github.com/CodeWithLex/CodeWithLex.github.io",
-      "highlights": "Group logins, 30-min scheduling slots, QR code activity receipts, apparatus inventory, attendance logs"
+      "highlights": "Group logins, 30-minute booking slots, apparatus queue & inventory tracking, QR code activity receipts, attendance and ID-deposit logs."
     },
     {
       "name": "COE LGU System",
       "tagline": "College of Engineering official student financial portal & budget transparency",
       "url": "https://www.coelgu-system.engineer",
       "repo": "https://github.com/CodeWithLex/LGU-SYSTEM",
-      "highlights": "Student council budget tracking in ₱, over-budget warnings, 1.0–5.0 Philippine GPA calculator with PDF export, audit log"
+      "highlights": "Student council budget ledger in ₱, over-budget detection, 1.0–5.0 Philippine GPA calculator with PDF export, CSV bulk student import, audit logging. Restricted to @g.cjc.edu.ph."
     },
     {
       "name": "PMAEE CadetCoach",
-      "tagline": "AI prep portal for Philippine Military Academy Entrance Examination",
+      "tagline": "AI review & exam prep portal for Philippine Military Academy Entrance Examination",
       "url": "https://reviewer-coach.onrender.com",
-      "highlights": "AI exam-coaching and prep platform built with Node/Express on Render"
+      "highlights": "AI exam-coaching modules, practice exams, study pathways on a Node/Express Render backend."
     },
     {
       "name": "eBarangay-Portal",
-      "tagline": "Barangay document requests and digital governance",
+      "tagline": "Barangay document requests and digital resident governance",
       "repo": "https://github.com/CodeWithLex/eBarangay-Portal"
     },
     {
       "name": "Content-Creation-Manager",
-      "tagline": "Java desktop application organizing content creation pipelines",
+      "tagline": "Java desktop application managing content creation pipelines and video assets",
       "repo": "https://github.com/CodeWithLex/Content-Creation-Manager"
     },
     {
       "name": "PORJECT-F.R.I.D.A.Y",
-      "tagline": "AI voice assistant experiment inspired by Marvel",
+      "tagline": "AI voice assistant experiment inspired by Marvel's Iron Man / F.R.I.D.A.Y",
       "repo": "https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y"
+    },
+    {
+      "name": "Healthcare Smart Dispenser",
+      "tagline": "Automated medicine dispenser and scheduling system using Java Swing and Arduino hardware"
     }
   ],
   "photography": {
@@ -52,7 +58,8 @@
     "facebook": "https://www.facebook.com/Lowbudphotography27/",
     "tiktok": "https://www.tiktok.com/@edrickvisuals.mov",
     "youtube": "https://www.youtube.com/@lexmatondo27",
-    "genres": ["Portraits", "Weddings", "Christenings", "Student Publication & Engineering events"]
+    "roles": "Staff Photojournalist for The Heartbeat student publication and official College of Engineering photographer.",
+    "genres": ["Editorial portraits", "Weddings & debuts", "Christenings", "University milestone ceremonies"]
   },
   "socials": {
     "github": "https://github.com/CodeWithLex",

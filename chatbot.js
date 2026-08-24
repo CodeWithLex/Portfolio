@@ -10,17 +10,19 @@
   const LOCAL_KNOWLEDGE = {
     name: "Lex Matondo (Lex Edrick Asherjesse C. Matondo)",
     role: "Computer Engineering (BSCPE) student, Developer & Photographer",
-    school: "Cor Jesu College (CJC), Digos City, Philippines",
+    school: "Cor Jesu College (CJC), Digos City, Davao del Sur, Philippines",
     philosophy: "CODE × CREATE — One person, two disciplines.",
+    email: "Matondolex@gmail.com",
     projects: [
       "• **ChemLab System** (https://chemlab-system.me): Chemistry lab scheduling and apparatus management portal.",
       "• **COE LGU System** (https://www.coelgu-system.engineer): College of Engineering budget transparency and student council financial portal.",
       "• **PMAEE CadetCoach** (https://reviewer-coach.onrender.com): AI prep portal for Philippine Military Academy entrance exams.",
-      "• **Content-Creation-Manager** & **eBarangay-Portal** on GitHub (https://github.com/CodeWithLex)."
+      "• **Content-Creation-Manager** & **eBarangay-Portal** on GitHub (https://github.com/CodeWithLex).",
+      "• **Healthcare Smart Dispenser**: Arduino-driven automated medicine dispenser with Java Swing GUI."
     ],
-    skills: "Java, JavaScript, Kotlin, SQL, HTML/CSS, Python, Node.js, Express, Supabase, PostgreSQL, MySQL, Java Swing, JavaFX, Android Jetpack Compose, Git, Figma, Photoshop, After Effects.",
-    photography: "Event & portrait photographer under **Leavian Visuals** (portraits, weddings, christenings, and College of Engineering events). Follow on TikTok (@edrickvisuals.mov) or Facebook (Lowbudphotography27).",
-    contact: "• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
+    skills: "Java, JavaScript, TypeScript, Kotlin, SQL, HTML5, CSS3, Python, Node.js, Express, Supabase, PostgreSQL, MySQL, Java Swing, JavaFX, Android Jetpack Compose, Git, Figma, Photoshop, Lightroom, After Effects.",
+    photography: "Event & portrait photographer under **Leavian Visuals** (portraits, weddings, debuts, christenings, and Cor Jesu College of Engineering & student publication events). Follow on TikTok (@edrickvisuals.mov) or Facebook (Lowbudphotography27).",
+    contact: "• **Email:** Matondolex@gmail.com\n• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
   };
 
   const SUGGESTIONS = [
@@ -238,8 +240,22 @@
   }
 
   function getLocalFallback(query) {
-    const q = query.toLowerCase();
-    if (q.includes('project') || q.includes('build') || q.includes('work') || q.includes('made') || q.includes('chemlab') || q.includes('lgu')) {
+    const q = query.toLowerCase().trim();
+
+    // Check if query is about Lex
+    const isAboutLex = q.includes('lex') || q.includes('you') || q.includes('project') || 
+                       q.includes('build') || q.includes('work') || q.includes('stack') || 
+                       q.includes('skill') || q.includes('tech') || q.includes('photo') || 
+                       q.includes('camera') || q.includes('contact') || q.includes('email') || 
+                       q.includes('school') || q.includes('college') || q.includes('cjc') || 
+                       q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || 
+                       q.includes('git') || q.includes('who');
+
+    if (!isAboutLex) {
+      return "I am Lex Matondo's dedicated portfolio assistant. I can only answer questions specifically about Lex, his software projects, technical skills, and photography work.";
+    }
+
+    if (q.includes('project') || q.includes('build') || q.includes('work') || q.includes('made') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet')) {
       return `Here are Lex's primary projects:\n\n${LOCAL_KNOWLEDGE.projects.join('\n')}`;
     }
     if (q.includes('stack') || q.includes('language') || q.includes('tech') || q.includes('tool') || q.includes('skill')) {
@@ -254,10 +270,7 @@
     if (q.includes('who') || q.includes('about') || q.includes('lex') || q.includes('school') || q.includes('college') || q.includes('cjc')) {
       return `**${LOCAL_KNOWLEDGE.name}**\n\n• ${LOCAL_KNOWLEDGE.role}\n• Studying at ${LOCAL_KNOWLEDGE.school}\n• Philosophy: "${LOCAL_KNOWLEDGE.philosophy}"`;
     }
-    if (q.includes('recipe') || q.includes('weather') || q.includes('math') || q.includes('president') || q.includes('bitcoin')) {
-      return "I am Lex's portfolio assistant, so I can only answer questions about Lex Matondo, his projects, skills, education, and photography.";
-    }
-    return `Lex is a Computer Engineering student, developer, and photographer from Digos City, Philippines. Ask me about his projects (${LOCAL_KNOWLEDGE.projects[0].split('(')[0].replace('• **', '')}), his tech stack, or his photography!`;
+    return `Lex is a Computer Engineering student, developer, and photographer from Digos City, Philippines. Ask me about his projects, his tech stack, or his photography!`;
   }
 
   async function sendMessage(text) {

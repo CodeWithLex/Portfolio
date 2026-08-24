@@ -41,12 +41,19 @@
     // Prevent duplicate injection
     if (document.getElementById('lexChatWidget')) return;
 
+    // Backdrop for mobile & focused reading
+    const backdrop = document.createElement('div');
+    backdrop.id = 'lexChatBackdrop';
+    backdrop.className = 'lex-chat-backdrop';
+    document.body.appendChild(backdrop);
+
     const widget = document.createElement('div');
     widget.id = 'lexChatWidget';
     widget.className = 'lex-chat-widget';
 
     widget.innerHTML = `
       <div class="lex-chat-panel" id="lexChatPanel" role="dialog" aria-label="AI Portfolio Assistant">
+        <div class="lex-sheet-handle" aria-hidden="true"></div>
         <div class="lex-chat-header">
           <div class="lex-chat-title-group">
             <div class="lex-chat-avatar">LM</div>
@@ -60,12 +67,12 @@
           </div>
           <div class="lex-chat-actions">
             <button class="lex-icon-btn" id="lexClearChat" title="Clear chat" aria-label="Clear chat">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
               </svg>
             </button>
             <button class="lex-icon-btn" id="lexCloseChat" title="Close" aria-label="Close chat">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
@@ -85,12 +92,12 @@
               type="text" 
               class="lex-chat-input" 
               id="lexChatInput" 
-              placeholder="Ask about Lex's projects, stack, or photos..." 
+              placeholder="Ask about projects, stack, or photos..." 
               maxlength="400"
               autocomplete="off"
             />
             <button type="submit" class="lex-send-btn" id="lexSendBtn" aria-label="Send message">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
@@ -101,11 +108,11 @@
 
       <button class="lex-chat-trigger" id="lexChatTrigger" aria-label="Open AI chat assistant">
         <span class="lex-trigger-icon">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
         </span>
-        <span>Chat with AI</span>
+        <span class="lex-trigger-label">Chat with AI</span>
         <span class="lex-trigger-badge"></span>
       </button>
     `;
@@ -120,12 +127,30 @@
     const trigger = document.getElementById('lexChatTrigger');
     const closeBtn = document.getElementById('lexCloseChat');
     const clearBtn = document.getElementById('lexClearChat');
+    const backdrop = document.getElementById('lexChatBackdrop');
     const form = document.getElementById('lexChatForm');
     const input = document.getElementById('lexChatInput');
 
     trigger.addEventListener('click', toggleChat);
     closeBtn.addEventListener('click', () => toggleChat(false));
     clearBtn.addEventListener('click', clearChat);
+    if (backdrop) backdrop.addEventListener('click', () => toggleChat(false));
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        toggleChat(false);
+      }
+    });
+
+    // Close if clicked outside on desktop
+    document.addEventListener('click', (e) => {
+      if (!isOpen) return;
+      const widget = document.getElementById('lexChatWidget');
+      if (widget && !widget.contains(e.target) && (!backdrop || !backdrop.contains(e.target))) {
+        toggleChat(false);
+      }
+    });
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -138,14 +163,19 @@
 
   function toggleChat(forceState) {
     const widget = document.getElementById('lexChatWidget');
+    const backdrop = document.getElementById('lexChatBackdrop');
     isOpen = typeof forceState === 'boolean' ? forceState : !isOpen;
 
     if (isOpen) {
       widget.classList.add('is-open');
+      if (backdrop && window.innerWidth <= 640) backdrop.classList.add('is-active');
       const input = document.getElementById('lexChatInput');
+      const body = document.getElementById('lexChatBody');
+      if (body) body.scrollTop = body.scrollHeight;
       setTimeout(() => input && input.focus(), 150);
     } else {
       widget.classList.remove('is-open');
+      if (backdrop) backdrop.classList.remove('is-active');
     }
   }
 

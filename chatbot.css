@@ -1,41 +1,66 @@
 /* ==========================================================================
    Lex Matondo Portfolio — AI Chatbot Widget Styles
-   Monochrome Obsidian Glassmorphism Design System
+   Clean, Unobtrusive Monochrome Obsidian Glassmorphism System
    ========================================================================== */
 
 .lex-chat-widget {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px;
+  right: 20px;
   z-index: 9999;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #f2f2f0;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Floating Trigger Button */
+/* Subtle Screen Backdrop for Mobile / Focused Reading */
+.lex-chat-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  pointer-events: none;
+}
+
+.lex-chat-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   Floating Launcher Trigger
+   ========================================================================== */
 .lex-chat-trigger {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: #111111;
+  gap: 8px;
+  background: rgba(18, 18, 18, 0.9);
   color: #f2f2f0;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 9999px;
-  padding: 10px 18px;
-  font-size: 14px;
+  padding: 8px 14px;
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: -0.1px;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  user-select: none;
 }
 
 .lex-chat-trigger:hover {
   transform: translateY(-2px);
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: rgba(28, 28, 28, 0.95);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .lex-chat-trigger:active {
@@ -46,8 +71,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: #ffffff;
   color: #050505;
   border-radius: 50%;
@@ -56,50 +81,57 @@
 }
 
 .lex-chat-trigger:hover .lex-trigger-icon {
-  transform: scale(1.06);
+  transform: scale(1.05);
+}
+
+.lex-trigger-label {
+  font-size: 12.5px;
+  color: #e5e5e3;
+  white-space: nowrap;
 }
 
 .lex-trigger-badge {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: #4ade80;
   border-radius: 50%;
-  margin-left: 2px;
-  box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
-  animation: lex-pulse 2s infinite ease-in-out;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.8);
+  animation: lex-pulse 2.2s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes lex-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-/* Chat Window Modal */
+/* ==========================================================================
+   Chat Window Panel (Desktop Default)
+   ========================================================================== */
 .lex-chat-panel {
   position: absolute;
-  bottom: calc(100% + 14px);
+  bottom: calc(100% + 12px);
   right: 0;
-  width: 380px;
+  width: 360px;
   max-width: calc(100vw - 32px);
-  height: 560px;
-  max-height: calc(100vh - 120px);
-  background: rgba(13, 13, 13, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  height: 500px;
+  max-height: calc(100vh - 100px);
+  background: rgba(14, 14, 14, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(16px) scale(0.96);
+  transform: translateY(12px) scale(0.97);
   transform-origin: bottom right;
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.28s ease;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.24s ease;
 }
 
 .lex-chat-widget.is-open .lex-chat-panel {
@@ -108,35 +140,45 @@
   transform: translateY(0) scale(1);
 }
 
+/* Mobile Drag / Sheet Handle */
+.lex-sheet-handle {
+  display: none;
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  margin: 8px auto 0 auto;
+}
+
 /* Header */
 .lex-chat-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
-  background: rgba(20, 20, 20, 0.85);
+  padding: 12px 16px;
+  background: rgba(20, 20, 20, 0.88);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .lex-chat-title-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 }
 
 .lex-chat-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: #ffffff;
   color: #050505;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11.5px;
   display: flex;
   align-items: center;
   justify-content: center;
   letter-spacing: -0.5px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .lex-chat-header-info {
@@ -145,7 +187,7 @@
 }
 
 .lex-chat-name {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #f2f2f0;
   display: flex;
@@ -158,11 +200,11 @@
   height: 6px;
   background: #4ade80;
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+  box-shadow: 0 0 5px rgba(74, 222, 128, 0.7);
 }
 
 .lex-chat-sub {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #888888;
   font-family: "JetBrains Mono", monospace;
 }
@@ -170,7 +212,7 @@
 .lex-chat-actions {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .lex-icon-btn {
@@ -196,23 +238,19 @@
 .lex-chat-body {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   scroll-behavior: smooth;
 }
 
 .lex-chat-body::-webkit-scrollbar {
-  width: 5px;
-}
-
-.lex-chat-body::-webkit-scrollbar-track {
-  background: transparent;
+  width: 4px;
 }
 
 .lex-chat-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 4px;
 }
 
@@ -220,9 +258,9 @@
 .lex-msg {
   display: flex;
   flex-direction: column;
-  max-width: 85%;
-  font-size: 13.5px;
-  line-height: 1.5;
+  max-width: 86%;
+  font-size: 13px;
+  line-height: 1.48;
   word-break: break-word;
 }
 
@@ -230,23 +268,23 @@
   align-self: flex-end;
   background: #ffffff;
   color: #050505;
-  padding: 9px 14px;
-  border-radius: 16px 16px 4px 16px;
+  padding: 8px 12px;
+  border-radius: 14px 14px 2px 14px;
   font-weight: 450;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .lex-msg.assistant {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.06);
-  color: #f0f0f0;
-  padding: 10px 14px;
-  border-radius: 16px 16px 16px 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ecece9;
+  padding: 9px 12px;
+  border-radius: 14px 14px 14px 2px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .lex-msg.assistant p {
-  margin: 0 0 6px 0;
+  margin: 0 0 5px 0;
 }
 
 .lex-msg.assistant p:last-child {
@@ -254,12 +292,12 @@
 }
 
 .lex-msg.assistant ul {
-  margin: 6px 0;
-  padding-left: 18px;
+  margin: 5px 0;
+  padding-left: 16px;
 }
 
 .lex-msg.assistant li {
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .lex-msg.assistant a {
@@ -269,47 +307,31 @@
   font-weight: 500;
 }
 
-.lex-msg.assistant a:hover {
-  opacity: 0.8;
-}
-
 .lex-msg.assistant code {
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-size: 11.5px;
   background: rgba(255, 255, 255, 0.1);
-  padding: 2px 5px;
+  padding: 1px 4px;
   border-radius: 4px;
-}
-
-.lex-msg-time {
-  font-size: 10px;
-  color: #777777;
-  margin-top: 4px;
-  align-self: flex-start;
-}
-
-.lex-msg.user .lex-msg-time {
-  align-self: flex-end;
-  color: #333333;
 }
 
 /* Quick Suggestion Chips */
 .lex-chat-suggestions {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  padding: 4px 16px 12px 16px;
+  gap: 5px;
+  padding: 2px 14px 10px 14px;
 }
 
 .lex-chip {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #d1d1d1;
-  font-size: 11.5px;
-  padding: 6px 11px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cccccc;
+  font-size: 11px;
+  padding: 5px 10px;
   border-radius: 9999px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
   white-space: nowrap;
 }
 
@@ -317,7 +339,6 @@
   background: #ffffff;
   color: #050505;
   border-color: #ffffff;
-  transform: translateY(-1px);
 }
 
 /* Typing Indicator */
@@ -325,18 +346,17 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 10px 14px;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px 16px 16px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px 14px 14px 2px;
   align-self: flex-start;
-  margin-top: 2px;
 }
 
 .lex-typing-dot {
-  width: 5px;
-  height: 5px;
-  background: #aaaaaa;
+  width: 4px;
+  height: 4px;
+  background: #999999;
   border-radius: 50%;
   animation: lex-bounce 1.4s infinite ease-in-out both;
 }
@@ -351,25 +371,25 @@
 
 /* Input Area */
 .lex-chat-footer {
-  padding: 12px 16px;
-  background: rgba(18, 18, 18, 0.9);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 14px;
+  background: rgba(16, 16, 16, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .lex-chat-form {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 4px 6px 4px 12px;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 3px 4px 3px 10px;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
 .lex-chat-form:focus-within {
-  border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .lex-chat-input {
@@ -378,57 +398,101 @@
   border: none;
   outline: none;
   color: #f2f2f0;
-  font-size: 13.5px;
+  font-size: 13px;
   font-family: inherit;
-  padding: 6px 0;
+  padding: 5px 0;
 }
 
 .lex-chat-input::placeholder {
-  color: #777777;
+  color: #666666;
+  font-size: 12.5px;
 }
 
 .lex-send-btn {
   background: #ffffff;
   color: #050505;
   border: none;
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
+  border-radius: 7px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: opacity 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
 }
 
 .lex-send-btn:hover {
   opacity: 0.9;
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .lex-send-btn:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
+/* ==========================================================================
+   Mobile & Tablet Responsiveness (Non-distracting Bottom Sheet Drawer)
+   ========================================================================== */
+@media (max-width: 640px) {
   .lex-chat-widget {
     bottom: 16px;
     right: 16px;
   }
 
+  /* Compact round floating trigger button on mobile */
+  .lex-chat-trigger {
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+
+  .lex-trigger-label {
+    display: none;
+  }
+
+  .lex-trigger-badge {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+  }
+
+  .lex-trigger-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Full-width ergonomic bottom sheet on mobile */
   .lex-chat-panel {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: auto 0 0 0;
     width: 100vw;
-    height: 82vh;
+    height: 72vh;
     max-width: 100vw;
-    max-height: 82vh;
+    max-height: 82dvh;
     border-radius: 20px 20px 0 0;
+    border-left: none;
+    border-right: none;
     border-bottom: none;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+    transform: translateY(100%);
+    transform-origin: bottom center;
+  }
+
+  .lex-sheet-handle {
+    display: block;
+  }
+
+  .lex-chat-widget.is-open .lex-chat-panel {
+    transform: translateY(0);
+  }
+
+  .lex-chat-footer {
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
   }
 }

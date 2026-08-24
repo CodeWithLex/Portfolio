@@ -108,15 +108,16 @@ function isRateLimited(ip) {
 
 function isAllowedOrigin(req) {
   const origin = req.headers.origin || req.headers.referer || '';
-  if (!origin) return true; // Allow direct server/curl if testing, or check if in production
+  if (!origin || origin === 'null') return true; // Allow direct, serverless or local testing
 
   const allowedPatterns = [
     /^https?:\/\/localhost(:\d+)?$/,
     /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
-    /^https:\/\/lex-portfolio[a-z0-9-]*\.vercel\.app$/,
-    /^https:\/\/[a-z0-9-]+\.vercel\.app$/,
+    /^https?:\/\/.*\.vercel\.app$/,
+    /^https:\/\/lex-portfolio.*\.vercel\.app$/,
     /^https:\/\/codewithlex\.github\.io$/,
-    /^https?:\/\/chemlab-system\.me$/
+    /^https?:\/\/chemlab-system\.me$/,
+    /^https?:\/\/www\.coelgu-system\.engineer$/
   ];
 
   return allowedPatterns.some(pattern => {
@@ -124,7 +125,7 @@ function isAllowedOrigin(req) {
       const url = new URL(origin);
       return pattern.test(url.origin);
     } catch {
-      return false;
+      return true;
     }
   });
 }

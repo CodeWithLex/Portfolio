@@ -272,35 +272,42 @@
   function getLocalFallback(query) {
     const q = query.toLowerCase().trim();
 
-    // Check if query is about Lex
-    const isAboutLex = q.includes('lex') || q.includes('you') || q.includes('project') || 
-                       q.includes('build') || q.includes('work') || q.includes('stack') || 
-                       q.includes('skill') || q.includes('tech') || q.includes('photo') || 
-                       q.includes('camera') || q.includes('contact') || q.includes('email') || 
-                       q.includes('school') || q.includes('college') || q.includes('cjc') || 
-                       q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || 
-                       q.includes('git') || q.includes('who');
-
-    if (!isAboutLex) {
-      return "I am Lex Matondo's dedicated portfolio assistant. I can only answer questions specifically about Lex, his software projects, technical skills, and photography work.";
+    // Natural Greetings
+    if (/^(hi|hello|hey|kamusta|musta|hi po|hello po|good day|good morning|good evening|yo)\b/.test(q) || q === 'hi' || q === 'hello' || q === 'hi po') {
+      return "Hello! I'm Lex Matondo's AI guide. I can answer any questions about his software projects, tech stack, education at Cor Jesu College, or photography work at Leavian Visuals.";
     }
 
-    if (q.includes('project') || q.includes('build') || q.includes('work') || q.includes('made') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet')) {
+    if (q === 'what' || q.includes('what can you do') || q.includes('help') || q.includes('options')) {
+      return "You can ask me about:\n\n• **Projects:** ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal\n• **Tech Stack:** Java, SQL, JavaScript, Kotlin, Android, Node.js\n• **Photography:** Leavian Visuals, portrait/event work, and publication photojournalism\n• **Contact & Links:** GitHub, socials, and email";
+    }
+
+    // Projects
+    if (q.includes('project') || q.includes('build') || q.includes('work') || q.includes('made') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || q.includes('dispenser') || q.includes('app')) {
       return `Here are Lex's primary projects:\n\n${LOCAL_KNOWLEDGE.projects.join('\n')}`;
     }
-    if (q.includes('stack') || q.includes('language') || q.includes('tech') || q.includes('tool') || q.includes('skill')) {
+
+    // Stack & Skills
+    if (q.includes('stack') || q.includes('language') || q.includes('tech') || q.includes('tool') || q.includes('skill') || q.includes('java') || q.includes('python') || q.includes('sql')) {
       return `Lex's technical stack:\n\n${LOCAL_KNOWLEDGE.skills}`;
     }
-    if (q.includes('photo') || q.includes('camera') || q.includes('picture') || q.includes('visual') || q.includes('shoot') || q.includes('wedding')) {
+
+    // Photography
+    if (q.includes('photo') || q.includes('camera') || q.includes('picture') || q.includes('visual') || q.includes('shoot') || q.includes('wedding') || q.includes('leavian')) {
       return LOCAL_KNOWLEDGE.photography;
     }
-    if (q.includes('contact') || q.includes('email') || q.includes('social') || q.includes('github') || q.includes('reach')) {
+
+    // Contact
+    if (q.includes('contact') || q.includes('email') || q.includes('social') || q.includes('github') || q.includes('reach') || q.includes('message')) {
       return `You can connect with Lex on:\n\n${LOCAL_KNOWLEDGE.contact}`;
     }
-    if (q.includes('who') || q.includes('about') || q.includes('lex') || q.includes('school') || q.includes('college') || q.includes('cjc')) {
+
+    // Background & Identity
+    if (q.includes('who') || q.includes('about') || q.includes('lex') || q.includes('school') || q.includes('college') || q.includes('cjc') || q.includes('student')) {
       return `**${LOCAL_KNOWLEDGE.name}**\n\n• ${LOCAL_KNOWLEDGE.role}\n• Studying at ${LOCAL_KNOWLEDGE.school}\n• Philosophy: "${LOCAL_KNOWLEDGE.philosophy}"`;
     }
-    return `Lex is a Computer Engineering student, developer, and photographer from Digos City, Philippines. Ask me about his projects, his tech stack, or his photography!`;
+
+    // Strict boundary refusal for unrelated subjects
+    return "I am Lex Matondo's dedicated portfolio assistant. I can only answer questions specifically about Lex, his software projects, technical skills, and photography work.";
   }
 
   async function sendMessage(text) {
@@ -321,6 +328,23 @@
 
     showTypingIndicator();
 
+    // If running via local file protocol (file://), answer immediately with local knowledge engine
+    if (window.location.protocol === 'file:') {
+      setTimeout(() => {
+        removeTypingIndicator();
+        const localReply = getLocalFallback(text);
+        appendMessage('assistant', localReply);
+        chatHistory.push({ role: 'assistant', localReply });
+        isSubmitting = false;
+        if (input) {
+          input.disabled = false;
+          input.focus();
+        }
+        if (sendBtn) sendBtn.disabled = false;
+      }, 300);
+      return;
+    }
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -337,11 +361,6 @@
         return;
       }
 
-      if (response.status === 403) {
-        appendMessage('assistant', "⚠️ **Access restricted:** This API is locked to verified portfolio domains.");
-        return;
-      }
-
       if (!response.ok) {
         throw new Error(`Server returned ${response.status}`);
       }
@@ -351,14 +370,14 @@
       appendMessage('assistant', botReply);
       chatHistory.push({ role: 'assistant', content: botReply });
     } catch (err) {
-      console.warn('API route unavailable or offline, using local knowledge engine:', err.message);
-      // Fallback local engine for local file preview
+      console.warn('API route unavailable, using local knowledge engine:', err.message);
+      // Fallback local engine
       setTimeout(() => {
         removeTypingIndicator();
         const fallbackReply = getLocalFallback(text);
         appendMessage('assistant', fallbackReply);
         chatHistory.push({ role: 'assistant', content: fallbackReply });
-      }, 350);
+      }, 250);
     } finally {
       // Cooldown before unlocking input to prevent spam clicking
       setTimeout(() => {
@@ -368,7 +387,7 @@
           input.focus();
         }
         if (sendBtn) sendBtn.disabled = false;
-      }, 1200);
+      }, 1000);
     }
   }
 

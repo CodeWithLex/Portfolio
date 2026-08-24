@@ -65,7 +65,7 @@
             <div class="lex-chat-avatar">LM</div>
             <div class="lex-chat-header-info">
               <div class="lex-chat-name">
-                Lex's AI Guide
+                Talk with Lex's AI Assistant 
                 <span class="lex-status-dot" title="Online"></span>
               </div>
               <div class="lex-chat-sub">Ask me about Lex's work</div>
@@ -118,7 +118,7 @@
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
         </span>
-        <span class="lex-trigger-label">Chat with AI</span>
+        <span class="lex-trigger-label">Chat with Lex</span>
         <span class="lex-trigger-badge"></span>
       </button>
     `;

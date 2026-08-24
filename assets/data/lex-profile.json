@@ -1,0 +1,64 @@
+{
+  "name": "Lex Matondo",
+  "fullName": "Lex Edrick Asherjesse C. Matondo",
+  "role": "Computer Engineering (BSCPE) Student, Developer & Photographer",
+  "university": "Cor Jesu College (CJC), Digos City, Philippines",
+  "location": "Digos City, Philippines",
+  "philosophy": "CODE × CREATE — One person, two disciplines. I build things. I also photograph them.",
+  "skills": {
+    "languages": ["Java", "JavaScript", "HTML", "CSS", "Kotlin", "SQL", "Python"],
+    "frameworks": ["Java Swing", "JavaFX", "Node.js", "Express.js", "Supabase", "PostgreSQL", "MySQL", "Android / Jetpack Compose"],
+    "tools": ["Git", "GitHub", "Figma", "NetBeans", "Android Studio", "VS Code", "Photoshop", "After Effects", "TouchDesigner"]
+  },
+  "projects": [
+    {
+      "name": "ChemLab System",
+      "tagline": "Chemistry laboratory apparatus & scheduling portal",
+      "url": "https://chemlab-system.me",
+      "repo": "https://github.com/CodeWithLex/CodeWithLex.github.io",
+      "highlights": "Group logins, 30-min scheduling slots, QR code activity receipts, apparatus inventory, attendance logs"
+    },
+    {
+      "name": "COE LGU System",
+      "tagline": "College of Engineering official student financial portal & budget transparency",
+      "url": "https://www.coelgu-system.engineer",
+      "repo": "https://github.com/CodeWithLex/LGU-SYSTEM",
+      "highlights": "Student council budget tracking in ₱, over-budget warnings, 1.0–5.0 Philippine GPA calculator with PDF export, audit log"
+    },
+    {
+      "name": "PMAEE CadetCoach",
+      "tagline": "AI prep portal for Philippine Military Academy Entrance Examination",
+      "url": "https://reviewer-coach.onrender.com",
+      "highlights": "AI exam-coaching and prep platform built with Node/Express on Render"
+    },
+    {
+      "name": "eBarangay-Portal",
+      "tagline": "Barangay document requests and digital governance",
+      "repo": "https://github.com/CodeWithLex/eBarangay-Portal"
+    },
+    {
+      "name": "Content-Creation-Manager",
+      "tagline": "Java desktop application organizing content creation pipelines",
+      "repo": "https://github.com/CodeWithLex/Content-Creation-Manager"
+    },
+    {
+      "name": "PORJECT-F.R.I.D.A.Y",
+      "tagline": "AI voice assistant experiment inspired by Marvel",
+      "repo": "https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y"
+    }
+  ],
+  "photography": {
+    "brand": "Leavian Visuals",
+    "facebook": "https://www.facebook.com/Lowbudphotography27/",
+    "tiktok": "https://www.tiktok.com/@edrickvisuals.mov",
+    "youtube": "https://www.youtube.com/@lexmatondo27",
+    "genres": ["Portraits", "Weddings", "Christenings", "Student Publication & Engineering events"]
+  },
+  "socials": {
+    "github": "https://github.com/CodeWithLex",
+    "portfolio": "https://lex-portfolio-swart.vercel.app",
+    "tiktok": "https://www.tiktok.com/@edrickvisuals.mov",
+    "facebook": "https://www.facebook.com/Lowbudphotography27/",
+    "youtube": "https://www.youtube.com/@lexmatondo27"
+  }
+}

@@ -66,13 +66,6 @@
             </div>
           </div>
           <div class="lex-chat-actions">
-            <button class="lex-icon-btn" id="lexApiKeyBtn" title="Set/View API Key" aria-label="Set API Key">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="7.5" cy="15.5" r="5.5"></circle>
-                <path d="m21 2-9.6 9.6"></path>
-                <path d="m15.5 7.5 3 3"></path>
-              </svg>
-            </button>
             <button class="lex-icon-btn" id="lexClearChat" title="Clear chat" aria-label="Clear chat">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -136,7 +129,6 @@
     const trigger = document.getElementById('lexChatTrigger');
     const closeBtn = document.getElementById('lexCloseChat');
     const clearBtn = document.getElementById('lexClearChat');
-    const keyBtn = document.getElementById('lexApiKeyBtn');
     const backdrop = document.getElementById('lexChatBackdrop');
     const form = document.getElementById('lexChatForm');
     const input = document.getElementById('lexChatInput');
@@ -168,24 +160,6 @@
     if (panel) {
       panel.addEventListener('click', (e) => {
         e.stopPropagation();
-      });
-    }
-
-    if (keyBtn) {
-      keyBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const existingKey = localStorage.getItem('lex_api_key') || '';
-        const newKey = window.prompt('Enter your NVIDIA API Key (nvapi-...) or Gemini/Groq key for direct inference:', existingKey);
-        if (newKey !== null) {
-          if (newKey.trim()) {
-            localStorage.setItem('lex_api_key', newKey.trim());
-            appendMessage('assistant', '✅ **API Key saved!** The chatbot will now run direct inference.');
-          } else {
-            localStorage.removeItem('lex_api_key');
-            appendMessage('assistant', 'API Key cleared.');
-          }
-        }
       });
     }
 
@@ -253,29 +227,6 @@ Strictly refuse unrelated off-topic queries. Keep answers concise, human, and or
       ...messages.slice(-6)
     ];
 
-    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v3',
-        messages: formattedMessages,
-        temperature: 0.3,
-        max_tokens: 500
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`NVIDIA API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const rawReply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a reply.";
-    return rawReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
-  }
-
   async function sendMessage(text) {
     if (isSubmitting) return;
     isSubmitting = true;
@@ -294,42 +245,28 @@ Strictly refuse unrelated off-topic queries. Keep answers concise, human, and or
 
     showTypingIndicator();
 
-    const localApiKey = localStorage.getItem('lex_api_key');
-
     try {
-      let botReply = '';
-
-      // 1. If user has saved a key locally starting with nvapi-, try calling NVIDIA direct
-      if (localApiKey && localApiKey.startsWith('nvapi-')) {
-        botReply = await callDirectNvidia(localApiKey, chatHistory);
-      } else {
-        // 2. Query Vercel serverless function
-        const response = await fetch(CHAT_API_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: chatHistory,
-            apiKey: localApiKey || undefined
-          })
-        });
-
-        if (response.status === 429) {
-          const errData = await response.json().catch(() => ({}));
-          const warning = errData.error || "Rate limit reached. Please wait a minute before asking more questions.";
-          removeTypingIndicator();
-          appendMessage('assistant', `⚠️ **${warning}**`);
-          return;
-        }
-
-        if (!response.ok) {
-          throw new Error(`Server returned ${response.status}`);
-        }
-
-        const data = await response.json();
-        botReply = data.reply || "Sorry, I couldn't generate a reply right now.";
-      }
+      const response = await fetch(CHAT_API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory })
+      });
 
       removeTypingIndicator();
+
+      if (response.status === 429) {
+        const errData = await response.json().catch(() => ({}));
+        const warning = errData.error || "Rate limit reached. Please wait a minute before asking more questions.";
+        appendMessage('assistant', `⚠️ **${warning}**`);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`);
+      }
+
+      const data = await response.json();
+      const botReply = data.reply || "Sorry, I couldn't generate a reply right now.";
       appendMessage('assistant', botReply);
       chatHistory.push({ role: 'assistant', content: botReply });
     } catch (err) {

@@ -124,6 +124,7 @@ function isAllowedOrigin(req) {
     /^https?:\/\/.*\.vercel\.app$/,
     /^https:\/\/lex-portfolio.*\.vercel\.app$/,
     /^https:\/\/codewithlex\.github\.io$/,
+    /^https?:\/\/.*codewithlex\.site$/,
     /^https?:\/\/chemlab-system\.me$/,
     /^https?:\/\/www\.coelgu-system\.engineer$/
   ];

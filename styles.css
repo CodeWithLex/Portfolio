@@ -422,6 +422,7 @@ html.has-landing-entrance .landing-shutter-layer {
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 2.5rem;
+  padding-right: 5rem;
   border-top: 1px solid var(--border-subtle);
   font-size: 11px;
   font-weight: 400;

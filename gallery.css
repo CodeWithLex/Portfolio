@@ -993,6 +993,10 @@ html.has-gallery-entrance .discipline-wipe-layer {
   color: var(--text-primary, #f2f2f0);
 }
 
+.gallery-footer {
+  padding-bottom: 4rem;
+}
+
 .gallery-footer .footer-copy {
   font-family: var(--font-mono, monospace);
   font-size: 11px;

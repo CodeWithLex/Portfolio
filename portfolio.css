@@ -1313,6 +1313,7 @@ body[data-mode="create"] .view-tech {
   gap: 1.5rem;
   border-top: 1px solid var(--border-subtle);
   padding-top: 2rem;
+  padding-bottom: 4rem;
 }
 
 .footer-links {
@@ -1330,6 +1331,7 @@ body[data-mode="create"] .view-tech {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
+  padding-right: 0.5rem;
 }
 
 /* ---------------------------------------------------------------------------

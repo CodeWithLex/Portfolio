@@ -320,49 +320,77 @@
     if (indicator) indicator.remove();
   }
 
-  function getLocalFallback(query) {
+  // 1. FAST PATH: Instant Knowledge Cache for direct portfolio facts & chips (<150ms)
+  function getInstantDetailReply(query) {
     const q = query.toLowerCase().trim();
 
-    // Natural Greetings
-    if (/^(hi|hello|hey|kamusta|musta|hi po|hello po|good day|good morning|good evening|yo)\b/.test(q) || q === 'hi' || q === 'hello' || q === 'hi po') {
-      return "Hello! I'm Lex Matondo's AI guide. I can answer any questions about his software projects, tech stack, education at Cor Jesu College, or photography work at Leavian Visuals.";
+    // Greetings
+    if (/^(hi|hello|hey|kamusta|musta|hi po|hello po|good morning|good afternoon|good evening|yo)\b/.test(q) || q === 'hi' || q === 'hello') {
+      return "Hello! I'm Lex Matondo's AI portfolio guide. Ask me anything about his software engineering projects, tech stack, education at Cor Jesu College, or photography at Leavian Visuals.";
     }
 
-    if (q === 'what' || q.includes('what can you do') || q.includes('help') || q.includes('options')) {
-      return "You can ask me about:\n\n• **Projects:** ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal\n• **Tech Stack:** Java, SQL, JavaScript, Kotlin, Android, Node.js\n• **Photography:** Leavian Visuals, portrait/event work, and publication photojournalism\n• **Contact & Links:** GitHub, socials, and email";
+    if (q === 'what' || q.includes('what can you do') || q.includes('options') || q.includes('commands')) {
+      return "You can ask me about:\n\n• **Projects:** ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal\n• **Tech Stack:** Java, SQL, JavaScript, Kotlin, Android, Node.js\n• **Photography:** Leavian Visuals portrait/event work & student journalism\n• **Contact & Links:** Business & academic emails, GitHub, and socials";
     }
 
-    // Links & Socials
-    if (q.includes('link') || q.includes('social') || q.includes('github') || q.includes('facebook') || q.includes('tiktok') || q.includes('youtube') || q.includes('url') || q.includes('web') || q.includes('page')) {
-      return `Here are Lex's verified links:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@edrickvisuals.mov\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab System:** https://chemlab-system.me\n• **COE LGU System:** https://www.coelgu-system.engineer\n• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph`;
+    // Direct Project Details
+    if (q.includes('chemlab') || q.includes('chemistry lab')) {
+      return `**ChemLab System** (https://chemlab-system.me)\n\n• Chemistry laboratory apparatus management & reservation portal\n• Features: Group scheduling, apparatus borrowing queues, session slots, QR activity receipts, and student attendance logs\n• GitHub: https://github.com/CodeWithLex`;
     }
 
-    // Projects
-    if (q.includes('project') || q.includes('build') || q.includes('work') || q.includes('made') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || q.includes('dispenser') || q.includes('app') || q.includes('system') || q.includes('code')) {
+    if (q.includes('coe lgu') || q.includes('lgu system') || q.includes('council')) {
+      return `**COE LGU System** (https://www.coelgu-system.engineer)\n\n• Official budget transparency & council finance portal for Cor Jesu College of Engineering\n• Features: Income/expense/donation tracking in PHP/₱, over-budget warnings, 1.0–5.0 Philippine GPA calculator with PDF export, and audit logging`;
+    }
+
+    if (q.includes('cadet') || q.includes('pmaee') || q.includes('cadetcoach')) {
+      return `**PMAEE CadetCoach** (https://reviewer-coach.onrender.com)\n\n• AI exam-coaching prep portal for Philippine Military Academy Entrance Examination candidates\n• Full-stack Node/Express system deployed on Render`;
+    }
+
+    if (q.includes('dispenser') || q.includes('medicine') || q.includes('arduino')) {
+      return `**Healthcare Smart Dispenser**\n\n• Automated medicine scheduler & dispenser combining Java Swing desktop software with Arduino hardware microcontroller integration.`;
+    }
+
+    if (q.includes('ebarangay')) {
+      return `**eBarangay-Portal** (https://github.com/CodeWithLex/eBarangay-Portal)\n\n• Digital Philippine barangay governance portal for requesting clearances, residency certifications, and indigency certificates.`;
+    }
+
+    // All Projects List
+    if (q === 'what projects has lex built?' || q === 'projects' || q === 'what projects' || q.includes('all projects') || q.includes('list projects')) {
       return `Here are Lex's primary projects:\n\n${LOCAL_KNOWLEDGE.projects.join('\n')}`;
     }
 
-    // Stack & Skills
-    if (q.includes('stack') || q.includes('language') || q.includes('tech') || q.includes('tool') || q.includes('skill') || q.includes('java') || q.includes('python') || q.includes('sql') || q.includes('backend') || q.includes('frontend')) {
+    // Contact & Email Inquiries
+    if (q === 'contact' || q === 'how can i contact lex?' || q.includes('how to contact') || q.includes('email') || q.includes('gmail') || q.includes('reach lex') || q.includes('hire lex')) {
+      return `Here are Lex's direct contact channels:\n\n• **Business Email:** codewithlex27@gmail.com\n• **Academic Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography:** https://www.facebook.com/Lowbudphotography27/`;
+    }
+
+    // Social Links
+    if (q === 'links' || q.includes('links') || q.includes('social') || q.includes('github') || q.includes('tiktok') || q.includes('youtube')) {
+      return `Lex's verified links:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@edrickvisuals.mov\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab:** https://chemlab-system.me\n• **COE LGU:** https://www.coelgu-system.engineer\n• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph`;
+    }
+
+    // Tech Stack & Skills
+    if (q === 'what is his tech stack?' || q === 'skills' || q === 'stack' || q.includes('tech stack') || q.includes('technologies') || q.includes('what languages') || q.includes('programming languages') || q.includes('what tools')) {
       return `Lex's technical stack:\n\n${LOCAL_KNOWLEDGE.skills}`;
     }
 
     // Photography
-    if (q.includes('photo') || q.includes('camera') || q.includes('picture') || q.includes('visual') || q.includes('shoot') || q.includes('wedding') || q.includes('leavian') || q.includes('heartbeat')) {
+    if (q === 'tell me about his photography' || q.includes('photography') || q.includes('leavian') || q.includes('photoshoot') || q.includes('camera') || q.includes('visuals')) {
       return `${LOCAL_KNOWLEDGE.photography}\n\n• Facebook: https://www.facebook.com/Lowbudphotography27/\n• TikTok: https://www.tiktok.com/@edrickvisuals.mov`;
     }
 
-    // Contact
-    if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('message') || q.includes('hire') || q.includes('talk')) {
-      return `You can connect with Lex on:\n\n${LOCAL_KNOWLEDGE.contact}`;
+    // General Bio & Education
+    if (q === 'tell me about lex' || q === 'who is lex' || q === 'who is lex matondo' || q === 'about lex' || q.includes('education') || q.includes('cor jesu') || q.includes('degree')) {
+      return `**${LOCAL_KNOWLEDGE.name}**\n\n• ${LOCAL_KNOWLEDGE.role}\n• Studying Computer Engineering at ${LOCAL_KNOWLEDGE.school}\n• Philosophy: "${LOCAL_KNOWLEDGE.philosophy}"\n• Timeline: Started programming in Sept 2024 and building production full-stack systems by 2026.`;
     }
 
-    // Background & Identity
-    if (q.includes('who') || q.includes('about') || q.includes('lex') || q.includes('school') || q.includes('college') || q.includes('cjc') || q.includes('student') || q.includes('study') || q.includes('degree')) {
-      return `**${LOCAL_KNOWLEDGE.name}**\n\n• ${LOCAL_KNOWLEDGE.role}\n• Studying at ${LOCAL_KNOWLEDGE.school}\n• Philosophy: "${LOCAL_KNOWLEDGE.philosophy}"`;
-    }
+    // Complex / conversational queries will return null to be processed by NVIDIA DeepSeek LLM!
+    return null;
+  }
 
-    // Strict boundary refusal only for completely unrelated queries (e.g. recipes, world trivia)
+  function getLocalFallback(query) {
+    const instant = getInstantDetailReply(query);
+    if (instant) return instant;
     return "I am Lex Matondo's dedicated portfolio assistant. I can answer any questions about Lex, his software engineering projects (ChemLab, COE LGU, CadetCoach), tech stack, and photography work.";
   }
 
@@ -384,6 +412,24 @@
 
     showTypingIndicator();
 
+    // 1. FAST PATH: If direct detail is available, answer in 120ms without LLM latency
+    const instantReply = getInstantDetailReply(text);
+    if (instantReply) {
+      setTimeout(() => {
+        removeTypingIndicator();
+        appendMessage('assistant', instantReply);
+        chatHistory.push({ role: 'assistant', content: instantReply });
+        isSubmitting = false;
+        if (input) {
+          input.disabled = false;
+          input.focus();
+        }
+        if (sendBtn) sendBtn.disabled = false;
+      }, 120);
+      return;
+    }
+
+    // 2. LLM PATH: Complex or open-ended reasoning routed to NVIDIA DeepSeek LLM
     try {
       const response = await fetch(CHAT_API_ENDPOINT, {
         method: 'POST',
@@ -409,16 +455,14 @@
       appendMessage('assistant', botReply);
       chatHistory.push({ role: 'assistant', content: botReply });
     } catch (err) {
-      console.warn('API call unavailable, using knowledge engine fallback:', err.message);
-      // Fallback local engine
+      console.warn('API call unavailable, using local fallback:', err.message);
       setTimeout(() => {
         removeTypingIndicator();
         const fallbackReply = getLocalFallback(text);
         appendMessage('assistant', fallbackReply);
         chatHistory.push({ role: 'assistant', content: fallbackReply });
-      }, 250);
+      }, 150);
     } finally {
-      // Cooldown before unlocking input to prevent spam clicking
       setTimeout(() => {
         isSubmitting = false;
         if (input) {
@@ -426,7 +470,7 @@
           input.focus();
         }
         if (sendBtn) sendBtn.disabled = false;
-      }, 800);
+      }, 600);
     }
   }
 

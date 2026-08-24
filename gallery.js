@@ -12,12 +12,15 @@
   let currentCategory = 'all';
   let activeShoot = null;
   let activePhotoIndex = 0;
-  let isSwitchingPhoto = false;
+  const preloadedCache = new Set();
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let isNavigatingPage = false;
 
   // DOM Elements
   const foldersGrid = document.getElementById('folders-grid');
   const filterButtons = document.querySelectorAll('.gal-filter-btn');
   const statusLabel = document.getElementById('gallery-status-label');
+  const wipeLayer = document.getElementById('gallery-wipe');
 
   // Inspector Elements
   const inspector = document.getElementById('shoot-inspector');
@@ -29,6 +32,7 @@
   const inspectorCounter = document.getElementById('inspector-photo-counter');
 
   // Photo Stage Elements
+  const photoFrame = document.getElementById('photo-frame');
   const activePhotoImg = document.getElementById('active-photo-img');
   const stagePrevBtn = document.getElementById('stage-prev-btn');
   const stageNextBtn = document.getElementById('stage-next-btn');
@@ -55,9 +59,114 @@
   const galleryData = window.GALLERY_DATA || [];
 
   /* ---------------------------------------------------------------------------
+     PAGE ENTRANCE & NAVIGATION WIPE HANDOFF
+     --------------------------------------------------------------------------- */
+  function initPageEntrance() {
+    try {
+      const entranceFlag = sessionStorage.getItem('gallery-entrance') || sessionStorage.getItem('portfolio-entrance');
+      if (entranceFlag && wipeLayer && !prefersReducedMotion) {
+        sessionStorage.removeItem('gallery-entrance');
+        sessionStorage.removeItem('portfolio-entrance');
+        const isCreate = (entranceFlag === 'create');
+        const outClass = isCreate ? 'wipe-to-create-out' : 'wipe-to-tech-out';
+
+        wipeLayer.className = `discipline-wipe-layer ${isCreate ? 'wipe-to-create-in' : 'wipe-to-tech-in'}`;
+        document.documentElement.classList.remove('has-gallery-entrance');
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            wipeLayer.className = `discipline-wipe-layer ${outClass}`;
+            setTimeout(() => {
+              wipeLayer.className = 'discipline-wipe-layer';
+            }, 380);
+          });
+        });
+      } else {
+        document.documentElement.classList.remove('has-gallery-entrance');
+      }
+    } catch (_) {
+      document.documentElement.classList.remove('has-gallery-entrance');
+    }
+  }
+
+  function navigateToPage(url, mode) {
+    try {
+      sessionStorage.setItem('portfolio-entrance', mode);
+    } catch (_) {}
+
+    if (prefersReducedMotion || !wipeLayer) {
+      window.location.href = url;
+      return;
+    }
+
+    if (isNavigatingPage) return;
+    isNavigatingPage = true;
+
+    const inClass = (mode === 'tech') ? 'wipe-to-tech-in' : 'wipe-to-create-in';
+    wipeLayer.className = `discipline-wipe-layer ${inClass}`;
+    document.body.classList.add('is-exiting');
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 340);
+  }
+
+  function setupPageNavigationTransitions() {
+    const backLinks = document.querySelectorAll('.gallery-back-link, a[href*="portfolio.html?mode=create"], a[href="portfolio.html"]');
+    backLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        navigateToPage('portfolio.html?mode=create', 'create');
+      });
+    });
+
+    const techLinks = document.querySelectorAll('.nav-switch-btn, a[href*="portfolio.html?mode=code"]');
+    techLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        navigateToPage('portfolio.html?mode=code', 'tech');
+      });
+    });
+
+    const brandLink = document.querySelector('.gallery-brand');
+    if (brandLink) {
+      brandLink.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        try {
+          sessionStorage.setItem('landing-entrance', 'create');
+        } catch (_) {}
+        if (prefersReducedMotion || !wipeLayer) {
+          window.location.href = 'index.html';
+          return;
+        }
+        if (isNavigatingPage) return;
+        isNavigatingPage = true;
+        wipeLayer.className = 'discipline-wipe-layer wipe-to-tech-in';
+        document.body.classList.add('is-exiting');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 340);
+      });
+    }
+
+    // Handle bfcache
+    window.addEventListener('pageshow', () => {
+      isNavigatingPage = false;
+      document.documentElement.classList.remove('has-gallery-entrance');
+      document.body.classList.remove('is-exiting');
+      if (wipeLayer) wipeLayer.className = 'discipline-wipe-layer';
+    });
+  }
+
+  /* ---------------------------------------------------------------------------
      INITIALIZATION & RENDERING
      --------------------------------------------------------------------------- */
   function initGallery() {
+    initPageEntrance();
+    setupPageNavigationTransitions();
     renderFolders();
     setupFilters();
     setupInspectorListeners();
@@ -74,7 +183,7 @@
       ? galleryData
       : galleryData.filter(s => s.category === currentCategory);
 
-    filtered.forEach((shoot, idx) => {
+    filtered.forEach((shoot) => {
       const card = document.createElement('article');
       card.className = 'folder-card';
       card.setAttribute('tabindex', '0');
@@ -138,12 +247,26 @@
   /* ---------------------------------------------------------------------------
      INSPECTOR MODAL & STAGE CONTROLLER
      --------------------------------------------------------------------------- */
+  function preloadShootPhotos(shoot) {
+    if (!shoot || !shoot.photos) return;
+    shoot.photos.forEach((p) => {
+      if (p.full && !preloadedCache.has(p.full)) {
+        const img = new Image();
+        img.src = p.full;
+        preloadedCache.add(p.full);
+      }
+    });
+  }
+
   function openShoot(slug, initialPhotoIndex = 0) {
     const shoot = galleryData.find(s => s.slug === slug);
     if (!shoot) return;
 
     activeShoot = shoot;
     activePhotoIndex = Math.max(0, Math.min(initialPhotoIndex, shoot.photos.length - 1));
+
+    // Preload shoot photos eagerly in background
+    preloadShootPhotos(shoot);
 
     // Update Header
     if (inspectorTitle) inspectorTitle.textContent = shoot.title;
@@ -159,8 +282,8 @@
       document.body.style.overflow = 'hidden';
     }
 
-    // Load Initial Photo & Metadata
-    loadPhoto(activePhotoIndex, false);
+    // Load Initial Photo & Metadata (instant, no directional slide)
+    loadPhoto(activePhotoIndex, false, 'fade');
 
     // Sync URL Deep Link
     updateUrl(shoot.slug, activePhotoIndex);
@@ -172,6 +295,11 @@
     inspector.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     activeShoot = null;
+
+    if (photoFrame) {
+      const outgoings = photoFrame.querySelectorAll('.outgoing-photo');
+      outgoings.forEach(el => el.remove());
+    }
 
     if (inspectorDetailsCol) {
       inspectorDetailsCol.classList.remove('is-drawer-open');
@@ -203,7 +331,8 @@
 
       thumbBtn.addEventListener('click', () => {
         if (idx !== activePhotoIndex) {
-          loadPhoto(idx, true);
+          const dir = idx > activePhotoIndex ? 'next' : 'prev';
+          loadPhoto(idx, true, dir);
         }
       });
 
@@ -211,46 +340,21 @@
     });
   }
 
-  function loadPhoto(index, animate = true) {
+  function loadPhoto(index, animate = true, direction = 'fade') {
     if (!activeShoot || !activeShoot.photos[index]) return;
-    if (isSwitchingPhoto && animate) return;
 
     activePhotoIndex = index;
     const photo = activeShoot.photos[index];
     const total = activeShoot.photos.length;
 
-    // Counter
+    // Immediate counter update
     if (inspectorCounter) {
       const cur = String(index + 1).padStart(2, '0');
       const tot = String(total).padStart(2, '0');
       inspectorCounter.textContent = `${cur} / ${tot}`;
     }
 
-    // Update Photo Image with smooth transition
-    if (activePhotoImg) {
-      if (animate) {
-        isSwitchingPhoto = true;
-        activePhotoImg.classList.add('is-switching');
-        setTimeout(() => {
-          activePhotoImg.src = photo.full;
-          activePhotoImg.alt = `${photo.title} — ${activeShoot.title}`;
-          activePhotoImg.onload = () => {
-            activePhotoImg.classList.remove('is-switching');
-            isSwitchingPhoto = false;
-          };
-          // Fallback if cached
-          setTimeout(() => {
-            activePhotoImg.classList.remove('is-switching');
-            isSwitchingPhoto = false;
-          }, 200);
-        }, 120);
-      } else {
-        activePhotoImg.src = photo.full;
-        activePhotoImg.alt = `${photo.title} — ${activeShoot.title}`;
-      }
-    }
-
-    // Update Filmstrip selection
+    // Update Filmstrip selection immediately
     if (filmstripContainer) {
       const thumbs = filmstripContainer.querySelectorAll('.filmstrip-thumb');
       thumbs.forEach((th, i) => {
@@ -282,19 +386,96 @@
       detailInquireLink.href = `mailto:lexmatondo@g.cjc.edu.ph?subject=${encodeURIComponent('Inquiry: ' + activeShoot.title)}&body=${encodeURIComponent('Hi Lex,\n\nI was browsing your visual archive and would love to inquire about booking a session similar to ' + activeShoot.title + '.\n\nThank you!')}`;
     }
 
+    // Update Photo Image with smooth double-buffered directional transition
+    if (activePhotoImg && photoFrame) {
+      if (!animate || prefersReducedMotion) {
+        // Clean up any existing outgoing elements
+        const existingOutgoings = photoFrame.querySelectorAll('.outgoing-photo');
+        existingOutgoings.forEach(el => el.remove());
+
+        activePhotoImg.src = photo.full;
+        activePhotoImg.alt = `${photo.title} — ${activeShoot.title}`;
+        activePhotoImg.style.transition = 'none';
+        activePhotoImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        activePhotoImg.style.opacity = '1';
+      } else {
+        // Remove previous outgoing images
+        const prevOutgoings = photoFrame.querySelectorAll('.outgoing-photo');
+        prevOutgoings.forEach(el => el.remove());
+
+        // Clone current image as outgoing layer if it has content
+        if (activePhotoImg.src && activePhotoImg.complete) {
+          const outgoing = activePhotoImg.cloneNode(true);
+          outgoing.removeAttribute('id');
+          outgoing.className = 'outgoing-photo';
+          outgoing.style.transition = 'none';
+          outgoing.style.transform = 'translate3d(0, 0, 0) scale(1)';
+          outgoing.style.opacity = '1';
+          photoFrame.appendChild(outgoing);
+
+          // Animate outgoing out
+          requestAnimationFrame(() => {
+            outgoing.style.transition = 'transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease';
+            if (direction === 'next') {
+              outgoing.style.transform = 'translate3d(-28px, 0, 0) scale(0.98)';
+              outgoing.style.opacity = '0';
+            } else if (direction === 'prev') {
+              outgoing.style.transform = 'translate3d(28px, 0, 0) scale(0.98)';
+              outgoing.style.opacity = '0';
+            } else {
+              outgoing.style.transform = 'scale(0.98)';
+              outgoing.style.opacity = '0';
+            }
+
+            setTimeout(() => {
+              if (outgoing.parentNode) {
+                outgoing.parentNode.removeChild(outgoing);
+              }
+            }, 270);
+          });
+        }
+
+        // Set incoming image source & initial offscreen state
+        activePhotoImg.src = photo.full;
+        activePhotoImg.alt = `${photo.title} — ${activeShoot.title}`;
+        activePhotoImg.style.transition = 'none';
+
+        if (direction === 'next') {
+          activePhotoImg.style.transform = 'translate3d(28px, 0, 0) scale(0.98)';
+          activePhotoImg.style.opacity = '0';
+        } else if (direction === 'prev') {
+          activePhotoImg.style.transform = 'translate3d(-28px, 0, 0) scale(0.98)';
+          activePhotoImg.style.opacity = '0';
+        } else {
+          activePhotoImg.style.transform = 'scale(0.98)';
+          activePhotoImg.style.opacity = '0';
+        }
+
+        // Force reflow
+        void activePhotoImg.offsetWidth;
+
+        // Smoothly animate incoming image to active view
+        requestAnimationFrame(() => {
+          activePhotoImg.style.transition = 'transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease';
+          activePhotoImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
+          activePhotoImg.style.opacity = '1';
+        });
+      }
+    }
+
     updateUrl(activeShoot.slug, index);
   }
 
   function nextPhoto() {
     if (!activeShoot) return;
     const nextIdx = (activePhotoIndex + 1) % activeShoot.photos.length;
-    loadPhoto(nextIdx, true);
+    loadPhoto(nextIdx, true, 'next');
   }
 
   function prevPhoto() {
     if (!activeShoot) return;
     const prevIdx = (activePhotoIndex - 1 + activeShoot.photos.length) % activeShoot.photos.length;
-    loadPhoto(prevIdx, true);
+    loadPhoto(prevIdx, true, 'prev');
   }
 
   /* ---------------------------------------------------------------------------
@@ -364,25 +545,35 @@
     if (!stage) return;
 
     let touchStartX = 0;
-    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
 
     stage.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
     }, { passive: true });
 
     stage.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
+      if (!touchStartTime) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const duration = Date.now() - touchStartTime;
+      touchStartTime = 0;
 
-    function handleSwipe() {
-      const threshold = 45;
-      if (touchEndX < touchStartX - threshold) {
-        nextPhoto();
-      } else if (touchEndX > touchStartX + threshold) {
-        prevPhoto();
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+
+      // Only trigger if horizontal swipe is dominant and within reasonable timing
+      if (duration < 650 && Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4) {
+        if (deltaX < 0) {
+          nextPhoto();
+        } else {
+          prevPhoto();
+        }
       }
-    }
+    }, { passive: true });
   }
 
   function updateUrl(slug, photoIndex) {
@@ -404,7 +595,7 @@
   }
 
   // Handle browser back/forward history navigation
-  window.addEventListener('popstate', (e) => {
+  window.addEventListener('popstate', () => {
     const params = new URLSearchParams(window.location.search);
     const shootSlug = params.get('shoot');
     if (shootSlug) {

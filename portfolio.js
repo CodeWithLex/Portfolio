@@ -232,6 +232,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Smooth Transition to Gallery Page from CREATE Mode
+  const galleryLinks = document.querySelectorAll('a[href*="gallery.html"]');
+  galleryLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      const targetHref = link.getAttribute("href") || "gallery.html";
+
+      try {
+        sessionStorage.setItem("gallery-entrance", "create");
+      } catch (_) {}
+
+      if (prefersReducedMotion || !wipeLayer) {
+        window.location.href = targetHref;
+        return;
+      }
+
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      wipeLayer.className = "discipline-wipe-layer wipe-to-create-in";
+      if (mainContainer) mainContainer.classList.add("is-switching");
+      if (portfolioWrapper) portfolioWrapper.classList.add("is-exiting-to-landing");
+
+      setTimeout(() => {
+        window.location.href = targetHref;
+      }, 340);
+    });
+  });
+
   // Handle browser Back/Forward (bfcache)
   window.addEventListener("pageshow", () => {
     isTransitioning = false;

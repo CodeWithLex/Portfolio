@@ -16,6 +16,13 @@
     rel="stylesheet">
   <link rel="stylesheet" href="portfolio.css">
   <link rel="stylesheet" href="gallery.css">
+  <script>
+    try {
+      if (sessionStorage.getItem('gallery-entrance') || sessionStorage.getItem('portfolio-entrance')) {
+        document.documentElement.classList.add('has-gallery-entrance');
+      }
+    } catch (_) { }
+  </script>
 </head>
 
 <body class="gallery-body">
@@ -296,6 +303,9 @@
       <span class="footer-copy">© 2026 Lex Matondo · Leavian Visuals</span>
     </div>
   </footer>
+
+  <!-- Discipline Wipe Layer for smooth page transitions -->
+  <div class="discipline-wipe-layer" id="gallery-wipe" aria-hidden="true"></div>
 
   <!-- Scripts -->
   <script src="gallery-data.js"></script>

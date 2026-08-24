@@ -258,6 +258,10 @@
   function formatMarkdown(text) {
     if (!text) return '';
     let html = text
+      // Clean any rogue think tags
+      .replace(/<think>[\s\S]*?<\/think>/gi, '')
+      .replace(/^[\s\S]*?<\/think>/gi, '')
+      .replace(/<\/?think>/gi, '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -379,9 +383,9 @@
       return `${LOCAL_KNOWLEDGE.photography}\n\n• Facebook: https://www.facebook.com/Lowbudphotography27/\n• TikTok: https://www.tiktok.com/@edrickvisuals.mov`;
     }
 
-    // General Bio & Education
-    if (q === 'tell me about lex' || q === 'who is lex' || q === 'who is lex matondo' || q === 'about lex' || q.includes('education') || q.includes('cor jesu') || q.includes('degree')) {
-      return `**${LOCAL_KNOWLEDGE.name}**\n\n• ${LOCAL_KNOWLEDGE.role}\n• Studying Computer Engineering at ${LOCAL_KNOWLEDGE.school}\n• Philosophy: "${LOCAL_KNOWLEDGE.philosophy}"\n• Timeline: Started programming in Sept 2024 and building production full-stack systems by 2026.`;
+    // Competence, Skill & "How Good is Lex" Inquiries
+    if (q.includes('how good') || q.includes('hwo good') || q.includes('how skilled') || q.includes('why hire') || q.includes('capable') || q.includes('experience') || q.includes('qualifications') || q.includes('what can lex do')) {
+      return `**Lex Matondo's Capabilities & Track Record:**\n\n• **Rapid Technical Arc:** Started coding in September 2024 (freshman CpE) and accelerated to building and deploying full-scale production portals (ChemLab, COE LGU) by 2026.\n• **Full-Stack Proficiency:** Deep knowledge of Java, SQL (PostgreSQL & MySQL), JavaScript, Node.js, Express, and Supabase backend architecture.\n• **Shipped Production Systems:** Built live systems solving real institutional needs (laboratory apparatus scheduling, student council financial transparency, military entrance exam prep).\n• **Dual Discipline:** Balances rigorous systems engineering with creative discipline as an event and documentary photographer at Leavian Visuals.`;
     }
 
     // Complex / conversational queries will return null to be processed by NVIDIA DeepSeek LLM!

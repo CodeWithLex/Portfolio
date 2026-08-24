@@ -141,6 +141,33 @@ function isAllowedOrigin(req) {
   });
 }
 
+function cleanModelOutput(rawText) {
+  if (!rawText || typeof rawText !== 'string') {
+    return "Lex Matondo is a skilled Computer Engineering student and developer specializing in Java, SQL, full-stack systems (ChemLab, COE LGU), and photography.";
+  }
+
+  let text = rawText;
+
+  // 1. Remove all DeepSeek reasoning tags (<think>...</think>)
+  text = text.replace(/<think>[\s\S]*?<\/think>/gi, '');
+  text = text.replace(/^[\s\S]*?<\/think>/gi, '');
+  text = text.replace(/<think>[\s\S]*/gi, '');
+  text = text.replace(/<\/?think>/gi, '');
+
+  // 2. Remove repetitive loop artifacts or divider runaways
+  text = text.replace(/(-|\s){6,}/g, '\n');
+  text = text.replace(/(\b[a-zA-Z0-9_/]+\b)(?:\s+\1){3,}/gi, '$1');
+
+  text = text.trim();
+
+  // 3. Fallback if output was entirely inside think tags
+  if (!text || text.length < 5) {
+    return "Lex Matondo is a focused Computer Engineering builder who progresses rapidly from foundational Java and SQL to deploying production portals (ChemLab, COE LGU) and managing editorial visual media.";
+  }
+
+  return text;
+}
+
 export default async function handler(req, res) {
   // Clean Universal CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -186,7 +213,10 @@ export default async function handler(req, res) {
     // 1. If NVIDIA API key is configured (NVIDIA NIM DeepSeek free tier)
     if (nvidiaKey) {
       const formattedMessages = [
-        { role: 'system', content: LEX_KNOWLEDGE },
+        { 
+          role: 'system', 
+          content: `${LEX_KNOWLEDGE}\n\nIMPORTANT: Do not output any reasoning tags or internal commentary. Directly answer questions about Lex Matondo's capabilities, projects, stack, and photography based on the verified facts above.` 
+        },
         ...messages.slice(-6)
       ];
 
@@ -199,16 +229,15 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           model: nvidiaModel,
           messages: formattedMessages,
-          temperature: 0.3,
-          max_tokens: 500
+          temperature: 0.2,
+          max_tokens: 450
         })
       });
 
       if (nvidiaResponse.ok) {
         const nvidiaData = await nvidiaResponse.json();
-        const rawReply = nvidiaData.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
-        // Clean any reasoning tags (<think>...</think>) if using DeepSeek-R1
-        const reply = rawReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+        const rawReply = nvidiaData.choices?.[0]?.message?.content || "";
+        const reply = cleanModelOutput(rawReply);
         return res.status(200).json({ reply });
       } else {
         const nvidiaErr = await nvidiaResponse.text();

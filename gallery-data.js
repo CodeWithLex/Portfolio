@@ -531,7 +531,7 @@ window.GALLERY_DATA = [
     "category": "journalism",
     "categoryLabel": "SPORTS / PHOTOJOURNALISM",
     "date": "2025",
-    "location": "Davao City Sports Complex, Philippines",
+    "location": "Tuguegarao City, Philippines",
     "cover": "assets/gallery/national-prisaa-2025/full/photo-1.jpg",
     "coverThumb": "assets/gallery/national-prisaa-2025/thumb/photo-1.jpg",
     "tagline": "High-speed athletic photojournalism and championship drama.",

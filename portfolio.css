@@ -1220,6 +1220,12 @@ body[data-mode="create"] .view-tech {
   transition-delay: 240ms;
 }
 
+.footer-emails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .cta-email {
   font-size: clamp(1.1rem, 2.2vw, 1.5rem);
   font-weight: 600;
@@ -1227,6 +1233,22 @@ body[data-mode="create"] .view-tech {
   border-bottom: 1px solid var(--border);
   width: fit-content;
   padding-bottom: 4px;
+}
+
+.cta-email-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cta-email-sub a {
+  color: var(--text-secondary);
+  border-bottom: 1px dashed var(--border);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.cta-email-sub a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
 }
 
 .climax-email {

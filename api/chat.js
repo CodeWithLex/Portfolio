@@ -13,7 +13,8 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
   - Role: Computer Engineering (BSCPE) Student, Full-Stack Developer & Photographer
   - University: Cor Jesu College (CJC), Digos City, Davao del Sur, Philippines
   - Philosophy: "CODE × CREATE" — One person, two disciplines. Developer first; photography is the real second discipline. "I build things. I also photograph them."
-  - Contact: Matondolex@gmail.com
+  - Business & Inquiries Email: codewithlex27@gmail.com
+  - Academic / CJC School Email: lexmatondo@g.cjc.edu.ph
   - Location: Digos City, Philippines
   - Arc: Started coding in September 2024 (freshman CpE) and accelerated to building and deploying full production systems by 2026.
 
@@ -57,7 +58,8 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
   - ChemLab System: https://chemlab-system.me
   - COE LGU System: https://www.coelgu-system.engineer
   - PMAEE CadetCoach: https://reviewer-coach.onrender.com
-  - Contact Email: Matondolex@gmail.com
+  - Business Email: codewithlex27@gmail.com
+  - School Email: lexmatondo@g.cjc.edu.ph
 
 =========================
 STRICT OPERATING CONSTRAINTS (MANDATORY)

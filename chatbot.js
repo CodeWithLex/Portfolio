@@ -12,7 +12,8 @@
     role: "Computer Engineering (BSCPE) student, Developer & Photographer",
     school: "Cor Jesu College (CJC), Digos City, Davao del Sur, Philippines",
     philosophy: "CODE × CREATE — One person, two disciplines.",
-    email: "Matondolex@gmail.com",
+    businessEmail: "codewithlex27@gmail.com",
+    schoolEmail: "lexmatondo@g.cjc.edu.ph",
     projects: [
       "• **ChemLab System** (https://chemlab-system.me): Chemistry lab scheduling and apparatus management portal.",
       "• **COE LGU System** (https://www.coelgu-system.engineer): College of Engineering budget transparency and student council financial portal.",
@@ -22,7 +23,7 @@
     ],
     skills: "Java, JavaScript, TypeScript, Kotlin, SQL, HTML5, CSS3, Python, Node.js, Express, Supabase, PostgreSQL, MySQL, Java Swing, JavaFX, Android Jetpack Compose, Git, Figma, Photoshop, Lightroom, After Effects.",
     photography: "Event & portrait photographer under **Leavian Visuals** (portraits, weddings, debuts, christenings, and Cor Jesu College of Engineering & student publication events). Follow on TikTok (@edrickvisuals.mov) or Facebook (Lowbudphotography27).",
-    contact: "• **Email:** Matondolex@gmail.com\n• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
+    contact: "• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
   };
 
   const SUGGESTIONS = [
@@ -330,7 +331,7 @@
 
     // Links & Socials
     if (q.includes('link') || q.includes('social') || q.includes('github') || q.includes('facebook') || q.includes('tiktok') || q.includes('youtube') || q.includes('url') || q.includes('web') || q.includes('page')) {
-      return `Here are Lex's verified links:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@edrickvisuals.mov\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab System:** https://chemlab-system.me\n• **COE LGU System:** https://www.coelgu-system.engineer\n• **Email:** Matondolex@gmail.com`;
+      return `Here are Lex's verified links:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@edrickvisuals.mov\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab System:** https://chemlab-system.me\n• **COE LGU System:** https://www.coelgu-system.engineer\n• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph`;
     }
 
     // Projects

@@ -12,7 +12,8 @@ This document serves as the authoritative source of truth for the AI portfolio a
 - **Core Framing:** **CODE × CREATE** — One person, two disciplines. Developer first; photography is the real second discipline. *"I build things. I also photograph them."*
 - **Location:** Digos City, Davao del Sur, Philippines
 - **University:** Cor Jesu College (CJC), Digos City — College of Engineering (BSCPE)
-- **Email:** Matondolex@gmail.com (accessible for collaboration and project inquiries)
+- **Business & Inquiries Email:** codewithlex27@gmail.com
+- **Academic / CJC School Email:** lexmatondo@g.cjc.edu.ph
 - **GitHub Bio:** "Student Developer | Java & SQL | Aspiring Full-stack Developer"
 - **Tone & Persona:** Student-honest, technically sharp, human, pragmatic, grounded, and focused on shipping real working software rather than corporate buzzwords.
 

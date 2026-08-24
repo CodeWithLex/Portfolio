@@ -39,15 +39,83 @@ Your purpose is to answer questions strictly about Lex Matondo, his projects, te
 4. Keep answers crisp and readable with short bullet points when listing items.
 `;
 
+// In-memory rate limiting cache (per serverless instance)
+const rateLimitMap = new Map();
+
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
+const MAX_REQUESTS_PER_WINDOW = 8;      // Max 8 requests per minute per IP
+const MAX_INPUT_LENGTH = 400;           // Limit input length to prevent token bloat
+
+function getClientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown-ip';
+}
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const userRecord = rateLimitMap.get(ip) || [];
+
+  // Filter requests within the active window
+  const activeRequests = userRecord.filter(timestamp => now - timestamp < RATE_LIMIT_WINDOW_MS);
+
+  if (activeRequests.length >= MAX_REQUESTS_PER_WINDOW) {
+    return true;
+  }
+
+  activeRequests.push(now);
+  rateLimitMap.set(ip, activeRequests);
+
+  // Clean old entries periodically to prevent memory leaks
+  if (rateLimitMap.size > 2000) {
+    for (const [key, timestamps] of rateLimitMap.entries()) {
+      const valid = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+      if (valid.length === 0) {
+        rateLimitMap.delete(key);
+      } else {
+        rateLimitMap.set(key, valid);
+      }
+    }
+  }
+
+  return false;
+}
+
+function isAllowedOrigin(req) {
+  const origin = req.headers.origin || req.headers.referer || '';
+  if (!origin) return true; // Allow direct server/curl if testing, or check if in production
+
+  const allowedPatterns = [
+    /^https?:\/\/localhost(:\d+)?$/,
+    /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
+    /^https:\/\/lex-portfolio[a-z0-9-]*\.vercel\.app$/,
+    /^https:\/\/[a-z0-9-]+\.vercel\.app$/,
+    /^https:\/\/codewithlex\.github\.io$/,
+    /^https?:\/\/chemlab-system\.me$/
+  ];
+
+  return allowedPatterns.some(pattern => {
+    try {
+      const url = new URL(origin);
+      return pattern.test(url.origin);
+    } catch {
+      return false;
+    }
+  });
+}
+
 export default async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
-  );
+  const clientOrigin = req.headers.origin || '*';
+
+  // Security Headers
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', clientOrigin);
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -57,13 +125,30 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
+  // 1. Origin verification
+  if (!isAllowedOrigin(req)) {
+    return res.status(403).json({ error: 'Access forbidden: unauthorized origin.' });
+  }
+
+  // 2. IP Rate limiting
+  const clientIp = getClientIp(req);
+  if (isRateLimited(clientIp)) {
+    res.setHeader('Retry-After', '60');
+    return res.status(429).json({
+      error: 'Too many requests. Please wait a minute before asking more questions.'
+    });
+  }
+
   try {
     const { messages = [] } = req.body || {};
-    const lastUserMessage = messages.length > 0 ? messages[messages.length - 1].content : '';
+    let lastUserMessage = messages.length > 0 ? messages[messages.length - 1].content : '';
 
     if (!lastUserMessage || !lastUserMessage.trim()) {
       return res.status(400).json({ error: 'Message content is required.' });
     }
+
+    // 3. Payload sanity check & truncation to prevent token drain
+    lastUserMessage = lastUserMessage.trim().slice(0, MAX_INPUT_LENGTH);
 
     const nvidiaKey = process.env.NVIDIA_API_KEY || process.env.DEEPSEEK_API_KEY;
     const nvidiaModel = process.env.NVIDIA_MODEL || 'deepseek-ai/deepseek-v3';

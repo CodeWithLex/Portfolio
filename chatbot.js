@@ -84,6 +84,7 @@
               class="lex-chat-input" 
               id="lexChatInput" 
               placeholder="Ask about Lex's projects, stack, or photos..." 
+              maxlength="400"
               autocomplete="off"
             />
             <button type="submit" class="lex-send-btn" id="lexSendBtn" aria-label="Send message">
@@ -263,6 +264,11 @@
     if (isSubmitting) return;
     isSubmitting = true;
 
+    const input = document.getElementById('lexChatInput');
+    const sendBtn = document.getElementById('lexSendBtn');
+    if (input) input.disabled = true;
+    if (sendBtn) sendBtn.disabled = true;
+
     appendMessage('user', text);
     chatHistory.push({ role: 'user', content: text });
 
@@ -279,26 +285,47 @@
         body: JSON.stringify({ messages: chatHistory })
       });
 
+      removeTypingIndicator();
+
+      if (response.status === 429) {
+        const errData = await response.json().catch(() => ({}));
+        const warning = errData.error || "Rate limit reached. Please wait a minute before asking more questions.";
+        appendMessage('assistant', `⚠️ **${warning}**`);
+        return;
+      }
+
+      if (response.status === 403) {
+        appendMessage('assistant', "⚠️ **Access restricted:** This API is locked to verified portfolio domains.");
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(`Server returned ${response.status}`);
       }
 
       const data = await response.json();
-      removeTypingIndicator();
       const botReply = data.reply || "Sorry, I couldn't generate a reply right now.";
       appendMessage('assistant', botReply);
       chatHistory.push({ role: 'assistant', content: botReply });
     } catch (err) {
       console.warn('API route unavailable or offline, using local knowledge engine:', err.message);
-      // Fallback local engine
+      // Fallback local engine for local file preview
       setTimeout(() => {
         removeTypingIndicator();
         const fallbackReply = getLocalFallback(text);
         appendMessage('assistant', fallbackReply);
         chatHistory.push({ role: 'assistant', content: fallbackReply });
-      }, 400);
+      }, 350);
     } finally {
-      isSubmitting = false;
+      // Cooldown before unlocking input to prevent spam clicking
+      setTimeout(() => {
+        isSubmitting = false;
+        if (input) {
+          input.disabled = false;
+          input.focus();
+        }
+        if (sendBtn) sendBtn.disabled = false;
+      }, 1200);
     }
   }
 

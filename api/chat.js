@@ -139,15 +139,13 @@ function isAllowedOrigin(req) {
 }
 
 export default async function handler(req, res) {
-  const clientOrigin = req.headers.origin || '*';
-
-  // Security Headers
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', clientOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
+  // Clean Universal CORS Headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, x-api-key, X-Requested-With'
+  );
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -157,12 +155,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
-  // 1. Origin verification
-  if (!isAllowedOrigin(req)) {
-    return res.status(403).json({ error: 'Access forbidden: unauthorized origin.' });
-  }
-
-  // 2. IP Rate limiting
+  // 1. IP Rate limiting
   const clientIp = getClientIp(req);
   if (isRateLimited(clientIp)) {
     res.setHeader('Retry-After', '60');
@@ -172,17 +165,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages = [] } = req.body || {};
+    const { messages = [], apiKey } = req.body || {};
     let lastUserMessage = messages.length > 0 ? messages[messages.length - 1].content : '';
 
     if (!lastUserMessage || !lastUserMessage.trim()) {
       return res.status(400).json({ error: 'Message content is required.' });
     }
 
-    // 3. Payload sanity check & truncation to prevent token drain
+    // Payload sanity check & truncation to prevent token drain
     lastUserMessage = lastUserMessage.trim().slice(0, MAX_INPUT_LENGTH);
 
-    const nvidiaKey = process.env.NVIDIA_API_KEY || process.env.DEEPSEEK_API_KEY;
+    const nvidiaKey = apiKey || req.headers['x-api-key'] || process.env.NVIDIA_API_KEY || process.env.DEEPSEEK_API_KEY;
     const nvidiaModel = process.env.NVIDIA_MODEL || 'deepseek-ai/deepseek-v3';
     const geminiKey = process.env.GEMINI_API_KEY;
     const groqKey = process.env.GROQ_API_KEY;

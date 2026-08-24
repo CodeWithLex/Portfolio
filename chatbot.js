@@ -66,6 +66,13 @@
             </div>
           </div>
           <div class="lex-chat-actions">
+            <button class="lex-icon-btn" id="lexApiKeyBtn" title="Set/View API Key" aria-label="Set API Key">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="7.5" cy="15.5" r="5.5"></circle>
+                <path d="m21 2-9.6 9.6"></path>
+                <path d="m15.5 7.5 3 3"></path>
+              </svg>
+            </button>
             <button class="lex-icon-btn" id="lexClearChat" title="Clear chat" aria-label="Clear chat">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -127,6 +134,7 @@
     const trigger = document.getElementById('lexChatTrigger');
     const closeBtn = document.getElementById('lexCloseChat');
     const clearBtn = document.getElementById('lexClearChat');
+    const keyBtn = document.getElementById('lexApiKeyBtn');
     const backdrop = document.getElementById('lexChatBackdrop');
     const form = document.getElementById('lexChatForm');
     const input = document.getElementById('lexChatInput');
@@ -134,6 +142,23 @@
     trigger.addEventListener('click', toggleChat);
     closeBtn.addEventListener('click', () => toggleChat(false));
     clearBtn.addEventListener('click', clearChat);
+
+    if (keyBtn) {
+      keyBtn.addEventListener('click', () => {
+        const existingKey = localStorage.getItem('lex_api_key') || '';
+        const newKey = window.prompt('Enter your NVIDIA API Key (nvapi-...) or Gemini/Groq key for direct inference:', existingKey);
+        if (newKey !== null) {
+          if (newKey.trim()) {
+            localStorage.setItem('lex_api_key', newKey.trim());
+            appendMessage('assistant', '✅ **API Key saved!** The chatbot will now run direct inference.');
+          } else {
+            localStorage.removeItem('lex_api_key');
+            appendMessage('assistant', 'API Key cleared.');
+          }
+        }
+      });
+    }
+
     if (backdrop) backdrop.addEventListener('click', () => toggleChat(false));
 
     // Close on Escape key
@@ -161,163 +186,37 @@
     });
   }
 
-  function toggleChat(forceState) {
-    const widget = document.getElementById('lexChatWidget');
-    const backdrop = document.getElementById('lexChatBackdrop');
-    isOpen = typeof forceState === 'boolean' ? forceState : !isOpen;
+  async function callDirectNvidia(apiKey, messages) {
+    const systemPrompt = `You are the dedicated, personal AI Portfolio Assistant for Lex Matondo (Lex Edrick Asherjesse C. Matondo).
+Answer questions about his background, education at Cor Jesu College, software projects (ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal), tech stack (Java, SQL, JS, Kotlin), and photography work at Leavian Visuals.
+Strictly refuse unrelated off-topic queries. Keep answers concise, human, and organized with markdown bullet points.`;
 
-    if (isOpen) {
-      widget.classList.add('is-open');
-      if (backdrop && window.innerWidth <= 640) backdrop.classList.add('is-active');
-      const input = document.getElementById('lexChatInput');
-      const body = document.getElementById('lexChatBody');
-      if (body) body.scrollTop = body.scrollHeight;
-      setTimeout(() => input && input.focus(), 150);
-    } else {
-      widget.classList.remove('is-open');
-      if (backdrop) backdrop.classList.remove('is-active');
-    }
-  }
+    const formattedMessages = [
+      { role: 'system', content: systemPrompt },
+      ...messages.slice(-6)
+    ];
 
-  function clearChat() {
-    chatHistory = [];
-    const chatBody = document.getElementById('lexChatBody');
-    chatBody.innerHTML = '';
-    renderWelcomeMessage();
-    renderSuggestions();
-  }
-
-  function renderWelcomeMessage() {
-    appendMessage(
-      'assistant',
-      "Hey! I'm Lex's AI portfolio guide. Ask me anything about his software projects, tech stack, photography work at Leavian Visuals, or background!"
-    );
-  }
-
-  function renderSuggestions() {
-    const container = document.getElementById('lexSuggestions');
-    container.innerHTML = '';
-    SUGGESTIONS.forEach((prompt) => {
-      const chip = document.createElement('button');
-      chip.className = 'lex-chip';
-      chip.type = 'button';
-      chip.textContent = prompt;
-      chip.addEventListener('click', () => {
-        sendMessage(prompt);
-      });
-      container.appendChild(chip);
+    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'deepseek-ai/deepseek-v3',
+        messages: formattedMessages,
+        temperature: 0.3,
+        max_tokens: 500
+      })
     });
-  }
 
-  function formatMarkdown(text) {
-    if (!text) return '';
-    let html = text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      // Bold **text**
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Links [text](url)
-      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      // Direct URLs
-      .replace(/(^|[^"'])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>')
-      // Code `text`
-      .replace(/`([^`]+)`/g, '<code>$1</code>')
-      // Bullet points
-      .replace(/^[•*-]\s+(.+)$/gm, '<li>$1</li>');
-
-    // Wrap li groups in ul
-    html = html.replace(/(<li>.*?<\/li>)+/gs, (match) => `<ul>${match}</ul>`);
-
-    // Paragraph breaks
-    return html.split('\n\n').map(p => {
-      p = p.trim();
-      if (!p) return '';
-      if (p.startsWith('<ul>')) return p;
-      return `<p>${p.replace(/\n/g, '<br/>')}</p>`;
-    }).join('');
-  }
-
-  function appendMessage(role, content) {
-    const chatBody = document.getElementById('lexChatBody');
-    const msgEl = document.createElement('div');
-    msgEl.className = `lex-msg ${role}`;
-
-    const formattedContent = role === 'assistant' ? formatMarkdown(content) : document.createTextNode(content).textContent;
-    msgEl.innerHTML = role === 'assistant' ? formattedContent : `<p>${formattedContent}</p>`;
-
-    chatBody.appendChild(msgEl);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  function showTypingIndicator() {
-    const chatBody = document.getElementById('lexChatBody');
-    const indicator = document.createElement('div');
-    indicator.className = 'lex-typing-indicator';
-    indicator.id = 'lexTypingIndicator';
-    indicator.innerHTML = `
-      <span class="lex-typing-dot"></span>
-      <span class="lex-typing-dot"></span>
-      <span class="lex-typing-dot"></span>
-    `;
-    chatBody.appendChild(indicator);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  function removeTypingIndicator() {
-    const indicator = document.getElementById('lexTypingIndicator');
-    if (indicator) indicator.remove();
-  }
-
-  // If running locally as file:// or on dev, connect to live Vercel endpoint so real DeepSeek API responds!
-  const CHAT_API_ENDPOINT = (window.location.protocol === 'file:')
-    ? 'https://lex-portfolio-swart.vercel.app/api/chat'
-    : '/api/chat';
-
-  function getLocalFallback(query) {
-    const q = query.toLowerCase().trim();
-
-    // Natural Greetings
-    if (/^(hi|hello|hey|kamusta|musta|hi po|hello po|good day|good morning|good evening|yo)\b/.test(q) || q === 'hi' || q === 'hello' || q === 'hi po') {
-      return "Hello! I'm Lex Matondo's AI guide. I can answer any questions about his software projects, tech stack, education at Cor Jesu College, or photography work at Leavian Visuals.";
+    if (!response.ok) {
+      throw new Error(`NVIDIA API error: ${response.status}`);
     }
 
-    if (q === 'what' || q.includes('what can you do') || q.includes('help') || q.includes('options')) {
-      return "You can ask me about:\n\n• **Projects:** ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal\n• **Tech Stack:** Java, SQL, JavaScript, Kotlin, Android, Node.js\n• **Photography:** Leavian Visuals, portrait/event work, and publication photojournalism\n• **Contact & Links:** GitHub, socials, and email";
-    }
-
-    // Links & Socials
-    if (q.includes('link') || q.includes('social') || q.includes('github') || q.includes('facebook') || q.includes('tiktok') || q.includes('youtube') || q.includes('url') || q.includes('web') || q.includes('page')) {
-      return `Here are Lex's verified links:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@edrickvisuals.mov\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab System:** https://chemlab-system.me\n• **COE LGU System:** https://www.coelgu-system.engineer\n• **Email:** Matondolex@gmail.com`;
-    }
-
-    // Projects
-    if (q.includes('project') || q.includes('build') || q.includes('work') || q.includes('made') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || q.includes('dispenser') || q.includes('app') || q.includes('system') || q.includes('code')) {
-      return `Here are Lex's primary projects:\n\n${LOCAL_KNOWLEDGE.projects.join('\n')}`;
-    }
-
-    // Stack & Skills
-    if (q.includes('stack') || q.includes('language') || q.includes('tech') || q.includes('tool') || q.includes('skill') || q.includes('java') || q.includes('python') || q.includes('sql') || q.includes('backend') || q.includes('frontend')) {
-      return `Lex's technical stack:\n\n${LOCAL_KNOWLEDGE.skills}`;
-    }
-
-    // Photography
-    if (q.includes('photo') || q.includes('camera') || q.includes('picture') || q.includes('visual') || q.includes('shoot') || q.includes('wedding') || q.includes('leavian') || q.includes('heartbeat')) {
-      return `${LOCAL_KNOWLEDGE.photography}\n\n• Facebook: https://www.facebook.com/Lowbudphotography27/\n• TikTok: https://www.tiktok.com/@edrickvisuals.mov`;
-    }
-
-    // Contact
-    if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('message') || q.includes('hire') || q.includes('talk')) {
-      return `You can connect with Lex on:\n\n${LOCAL_KNOWLEDGE.contact}`;
-    }
-
-    // Background & Identity
-    if (q.includes('who') || q.includes('about') || q.includes('lex') || q.includes('school') || q.includes('college') || q.includes('cjc') || q.includes('student') || q.includes('study') || q.includes('degree')) {
-      return `**${LOCAL_KNOWLEDGE.name}**\n\n• ${LOCAL_KNOWLEDGE.role}\n• Studying at ${LOCAL_KNOWLEDGE.school}\n• Philosophy: "${LOCAL_KNOWLEDGE.philosophy}"`;
-    }
-
-    // Strict boundary refusal only for completely unrelated queries (e.g. recipes, world trivia)
-    return "I am Lex Matondo's dedicated portfolio assistant. I can answer any questions about Lex, his software engineering projects (ChemLab, COE LGU, CadetCoach), tech stack, and photography work.";
+    const data = await response.json();
+    const rawReply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a reply.";
+    return rawReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
   }
 
   async function sendMessage(text) {
@@ -338,32 +237,46 @@
 
     showTypingIndicator();
 
+    const localApiKey = localStorage.getItem('lex_api_key');
+
     try {
-      const response = await fetch(CHAT_API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: chatHistory })
-      });
+      let botReply = '';
+
+      // 1. If user has saved a key locally starting with nvapi-, try calling NVIDIA direct
+      if (localApiKey && localApiKey.startsWith('nvapi-')) {
+        botReply = await callDirectNvidia(localApiKey, chatHistory);
+      } else {
+        // 2. Query Vercel serverless function
+        const response = await fetch(CHAT_API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: chatHistory,
+            apiKey: localApiKey || undefined
+          })
+        });
+
+        if (response.status === 429) {
+          const errData = await response.json().catch(() => ({}));
+          const warning = errData.error || "Rate limit reached. Please wait a minute before asking more questions.";
+          removeTypingIndicator();
+          appendMessage('assistant', `⚠️ **${warning}**`);
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(`Server returned ${response.status}`);
+        }
+
+        const data = await response.json();
+        botReply = data.reply || "Sorry, I couldn't generate a reply right now.";
+      }
 
       removeTypingIndicator();
-
-      if (response.status === 429) {
-        const errData = await response.json().catch(() => ({}));
-        const warning = errData.error || "Rate limit reached. Please wait a minute before asking more questions.";
-        appendMessage('assistant', `⚠️ **${warning}**`);
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
-      }
-
-      const data = await response.json();
-      const botReply = data.reply || "Sorry, I couldn't generate a reply right now.";
       appendMessage('assistant', botReply);
       chatHistory.push({ role: 'assistant', content: botReply });
     } catch (err) {
-      console.warn('API fetch unavailable, using knowledge engine fallback:', err.message);
+      console.warn('API call unavailable, using knowledge engine fallback:', err.message);
       // Fallback local engine
       setTimeout(() => {
         removeTypingIndicator();
@@ -380,7 +293,7 @@
           input.focus();
         }
         if (sendBtn) sendBtn.disabled = false;
-      }, 1000);
+      }, 800);
     }
   }
 

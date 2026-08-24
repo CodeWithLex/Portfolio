@@ -383,7 +383,7 @@
     if (detailCount) detailCount.textContent = `${total} Photographs`;
 
     if (detailInquireLink) {
-      detailInquireLink.href = `mailto:lexmatondo@g.cjc.edu.ph?subject=${encodeURIComponent('Inquiry: ' + activeShoot.title)}&body=${encodeURIComponent('Hi Lex,\n\nI was browsing your visual archive and would love to inquire about booking a session similar to ' + activeShoot.title + '.\n\nThank you!')}`;
+      detailInquireLink.href = `mailto:codewithlex27@gmail.com?subject=${encodeURIComponent('Inquiry: ' + activeShoot.title + ' — Leavian Visuals')}&body=${encodeURIComponent('Hi Lex,\n\nI was browsing your visual archive and would love to inquire about booking a session similar to ' + activeShoot.title + '.\n\nThank you!')}`;
     }
 
     // Update Photo Image with smooth double-buffered directional transition

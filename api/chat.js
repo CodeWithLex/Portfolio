@@ -58,8 +58,8 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
   - ChemLab System: https://chemlab-system.me
   - COE LGU System: https://www.coelgu-system.engineer
   - PMAEE CadetCoach: https://reviewer-coach.onrender.com
-  - Business Email: codewithlex27@gmail.com
-  - School Email: lexmatondo@g.cjc.edu.ph
+  - Business Email (Collabs, Development & Projects): [codewithlex27@gmail.com](mailto:codewithlex27@gmail.com?subject=Project%20Inquiry%20%2F%20Collaboration%20%E2%80%94%20Lex%20Matondo&body=Hi%20Lex%2C%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0A%0A)
+  - Academic & CJC Institutional Email: [lexmatondo@g.cjc.edu.ph](mailto:lexmatondo@g.cjc.edu.ph?subject=Academic%20%2F%20Institutional%20Inquiry%20%E2%80%94%20Cor%20Jesu%20College&body=Hi%20Lex%2C%0A%0AI%20am%20reaching%20out%20regarding%3A%0A%0A)
 
 =========================
 STRICT OPERATING CONSTRAINTS (MANDATORY)

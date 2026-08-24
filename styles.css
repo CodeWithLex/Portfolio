@@ -144,22 +144,24 @@ a {
 }
 
 /* 65% / 35% Desktop Hover Expansion */
-.landing-split.hover-tech .side-tech {
-  flex-basis: 65%;
-  background: var(--bg-secondary);
-}
-.landing-split.hover-tech .side-create {
-  flex-basis: 35%;
-  opacity: 0.45;
-}
+@media (hover: hover) {
+  .landing-split.hover-tech .side-tech {
+    flex-basis: 65%;
+    background: var(--bg-secondary);
+  }
+  .landing-split.hover-tech .side-create {
+    flex-basis: 35%;
+    opacity: 0.45;
+  }
 
-.landing-split.hover-create .side-create {
-  flex-basis: 65%;
-  background: var(--bg-secondary);
-}
-.landing-split.hover-create .side-tech {
-  flex-basis: 35%;
-  opacity: 0.45;
+  .landing-split.hover-create .side-create {
+    flex-basis: 65%;
+    background: var(--bg-secondary);
+  }
+  .landing-split.hover-create .side-tech {
+    flex-basis: 35%;
+    opacity: 0.45;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -243,7 +245,10 @@ html.has-landing-entrance .landing-shutter-layer {
   pointer-events: none;
   transform: scaleX(0);
   will-change: transform;
-  transition: transform 380ms var(--ease-smooth);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 340ms var(--ease-smooth);
 }
 
 .landing-shutter-layer.shutter-from-left {
@@ -484,6 +489,29 @@ html.has-landing-entrance .landing-shutter-layer {
     border-color: rgba(255, 255, 255, 0.25);
     margin-top: 1.25rem;
     padding: 0.65rem 1.5rem;
+  }
+
+  .split-side:active {
+    opacity: 0.85;
+  }
+
+  /* Smooth mobile card expansion without height/padding layout jumping */
+  .landing-split.expand-tech .side-tech,
+  .landing-split.expand-create .side-create {
+    flex-basis: auto !important;
+    opacity: 1 !important;
+    transform: scale(1.01);
+    background: var(--bg-secondary) !important;
+  }
+
+  .landing-split.expand-tech .side-create,
+  .landing-split.expand-create .side-tech {
+    flex-basis: auto !important;
+    opacity: 0.15 !important;
+    padding: 3.5rem 1.5rem !important;
+    min-height: 42vh !important;
+    transform: scale(0.98);
+    pointer-events: none;
   }
 }
 

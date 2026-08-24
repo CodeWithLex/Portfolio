@@ -29,9 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modeSlider && activeBtn && modeGroup) {
       const groupRect = modeGroup.getBoundingClientRect();
       const btnRect = activeBtn.getBoundingClientRect();
-      const leftOffset = btnRect.left - groupRect.left;
-      modeSlider.style.transform = `translateX(${leftOffset}px)`;
-      modeSlider.style.width = `${btnRect.width}px`;
+      if (btnRect.width > 0) {
+        const leftOffset = btnRect.left - groupRect.left;
+        modeSlider.style.transform = `translate3d(${leftOffset}px, 0, 0)`;
+        modeSlider.style.width = `${btnRect.width}px`;
+      }
     }
   };
 
@@ -72,8 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: 0.05,
-        rootMargin: "0px 0px -30px 0px"
+        threshold: 0.02,
+        rootMargin: "0px 0px -10px 0px"
       }
     );
 
@@ -114,6 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const inClass = goingToCreate ? "wipe-to-create-in" : "wipe-to-tech-in";
     const outClass = goingToCreate ? "wipe-to-create-out" : "wipe-to-tech-out";
 
+    // Temporarily disable smooth scroll to prevent scroll fighting during wipe
+    document.documentElement.style.scrollBehavior = "auto";
+
     // Reset wipe state
     wipeLayer.className = "discipline-wipe-layer";
 
@@ -123,9 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateNav(mode);
 
     setTimeout(() => {
-      // Sequence 2: Switch discipline while covered, reset scroll to top
+      // Sequence 2: Switch discipline while covered, reset scroll to top immediately
       body.setAttribute("data-mode", mode);
-      window.scrollTo({ top: 0 });
+      window.scrollTo(0, 0);
       updateUrl(mode);
 
       // Sequence 3: Wipe blade sweeps out to destination side
@@ -138,10 +143,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
           wipeLayer.className = "discipline-wipe-layer";
+          document.documentElement.style.scrollBehavior = "";
           isTransitioning = false;
-        }, 280);
-      }, 100);
-    }, 220);
+        }, 320);
+      }, 120);
+    }, 240);
   };
 
   modeBtns.forEach((btn) => {
@@ -350,8 +356,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 6. Section Exit Monitoring & Scroll Displacement
-  if (!prefersReducedMotion && "IntersectionObserver" in window) {
+  // 6. Section Exit Monitoring & Scroll Displacement (Desktop fine pointers only)
+  const isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!prefersReducedMotion && isFinePointer && "IntersectionObserver" in window) {
     const selectedWork = document.getElementById("work");
     const archiveSection = document.getElementById("archive-section");
     if (selectedWork && archiveSection) {
@@ -399,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (scrollY < 400) {
               const moveY = Math.min(scrollY * 0.12, 28);
               const kickerOpacity = Math.max(1 - scrollY * 0.005, 0.2);
-              heroHeading.style.transform = `translateY(-${moveY}px)`;
+              heroHeading.style.transform = `translate3d(0, -${moveY}px, 0)`;
               heroKicker.style.opacity = kickerOpacity;
             }
             ticking = false;
@@ -592,16 +599,23 @@ document.addEventListener("DOMContentLoaded", () => {
       stage.classList.remove("is-lens-active");
     });
 
-    // Mobile / Touch Drag Lens & Tap
+    // Mobile / Touch Drag Lens & Tap with requestAnimationFrame throttling
     let touchTimeout = null;
+    let touchTicking = false;
     const handleTouch = (e) => {
       const touch = e.touches[0] || e.changedTouches[0];
       if (!touch) return;
-      const rect = frame.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-      setLensPos(x, y, 120);
-      stage.classList.add("is-lens-active");
+      if (!touchTicking) {
+        window.requestAnimationFrame(() => {
+          const rect = frame.getBoundingClientRect();
+          const x = touch.clientX - rect.left;
+          const y = touch.clientY - rect.top;
+          setLensPos(x, y, 120);
+          stage.classList.add("is-lens-active");
+          touchTicking = false;
+        });
+        touchTicking = true;
+      }
 
       if (touchTimeout) clearTimeout(touchTimeout);
     };
@@ -617,7 +631,7 @@ document.addEventListener("DOMContentLoaded", () => {
     frame.addEventListener("touchend", () => {
       touchTimeout = setTimeout(() => {
         stage.classList.remove("is-lens-active");
-      }, 2500);
+      }, 2000);
     }, { passive: true });
 
     // Mobile Scroll Ambient Pulse: softly illuminates center face when scrolled past
@@ -635,7 +649,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               setTimeout(() => {
                 stage.classList.remove("is-lens-active");
-              }, 2200);
+              }, 2000);
             }
           });
         },

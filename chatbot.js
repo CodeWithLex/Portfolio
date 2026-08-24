@@ -131,6 +131,8 @@
   }
 
   function bindEvents() {
+    const widget = document.getElementById('lexChatWidget');
+    const panel = document.getElementById('lexChatPanel');
     const trigger = document.getElementById('lexChatTrigger');
     const closeBtn = document.getElementById('lexCloseChat');
     const clearBtn = document.getElementById('lexClearChat');
@@ -139,12 +141,40 @@
     const form = document.getElementById('lexChatForm');
     const input = document.getElementById('lexChatInput');
 
-    trigger.addEventListener('click', toggleChat);
-    closeBtn.addEventListener('click', () => toggleChat(false));
-    clearBtn.addEventListener('click', clearChat);
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleChat();
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleChat(false);
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        clearChat();
+      });
+    }
+
+    if (panel) {
+      panel.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
 
     if (keyBtn) {
-      keyBtn.addEventListener('click', () => {
+      keyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const existingKey = localStorage.getItem('lex_api_key') || '';
         const newKey = window.prompt('Enter your NVIDIA API Key (nvapi-...) or Gemini/Groq key for direct inference:', existingKey);
         if (newKey !== null) {
@@ -159,7 +189,13 @@
       });
     }
 
-    if (backdrop) backdrop.addEventListener('click', () => toggleChat(false));
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleChat(false);
+      });
+    }
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
@@ -171,19 +207,40 @@
     // Close if clicked outside on desktop
     document.addEventListener('click', (e) => {
       if (!isOpen) return;
-      const widget = document.getElementById('lexChatWidget');
-      if (widget && !widget.contains(e.target) && (!backdrop || !backdrop.contains(e.target))) {
+      const w = document.getElementById('lexChatWidget');
+      if (w && !w.contains(e.target)) {
         toggleChat(false);
       }
     });
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const text = input.value.trim();
-      if (!text || isSubmitting) return;
-      sendMessage(text);
-      input.value = '';
-    });
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const text = input ? input.value.trim() : '';
+        if (!text || isSubmitting) return;
+        sendMessage(text);
+        if (input) input.value = '';
+      });
+    }
+  }
+
+  function toggleChat(forceState) {
+    const widget = document.getElementById('lexChatWidget');
+    const backdrop = document.getElementById('lexChatBackdrop');
+    isOpen = typeof forceState === 'boolean' ? forceState : !isOpen;
+
+    if (isOpen) {
+      if (widget) widget.classList.add('is-open');
+      if (backdrop && window.innerWidth <= 640) backdrop.classList.add('is-active');
+      const input = document.getElementById('lexChatInput');
+      const body = document.getElementById('lexChatBody');
+      if (body) body.scrollTop = body.scrollHeight;
+      setTimeout(() => input && input.focus(), 150);
+    } else {
+      if (widget) widget.classList.remove('is-open');
+      if (backdrop) backdrop.classList.remove('is-active');
+    }
   }
 
   async function callDirectNvidia(apiKey, messages) {

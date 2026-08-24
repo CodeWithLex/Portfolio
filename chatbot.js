@@ -217,16 +217,6 @@
     }
   }
 
-  async function callDirectNvidia(apiKey, messages) {
-    const systemPrompt = `You are the dedicated, personal AI Portfolio Assistant for Lex Matondo (Lex Edrick Asherjesse C. Matondo).
-Answer questions about his background, education at Cor Jesu College, software projects (ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal), tech stack (Java, SQL, JS, Kotlin), and photography work at Leavian Visuals.
-Strictly refuse unrelated off-topic queries. Keep answers concise, human, and organized with markdown bullet points.`;
-
-    const formattedMessages = [
-      { role: 'system', content: systemPrompt },
-      ...messages.slice(-6)
-    ];
-
   async function sendMessage(text) {
     if (isSubmitting) return;
     isSubmitting = true;

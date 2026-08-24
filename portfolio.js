@@ -688,4 +688,70 @@ document.addEventListener("DOMContentLoaded", () => {
       ambientObserver.observe(stage);
     }
   });
+
+  // Smart Email Launcher with Automatic Clipboard Copy & Toast Feedback
+  const showToast = (message) => {
+    let toast = document.getElementById("lex-email-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "lex-email-toast";
+      toast.className = "lex-toast";
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = message;
+    toast.classList.add("is-visible");
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+      toast.classList.remove("is-visible");
+    }, 4500);
+  };
+
+  const handleEmailClick = (e, email, isAcademic) => {
+    e.preventDefault();
+
+    const subject = isAcademic
+      ? "Academic / Institutional Inquiry — Cor Jesu College"
+      : "Project Inquiry / Collaboration — Lex Matondo";
+
+    const body = isAcademic
+      ? "Hi Lex,\n\nI am reaching out regarding an academic matter at Cor Jesu College:\n\n"
+      : "Hi Lex,\n\nI saw your portfolio and would like to connect regarding:\n\n";
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoUrl = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // 1. Copy email to clipboard
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email);
+      }
+    } catch (_) {}
+
+    // 2. Open Gmail web composer
+    const newWindow = window.open(gmailUrl, "_blank", "noopener,noreferrer");
+
+    // 3. If popup was blocked or user is on mobile, fallback to mailto or offer direct link
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+      window.location.href = mailtoUrl;
+    }
+
+    // 4. Show friendly toast feedback
+    showToast(`
+      <span class="toast-title">📋 Copied <strong>${email}</strong></span>
+      <span class="toast-sub">Opening Gmail web composer...</span>
+      <div class="toast-actions">
+        <a href="${gmailUrl}" target="_blank" rel="noopener">Open Gmail Web</a> · 
+        <a href="${mailtoUrl}">Open Mail App</a>
+      </div>
+    `);
+  };
+
+  document.querySelectorAll(".cta-email, .cta-email-sub a").forEach((link) => {
+    const isAcademic = link.textContent.includes("cjc.edu.ph") || link.href.includes("cjc.edu.ph");
+    const email = isAcademic ? "lexmatondo@g.cjc.edu.ph" : "codewithlex27@gmail.com";
+
+    link.addEventListener("click", (e) => {
+      handleEmailClick(e, email, isAcademic);
+    });
+  });
 });

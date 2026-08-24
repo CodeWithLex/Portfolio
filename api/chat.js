@@ -168,6 +168,33 @@ function cleanModelOutput(rawText) {
   return text;
 }
 
+function evaluateGuardrail(text) {
+  if (!text || typeof text !== 'string') return null;
+  const q = text.toLowerCase().trim();
+
+  // 1. Vulgarity, profanity & toxic abuse (English & Filipino/Tagalog)
+  const vulgarPattern = /\b(fuck|fucking|fucker|shit|bitch|asshole|bastard|dick|pussy|porn|nsfw|sex|nude|gago|tangina|putangina|tarantado|bobo|ulol|pakshet|kupal|kantot|hindot|pepe|titi|yawa|bilat|piste|shibal)\b/i;
+  if (vulgarPattern.test(q)) {
+    return "Please keep the conversation respectful. I can only assist with questions regarding Lex Matondo's software engineering projects, technical stack, and photography work.";
+  }
+
+  // 2. Prompt Injection, System Probing & Jailbreak attempts
+  const injectionPattern = /(ignore (all )?previous instructions|system prompt|jailbreak|dan mode|reveal (your )?prompt|act as an unfiltered|pretend you are|forget your rules|bypass filter)/i;
+  if (injectionPattern.test(q)) {
+    return "I am Lex Matondo's dedicated portfolio assistant. I can only answer questions specifically about Lex, his software engineering projects (ChemLab, COE LGU, CadetCoach), tech stack, and photography work.";
+  }
+
+  // 3. Obvious off-topic queries (Homework solvers, recipes, weather, general essays, unrelated coding requests)
+  const offTopicPattern = /\b(calculate \d+|solve (the equation|this math|\d+)|write (an? essay|a poem|a song|a story about|python script for)|recipe for|how to cook|weather in|crypto price|bitcoin price|who is the president of|tell me a joke|translate to (french|spanish|japanese|german))\b/i;
+  const isAboutLex = q.includes('lex') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || q.includes('dispenser') || q.includes('leavian') || q.includes('photo') || q.includes('cjc') || q.includes('matondo');
+  
+  if (!isAboutLex && offTopicPattern.test(q)) {
+    return "I am Lex Matondo's dedicated portfolio assistant. I can only answer questions specifically about Lex, his software engineering projects (ChemLab, COE LGU, CadetCoach), tech stack, and photography work.";
+  }
+
+  return null;
+}
+
 export default async function handler(req, res) {
   // Clean Universal CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -204,6 +231,12 @@ export default async function handler(req, res) {
 
     // Payload sanity check & truncation to prevent token drain
     lastUserMessage = lastUserMessage.trim().slice(0, MAX_INPUT_LENGTH);
+
+    // 2. Proactive Fast Guardrail: Reject vulgar & off-topic questions immediately (0 tokens)
+    const guardrailReply = evaluateGuardrail(lastUserMessage);
+    if (guardrailReply) {
+      return res.status(200).json({ reply: guardrailReply });
+    }
 
     const nvidiaKey = apiKey || req.headers['x-api-key'] || process.env.NVIDIA_API_KEY || process.env.DEEPSEEK_API_KEY;
     const nvidiaModel = process.env.NVIDIA_MODEL || 'deepseek-ai/deepseek-v3';

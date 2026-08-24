@@ -992,6 +992,111 @@ body[data-mode="create"] .view-tech {
   margin-top: 0.2rem;
 }
 
+/* Photo Archive Header CTA */
+.photo-archive-cta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: all 200ms ease;
+  margin-left: auto;
+}
+
+.photo-archive-cta:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Full Gallery Action Banner */
+.gallery-open-banner {
+  margin-top: 3.5rem;
+  padding: 2.25rem 2.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  transition: border-color 250ms ease;
+}
+
+.gallery-open-banner:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.banner-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.banner-heading {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  max-width: 600px;
+}
+
+.banner-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: var(--text-primary);
+  color: #050505;
+  padding: 0.75rem 1.35rem;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  transition: all 200ms ease;
+}
+
+.banner-link:hover {
+  opacity: 0.9;
+  transform: translateX(3px);
+}
+
+@media (max-width: 860px) {
+  .photo-archive-cta {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .gallery-open-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem;
+    gap: 1.25rem;
+  }
+
+  .banner-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    HOW I WORK / PHILOSOPHY
 --------------------------------------------------------------------------- */

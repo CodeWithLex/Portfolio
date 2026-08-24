@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lex Matondo · Visual Archive &amp; Shoot Gallery</title>
+  <meta name="description"
+    content="Curated photography collections, client shoots, documentary frames, and optical metadata by Lex Matondo / Leavian Visuals.">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-size='14' font-weight='600' fill='%23F2F2F0' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="gallery.css">
+</head>
+
+<body class="gallery-body">
+
+  <!-- Ambient Backdrop -->
+  <div class="gallery-backdrop" aria-hidden="true"></div>
+
+  <!-- Header Navigation -->
+  <header class="gallery-header">
+    <div class="gallery-nav-inner">
+      <a href="portfolio.html?mode=create" class="gallery-back-link" aria-label="Return to portfolio">
+        <span class="back-arrow">←</span>
+        <span class="back-text">BACK TO PORTFOLIO</span>
+      </a>
+
+      <a href="index.html" class="gallery-brand" aria-label="Lex Matondo Home">
+        <span class="brand-name">LEX MATONDO</span>
+        <span class="brand-sub">VISUAL ARCHIVE</span>
+      </a>
+
+      <div class="gallery-nav-actions">
+        <a href="portfolio.html?mode=code" class="nav-switch-btn" aria-label="Switch to Tech Mode">
+          <span>TECH</span> ↗
+        </a>
+        <a href="mailto:lexmatondo@g.cjc.edu.ph" class="gallery-contact-btn">
+          <span>CONTACT</span> →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="gallery-main" id="gallery-root">
+
+    <!-- Editorial Gallery Hero -->
+    <section class="gallery-hero">
+      <div class="gallery-hero-inner">
+        <span class="gallery-kicker">LEAVIAN VISUALS · COMPLETE ARCHIVE</span>
+        <h1 class="gallery-title">
+          Stories in Stillness.<br>
+          Curated Shoot Collections.
+        </h1>
+        <p class="gallery-subtitle">
+          Explore complete client sessions, sacred ceremonies, and optical field studies. Open any shoot folder to inspect full-resolution photographs alongside camera settings, exposure data, and color science notes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Folder Filter Bar -->
+    <section class="gallery-controls-section" aria-label="Filter shoot collections">
+      <div class="gallery-controls-inner">
+        <div class="filter-pills" role="tablist" aria-label="Shoot category filters">
+          <button type="button" class="gal-filter-btn is-active" data-category="all" role="tab" aria-selected="true">
+            <span>ALL COLLECTIONS</span>
+            <span class="filter-count" id="count-all">9</span>
+          </button>
+          <button type="button" class="gal-filter-btn" data-category="portraits" role="tab" aria-selected="false">
+            <span>PORTRAITS</span>
+            <span class="filter-count" id="count-portraits">3</span>
+          </button>
+          <button type="button" class="gal-filter-btn" data-category="wedding" role="tab" aria-selected="false">
+            <span>WEDDING</span>
+            <span class="filter-count" id="count-wedding">1</span>
+          </button>
+          <button type="button" class="gal-filter-btn" data-category="christening" role="tab" aria-selected="false">
+            <span>CHRISTENING</span>
+            <span class="filter-count" id="count-christening">1</span>
+          </button>
+          <button type="button" class="gal-filter-btn" data-category="documentary" role="tab" aria-selected="false">
+            <span>DOCUMENTARY</span>
+            <span class="filter-count" id="count-documentary">1</span>
+          </button>
+          <button type="button" class="gal-filter-btn" data-category="journalism" role="tab" aria-selected="false">
+            <span>JOURNALISM &amp; SPORTS</span>
+            <span class="filter-count" id="count-journalism">2</span>
+          </button>
+          <button type="button" class="gal-filter-btn" data-category="editorial" role="tab" aria-selected="false">
+            <span>COLOR &amp; OPTICS</span>
+            <span class="filter-count" id="count-editorial">1</span>
+          </button>
+        </div>
+
+        <div class="gallery-stats" aria-live="polite">
+          <span class="stats-label" id="gallery-status-label">SHOWING 9 COLLECTIONS · 48 PHOTOGRAPHS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Folder Cards Grid View -->
+    <section class="gallery-folders-section" id="folders-view" aria-label="Photography Shoot Folders">
+      <div class="folders-grid" id="folders-grid">
+        <!-- Rendered dynamically by gallery.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= SHOOT INSPECTOR MODAL / EXPANDED STAGE ================= -->
+  <div class="shoot-inspector" id="shoot-inspector" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-label="Shoot Photograph Inspector">
+
+    <!-- Inspector Top Navigation Bar -->
+    <div class="inspector-header">
+      <button type="button" class="inspector-back-btn" id="inspector-close-btn" aria-label="Return to all collections">
+        <span class="arrow">←</span>
+        <span class="label">ALL COLLECTIONS</span>
+      </button>
+
+      <div class="inspector-shoot-info">
+        <span class="inspector-badge" id="inspector-shoot-category">PORTRAITS</span>
+        <h2 class="inspector-shoot-title" id="inspector-shoot-title">19th Birthday Editorial Shoot</h2>
+      </div>
+
+      <div class="inspector-header-right">
+        <span class="photo-counter" id="inspector-photo-counter">01 / 05</span>
+        <button type="button" class="inspector-share-btn" id="inspector-share-btn" title="Copy link to this shoot"
+          aria-label="Share shoot link">
+          <span>SHARE</span> ↗
+        </button>
+        <button type="button" class="inspector-dismiss-btn" id="inspector-dismiss-btn" aria-label="Close inspector">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Inspector Main Stage (Two-Column Layout) -->
+    <div class="inspector-stage">
+
+      <!-- Left Column: Photo Viewport & Filmstrip -->
+      <div class="inspector-viewport-col">
+        <div class="photo-display-stage" id="photo-display-stage">
+          <div class="stage-shutter-blade" id="stage-shutter" aria-hidden="true"></div>
+
+          <!-- Main Active Image -->
+          <div class="photo-frame" id="photo-frame">
+            <img class="active-photo" id="active-photo-img" src="" alt="Active Photograph" loading="eager"
+              decoding="async">
+          </div>
+
+          <!-- Floating Navigation Controls -->
+          <button type="button" class="stage-nav-btn stage-prev" id="stage-prev-btn" aria-label="Previous photograph">
+            <span>←</span>
+          </button>
+          <button type="button" class="stage-nav-btn stage-next" id="stage-next-btn" aria-label="Next photograph">
+            <span>→</span>
+          </button>
+
+          <!-- Toggle Details pill on Mobile -->
+          <button type="button" class="mobile-details-toggle" id="mobile-details-toggle" aria-expanded="false"
+            aria-controls="inspector-details-col">
+            <span class="toggle-icon">ℹ</span>
+            <span class="toggle-text">SHOW SPECS &amp; DETAILS</span>
+          </button>
+        </div>
+
+        <!-- Thumbnail Filmstrip Strip -->
+        <div class="inspector-filmstrip-bar">
+          <div class="filmstrip-container" id="filmstrip-container" role="tablist"
+            aria-label="Collection photo thumbnails">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Metadata & Technical Details Panel -->
+      <aside class="inspector-details-col" id="inspector-details-col">
+        <div class="details-panel-inner">
+
+          <!-- Mobile Drawer Header -->
+          <div class="drawer-header-mobile">
+            <span class="drawer-drag-handle" aria-hidden="true"></span>
+            <button type="button" class="drawer-close-btn" id="drawer-close-btn" aria-label="Close details panel">
+              <span>✕ CLOSE DETAILS</span>
+            </button>
+          </div>
+
+          <!-- Section 1: Photograph Title & Narrative -->
+          <div class="details-block">
+            <span class="block-kicker" id="detail-photo-index">FRAME 01</span>
+            <h3 class="detail-photo-title" id="detail-photo-title">Sunlit Portrait in the Meadow</h3>
+            <p class="detail-photo-caption" id="detail-photo-caption">
+              Low-angle framing accentuating the golden sunlight filtering through the background foliage.
+            </p>
+          </div>
+
+          <!-- Section 2: Technical EXIF & Optics -->
+          <div class="details-block">
+            <span class="block-kicker">OPTICAL &amp; EXPOSURE METADATA</span>
+            <div class="meta-grid">
+              <div class="spec-item">
+                <span class="spec-label">CAMERA BODY</span>
+                <span class="spec-val" id="detail-camera">Nikon Full-Frame</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">OPTICS / FOCAL</span>
+                <span class="spec-val" id="detail-lens">55mm ƒ/1.8</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">EXPOSURE</span>
+                <span class="spec-val" id="detail-exposure">ƒ/1.8 · 1/800s · ISO 100</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">LIGHTING SETUP</span>
+                <span class="spec-val" id="detail-lighting">Direct Golden Hour Sunlight</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Color Science & Post-Production -->
+          <div class="details-block">
+            <span class="block-kicker">COLOR SCIENCE &amp; POST</span>
+            <div class="meta-grid">
+              <div class="spec-item full-width">
+                <span class="spec-label">COLOR PROFILE</span>
+                <span class="spec-val" id="detail-color">Warm Tonal Grade · Soft Highlights</span>
+              </div>
+              <div class="spec-item full-width">
+                <span class="spec-label">PRIMARY POST-PRODUCTION</span>
+                <span class="spec-val" id="detail-post-science">Adobe Lightroom Classic · Warm Editorial</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Shoot Context & Location -->
+          <div class="details-block">
+            <span class="block-kicker">COLLECTION OVERVIEW</span>
+            <div class="meta-grid">
+              <div class="spec-item">
+                <span class="spec-label">CLIENT / PROJECT</span>
+                <span class="spec-val" id="detail-client">Bebe's 19th Birthday</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">LOCATION</span>
+                <span class="spec-val" id="detail-location">Davao Region, Philippines</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">DATE ARCHIVED</span>
+                <span class="spec-val" id="detail-date">2026</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">TOTAL FRAMES</span>
+                <span class="spec-val" id="detail-count">5 Photographs</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Client Action / Inquire -->
+          <div class="details-action-block">
+            <a href="mailto:lexmatondo@g.cjc.edu.ph" class="inquire-shoot-btn" id="detail-inquire-link">
+              <span>INQUIRE ABOUT SIMILAR SHOOT</span>
+              <span class="arrow">→</span>
+            </a>
+            <span class="inquire-subtext">Direct bookings for portrait sessions, weddings, and documentary events.</span>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Shared Footer -->
+  <footer class="gallery-footer">
+    <div class="footer-cta">
+      <h2 class="cta-headline">HAVE A STORY TO DOCUMENT?</h2>
+      <p class="cta-prompt">Available for portrait sessions, weddings, ceremonies, and documentary assignments across Mindanao.</p>
+      <a class="cta-email" href="mailto:lexmatondo@g.cjc.edu.ph">lexmatondo@g.cjc.edu.ph</a>
+    </div>
+
+    <div class="footer-bar">
+      <div class="footer-links">
+        <a href="portfolio.html?mode=create">Portfolio</a>
+        <a href="https://github.com/CodeWithLex" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.facebook.com/Lowbudphotography27/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.tiktok.com/@edrickvisuals.mov" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@lexmatondo27" target="_blank" rel="noopener">YouTube</a>
+        <a href="resume.html">Resume</a>
+      </div>
+      <span class="footer-copy">© 2026 Lex Matondo · Leavian Visuals</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="gallery-data.js"></script>
+  <script src="gallery.js"></script>
+</body>
+
+</html>

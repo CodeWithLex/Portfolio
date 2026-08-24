@@ -5,8 +5,8 @@
 
 .lex-chat-widget {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 75px;
+  right: 24px;
   z-index: 9999;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #f2f2f0;
@@ -439,8 +439,8 @@
    ========================================================================== */
 @media (max-width: 640px) {
   .lex-chat-widget {
-    bottom: 16px;
-    right: 16px;
+    bottom: 75px;
+    right: 18px;
   }
 
   /* Compact round floating trigger button on mobile */

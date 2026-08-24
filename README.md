@@ -19,7 +19,7 @@ Deployed on Vercel (static, no build step). To ship updates: commit + push to Gi
 
 ## Make it yours
 
-Everything personal is marked with `✏️` comments in `index.html`; on `portfolio.html` edit directly:
+Everything personal is marked with `EDIT` comments in `index.html`; on `portfolio.html` edit directly:
 
 | What | Where |
 |---|---|

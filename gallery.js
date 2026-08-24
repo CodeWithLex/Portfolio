@@ -313,7 +313,7 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(url).then(() => {
             const originalText = inspectorShareBtn.innerHTML;
-            inspectorShareBtn.innerHTML = '<span>COPIED!</span> ✓';
+            inspectorShareBtn.innerHTML = '<span>COPIED</span>';
             setTimeout(() => {
               inspectorShareBtn.innerHTML = originalText;
             }, 2000);

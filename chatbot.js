@@ -265,9 +265,9 @@
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       // Links [text](url or mailto)
       .replace(/\[([^\]]+)\]\(((?:https?:\/\/|mailto:)[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      // Auto-link specific Lex emails with prefilled mailto prompts
-      .replace(/(^|\s|<strong>)(codewithlex27@gmail\.com)(<\/strong>|\s|[.,]|$)/gi, '$1<a href="mailto:codewithlex27@gmail.com?subject=Project%20Inquiry%20%2F%20Collaboration%20%E2%80%94%20Lex%20Matondo&body=Hi%20Lex%2C%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0A%0A">$2</a>$3')
-      .replace(/(^|\s|<strong>)(lexmatondo@g\.cjc\.edu\.ph)(<\/strong>|\s|[.,]|$)/gi, '$1<a href="mailto:lexmatondo@g.cjc.edu.ph?subject=Academic%20%2F%20Institutional%20Inquiry%20%E2%80%94%20Cor%20Jesu%20College&body=Hi%20Lex%2C%0A%0AI%20am%20reaching%20out%20regarding%3A%0A%0A">$2</a>$3')
+      // Auto-link specific Lex emails with direct web Gmail composer prompts
+      .replace(/(^|\s|<strong>)(codewithlex27@gmail\.com)(<\/strong>|\s|[.,]|$)/gi, '$1<a href="https://mail.google.com/mail/?view=cm&fs=1&to=codewithlex27@gmail.com&su=Project%20Inquiry%20%2F%20Collaboration%20%E2%80%94%20Lex%20Matondo&body=Hi%20Lex%2C%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0A%0A" target="_blank" rel="noopener noreferrer">$2</a>$3')
+      .replace(/(^|\s|<strong>)(lexmatondo@g\.cjc\.edu\.ph)(<\/strong>|\s|[.,]|$)/gi, '$1<a href="https://mail.google.com/mail/?view=cm&fs=1&to=lexmatondo@g.cjc.edu.ph&su=Academic%20%2F%20Institutional%20Inquiry%20%E2%80%94%20Cor%20Jesu%20College&body=Hi%20Lex%2C%0A%0AI%20am%20reaching%20out%20regarding%3A%0A%0A" target="_blank" rel="noopener noreferrer">$2</a>$3')
       // Direct URLs
       .replace(/(^|[^"'])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>')
       // Code `text`

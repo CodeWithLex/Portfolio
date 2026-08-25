@@ -18,12 +18,12 @@
       "• **ChemLab System** (https://chemlab-system.me): Chemistry lab scheduling and apparatus management portal.",
       "• **COE LGU System** (https://www.coelgu-system.engineer): College of Engineering budget transparency and student council financial portal.",
       "• **PMAEE CadetCoach** (https://reviewer-coach.onrender.com): AI prep portal for Philippine Military Academy entrance exams.",
-      "• **Content-Creation-Manager** & **eBarangay-Portal** on GitHub (https://github.com/CodeWithLex).",
+      "• **Content-Creation-Manager** & **eBarangay-Portal** on GitHub (https://github.com/focalstack-lex).",
       "• **Healthcare Smart Dispenser**: Arduino-driven automated medicine dispenser with Java Swing GUI."
     ],
     skills: "Java, JavaScript, TypeScript, Kotlin, SQL, HTML5, CSS3, Python, Node.js, Express, Supabase, PostgreSQL, MySQL, Java Swing, JavaFX, Android Jetpack Compose, Git, Figma, Photoshop, Lightroom, After Effects.",
-    photography: "Event & portrait photographer under **Focal Stack (@focalstack.lex)** (portraits, weddings, debuts, christenings, and Cor Jesu College of Engineering & student publication events). Follow on TikTok (@focalstack.lex) or Facebook (Lowbudphotography27).",
-    contact: "• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
+    photography: "Event & portrait photographer under **Focal Stack (@focalstack.lex)** (portraits, weddings, debuts, christenings, and Cor Jesu College of Engineering & student publication events). Follow on TikTok (@focalstack.lex) or Facebook (focalstack.lex).",
+    contact: "• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/focalstack-lex\n• **TikTok:** https://www.tiktok.com/@focalstack.lex\n• **Facebook:** https://www.facebook.com/focalstack.lex/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
   };
 
   const SUGGESTIONS = [
@@ -385,12 +385,12 @@
 
     // Contact & Email Inquiries
     if (q === 'contact' || q === 'how can i contact lex?' || q.includes('how to contact') || q.includes('email') || q.includes('gmail') || q.includes('reach lex') || q.includes('hire lex')) {
-      return `Here are Lex's direct contact channels:\n\n• **Business Email:** codewithlex27@gmail.com\n• **Academic Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography:** https://www.facebook.com/Lowbudphotography27/`;
+      return `Here are Lex's direct contact channels:\n\n• **Business Email:** codewithlex27@gmail.com\n• **Academic Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/focalstack-lex\n• **Photography:** https://www.facebook.com/focalstack.lex/`;
     }
 
     // Social Links
     if (q === 'links' || q.includes('links') || q.includes('social') || q.includes('github') || q.includes('tiktok') || q.includes('youtube')) {
-      return `Lex's verified links:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **Photography Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@edrickvisuals.mov\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab:** https://chemlab-system.me\n• **COE LGU:** https://www.coelgu-system.engineer\n• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph`;
+      return `Lex's verified links:\n\n• **GitHub:** https://github.com/focalstack-lex\n• **Photography Facebook:** https://www.facebook.com/focalstack.lex/\n• **TikTok (Video/Creative):** https://www.tiktok.com/@focalstack.lex\n• **YouTube:** https://www.youtube.com/@lexmatondo27\n• **ChemLab:** https://chemlab-system.me\n• **COE LGU:** https://www.coelgu-system.engineer\n• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph`;
     }
 
     // Tech Stack & Skills
@@ -400,7 +400,7 @@
 
     // Photography
     if (q === 'tell me about his photography' || q.includes('photography') || q.includes('focal') || q.includes('leavian') || q.includes('photoshoot') || q.includes('camera') || q.includes('visuals')) {
-      return `${LOCAL_KNOWLEDGE.photography}\n\n• Facebook: https://www.facebook.com/Lowbudphotography27/\n• TikTok: https://www.tiktok.com/@edrickvisuals.mov`;
+      return `${LOCAL_KNOWLEDGE.photography}\n\n• Facebook: https://www.facebook.com/focalstack.lex/\n• TikTok: https://www.tiktok.com/@focalstack.lex`;
     }
 
     // Competence, Skill & "How Good is Lex" Inquiries

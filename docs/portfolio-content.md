@@ -17,9 +17,9 @@ Verified facts for the accuracy pass. Everything implemented on the site must tr
 
 | Handle | URL | Role |
 |---|---|---|
-| CodeWithLex | https://github.com/CodeWithLex | Dev identity. 15 public repos. |
-| @edrickvisuals.mov | https://www.tiktok.com/@edrickvisuals.mov | TikTok — creative/video industry (user-provided) |
-| Focal Stack | https://www.facebook.com/Lowbudphotography27/ | Facebook photography page (@focalstack.lex) |
+| focalstack-lex | https://github.com/focalstack-lex | Dev identity. 15 public repos. |
+| @focalstack.lex | https://www.tiktok.com/@focalstack.lex | TikTok — creative/video & photography |
+| Focal Stack | https://www.facebook.com/focalstack.lex/ | Facebook photography page (@focalstack.lex) |
 | @makinglifecinematic | https://www.tiktok.com/@makinglifecinematic | Personal TikTok (found on GitHub profile) — may be redundant with edrickvisuals |
 | @lexmatondo27 | https://www.youtube.com/@lexmatondo27 | YouTube (found on GitHub profile) |
 | chemlab-system.me | http://chemlab-system.me/ | Custom domain wired to CodeWithLex.github.io — currently **503/down** |

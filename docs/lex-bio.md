@@ -107,8 +107,8 @@ This document serves as the authoritative source of truth for the AI portfolio a
 ## 5. Photography & Creative Portfolio (Focal Stack)
 
 - **Brand:** **Focal Stack (@focalstack.lex)**
-- **Facebook Page:** https://www.facebook.com/Lowbudphotography27/
-- **TikTok Creative/Video:** https://www.tiktok.com/@edrickvisuals.mov
+- **Facebook Page:** https://www.facebook.com/focalstack.lex/
+- **TikTok Creative/Video:** https://www.tiktok.com/@focalstack.lex
 - **YouTube:** https://www.youtube.com/@lexmatondo27
 - **Institutional Roles:**
   - Staff Photojournalist for the student publication (*The Heartbeat*).
@@ -127,9 +127,9 @@ This document serves as the authoritative source of truth for the AI portfolio a
 | Platform | URL | Purpose |
 |---|---|---|
 | **Portfolio** | https://lex-portfolio-swart.vercel.app / https://codewithlex.site | Main web portfolio |
-| **GitHub** | https://github.com/CodeWithLex | 15+ repositories & open-source code |
-| **Focal Stack (FB)** | https://www.facebook.com/Lowbudphotography27/ | Photography & developer client archive |
-| **TikTok (Video/Creative)** | https://www.tiktok.com/@edrickvisuals.mov | Cinematography & video edits |
+| **GitHub** | https://github.com/focalstack-lex | 15+ repositories & open-source code |
+| **Focal Stack (FB)** | https://www.facebook.com/focalstack.lex/ | Photography & developer client archive |
+| **TikTok (Video/Creative)** | https://www.tiktok.com/@focalstack.lex | Cinematography & video edits |
 | **YouTube** | https://www.youtube.com/@lexmatondo27 | Video projects & tech explorations |
 
 ---

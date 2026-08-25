@@ -71,6 +71,25 @@ a {
   background: var(--bg-primary);
 }
 
+.brand-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.brand-logo-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.brand-with-logo:hover .brand-logo-img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.45));
+}
+
 .header-name {
   font-size: 13px;
   font-weight: 700;

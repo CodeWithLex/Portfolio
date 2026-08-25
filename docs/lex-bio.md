@@ -104,9 +104,9 @@ This document serves as the authoritative source of truth for the AI portfolio a
 
 ---
 
-## 5. Photography & Creative Portfolio (Leavian Visuals)
+## 5. Photography & Creative Portfolio (Focal Stack)
 
-- **Brand:** **Leavian Visuals**
+- **Brand:** **Focal Stack (@focalstack.lex)**
 - **Facebook Page:** https://www.facebook.com/Lowbudphotography27/
 - **TikTok Creative/Video:** https://www.tiktok.com/@edrickvisuals.mov
 - **YouTube:** https://www.youtube.com/@lexmatondo27
@@ -126,9 +126,9 @@ This document serves as the authoritative source of truth for the AI portfolio a
 
 | Platform | URL | Purpose |
 |---|---|---|
-| **Portfolio** | https://lex-portfolio-swart.vercel.app | Main web portfolio |
+| **Portfolio** | https://lex-portfolio-swart.vercel.app / https://codewithlex.site | Main web portfolio |
 | **GitHub** | https://github.com/CodeWithLex | 15+ repositories & open-source code |
-| **Leavian Visuals (FB)** | https://www.facebook.com/Lowbudphotography27/ | Photography client archive |
+| **Focal Stack (FB)** | https://www.facebook.com/Lowbudphotography27/ | Photography & developer client archive |
 | **TikTok (Video/Creative)** | https://www.tiktok.com/@edrickvisuals.mov | Cinematography & video edits |
 | **YouTube** | https://www.youtube.com/@lexmatondo27 | Video projects & tech explorations |
 

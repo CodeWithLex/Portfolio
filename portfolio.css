@@ -82,16 +82,63 @@ button {
 }
 
 .site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-primary);
+  text-decoration: none;
   transition: opacity 200ms ease;
 }
 
+.brand-logo-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+  transition: transform 0.25s var(--ease-smooth), filter 0.25s var(--ease-smooth);
+}
+
+.site-brand:hover .brand-logo-img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.45));
+}
+
 .site-brand:hover {
-  opacity: 0.7;
+  opacity: 0.85;
+}
+
+.focal-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 4px 10px 4px 6px;
+  margin-bottom: 0.85rem;
+  width: fit-content;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.focal-badge-logo {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.focal-badge-text {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--text-primary);
+  text-transform: uppercase;
 }
 
 .mode-switch-group {

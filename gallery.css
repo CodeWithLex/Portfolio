@@ -78,24 +78,45 @@ html.has-gallery-entrance .discipline-wipe-layer {
 
 .gallery-brand {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 0.75rem;
   text-decoration: none;
 }
 
+.gallery-brand .brand-logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.gallery-brand:hover .brand-logo-img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.gallery-brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .brand-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--text-primary, #f2f2f0);
+  line-height: 1.2;
 }
 
 .brand-sub {
-  font-family: var(--font-mono, monospace);
-  font-size: 9px;
-  letter-spacing: 0.22em;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   color: var(--text-muted, #888888);
-  margin-top: 1px;
+  line-height: 1.2;
 }
 
 .gallery-nav-actions {

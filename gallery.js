@@ -383,7 +383,7 @@
     if (detailCount) detailCount.textContent = `${total} Photographs`;
 
     if (detailInquireLink) {
-      detailInquireLink.href = `https://mail.google.com/mail/?view=cm&fs=1&to=codewithlex27@gmail.com&su=${encodeURIComponent('Inquiry: ' + activeShoot.title + ' — Leavian Visuals')}&body=${encodeURIComponent('Hi Lex,\n\nI was browsing your visual archive and would love to inquire about booking a session similar to ' + activeShoot.title + '.\n\nThank you!')}`;
+      detailInquireLink.href = `https://mail.google.com/mail/?view=cm&fs=1&to=codewithlex27@gmail.com&su=${encodeURIComponent('Inquiry: ' + activeShoot.title + ' — Focal Stack')}&body=${encodeURIComponent('Hi Lex,\n\nI was browsing your visual archive and would love to inquire about booking a session similar to ' + activeShoot.title + '.\n\nThank you!')}`;
       detailInquireLink.target = '_blank';
       detailInquireLink.rel = 'noopener noreferrer';
     }

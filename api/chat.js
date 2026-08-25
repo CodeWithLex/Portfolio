@@ -43,14 +43,14 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
      - Automated medicine scheduler and dispenser built with Java Swing and Arduino hardware.
 
 • Photography & Creative Work:
-  - Brand: Leavian Visuals (Facebook: https://www.facebook.com/Lowbudphotography27/)
+  - Brand: Focal Stack (Handle: @focalstack.lex, Facebook: https://www.facebook.com/Lowbudphotography27/)
   - TikTok: @edrickvisuals.mov (https://www.tiktok.com/@edrickvisuals.mov)
   - YouTube: @lexmatondo27 (https://www.youtube.com/@lexmatondo27)
   - Roles: Staff Photojournalist for "The Heartbeat" student publication and official event photographer for Cor Jesu College of Engineering.
   - Specialties: Editorial portraits, weddings, debut/18th birthday sessions, christenings, and community documentary storytelling.
 
 • Official Links & Channels:
-  - Portfolio: https://lex-portfolio-swart.vercel.app
+  - Portfolio: https://lex-portfolio-swart.vercel.app / https://codewithlex.site
   - GitHub: https://github.com/CodeWithLex
   - Photography Facebook: https://www.facebook.com/Lowbudphotography27/
   - TikTok (Video/Creative): https://www.tiktok.com/@edrickvisuals.mov
@@ -352,16 +352,16 @@ export default async function handler(req, res) {
 
     // 3. Fallback response if neither key is set in environment yet
     const query = lastUserMessage.toLowerCase();
-    let fallbackReply = "I am Lex Matondo's portfolio assistant! I can tell you about his projects (ChemLab System, COE LGU System, PMAEE CadetCoach), his tech stack (Java, SQL, JS, Kotlin), education at Cor Jesu College, or his photography work at Leavian Visuals.";
+    let fallbackReply = "I am Lex Matondo's portfolio assistant! I can tell you about his projects (ChemLab System, COE LGU System, PMAEE CadetCoach), his tech stack (Java, SQL, JS, Kotlin), education at Cor Jesu College, or his photography work at Focal Stack (@focalstack.lex).";
 
     if (query.includes('project') || query.includes('build') || query.includes('work')) {
       fallbackReply = "Lex has built and deployed several major systems:\n\n• **ChemLab System** (https://chemlab-system.me): Chemistry lab scheduling and apparatus management.\n• **COE LGU System** (https://www.coelgu-system.engineer): College of Engineering financial transparency portal with grade tracking.\n• **PMAEE CadetCoach** (https://reviewer-coach.onrender.com): AI prep portal for PMA entrance exams.\n• **Content-Creation-Manager** & **eBarangay-Portal** on GitHub (https://github.com/CodeWithLex).";
     } else if (query.includes('stack') || query.includes('language') || query.includes('tech') || query.includes('skill')) {
       fallbackReply = "Lex's core tech stack includes:\n\n• **Languages:** Java, JavaScript, Kotlin, SQL, HTML/CSS, Python\n• **Frameworks & Databases:** Node.js, Express, Supabase, PostgreSQL, MySQL, Java Swing, JavaFX, Android Jetpack Compose\n• **Tools:** Git/GitHub, Figma, Android Studio, VS Code, Photoshop, After Effects";
-    } else if (query.includes('photo') || query.includes('camera') || query.includes('picture') || query.includes('visual')) {
-      fallbackReply = "Lex is also an event and portrait photographer under **Leavian Visuals**! He covers weddings, portraits, and christenings, and shoots for his college engineering events and student publication. Check out his work on TikTok (@edrickvisuals.mov) or Facebook (Lowbudphotography27).";
+    } else if (query.includes('photo') || query.includes('camera') || query.includes('picture') || query.includes('visual') || query.includes('focal')) {
+      fallbackReply = "Lex is also an event and portrait photographer under **Focal Stack (@focalstack.lex)**! He covers weddings, portraits, and christenings, and shoots for his college engineering events and student publication. Check out his work on TikTok (@edrickvisuals.mov) or Facebook (Lowbudphotography27).";
     } else if (query.includes('who') || query.includes('about') || query.includes('lex') || query.includes('school') || query.includes('college')) {
-      fallbackReply = "Lex (Lex Edrick Asherjesse C. Matondo) is a Computer Engineering (BSCPE) student at Cor Jesu College in Digos City, Philippines. His philosophy is **CODE × CREATE** — building robust software while pursuing visual storytelling through photography.";
+      fallbackReply = "Lex (Lex Edrick Asherjesse C. Matondo) is a Computer Engineering (BSCPE) student at Cor Jesu College in Digos City, Philippines. His philosophy is **CODE × CREATE** — building robust software while pursuing visual storytelling through photography at Focal Stack.";
     } else if (query.includes('contact') || query.includes('email') || query.includes('social') || query.includes('github')) {
       fallbackReply = "You can connect with Lex on:\n\n• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Photography FB:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27";
     } else if (!query.includes('lex') && (query.includes('recipe') || query.includes('weather') || query.includes('poem') || query.includes('joke') || query.includes('math') || query.includes('python code'))) {

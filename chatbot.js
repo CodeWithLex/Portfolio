@@ -22,7 +22,7 @@
       "• **Healthcare Smart Dispenser**: Arduino-driven automated medicine dispenser with Java Swing GUI."
     ],
     skills: "Java, JavaScript, TypeScript, Kotlin, SQL, HTML5, CSS3, Python, Node.js, Express, Supabase, PostgreSQL, MySQL, Java Swing, JavaFX, Android Jetpack Compose, Git, Figma, Photoshop, Lightroom, After Effects.",
-    photography: "Event & portrait photographer under **Leavian Visuals** (portraits, weddings, debuts, christenings, and Cor Jesu College of Engineering & student publication events). Follow on TikTok (@edrickvisuals.mov) or Facebook (Lowbudphotography27).",
+    photography: "Event & portrait photographer under **Focal Stack (@focalstack.lex)** (portraits, weddings, debuts, christenings, and Cor Jesu College of Engineering & student publication events). Follow on TikTok (@focalstack.lex) or Facebook (Lowbudphotography27).",
     contact: "• **Business Email:** codewithlex27@gmail.com\n• **School Email (CJC):** lexmatondo@g.cjc.edu.ph\n• **GitHub:** https://github.com/CodeWithLex\n• **TikTok:** https://www.tiktok.com/@edrickvisuals.mov\n• **Facebook:** https://www.facebook.com/Lowbudphotography27/\n• **YouTube:** https://www.youtube.com/@lexmatondo27"
   };
 
@@ -62,7 +62,7 @@
         <div class="lex-sheet-handle" aria-hidden="true"></div>
         <div class="lex-chat-header">
           <div class="lex-chat-title-group">
-            <div class="lex-chat-avatar">LM</div>
+            <div class="lex-chat-avatar"><img src="assets/img/focal-stack-logo.png" alt="Focal Stack" class="lex-avatar-img"></div>
             <div class="lex-chat-header-info">
               <div class="lex-chat-name">
                 Talk with Lex's AI Assistant 
@@ -114,9 +114,7 @@
 
       <button class="lex-chat-trigger" id="lexChatTrigger" aria-label="Open AI chat assistant">
         <span class="lex-trigger-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
+          <img src="assets/img/focal-stack-logo.png" alt="Focal Stack" class="lex-trigger-logo">
         </span>
         <span class="lex-trigger-label">Chat with Lex</span>
         <span class="lex-trigger-badge"></span>
@@ -234,7 +232,7 @@
   function renderWelcomeMessage() {
     appendMessage(
       'assistant',
-      "Hey! I'm Lex's AI portfolio guide. Ask me anything about his software projects, tech stack, photography work at Leavian Visuals, or background!"
+      "Hey! I'm Lex's AI portfolio guide. Ask me anything about his software projects, tech stack, photography at Focal Stack (@focalstack.lex), or background!"
     );
   }
 
@@ -245,10 +243,12 @@
     container.style.display = 'flex';
     SUGGESTIONS.forEach((prompt) => {
       const chip = document.createElement('button');
-      chip.className = 'lex-chip';
       chip.type = 'button';
+      chip.className = 'lex-chip';
       chip.textContent = prompt;
       chip.addEventListener('click', () => {
+        const input = document.getElementById('lexChatInput');
+        if (input) input.value = prompt;
         sendMessage(prompt);
       });
       container.appendChild(chip);
@@ -342,7 +342,7 @@
 
     // 0. Proactive Guardrail: Obvious Off-topic queries (Homework, recipes, weather, general essays)
     const offTopicPattern = /\b(calculate \d+|solve (the equation|this math|\d+)|write (an? essay|a poem|a song|a story about|python script for)|recipe for|how to cook|weather in|crypto price|bitcoin price|who is the president of|tell me a joke|translate to (french|spanish|japanese|german))\b/i;
-    const isAboutLex = q.includes('lex') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || q.includes('dispenser') || q.includes('leavian') || q.includes('photo') || q.includes('cjc') || q.includes('matondo');
+    const isAboutLex = q.includes('lex') || q.includes('chemlab') || q.includes('lgu') || q.includes('cadet') || q.includes('dispenser') || q.includes('leavian') || q.includes('focal') || q.includes('photo') || q.includes('cjc') || q.includes('matondo');
     
     if (!isAboutLex && offTopicPattern.test(q)) {
       return "I am Lex Matondo's dedicated portfolio assistant. I can only answer questions specifically about Lex, his software engineering projects (ChemLab, COE LGU, CadetCoach), tech stack, and photography work.";
@@ -350,11 +350,11 @@
 
     // Greetings
     if (/^(hi|hello|hey|kamusta|musta|hi po|hello po|good morning|good afternoon|good evening|yo)\b/.test(q) || q === 'hi' || q === 'hello') {
-      return "Hello! I'm Lex Matondo's AI portfolio guide. Ask me anything about his software engineering projects, tech stack, education at Cor Jesu College, or photography at Leavian Visuals.";
+      return "Hello! I'm Lex Matondo's AI portfolio guide. Ask me anything about his software engineering projects, tech stack, education at Cor Jesu College, or photography at Focal Stack (@focalstack.lex).";
     }
 
     if (q === 'what' || q.includes('what can you do') || q.includes('options') || q.includes('commands')) {
-      return "You can ask me about:\n\n• **Projects:** ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal\n• **Tech Stack:** Java, SQL, JavaScript, Kotlin, Android, Node.js\n• **Photography:** Leavian Visuals portrait/event work & student journalism\n• **Contact & Links:** Business & academic emails, GitHub, and socials";
+      return "You can ask me about:\n\n• **Projects:** ChemLab System, COE LGU System, PMAEE CadetCoach, eBarangay-Portal\n• **Tech Stack:** Java, SQL, JavaScript, Kotlin, Android, Node.js\n• **Photography:** Focal Stack portrait/event work & student journalism\n• **Contact & Links:** Business & academic emails, GitHub, and socials";
     }
 
     // Direct Project Details
@@ -399,13 +399,13 @@
     }
 
     // Photography
-    if (q === 'tell me about his photography' || q.includes('photography') || q.includes('leavian') || q.includes('photoshoot') || q.includes('camera') || q.includes('visuals')) {
+    if (q === 'tell me about his photography' || q.includes('photography') || q.includes('focal') || q.includes('leavian') || q.includes('photoshoot') || q.includes('camera') || q.includes('visuals')) {
       return `${LOCAL_KNOWLEDGE.photography}\n\n• Facebook: https://www.facebook.com/Lowbudphotography27/\n• TikTok: https://www.tiktok.com/@edrickvisuals.mov`;
     }
 
     // Competence, Skill & "How Good is Lex" Inquiries
     if (q.includes('how good') || q.includes('hwo good') || q.includes('how skilled') || q.includes('why hire') || q.includes('capable') || q.includes('experience') || q.includes('qualifications') || q.includes('what can lex do')) {
-      return `**Lex Matondo's Capabilities & Track Record:**\n\n• **Rapid Technical Arc:** Started coding in September 2024 (freshman CpE) and accelerated to building and deploying full-scale production portals (ChemLab, COE LGU) by 2026.\n• **Full-Stack Proficiency:** Deep knowledge of Java, SQL (PostgreSQL & MySQL), JavaScript, Node.js, Express, and Supabase backend architecture.\n• **Shipped Production Systems:** Built live systems solving real institutional needs (laboratory apparatus scheduling, student council financial transparency, military entrance exam prep).\n• **Dual Discipline:** Balances rigorous systems engineering with creative discipline as an event and documentary photographer at Leavian Visuals.`;
+      return `**Lex Matondo's Capabilities & Track Record:**\n\n• **Rapid Technical Arc:** Started coding in September 2024 (freshman CpE) and accelerated to building and deploying full-scale production portals (ChemLab, COE LGU) by 2026.\n• **Full-Stack Proficiency:** Deep knowledge of Java, SQL (PostgreSQL & MySQL), JavaScript, Node.js, Express, and Supabase backend architecture.\n• **Shipped Production Systems:** Built live systems solving real institutional needs (laboratory apparatus scheduling, student council financial transparency, military entrance exam prep).\n• **Dual Discipline:** Balances rigorous systems engineering with creative discipline as an event and documentary photographer at Focal Stack (@focalstack.lex).`;
     }
 
     // Complex / conversational queries will return null to be processed by NVIDIA DeepSeek LLM!

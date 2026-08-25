@@ -72,13 +72,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
   background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 12px;
   flex-shrink: 0;
-  padding: 6px;
+  padding: 8px;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -176,9 +176,9 @@
 }
 
 .lex-chat-avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
   background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
@@ -186,7 +186,7 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  padding: 6px;
+  padding: 8px;
 }
 
 .lex-avatar-img {
@@ -295,6 +295,7 @@
   padding: 9px 12px;
   border-radius: 14px 14px 14px 2px;
   border: 1px solid rgba(255, 255, 255, 0.07);
+  min-width: 200px;
 }
 
 .lex-msg.assistant p {

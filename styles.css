@@ -78,10 +78,10 @@ a {
 }
 
 .brand-logo-img {
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.25));
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 

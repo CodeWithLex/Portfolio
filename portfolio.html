@@ -128,498 +128,74 @@
             </div>
           </div>
 
-          <!-- ================= COE LGU EXECUTIVE PRESENTATION & CASE STUDY DECK ================= -->
-          <div class="case-study-block pres-deck-wrapper reveal-on-scroll" id="coe-presentation" aria-labelledby="pres-main-heading">
+          <!-- Case Study: COE LGU System -->
+          <div class="case-study-block reveal-on-scroll">
+            <div class="case-study-header">
+              <span class="cs-label">CASE STUDY</span>
+              <h3 class="cs-title">Digital governance for the College of Engineering.</h3>
+            </div>
 
-            <!-- Presentation Header & Sticky Presenter Bar -->
-            <div class="pres-header-bar">
-              <div class="pres-header-meta">
-                <div class="pres-badge">
-                  <span class="pres-badge-dot"></span>
-                  <span>COE LGU EXECUTIVE BRIEFING</span>
-                </div>
-                <h3 class="pres-main-heading" id="pres-main-heading">
-                  Student Government Financial Transparency &amp; Governance System
-                </h3>
-                <p class="pres-lead-desc">
-                  A non-technical case study and institutional presentation prepared for the <strong>Student Government of the College of Engineering</strong>.
+            <div class="cs-summary-grid">
+              <div class="cs-card">
+                <span class="cs-card-tag">THE PROBLEM</span>
+                <p class="cs-card-text">
+                  Student council finances and event allocations relied on disconnected spreadsheets and paper slips. Students had zero real-time visibility into fund usage, and officers spent hours manually balancing ledgers before audits.
                 </p>
               </div>
 
-              <!-- Interactive Presenter Toolbar -->
-              <div class="pres-toolbar" role="region" aria-label="Presenter Navigation Controls">
-                <div class="pres-stepper">
-                  <button type="button" class="pres-nav-btn" id="pres-prev-btn" aria-label="Previous Slide">
-                    <span aria-hidden="true">←</span> PREV
-                  </button>
-                  <span class="pres-counter" id="pres-counter" aria-live="polite">
-                    <span id="pres-current-idx">01</span> / 08
-                  </span>
-                  <button type="button" class="pres-nav-btn" id="pres-next-btn" aria-label="Next Slide">
-                    NEXT <span aria-hidden="true">→</span>
-                  </button>
-                </div>
-
-                <div class="pres-actions">
-                  <button type="button" class="pres-toggle-deck-btn" id="pres-mode-btn" aria-pressed="false" title="Toggle Fullscreen Presenter Mode (Press F or Space to advance)">
-                    <span class="btn-icon" aria-hidden="true">[ ]</span>
-                    <span class="btn-label">PRESENTER MODE</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Quick Slide Jump Navigation Pills -->
-              <div class="pres-jump-pills" role="tablist" aria-label="Quick slide navigation">
-                <button type="button" class="pres-pill is-active" data-slide-target="pres-slide-1" role="tab" aria-selected="true">01 Summary</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-2" role="tab" aria-selected="false">02 Bottlenecks</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-3" role="tab" aria-selected="false">03 Core Modules</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-4" role="tab" aria-selected="false">04 Field Scenario</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-5" role="tab" aria-selected="false">05 ₱1.00 Flow</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-6" role="tab" aria-selected="false">06 Role Matrix</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-7" role="tab" aria-selected="false">07 4-Wk Roadmap</button>
-                <button type="button" class="pres-pill" data-slide-target="pres-slide-8" role="tab" aria-selected="false">08 Adoption</button>
+              <div class="cs-card">
+                <span class="cs-card-tag">THE SOLUTION</span>
+                <p class="cs-card-text">
+                  A centralized, domain-gated web portal (<code>@g.cjc.edu.ph</code>) giving every engineering student real-time financial transparency, automated budget tracking, and instant academic progress computation.
+                </p>
               </div>
             </div>
 
-            <!-- Slide Deck Slides -->
-            <div class="pres-slides-container" id="pres-slides-stage">
+            <div class="cs-details-grid">
+              <div class="cs-detail-item">
+                <span class="cs-detail-num">01</span>
+                <h4 class="cs-detail-title">₱ Real-Time Treasury</h4>
+                <p class="cs-detail-desc">Automated income, expense, and donation tracking with built-in over-budget warnings.</p>
+              </div>
 
-              <!-- ================= SLIDE 01 ================= -->
-              <article class="pres-slide is-active" id="pres-slide-1" data-slide-index="1" tabindex="0" aria-label="Slide 1: Executive Summary">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">01 // THE BIG PICTURE</span>
-                  <h4 class="pres-slide-title">Instant Financial Clarity, 100% Audit Readiness &amp; Student Trust</h4>
-                  <p class="pres-slide-subtitle">
-                    Every peso entrusted to the College of Engineering Student Government must be accounted for accurately, promptly, and transparently.
-                  </p>
-                </div>
+              <div class="cs-detail-item">
+                <span class="cs-detail-num">02</span>
+                <h4 class="cs-detail-title">Immutable Audit Log</h4>
+                <p class="cs-detail-desc">Tamper-evident activity logs recording every budget transfer, disbursement, and council action.</p>
+              </div>
 
-                <div class="pres-cards-grid grid-3">
-                  <div class="pres-card">
-                    <div class="pres-card-header">
-                      <span class="pres-card-num">PILLAR 01</span>
-                    </div>
-                    <h5 class="pres-card-title">Real-Time Clarity</h5>
-                    <p class="pres-card-text">
-                      Know the exact remaining fund balance across all college committees and event budgets in <strong>1 single second</strong> without waiting for monthly manual reports.
-                    </p>
-                    <div class="pres-card-footer">
-                      <span class="pres-tag">Instant Sync</span>
-                    </div>
-                  </div>
+              <div class="cs-detail-item">
+                <span class="cs-detail-num">03</span>
+                <h4 class="cs-detail-title">Academic Progress Engine</h4>
+                <p class="cs-detail-desc">Client-side 1.0–5.0 Philippine GPA calculator with instant student progress PDF export.</p>
+              </div>
 
-                  <div class="pres-card highlight">
-                    <div class="pres-card-header">
-                      <span class="pres-card-num">PILLAR 02</span>
-                    </div>
-                    <h5 class="pres-card-title">Bulletproof Audit</h5>
-                    <p class="pres-card-text">
-                      Every official receipt is photographed, timestamped, and permanently tied to disbursements. Ready for instant Dean &amp; Student Affairs inspection.
-                    </p>
-                    <div class="pres-card-footer">
-                      <span class="pres-tag">100% Paperless</span>
-                    </div>
-                  </div>
+              <div class="cs-detail-item">
+                <span class="cs-detail-num">04</span>
+                <h4 class="cs-detail-title">Batch Admin Operations</h4>
+                <p class="cs-detail-desc">High-speed CSV roster parsing for bulk student verification and institutional enrollment.</p>
+              </div>
+            </div>
 
-                  <div class="pres-card">
-                    <div class="pres-card-header">
-                      <span class="pres-card-num">PILLAR 03</span>
-                    </div>
-                    <h5 class="pres-card-title">Constituent Trust</h5>
-                    <p class="pres-card-text">
-                      Empower engineering students with a verified public transparency view. Eliminates rumors and strengthens faith in student council stewardship.
-                    </p>
-                    <div class="pres-card-footer">
-                      <span class="pres-tag">@g.cjc.edu.ph Gate</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pres-highlight-bar">
-                  <span class="highlight-label">COUNCIL BENEFIT:</span>
-                  <p class="highlight-text">
-                    Zero specialized IT training required. If an officer can snap a photo on a smartphone or use online banking, they can master this platform in 10 minutes.
-                  </p>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 02 ================= -->
-              <article class="pres-slide" id="pres-slide-2" data-slide-index="2" tabindex="0" aria-label="Slide 2: Current Bottlenecks">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">02 // CURRENT BOTTLENECKS</span>
-                  <h4 class="pres-slide-title">The Hidden Cost of Paper Vouchers &amp; Disconnected Spreadsheets</h4>
-                  <p class="pres-slide-subtitle">
-                    How traditional manual practices cause stress, accidental overspending, and delayed liquidations.
-                  </p>
-                </div>
-
-                <div class="pres-comparison-grid">
-                  <div class="pres-comp-card">
-                    <div class="comp-header">
-                      <span class="comp-area">Receipt Storage</span>
-                    </div>
-                    <div class="comp-row before">
-                      <span class="status-pill status-bad">MANUAL TODAY</span>
-                      <p>Receipts stored in envelopes or envelopes; thermal receipts fade completely after 2–3 months.</p>
-                    </div>
-                    <div class="comp-row after">
-                      <span class="status-pill status-good">COE LGU PORTAL</span>
-                      <p>High-resolution digital scans permanently stored and linked directly to the purchase record.</p>
-                    </div>
-                  </div>
-
-                  <div class="pres-comp-card">
-                    <div class="comp-header">
-                      <span class="comp-area">Fund Monitoring</span>
-                    </div>
-                    <div class="comp-row before">
-                      <span class="status-pill status-bad">MANUAL TODAY</span>
-                      <p>Multiple conflicting Excel spreadsheets on separate flash drives; accidental overspending occurs.</p>
-                    </div>
-                    <div class="comp-row after">
-                      <span class="status-pill status-good">COE LGU PORTAL</span>
-                      <p>Centralized single source of truth with automated live ledger math and budget ceiling alerts.</p>
-                    </div>
-                  </div>
-
-                  <div class="pres-comp-card">
-                    <div class="comp-header">
-                      <span class="comp-area">Liquidation Stress</span>
-                    </div>
-                    <div class="comp-row before">
-                      <span class="status-pill status-bad">MANUAL TODAY</span>
-                      <p>Gathering lost receipts and balancing differences takes 2–3 weeks of late nights before deadlines.</p>
-                    </div>
-                    <div class="comp-row after">
-                      <span class="status-pill status-good">COE LGU PORTAL</span>
-                      <p>1-Click instant liquidation generation with itemized receipts and official sign-off headers in 3 minutes.</p>
-                    </div>
-                  </div>
-
-                  <div class="pres-comp-card">
-                    <div class="comp-header">
-                      <span class="comp-area">Student Transparency</span>
-                    </div>
-                    <div class="comp-row before">
-                      <span class="status-pill status-bad">MANUAL TODAY</span>
-                      <p>Students ask <em>"Saan napunta ang pondo?"</em>; reports take weeks to publish on physical boards.</p>
-                    </div>
-                    <div class="comp-row after">
-                      <span class="status-pill status-good">COE LGU PORTAL</span>
-                      <p>Real-time public dashboard where every verified expenditure can be inspected transparently.</p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 03 ================= -->
-              <article class="pres-slide" id="pres-slide-3" data-slide-index="3" tabindex="0" aria-label="Slide 3: System Tour">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">03 // SYSTEM TOUR</span>
-                  <h4 class="pres-slide-title">4 Core Modules in Plain Language (Zero Tech Jargon)</h4>
-                  <p class="pres-slide-subtitle">
-                    A streamlined digital toolkit tailored to student government operations and council workflows.
-                  </p>
-                </div>
-
-                <div class="pres-modules-grid">
-                  <div class="pres-module-card">
-                    <div class="module-index">01</div>
-                    <div class="module-content">
-                      <h5 class="module-title">Executive Control Tower (Dashboard)</h5>
-                      <p class="module-desc">
-                        A clean executive dashboard showing 4 live metric tiles: <strong>Total Income Received</strong>, <strong>Total Expenses Incurred</strong>, <strong>Remaining Usable Balance</strong>, and <strong>Earmarked Special Funds</strong>.
-                      </p>
-                      <span class="module-benefit">→ Instant birds-eye status for the Governor &amp; Treasurer at a glance</span>
-                    </div>
-                  </div>
-
-                  <div class="pres-module-card">
-                    <div class="module-index">02</div>
-                    <div class="module-content">
-                      <h5 class="module-title">Events &amp; Project Budget Ledger</h5>
-                      <p class="module-desc">
-                        Allocate budget ceilings per project (e.g., <em>Engineering Week, General Assembly, Sports Fest, Seminars</em>). Live progress bars warn officers before exceeding budget caps.
-                      </p>
-                      <span class="module-benefit">→ Prevents project coordinators from accidental overspending</span>
-                    </div>
-                  </div>
-
-                  <div class="pres-module-card">
-                    <div class="module-index">03</div>
-                    <div class="module-content">
-                      <h5 class="module-title">Digital Receipt Vault ("Shoebox Killer")</h5>
-                      <p class="module-desc">
-                        Snap photo receipts directly from smartphones during purchases. Attach vendor, date, and description. High-res proofs remain permanently searchable.
-                      </p>
-                      <span class="module-benefit">→ No more faded thermal paper or lost receipt envelopes</span>
-                    </div>
-                  </div>
-
-                  <div class="pres-module-card">
-                    <div class="module-index">04</div>
-                    <div class="module-content">
-                      <h5 class="module-title">1-Click Institutional Liquidation Export</h5>
-                      <p class="module-desc">
-                        Generates ready-to-print financial statements, balance ledgers, and itemized expenditure sheets with official signatory blocks for the Governor, Treasurer, and Auditor.
-                      </p>
-                      <span class="module-benefit">→ Cuts council liquidation prep time by over 85%</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 04 ================= -->
-              <article class="pres-slide" id="pres-slide-4" data-slide-index="4" tabindex="0" aria-label="Slide 4: Real-World Scenario">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">04 // FIELD SCENARIO</span>
-                  <h4 class="pres-slide-title">Real-World Case: Annual Engineering Week Liquidation</h4>
-                  <p class="pres-slide-subtitle">
-                    Comparing a major college event managed manually versus with the COE LGU Portal.
-                  </p>
-                </div>
-
-                <div class="pres-scenario-container">
-                  <div class="scenario-side scenario-before">
-                    <div class="scenario-badge badge-before">BEFORE: MANUAL PROCESS</div>
-                    <ul class="scenario-list">
-                      <li><strong>₱120,000 budget</strong> distributed across 8 committee chairs for stages, food, and prizes.</li>
-                      <li>3 receipts got soaked in water during field setup; 2 thermal receipts faded into white paper.</li>
-                      <li>Council Treasurer spent <strong>14 nights</strong> sorting crumpled slips and calculating a ₱3,850 gap.</li>
-                      <li>Final liquidation submission took <strong>24 days</strong> after the event concluded.</li>
-                    </ul>
-                    <div class="scenario-footer foot-bad">
-                      <span>Result: Stressed officers, audit delays, and budget hold-ups.</span>
-                    </div>
-                  </div>
-
-                  <div class="scenario-vs">VS</div>
-
-                  <div class="scenario-side scenario-after">
-                    <div class="scenario-badge badge-after">AFTER: COE LGU PORTAL</div>
-                    <ul class="scenario-list">
-                      <li>Event registered with <strong>₱120,000 budget ceiling</strong> locked in the system.</li>
-                      <li>Committee leads took smartphone photos of receipts right at the store checkout counter.</li>
-                      <li>Executive dashboard showed real-time remaining balance as each purchase was submitted.</li>
-                      <li>Treasurer clicked <strong>"Export Liquidation Report"</strong> — generated with all 26 verified receipt scans in <strong>3 minutes</strong>!</li>
-                    </ul>
-                    <div class="scenario-footer foot-good">
-                      <span>Result: 100% audit accuracy, zero discrepancies, peaceful handovers.</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 05 ================= -->
-              <article class="pres-slide" id="pres-slide-5" data-slide-index="5" tabindex="0" aria-label="Slide 5: The Journey of ₱1.00">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">05 // WORKFLOW AUDIT</span>
-                  <h4 class="pres-slide-title">The Journey of ₱1.00: 5-Step Accountability Pipeline</h4>
-                  <p class="pres-slide-subtitle">
-                    How every peso is protected from the moment it is allocated to final public disclosure.
-                  </p>
-                </div>
-
-                <div class="pres-pipeline-flow">
-                  <div class="pipeline-step">
-                    <div class="step-num">01</div>
-                    <div class="step-card">
-                      <h6 class="step-title">Budget Allocation</h6>
-                      <p class="step-desc">Council assigns fund ceiling to specific event/project.</p>
-                    </div>
-                  </div>
-                  <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                  <div class="pipeline-step">
-                    <div class="step-num">02</div>
-                    <div class="step-card">
-                      <h6 class="step-title">Mobile Receipt Capture</h6>
-                      <p class="step-desc">Officer uploads receipt photo at moment of purchase.</p>
-                    </div>
-                  </div>
-                  <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                  <div class="pipeline-step">
-                    <div class="step-num">03</div>
-                    <div class="step-card">
-                      <h6 class="step-title">Treasurer Verification</h6>
-                      <p class="step-desc">Finance officer checks, approves &amp; logs timestamp.</p>
-                    </div>
-                  </div>
-                  <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                  <div class="pipeline-step">
-                    <div class="step-num">04</div>
-                    <div class="step-card">
-                      <h6 class="step-title">Live Balance Sync</h6>
-                      <p class="step-desc">All balance cards and committee progress bars update live.</p>
-                    </div>
-                  </div>
-                  <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                  <div class="pipeline-step">
-                    <div class="step-num">05</div>
-                    <div class="step-card">
-                      <h6 class="step-title">Public Transparency</h6>
-                      <p class="step-desc">Students &amp; faculty inspect verified public ledger.</p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 06 ================= -->
-              <article class="pres-slide" id="pres-slide-6" data-slide-index="6" tabindex="0" aria-label="Slide 6: Role Benefits Matrix">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">06 // STAKEHOLDER MATRIX</span>
-                  <h4 class="pres-slide-title">How Every Student Leader &amp; Constituent Wins</h4>
-                  <p class="pres-slide-subtitle">
-                    Designed to simplify duties across the entire College of Engineering student hierarchy.
-                  </p>
-                </div>
-
-                <div class="pres-role-grid">
-                  <div class="role-item">
-                    <div class="role-badge">COE GOVERNOR &amp; EXEC BOARD</div>
-                    <h5 class="role-title">Executive Oversight &amp; Strategic Peace of Mind</h5>
-                    <p class="role-desc">Instant birds-eye view of every active project budget. Confidence that zero unauthorized spending or unrecorded disbursements take place.</p>
-                  </div>
-
-                  <div class="role-item">
-                    <div class="role-badge">COUNCIL TREASURER &amp; FINANCE</div>
-                    <h5 class="role-title">Automated Math &amp; Cash Reconciliation</h5>
-                    <p class="role-desc">Eliminates manual ledger math errors. Clearly separates General Council funds, departmental collections, and sponsorships with zero confusion.</p>
-                  </div>
-
-                  <div class="role-item">
-                    <div class="role-badge">COUNCIL AUDITOR &amp; ADVISERS</div>
-                    <h5 class="role-title">Permanent Immutable Activity Trail</h5>
-                    <p class="role-desc">Every edit, approval, or disbursement records who entered it with date and time. An auditor can click any item and immediately view the attached receipt scan.</p>
-                  </div>
-
-                  <div class="role-item">
-                    <div class="role-badge">COMMITTEE HEADS &amp; PROJECT LEADS</div>
-                    <h5 class="role-title">Clear Budget Ceilings &amp; Effortless Submissions</h5>
-                    <p class="role-desc">Know exact remaining budget before making purchases. Snap receipts on mobile without collecting heaps of paper envelopes.</p>
-                  </div>
-
-                  <div class="role-item span-full">
-                    <div class="role-badge">ENGINEERING STUDENT BODY (CONSTITUENTS)</div>
-                    <h5 class="role-title">Full Disclosure &amp; High Institutional Pride</h5>
-                    <p class="role-desc">Access to a modern, verified transparency dashboard with institutional <code>@g.cjc.edu.ph</code> login. Direct proof of honest, world-class engineering student leadership.</p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 07 ================= -->
-              <article class="pres-slide" id="pres-slide-7" data-slide-index="7" tabindex="0" aria-label="Slide 7: Implementation Roadmap">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">07 // 4-WEEK ROLLOUT</span>
-                  <h4 class="pres-slide-title">4-Week Fast-Track Adoption Roadmap</h4>
-                  <p class="pres-slide-subtitle">
-                    Zero disruption to current council work. Seamless transition from spreadsheets to cloud governance.
-                  </p>
-                </div>
-
-                <div class="pres-roadmap-grid">
-                  <div class="roadmap-card">
-                    <div class="roadmap-header">
-                      <span class="wk-label">WEEK 01</span>
-                      <span class="wk-status">SETUP</span>
-                    </div>
-                    <h5 class="roadmap-title">Account Provisioning</h5>
-                    <p class="roadmap-desc">Setup official student government accounts, assign roles (Governor, Treasurer, Auditor), and input initial semester budget ceilings.</p>
-                  </div>
-
-                  <div class="roadmap-card">
-                    <div class="roadmap-header">
-                      <span class="wk-label">WEEK 02</span>
-                      <span class="wk-status">TRAINING</span>
-                    </div>
-                    <h5 class="roadmap-title">1-Hour Officer Workshop</h5>
-                    <p class="roadmap-desc">Hands-on, non-technical orientation for council officers and committee heads on receipt photography and 1-click export.</p>
-                  </div>
-
-                  <div class="roadmap-card">
-                    <div class="roadmap-header">
-                      <span class="wk-label">WEEK 03</span>
-                      <span class="wk-status">PILOT</span>
-                    </div>
-                    <h5 class="roadmap-title">Pilot on 2 Events</h5>
-                    <p class="roadmap-desc">Use the system live for two upcoming departmental activities or committee procurements. Gather feedback and confirm categories.</p>
-                  </div>
-
-                  <div class="roadmap-card highlight">
-                    <div class="roadmap-header">
-                      <span class="wk-label">WEEK 04</span>
-                      <span class="wk-status">GO LIVE</span>
-                    </div>
-                    <h5 class="roadmap-title">Official Launch</h5>
-                    <p class="roadmap-desc">Full deployment across all engineering student government committees and public transparency link activation for the student body.</p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- ================= SLIDE 08 ================= -->
-              <article class="pres-slide" id="pres-slide-8" data-slide-index="8" tabindex="0" aria-label="Slide 8: Action Steps & Resolution">
-                <div class="pres-slide-header">
-                  <span class="pres-slide-kicker">08 // NEXT STEPS</span>
-                  <h4 class="pres-slide-title">Action Steps for Official Student Council Adoption</h4>
-                  <p class="pres-slide-subtitle">
-                    Transforming the College of Engineering into the benchmark for digital transparency and good governance.
-                  </p>
-                </div>
-
-                <div class="pres-adoption-box">
-                  <div class="adoption-steps">
-                    <div class="adopt-step">
-                      <span class="adopt-num">1</span>
-                      <div class="adopt-text">
-                        <strong>Council Resolution / Executive Endorsement:</strong>
-                        <span>Pass a student council resolution approving the official adoption of the COE LGU Digital Governance System.</span>
-                      </div>
-                    </div>
-
-                    <div class="adopt-step">
-                      <span class="adopt-num">2</span>
-                      <div class="adopt-text">
-                        <strong>Designate Primary Administrator:</strong>
-                        <span>Appoint the COE Student Council Treasurer and Auditor as primary system custodians.</span>
-                      </div>
-                    </div>
-
-                    <div class="adopt-step">
-                      <span class="adopt-num">3</span>
-                      <div class="adopt-text">
-                        <strong>Schedule 30-Minute Live Onboarding:</strong>
-                        <span>Conduct an onboarding session for all student council committees and department representatives.</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="adoption-cta-panel">
-                    <div class="cta-stat-pill">
-                      <span class="stat-big">100%</span>
-                      <span class="stat-label">AUDIT READY</span>
-                    </div>
-                    <div class="cta-stat-pill">
-                      <span class="stat-big">0</span>
-                      <span class="stat-label">NEW HARDWARE REQUIRED</span>
-                    </div>
-                    <div class="cta-actions-group">
-                      <a href="https://www.coelgu-system.engineer" target="_blank" rel="noopener" class="pres-cta-primary">
-                        <span>LAUNCH LIVE PORTAL</span> <span class="cta-arrow">↗</span>
-                      </a>
-                      <button type="button" class="pres-cta-secondary" id="pres-restart-btn">
-                        <span>RESTART PRESENTATION</span> <span>↺</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-            </div><!-- /pres-slides-container -->
-
-          </div><!-- /case-study-block pres-deck-wrapper -->
+            <div class="cs-metrics-row">
+              <div class="cs-metric">
+                <span class="cs-metric-value">100%</span>
+                <span class="cs-metric-label">Fund Visibility</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">0</span>
+                <span class="cs-metric-label">Unverified Edits</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">Real-time</span>
+                <span class="cs-metric-label">Ledger Sync</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">@g.cjc.edu.ph</span>
+                <span class="cs-metric-label">Campus Auth Gate</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- Compact Project Archive Index -->

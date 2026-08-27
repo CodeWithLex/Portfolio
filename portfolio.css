@@ -3448,7 +3448,7 @@ body.is-presenter-mode .pres-slide.is-active {
 .github-contributions-card {
   margin-top: 3.5rem;
   width: 100%;
-  background: rgba(14, 17, 23, 0.75);
+  background: rgba(17, 17, 17, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
@@ -3508,19 +3508,7 @@ body.is-presenter-mode .pres-slide.is-active {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.gh-live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #39d353;
-  box-shadow: 0 0 8px #39d353;
-  animation: ghPulseDot 2s infinite ease-in-out;
-}
 
-@keyframes ghPulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
 
 .gh-card-link {
   font-family: var(--font-mono);
@@ -3600,11 +3588,11 @@ body.is-presenter-mode .pres-slide.is-active {
 }
 
 /* Color levels matching GitHub palette */
-.gh-day-cell[data-level="0"] { fill: #161b22; }
-.gh-day-cell[data-level="1"] { fill: #0e4429; }
-.gh-day-cell[data-level="2"] { fill: #006d32; }
-.gh-day-cell[data-level="3"] { fill: #26a641; }
-.gh-day-cell[data-level="4"] { fill: #39d353; }
+.gh-day-cell[data-level="0"] { fill: #161616; }
+.gh-day-cell[data-level="1"] { fill: #444444; }
+.gh-day-cell[data-level="2"] { fill: #767676; }
+.gh-day-cell[data-level="3"] { fill: #b8b8b8; }
+.gh-day-cell[data-level="4"] { fill: #ffffff; }
 
 /* Skeleton */
 .gh-skeleton {
@@ -3625,25 +3613,10 @@ body.is-presenter-mode .pres-slide.is-active {
 .gh-card-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: 0.75rem;
   padding-top: 0.85rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.gh-footer-help {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #6e7681;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.gh-footer-help:hover {
-  color: #8b949e;
-  text-decoration: underline;
 }
 
 .gh-legend {
@@ -3666,19 +3639,19 @@ body.is-presenter-mode .pres-slide.is-active {
   display: inline-block;
 }
 
-.gh-legend-box.gh-level-0 { background: #161b22; }
-.gh-legend-box.gh-level-1 { background: #0e4429; }
-.gh-legend-box.gh-level-2 { background: #006d32; }
-.gh-legend-box.gh-level-3 { background: #26a641; }
-.gh-legend-box.gh-level-4 { background: #39d353; }
+.gh-legend-box.gh-level-0 { background: #161616; border: 1px solid rgba(255, 255, 255, 0.08); }
+.gh-legend-box.gh-level-1 { background: #444444; }
+.gh-legend-box.gh-level-2 { background: #767676; }
+.gh-legend-box.gh-level-3 { background: #b8b8b8; }
+.gh-legend-box.gh-level-4 { background: #ffffff; }
 
 /* Floating Tooltip */
 .gh-tooltip {
   position: fixed;
   z-index: 1000;
   pointer-events: none;
-  background: #1f242c;
-  color: #f0f6fc;
+  background: #161616;
+  color: #f2f2f0;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   padding: 0.4rem 0.65rem;

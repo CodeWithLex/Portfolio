@@ -37,8 +37,8 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
      - Philippine barangay online document requests (Clearance, Indigency, Residency) and resident digital governance.
   5. Content-Creation-Manager (https://github.com/CodeWithLex/Content-Creation-Manager):
      - Java desktop application automating content creation pipelines and video assets.
-  6. PORJECT-F.R.I.D.A.Y (https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y):
-     - AI voice assistant experiment inspired by Marvel's Iron Man / F.R.I.D.A.Y.
+  6. Capstone Compass (https://capstone-compass-client.vercel.app/ | repo: https://github.com/focalstack-lex/Capstone-Compass):
+     - AI capstone advisor and thesis project planner for college students with scope evaluation and scaffold generation.
   7. Healthcare Smart Assistant / Medicine Dispenser:
      - Automated medicine scheduler and dispenser built with Java Swing and Arduino hardware.
 
@@ -58,6 +58,7 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
   - ChemLab System: https://chemlab-system.me
   - COE LGU System: https://www.coelgu-system.engineer
   - PMAEE CadetCoach: https://reviewer-coach.onrender.com
+  - Capstone Compass: https://capstone-compass-client.vercel.app/
   - Business Email (Collabs, Development & Projects): [codewithlex27@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=codewithlex27@gmail.com&su=Project%20Inquiry%20%2F%20Collaboration%20%E2%80%94%20Lex%20Matondo&body=Hi%20Lex%2C%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0A%0A)
   - Academic & CJC Institutional Email: [lexmatondo@g.cjc.edu.ph](https://mail.google.com/mail/?view=cm&fs=1&to=lexmatondo@g.cjc.edu.ph&su=Academic%20%2F%20Institutional%20Inquiry%20%E2%80%94%20Cor%20Jesu%20College&body=Hi%20Lex%2C%0A%0AI%20am%20reaching%20out%20regarding%3A%0A%0A)
 

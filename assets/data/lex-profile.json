@@ -10,9 +10,39 @@
   "philosophy": "CODE × CREATE — One person, two disciplines. I build things. I also photograph them.",
   "journey": "Started coding in September 2024 as a freshman CpE student, progressing to deploying full-stack production portals by 2026.",
   "skills": {
-    "languages": ["Java", "JavaScript", "TypeScript", "Kotlin", "SQL", "HTML5", "CSS3", "Python"],
-    "frameworks": ["Java Swing", "JavaFX", "Node.js", "Express.js", "Supabase", "PostgreSQL", "MySQL", "Android / Jetpack Compose", "Vercel Serverless"],
-    "tools": ["Git", "GitHub", "Figma", "NetBeans", "Android Studio", "VS Code", "Photoshop", "Lightroom", "After Effects", "TouchDesigner"]
+    "languages": [
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "Kotlin",
+      "SQL",
+      "HTML5",
+      "CSS3",
+      "Python"
+    ],
+    "frameworks": [
+      "Java Swing",
+      "JavaFX",
+      "Node.js",
+      "Express.js",
+      "Supabase",
+      "PostgreSQL",
+      "MySQL",
+      "Android / Jetpack Compose",
+      "Vercel Serverless"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "Figma",
+      "NetBeans",
+      "Android Studio",
+      "VS Code",
+      "Photoshop",
+      "Lightroom",
+      "After Effects",
+      "TouchDesigner"
+    ]
   },
   "projects": [
     {
@@ -46,9 +76,11 @@
       "repo": "https://github.com/CodeWithLex/Content-Creation-Manager"
     },
     {
-      "name": "PORJECT-F.R.I.D.A.Y",
-      "tagline": "AI voice assistant experiment inspired by Marvel's Iron Man / F.R.I.D.A.Y",
-      "repo": "https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y"
+      "name": "Capstone Compass",
+      "tagline": "AI-powered capstone idea generator and project planner for college students",
+      "url": "https://capstone-compass-client.vercel.app/",
+      "repo": "https://github.com/focalstack-lex/Capstone-Compass",
+      "highlights": "Profile to interest to idea pipeline, Philippine college context, feasibility scoring, Supabase auth/database, multi-provider AI."
     },
     {
       "name": "Healthcare Smart Dispenser",
@@ -61,7 +93,12 @@
     "tiktok": "https://www.tiktok.com/@focalstack.lex",
     "youtube": "https://www.youtube.com/@lexmatondo27",
     "roles": "Staff Photojournalist for The Heartbeat student publication and official College of Engineering photographer.",
-    "genres": ["Editorial portraits", "Weddings & debuts", "Christenings", "University milestone ceremonies"]
+    "genres": [
+      "Editorial portraits",
+      "Weddings & debuts",
+      "Christenings",
+      "University milestone ceremonies"
+    ]
   },
   "socials": {
     "github": "https://github.com/focalstack-lex",

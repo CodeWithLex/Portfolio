@@ -91,9 +91,10 @@ This document serves as the authoritative source of truth for the AI portfolio a
 - **Repository:** https://github.com/CodeWithLex/Content-Creation-Manager
 - **Description:** Java desktop application that organizes content production pipelines, video assets, script drafts, and posting schedules — bridging his software and photography disciplines.
 
-### 6. PORJECT-F.R.I.D.A.Y
-- **Repository:** https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y
-- **Description:** A playful AI voice assistant desktop experiment inspired by Marvel's Iron Man / F.R.I.D.A.Y assistant.
+### 6. Capstone Compass
+- **Live App:** https://capstone-compass-client.vercel.app/
+- **Repository:** https://github.com/focalstack-lex/Capstone-Compass
+- **Description:** AI-powered capstone idea generator and project planner for college students, helping scope and structure thesis projects.
 
 ### 7. Hardware & Embedded Systems: Healthcare Smart Assistant / Medicine Dispenser
 - **Stack:** Java Swing desktop controller + Arduino microcontroller hardware.

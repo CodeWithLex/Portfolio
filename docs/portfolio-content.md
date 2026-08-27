@@ -49,7 +49,7 @@ Verified facts for the accuracy pass. Everything implemented on the site must tr
 | **PMAEE CadetCoach** | AI prep portal for the Philippine Military Academy Entrance Exam (login-walled; features TBD from Lex) | **LIVE** on Render (backend hosting — Node/Express likely) | https://reviewer-coach.onrender.com |
 | **eBarangay-Portal** | Barangay document requests / digital governance web app | Shipped repo, May 2026. JavaScript. | https://github.com/CodeWithLex/eBarangay-Portal |
 | **Content-Creation-Manager** | Own Java app that assists his content-creation workflow | Real repo, pinned on GitHub. Java. The CODE×CREATE bridge project. | https://github.com/CodeWithLex/Content-Creation-Manager |
-| **PORJECT-F.R.I.D.A.Y** | Experiment replicating a JARVIS/F.R.I.D.A.Y-style assistant ("Lezz try and replicate Tony Stank's F.R.I.D.A.Y") | Real repo. Personality piece — experimentation + humor. | https://github.com/CodeWithLex/PORJECT-F.R.I.D.A.Y |
+| **Capstone Compass** | AI capstone advisor and thesis project planner for college students | **LIVE** + repo | https://capstone-compass-client.vercel.app/ · repo: focalstack-lex/Capstone-Compass |
 | **Healthcare Smart Assistant / Medicine Dispenser** | Java Swing app + Arduino hardware | From personal brief. **No public repo** — school/hardware project. Presentable without link. | — |
 | **Friend-group elimination game** | Quick (~2–5 min) social web game, Hunger-Games-inspired | From personal brief — "concept I explored". No repo found. Label as experiment/concept. | — |
 | Fitness_App_Final_Project | Fitness app, Aug 2025 | Minor — "more on GitHub" | repo exists |
@@ -72,7 +72,7 @@ Verified facts for the accuracy pass. Everything implemented on the site must tr
 ## Copy direction
 
 - Headline candidate: **"I build things."** (alt: "I build things. I also photograph them.")
-- Voice: young, smart, self-aware, technical, human. Student-honest. Personality encouraged (F.R.I.D.A.Y repo already has it).
+- Voice: young, smart, self-aware, technical, human. Student-honest. Personality encouraged.
 - Status line (replaces fake "SYSTEM V2.4"): something true, e.g. `CPE STUDENT · CURRENTLY BUILDING`.
 
 ## Banned (must be removed/replaced in accuracy pass)

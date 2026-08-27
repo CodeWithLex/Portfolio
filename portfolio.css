@@ -2665,7 +2665,7 @@ body.is-presenter-mode .pres-slide.is-active {
 }
 
 /* ---------------------------------------------------------------------------
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (Comprehensive Mobile Optimization)
 --------------------------------------------------------------------------- */
 @media (max-width: 860px) {
   .portfolio-container {
@@ -2674,8 +2674,67 @@ body.is-presenter-mode .pres-slide.is-active {
 
   .site-header {
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.25rem 0 1rem;
+  }
+
+  .site-brand {
+    font-size: 11.5px;
+    gap: 0.5rem;
+  }
+
+  .brand-logo-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mode-switch-group {
+    font-size: 11px;
+    gap: 0.45rem;
+  }
+
+  .featured-footer {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
-    padding: 1.5rem 0;
+    padding-top: 0.75rem;
+  }
+
+  .featured-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem 1.35rem;
+    width: 100%;
+  }
+
+  .action-link {
+    font-size: 11.5px;
+    padding: 2px 0;
+    white-space: nowrap;
+  }
+
+  /* Make screenshot carousel nav buttons permanently touch-visible on mobile */
+  .cf-nav-btn {
+    opacity: 0.85 !important;
+    pointer-events: auto !important;
+    width: 34px;
+    height: 34px;
+  }
+
+  .crossfade-badge {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 9.5px;
+  }
+
+  .crossfade-indicators {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.6rem;
   }
 
   .archive-item {
@@ -2722,6 +2781,7 @@ body.is-presenter-mode .pres-slide.is-active {
   .footer-bar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1.25rem;
   }
 
   .cs-summary-grid {
@@ -2730,10 +2790,12 @@ body.is-presenter-mode .pres-slide.is-active {
 
   .cs-details-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
   }
 
   .cs-metrics-row {
     grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
   }
 
   /* Stabilize mobile section scroll (prevent jittery exit displacements) */
@@ -2749,8 +2811,80 @@ body.is-presenter-mode .pres-slide.is-active {
 }
 
 @media (max-width: 580px) {
+  .portfolio-container {
+    padding: 0 1rem;
+  }
+
+  .hero-heading {
+    font-size: clamp(1.85rem, 8.5vw, 2.6rem);
+    letter-spacing: -0.03em;
+  }
+
+  .featured-title {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+  }
+
+  .featured-actions {
+    gap: 0.75rem 1.15rem;
+  }
+
+  .action-link {
+    font-size: 11px;
+  }
+
+  .case-study-block {
+    gap: 1.25rem;
+    padding-top: 1.75rem;
+  }
+
+  .cs-card {
+    padding: 1.2rem;
+  }
+
+  .cs-card-text {
+    font-size: 13.5px;
+  }
+
   .cs-details-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .cs-detail-item {
+    padding: 1rem;
+  }
+
+  .cs-metrics-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .cs-metric {
+    padding: 0.85rem 1rem;
+  }
+
+  .cs-metric-value {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .featured-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 100%;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 0.75rem;
+  }
+
+  .action-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .cs-metrics-row {
@@ -3133,6 +3267,10 @@ body.is-presenter-mode .pres-slide.is-active {
 }
 
 @media (max-width: 600px) {
+  .pres-deck-wrapper {
+    padding: 1.5rem 0.85rem;
+    gap: 1.5rem;
+  }
   .pres-roadmap-grid {
     grid-template-columns: 1fr;
   }
@@ -3140,21 +3278,63 @@ body.is-presenter-mode .pres-slide.is-active {
     flex-direction: column;
     align-items: stretch;
     gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
   }
   .pres-stepper {
     justify-content: space-between;
+    width: 100%;
   }
   .pres-toggle-deck-btn {
+    width: 100%;
     justify-content: center;
+  }
+  .pres-jump-pills {
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 0.4rem;
+    width: 100%;
+  }
+  .pres-pill {
+    flex-shrink: 0;
+    font-size: 9.5px;
+    padding: 4px 8px;
   }
   .pres-pipeline-flow {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.5rem;
   }
   .pipeline-arrow {
     transform: rotate(90deg);
     text-align: center;
-    margin: 0.25rem 0;
+    margin: 0.2rem 0;
+    font-size: 1rem;
+  }
+  .pres-adoption-box {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+  }
+  .adoption-cta-panel {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: 1.25rem;
+    gap: 1rem;
+  }
+  .pres-cta-primary,
+  .pres-cta-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+  .stat-big {
+    font-size: 1.75rem;
   }
 }
 

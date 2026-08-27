@@ -921,4 +921,219 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial setup
     updateSlideUI(1);
   }
-});
+
+  /* ---------------------------------------------------------------------------
+     Real-Time GitHub Contributions Graph Controller
+  --------------------------------------------------------------------------- */
+  function initGitHubContributions() {
+    const card = document.getElementById("gh-contributions-card");
+    if (!card) return;
+
+    const wrapper = document.getElementById("gh-heatmap-wrapper");
+    const totalCountEl = document.getElementById("gh-total-count");
+    const tooltip = document.getElementById("gh-tooltip");
+    const username = card.getAttribute("data-username") || "focalstack-lex";
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const fullMonthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    async function fetchContributions() {
+      // 1. Try Vercel serverless function
+      try {
+        const res = await fetch(`/api/github-contributions?user=${encodeURIComponent(username)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.contributions && data.contributions.length > 0) {
+            return data;
+          }
+        }
+      } catch (err) {
+        console.warn("Serverless contribution endpoint unavailable, trying direct API:", err);
+      }
+
+      // 2. Try direct public GitHub contributions API
+      try {
+        const directRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(username)}?y=last`);
+        if (directRes.ok) {
+          const data = await directRes.json();
+          if (data && data.contributions && data.contributions.length > 0) {
+            return data;
+          }
+        }
+      } catch (err) {
+        console.warn("Direct public API failed, trying local fallback cache:", err);
+      }
+
+      // 3. Fallback to cached static snapshot
+      try {
+        const localRes = await fetch("assets/data/github-contributions.json");
+        if (localRes.ok) {
+          return await localRes.json();
+        }
+      } catch (err) {
+        console.error("Local fallback cache failed:", err);
+      }
+
+      return null;
+    }
+
+    function renderHeatmap(data) {
+      if (!data || !data.contributions || data.contributions.length === 0) {
+        wrapper.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.8rem;">Unable to load GitHub contributions at this moment.</div>`;
+        return;
+      }
+
+      const days = data.contributions;
+      const total = data.total && typeof data.total.lastYear === "number"
+        ? data.total.lastYear
+        : days.reduce((sum, d) => sum + (d.count || 0), 0);
+
+      if (totalCountEl) {
+        totalCountEl.textContent = total.toLocaleString();
+      }
+
+      // Group days into 53 weeks (Sunday to Saturday)
+      const weeks = [];
+      let currentWeek = [];
+
+      const firstDate = new Date(days[0].date + "T00:00:00Z");
+      const startDow = firstDate.getUTCDay();
+
+      for (let i = 0; i < startDow; i++) {
+        currentWeek.push(null);
+      }
+
+      days.forEach((day) => {
+        currentWeek.push(day);
+        if (currentWeek.length === 7) {
+          weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      });
+
+      if (currentWeek.length > 0) {
+        while (currentWeek.length < 7) {
+          currentWeek.push(null);
+        }
+        weeks.push(currentWeek);
+      }
+
+      const numWeeks = weeks.length;
+      const leftPad = 28;
+      const topPad = 18;
+      const cellSize = 10;
+      const cellGap = 3;
+      const colStep = cellSize + cellGap;
+      const rowStep = cellSize + cellGap;
+
+      const svgWidth = leftPad + numWeeks * colStep + 8;
+      const svgHeight = topPad + 7 * rowStep + 4;
+
+      // Extract month labels
+      const monthLabels = [];
+      let lastMonth = -1;
+
+      weeks.forEach((w, colIdx) => {
+        const firstValidDay = w.find((d) => d !== null);
+        if (!firstValidDay) return;
+        const dObj = new Date(firstValidDay.date + "T00:00:00Z");
+        const m = dObj.getUTCMonth();
+        if (m !== lastMonth) {
+          if (monthLabels.length === 0 || (colIdx - monthLabels[monthLabels.length - 1].col) >= 2) {
+            monthLabels.push({ col: colIdx, name: monthNames[m] });
+            lastMonth = m;
+          }
+        }
+      });
+
+      // Build SVG elements
+      let svgMarkup = `<svg class="gh-svg-chart" viewBox="0 0 ${svgWidth} ${svgHeight}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Contribution Calendar">`;
+
+      // Month headers
+      monthLabels.forEach((ml) => {
+        const x = leftPad + ml.col * colStep;
+        svgMarkup += `<text class="gh-month-label" x="${x}" y="12">${ml.name}</text>`;
+      });
+
+      // Weekday labels (Mon=1, Wed=3, Fri=5)
+      const dayLabelMap = [
+        { label: "Mon", row: 1 },
+        { label: "Wed", row: 3 },
+        { label: "Fri", row: 5 }
+      ];
+      dayLabelMap.forEach((dl) => {
+        const y = topPad + dl.row * rowStep + 8;
+        svgMarkup += `<text class="gh-day-label" x="0" y="${y}">${dl.label}</text>`;
+      });
+
+      // Contribution cells
+      weeks.forEach((w, colIdx) => {
+        const x = leftPad + colIdx * colStep;
+        w.forEach((day, rowIdx) => {
+          if (!day) return;
+          const y = topPad + rowIdx * rowStep;
+          const count = day.count || 0;
+          const level = typeof day.level === "number" ? day.level : (count > 9 ? 4 : count > 5 ? 3 : count > 2 ? 2 : count > 0 ? 1 : 0);
+          
+          svgMarkup += `<rect class="gh-day-cell" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" ry="2" data-date="${day.date}" data-count="${count}" data-level="${level}" tabindex="0" aria-label="${count} contributions on ${day.date}"></rect>`;
+        });
+      });
+
+      svgMarkup += `</svg>`;
+      wrapper.innerHTML = svgMarkup;
+
+      // Attach tooltip listeners
+      const cells = wrapper.querySelectorAll(".gh-day-cell");
+      cells.forEach((cell) => {
+        const showTooltip = (e) => {
+          const dateStr = cell.getAttribute("data-date");
+          const count = parseInt(cell.getAttribute("data-count") || "0", 10);
+          if (!dateStr) return;
+
+          const parts = dateStr.split("-");
+          const year = parts[0];
+          const monthIdx = parseInt(parts[1], 10) - 1;
+          const day = parseInt(parts[2], 10);
+          const formattedDate = `${fullMonthNames[monthIdx]} ${day}, ${year}`;
+
+          const text = count === 0
+            ? `No contributions on ${formattedDate}`
+            : count === 1
+            ? `1 contribution on ${formattedDate}`
+            : `${count} contributions on ${formattedDate}`;
+
+          if (tooltip) {
+            tooltip.textContent = text;
+            tooltip.classList.add("is-visible");
+            tooltip.setAttribute("aria-hidden", "false");
+
+            const rect = cell.getBoundingClientRect();
+            tooltip.style.left = `${rect.left + rect.width / 2}px`;
+            tooltip.style.top = `${rect.top}px`;
+          }
+        };
+
+        const hideTooltip = () => {
+          if (tooltip) {
+            tooltip.classList.remove("is-visible");
+            tooltip.setAttribute("aria-hidden", "true");
+          }
+        };
+
+        cell.addEventListener("mouseenter", showTooltip);
+        cell.addEventListener("mouseleave", hideTooltip);
+        cell.addEventListener("focus", showTooltip);
+        cell.addEventListener("blur", hideTooltip);
+      });
+    }
+
+    // Initialize fetching
+    fetchContributions().then(renderHeatmap);
+  }
+
+    // Initialize real-time GitHub activity
+    initGitHubContributions();
+  });

@@ -3438,3 +3438,260 @@ body.is-presenter-mode .pres-slide.is-active {
 .lex-toast .toast-actions a:hover {
   opacity: 0.7;
 }
+
+
+/* ---------------------------------------------------------------------------
+   Real-Time GitHub Contributions Graph
+   Minimalist Dark Obsidian Glassmorphism matching Image 2
+--------------------------------------------------------------------------- */
+
+.github-contributions-card {
+  margin-top: 3.5rem;
+  width: 100%;
+  background: rgba(14, 17, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-contributions-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.gh-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.gh-card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.gh-card-icon {
+  color: var(--text-primary);
+  opacity: 0.9;
+}
+
+.gh-card-heading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.gh-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gh-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #39d353;
+  box-shadow: 0 0 8px #39d353;
+  animation: ghPulseDot 2s infinite ease-in-out;
+}
+
+@keyframes ghPulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.gh-card-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.gh-card-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* Heatmap scroll container */
+.gh-heatmap-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.gh-heatmap-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gh-heatmap-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gh-heatmap-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.gh-heatmap-wrapper {
+  min-width: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gh-svg-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* SVG Chart Typography & Elements */
+.gh-month-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: #8b949e;
+}
+
+.gh-day-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: #8b949e;
+}
+
+.gh-day-cell {
+  cursor: pointer;
+  outline: none;
+  rx: 2px;
+  ry: 2px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.gh-day-cell:hover {
+  filter: brightness(1.35);
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1px;
+}
+
+/* Color levels matching GitHub palette */
+.gh-day-cell[data-level="0"] { fill: #161b22; }
+.gh-day-cell[data-level="1"] { fill: #0e4429; }
+.gh-day-cell[data-level="2"] { fill: #006d32; }
+.gh-day-cell[data-level="3"] { fill: #26a641; }
+.gh-day-cell[data-level="4"] { fill: #39d353; }
+
+/* Skeleton */
+.gh-skeleton {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%);
+  background-size: 200% 100%;
+  animation: ghSkeletonShimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+@keyframes ghSkeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Footer & Legend */
+.gh-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.gh-footer-help {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #6e7681;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gh-footer-help:hover {
+  color: #8b949e;
+  text-decoration: underline;
+}
+
+.gh-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gh-legend-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #8b949e;
+  padding: 0 3px;
+}
+
+.gh-legend-box {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.gh-legend-box.gh-level-0 { background: #161b22; }
+.gh-legend-box.gh-level-1 { background: #0e4429; }
+.gh-legend-box.gh-level-2 { background: #006d32; }
+.gh-legend-box.gh-level-3 { background: #26a641; }
+.gh-legend-box.gh-level-4 { background: #39d353; }
+
+/* Floating Tooltip */
+.gh-tooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  background: #1f242c;
+  color: #f0f6fc;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -100%) translateY(-8px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.gh-tooltip.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -100%) translateY(-10px);
+}

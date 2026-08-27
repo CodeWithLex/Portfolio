@@ -737,7 +737,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 4. Show friendly toast feedback
     showToast(`
-      <span class="toast-title">📋 Copied <strong>${email}</strong></span>
+      <span class="toast-title">Copied <strong>${email}</strong></span>
       <span class="toast-sub">Opening Gmail web composer...</span>
       <div class="toast-actions">
         <a href="${gmailUrl}" target="_blank" rel="noopener">Open Gmail Web</a> · 
@@ -754,4 +754,171 @@ document.addEventListener("DOMContentLoaded", () => {
       handleEmailClick(e, email, isAcademic);
     });
   });
+
+  // =========================================================================
+  // COE LGU Executive Presentation Deck & Presenter Mode Controller
+  // =========================================================================
+  const presDeck = document.getElementById("coe-presentation");
+  if (presDeck) {
+    const presSlides = document.querySelectorAll(".pres-slide");
+    const prevBtn = document.getElementById("pres-prev-btn");
+    const nextBtn = document.getElementById("pres-next-btn");
+    const currentIdxEl = document.getElementById("pres-current-idx");
+    const modeBtn = document.getElementById("pres-mode-btn");
+    const jumpPills = document.querySelectorAll(".pres-pill");
+    const restartBtn = document.getElementById("pres-restart-btn");
+
+    let activeIndex = 1;
+    const totalSlides = presSlides.length || 8;
+
+    const updateSlideUI = (index) => {
+      activeIndex = Math.max(1, Math.min(index, totalSlides));
+
+      if (currentIdxEl) {
+        currentIdxEl.textContent = String(activeIndex).padStart(2, "0");
+      }
+
+      if (prevBtn) prevBtn.disabled = activeIndex <= 1;
+      if (nextBtn) nextBtn.disabled = activeIndex >= totalSlides;
+
+      // Update pills
+      jumpPills.forEach((pill, idx) => {
+        const isActive = idx + 1 === activeIndex;
+        pill.classList.toggle("is-active", isActive);
+        pill.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      // Update active slide class
+      presSlides.forEach((slide, idx) => {
+        const isActive = idx + 1 === activeIndex;
+        slide.classList.toggle("is-active", isActive);
+      });
+    };
+
+    const goToSlide = (index, shouldScroll = true) => {
+      updateSlideUI(index);
+
+      const targetSlide = document.getElementById(`pres-slide-${activeIndex}`);
+      if (targetSlide) {
+        if (body.classList.contains("is-presenter-mode")) {
+          targetSlide.focus({ preventScroll: true });
+        } else if (shouldScroll) {
+          targetSlide.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    };
+
+    // Next / Prev Button Clicks
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        if (activeIndex > 1) goToSlide(activeIndex - 1, true);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        if (activeIndex < totalSlides) goToSlide(activeIndex + 1, true);
+      });
+    }
+
+    // Pill Jumps
+    jumpPills.forEach((pill, idx) => {
+      pill.addEventListener("click", () => {
+        goToSlide(idx + 1, true);
+      });
+    });
+
+    // Restart Button
+    if (restartBtn) {
+      restartBtn.addEventListener("click", () => {
+        goToSlide(1, true);
+      });
+    }
+
+    // Presenter Mode Toggle
+    const togglePresenterMode = (forceState) => {
+      const isCurrentlyPresenter = body.classList.contains("is-presenter-mode");
+      const nextState = typeof forceState === "boolean" ? forceState : !isCurrentlyPresenter;
+
+      body.classList.toggle("is-presenter-mode", nextState);
+      if (modeBtn) {
+        modeBtn.classList.toggle("is-active", nextState);
+        modeBtn.setAttribute("aria-pressed", nextState ? "true" : "false");
+        const label = modeBtn.querySelector(".btn-label");
+        const icon = modeBtn.querySelector(".btn-icon");
+        if (label) label.textContent = nextState ? "EXIT PRESENTER (ESC)" : "PRESENTER MODE";
+        if (icon) icon.textContent = nextState ? "[✕]" : "[ ]";
+      }
+
+      goToSlide(activeIndex, !nextState);
+    };
+
+    if (modeBtn) {
+      modeBtn.addEventListener("click", () => togglePresenterMode());
+    }
+
+    // Keyboard navigation when in Presenter Mode or focused inside presentation
+    window.addEventListener("keydown", (e) => {
+      const isPresenter = body.classList.contains("is-presenter-mode");
+
+      // Toggle Presenter Mode with 'F' or 'f' (when not in input/textarea)
+      if ((e.key === "f" || e.key === "F") && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) {
+        if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          togglePresenterMode();
+          return;
+        }
+      }
+
+      // Exit presenter mode with Escape
+      if (e.key === "Escape" && isPresenter) {
+        e.preventDefault();
+        togglePresenterMode(false);
+        return;
+      }
+
+      if (isPresenter) {
+        if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          if (activeIndex < totalSlides) goToSlide(activeIndex + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp") {
+          e.preventDefault();
+          if (activeIndex > 1) goToSlide(activeIndex - 1);
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          goToSlide(1);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          goToSlide(totalSlides);
+        }
+      }
+    });
+
+    // IntersectionObserver to sync slide pill and counter during natural scroll
+    if ("IntersectionObserver" in window) {
+      const slideObserver = new IntersectionObserver(
+        (entries) => {
+          if (body.classList.contains("is-presenter-mode")) return;
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const slideIdx = parseInt(entry.target.getAttribute("data-slide-index"), 10);
+              if (slideIdx) {
+                updateSlideUI(slideIdx);
+              }
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.45,
+          rootMargin: "-10% 0px -40% 0px"
+        }
+      );
+
+      presSlides.forEach((slide) => slideObserver.observe(slide));
+    }
+
+    // Initial setup
+    updateSlideUI(1);
+  }
 });

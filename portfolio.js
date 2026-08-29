@@ -101,6 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isInitial || prefersReducedMotion || !wipeLayer || !mainContainer) {
       body.setAttribute("data-mode", mode);
       updateNav(mode);
+      const vid = document.getElementById("coelgu-hero-video");
+      if (mode === "create" && vid) {
+        vid.pause();
+      } else if (mode === "code" && vid) {
+        const vidPane = document.getElementById("cf-video-pane");
+        if (vidPane && vidPane.classList.contains("is-active")) vid.play().catch(() => {});
+      }
       if (!isInitial) {
         updateUrl(mode);
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -130,6 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       // Sequence 2: Switch discipline while covered, reset scroll to top immediately
       body.setAttribute("data-mode", mode);
+      const vid = document.getElementById("coelgu-hero-video");
+      if (mode === "create" && vid) {
+        vid.pause();
+      } else if (mode === "code" && vid) {
+        const vidPane = document.getElementById("cf-video-pane");
+        if (vidPane && vidPane.classList.contains("is-active")) vid.play().catch(() => {});
+      }
       window.scrollTo(0, 0);
       updateUrl(mode);
 
@@ -447,9 +461,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7. Featured Project Screenshot Showcase with Right-to-Left Shutter Wipe
+  // 7. Featured Project Live Video Demo & Screenshot Showcase
   const crossfadeStage = document.getElementById("coelgu-crossfade-stage");
   if (crossfadeStage) {
+    const videoPane = document.getElementById("cf-video-pane");
+    const screensPane = document.getElementById("cf-screens-pane");
+    const tabVideo = document.getElementById("cf-tab-video");
+    const tabScreens = document.getElementById("cf-tab-screens");
+    const heroVideo = document.getElementById("coelgu-hero-video");
+
+    const vidPlayBtn = document.getElementById("cf-vid-play-btn");
+    const iconPlay = vidPlayBtn ? vidPlayBtn.querySelector(".vhud-icon-play") : null;
+    const iconPause = vidPlayBtn ? vidPlayBtn.querySelector(".vhud-icon-pause") : null;
+    const vidSoundBtn = document.getElementById("cf-vid-sound-btn");
+    const iconMute = vidSoundBtn ? vidSoundBtn.querySelector(".vhud-icon-mute") : null;
+    const iconUnmute = vidSoundBtn ? vidSoundBtn.querySelector(".vhud-icon-unmute") : null;
+    const soundLabel = document.getElementById("cf-sound-label");
+    const scrubTrack = document.getElementById("cf-vid-scrub");
+    const progressBar = document.getElementById("cf-vid-progress");
+    const timeDisplay = document.getElementById("cf-vid-time");
+    const fsBtn = document.getElementById("cf-vid-fs-btn");
+
     const slides = crossfadeStage.querySelectorAll(".crossfade-slide");
     const dots = crossfadeStage.querySelectorAll(".cf-dot");
     const prevBtn = document.getElementById("cf-prev-btn");
@@ -461,7 +493,172 @@ document.addEventListener("DOMContentLoaded", () => {
     let crossfadeTimer = null;
     let isWiping = false;
     let isVisible = true;
+    let currentView = "video"; // 'video' | 'screens'
 
+    // Format mm:ss
+    const formatTime = (secs) => {
+      if (isNaN(secs) || secs < 0) return "0:00";
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m}:${s < 10 ? "0" : ""}${s}`;
+    };
+
+    // Video Playback Controls
+    const updatePlayState = () => {
+      if (!heroVideo || !iconPlay || !iconPause) return;
+      const isPaused = heroVideo.paused;
+      iconPlay.style.display = isPaused ? "inline-block" : "none";
+      iconPause.style.display = isPaused ? "none" : "inline-block";
+      if (vidPlayBtn) {
+        vidPlayBtn.setAttribute("aria-label", isPaused ? "Play video" : "Pause video");
+      }
+    };
+
+    const togglePlay = () => {
+      if (!heroVideo) return;
+      if (heroVideo.paused) {
+        heroVideo.play().catch(() => {});
+      } else {
+        heroVideo.pause();
+      }
+      updatePlayState();
+    };
+
+    const updateMuteState = () => {
+      if (!heroVideo || !iconMute || !iconUnmute || !soundLabel) return;
+      const isMuted = heroVideo.muted;
+      iconMute.style.display = isMuted ? "inline-block" : "none";
+      iconUnmute.style.display = isMuted ? "none" : "inline-block";
+      soundLabel.textContent = isMuted ? "MUTED" : "SOUND ON";
+      if (vidSoundBtn) {
+        vidSoundBtn.setAttribute("aria-label", isMuted ? "Unmute audio" : "Mute audio");
+      }
+    };
+
+    const toggleMute = () => {
+      if (!heroVideo) return;
+      heroVideo.muted = !heroVideo.muted;
+      updateMuteState();
+    };
+
+    if (heroVideo) {
+      heroVideo.addEventListener("play", updatePlayState);
+      heroVideo.addEventListener("pause", updatePlayState);
+      heroVideo.addEventListener("timeupdate", () => {
+        if (!heroVideo.duration) return;
+        const pct = (heroVideo.currentTime / heroVideo.duration) * 100;
+        if (progressBar) progressBar.style.width = `${pct}%`;
+        if (scrubTrack) scrubTrack.setAttribute("aria-valuenow", Math.round(pct));
+        if (timeDisplay) timeDisplay.textContent = formatTime(heroVideo.currentTime);
+      });
+
+      heroVideo.addEventListener("loadedmetadata", () => {
+        if (timeDisplay) timeDisplay.textContent = formatTime(heroVideo.currentTime);
+      });
+
+      heroVideo.addEventListener("click", togglePlay);
+
+      // Try autoplay on load
+      heroVideo.play().catch(() => {
+        // Autoplay policy prevented playback, video will remain ready on poster
+        updatePlayState();
+      });
+    }
+
+    if (vidPlayBtn) {
+      vidPlayBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        togglePlay();
+      });
+    }
+
+    if (vidSoundBtn) {
+      vidSoundBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleMute();
+      });
+    }
+
+    if (scrubTrack && heroVideo) {
+      const handleScrub = (e) => {
+        const rect = scrubTrack.getBoundingClientRect();
+        const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+        const clickPos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        if (heroVideo.duration) {
+          heroVideo.currentTime = clickPos * heroVideo.duration;
+        }
+      };
+
+      scrubTrack.addEventListener("click", (e) => {
+        e.stopPropagation();
+        handleScrub(e);
+      });
+    }
+
+    if (fsBtn && heroVideo) {
+      fsBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!document.fullscreenElement) {
+          if (container && container.requestFullscreen) {
+            container.requestFullscreen().catch(() => {});
+          } else if (heroVideo.requestFullscreen) {
+            heroVideo.requestFullscreen().catch(() => {});
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+          }
+        }
+      });
+    }
+
+    // View Switcher (Video Demo vs Screenshot Gallery)
+    const switchView = (targetView) => {
+      currentView = targetView;
+      const showVideo = targetView === "video";
+
+      if (tabVideo) {
+        tabVideo.classList.toggle("is-active", showVideo);
+        tabVideo.setAttribute("aria-selected", showVideo ? "true" : "false");
+      }
+      if (tabScreens) {
+        tabScreens.classList.toggle("is-active", !showVideo);
+        tabScreens.setAttribute("aria-selected", !showVideo ? "true" : "false");
+      }
+
+      if (videoPane) {
+        videoPane.classList.toggle("is-active", showVideo);
+        if (showVideo) {
+          videoPane.removeAttribute("hidden");
+          if (heroVideo && isVisible) {
+            heroVideo.play().catch(() => {});
+          }
+        } else {
+          videoPane.setAttribute("hidden", "");
+          if (heroVideo) heroVideo.pause();
+        }
+      }
+
+      if (screensPane) {
+        screensPane.classList.toggle("is-active", !showVideo);
+        if (!showVideo) {
+          screensPane.removeAttribute("hidden");
+          startTimer();
+        } else {
+          screensPane.setAttribute("hidden", "");
+          stopTimer();
+        }
+      }
+    };
+
+    if (tabVideo) {
+      tabVideo.addEventListener("click", () => switchView("video"));
+    }
+    if (tabScreens) {
+      tabScreens.addEventListener("click", () => switchView("screens"));
+    }
+
+    // Screenshot Carousel Logic
     const transitionToSlide = (targetIndex, direction = "rtl") => {
       const nextIndex = (targetIndex + slides.length) % slides.length;
       if (nextIndex === currentSlide) return;
@@ -483,12 +680,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const inClass = direction === "rtl" ? "wipe-rtl-in" : "wipe-ltr-in";
       const outClass = direction === "rtl" ? "wipe-rtl-out" : "wipe-ltr-out";
 
-      // 1. Shutter sweeps across screenshot frame from right to left
       shutterBlade.className = "cf-shutter-blade";
       shutterBlade.classList.add(inClass);
 
       setTimeout(() => {
-        // 2. Switch slide while completely covered by black blade
         slides.forEach((slide, i) => slide.classList.toggle("is-active", i === nextIndex));
         dots.forEach((dot, i) => {
           const active = (i === nextIndex);
@@ -497,7 +692,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         currentSlide = nextIndex;
 
-        // 3. Shutter blade sweeps out to left, revealing new screenshot
         setTimeout(() => {
           shutterBlade.classList.remove(inClass);
           shutterBlade.classList.add(outClass);
@@ -511,18 +705,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const nextSlide = () => {
-      if (!isVisible) return;
+      if (!isVisible || currentView !== "screens") return;
       transitionToSlide(currentSlide + 1, "rtl");
     };
 
     const prevSlide = () => {
-      if (!isVisible) return;
+      if (!isVisible || currentView !== "screens") return;
       transitionToSlide(currentSlide - 1, "ltr");
     };
 
     const startTimer = () => {
       stopTimer();
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && currentView === "screens") {
         crossfadeTimer = setInterval(nextSlide, 3600);
       }
     };
@@ -537,7 +731,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const restartTimerAfterDelay = () => {
       stopTimer();
       setTimeout(() => {
-        startTimer();
+        if (currentView === "screens") startTimer();
       }, 4500);
     };
 
@@ -566,33 +760,35 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    if (container) {
-      container.addEventListener("click", (e) => {
-        if (e.target.closest(".crossfade-badge, .cf-nav-btn, .cf-dot")) return;
-        nextSlide();
-        restartTimerAfterDelay();
-      });
-    }
-
-    // Reset when tab regains focus
+    // Lifecycle & Focus
     window.addEventListener("focus", () => {
-      if (isVisible) startTimer();
+      if (isVisible) {
+        if (currentView === "video" && heroVideo && body.getAttribute("data-mode") !== "create") {
+          heroVideo.play().catch(() => {});
+        } else if (currentView === "screens") {
+          startTimer();
+        }
+      }
     });
 
     if ("IntersectionObserver" in window) {
       const visibilityObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           isVisible = entry.isIntersecting;
-          if (isVisible) {
-            startTimer();
+          const isInTechMode = body.getAttribute("data-mode") !== "create";
+          if (isVisible && isInTechMode) {
+            if (currentView === "video" && heroVideo) {
+              heroVideo.play().catch(() => {});
+            } else if (currentView === "screens") {
+              startTimer();
+            }
           } else {
+            if (heroVideo) heroVideo.pause();
             stopTimer();
           }
         });
       }, { threshold: 0.1 });
       visibilityObserver.observe(crossfadeStage);
-    } else {
-      startTimer();
     }
   }
 

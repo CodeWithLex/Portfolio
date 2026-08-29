@@ -72,18 +72,113 @@
           </div>
 
           <div class="featured-visual reveal-clip seq-4" id="coelgu-crossfade-stage"
-            aria-label="COE LGU Portal Screenshots Showcase">
-            <div class="crossfade-container" role="region" aria-label="Interactive Screenshot Carousel">
-              <img class="crossfade-slide is-active" src="assets/projects/coelgu/screen-1.png"
-                alt="COE LGU Portal: Authentication &amp; Login" loading="eager" decoding="async">
-              <img class="crossfade-slide" src="assets/projects/coelgu/screen-2.png"
-                alt="COE LGU Portal: Treasury &amp; Balance Ledger" loading="lazy" decoding="async">
-              <img class="crossfade-slide" src="assets/projects/coelgu/screen-3.png"
-                alt="COE LGU Portal: Budget Breakdown &amp; Transactions" loading="lazy" decoding="async">
-              <img class="crossfade-slide" src="assets/projects/coelgu/screen-4.png"
-                alt="COE LGU Portal: Student Roster &amp; CSV Import" loading="lazy" decoding="async">
-              <img class="crossfade-slide" src="assets/projects/coelgu/screen-5.png"
-                alt="COE LGU Portal: Audit Log &amp; System Analytics" loading="lazy" decoding="async">
+            aria-label="COE LGU Portal Live Video Demo &amp; Screenshot Showcase">
+
+            <!-- Showcase View Switcher (Video vs Screenshots) -->
+            <div class="cf-view-toggle" role="tablist" aria-label="Showcase display mode">
+              <button type="button" class="cf-view-btn is-active" id="cf-tab-video" role="tab" aria-selected="true"
+                aria-controls="cf-video-pane" data-view-target="video">
+                <span>▶ LIVE VIDEO DEMO</span>
+              </button>
+              <button type="button" class="cf-view-btn" id="cf-tab-screens" role="tab" aria-selected="false"
+                aria-controls="cf-screens-pane" data-view-target="screens">
+                <span>☷ SCREENSHOTS (5)</span>
+              </button>
+            </div>
+
+            <div class="crossfade-container" role="region" aria-label="Interactive COE LGU Showcase">
+
+              <!-- 01. Video Walkthrough Pane (Shown First / Default) -->
+              <div class="cf-video-pane is-active" id="cf-video-pane" role="tabpanel" aria-labelledby="cf-tab-video">
+                <video id="coelgu-hero-video" class="featured-video-element"
+                  src="assets/projects/coelgu-demo.mov"
+                  poster="assets/projects/coelgu/screen-1.png"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="auto"
+                  aria-label="COE LGU System Full Walkthrough Video">
+                  <source src="assets/projects/coelgu-demo.mov" type="video/quicktime">
+                  <source src="assets/projects/coelgu/coelgu-demo.mov" type="video/quicktime">
+                  <source src="assets/projects/coelgu-demo.mov" type="video/mp4">
+                  Your browser does not support HTML5 video.
+                </video>
+
+                <!-- Floating Video Control HUD -->
+                <div class="cf-video-hud" id="cf-video-hud" aria-label="Video playback controls">
+                  <button type="button" class="cf-vhud-btn cf-vhud-play" id="cf-vid-play-btn" aria-label="Pause video" title="Play / Pause">
+                    <svg class="vhud-icon vhud-icon-pause" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                      <rect x="6" y="4" width="4" height="16" rx="1"/>
+                      <rect x="14" y="4" width="4" height="16" rx="1"/>
+                    </svg>
+                    <svg class="vhud-icon vhud-icon-play" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="display:none;">
+                      <polygon points="6 3 20 12 6 21 6 3"/>
+                    </svg>
+                  </button>
+
+                  <button type="button" class="cf-vhud-btn cf-vhud-sound" id="cf-vid-sound-btn" aria-label="Toggle mute" title="Mute / Unmute">
+                    <svg class="vhud-icon vhud-icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                      <line x1="23" y1="9" x2="17" y2="15"/>
+                      <line x1="17" y1="9" x2="23" y2="15"/>
+                    </svg>
+                    <svg class="vhud-icon vhud-icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="display:none;">
+                      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    </svg>
+                    <span class="vhud-sound-label" id="cf-sound-label">MUTED</span>
+                  </button>
+
+                  <div class="cf-vhud-scrub" id="cf-vid-scrub" role="slider" aria-label="Video scrubber" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                    <div class="cf-vhud-progress" id="cf-vid-progress"></div>
+                  </div>
+
+                  <span class="cf-vhud-time" id="cf-vid-time">0:00</span>
+
+                  <button type="button" class="cf-vhud-btn cf-vhud-fs" id="cf-vid-fs-btn" aria-label="Toggle fullscreen" title="Fullscreen">
+                    <svg class="vhud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 02. Interactive Screenshot Slides Pane -->
+              <div class="cf-screens-pane" id="cf-screens-pane" role="tabpanel" aria-labelledby="cf-tab-screens" hidden>
+                <img class="crossfade-slide is-active" src="assets/projects/coelgu/screen-1.png"
+                  alt="COE LGU Portal: Authentication &amp; Login" loading="eager" decoding="async">
+                <img class="crossfade-slide" src="assets/projects/coelgu/screen-2.png"
+                  alt="COE LGU Portal: Treasury &amp; Balance Ledger" loading="lazy" decoding="async">
+                <img class="crossfade-slide" src="assets/projects/coelgu/screen-3.png"
+                  alt="COE LGU Portal: Budget Breakdown &amp; Transactions" loading="lazy" decoding="async">
+                <img class="crossfade-slide" src="assets/projects/coelgu/screen-4.png"
+                  alt="COE LGU Portal: Student Roster &amp; CSV Import" loading="lazy" decoding="async">
+                <img class="crossfade-slide" src="assets/projects/coelgu/screen-5.png"
+                  alt="COE LGU Portal: Audit Log &amp; System Analytics" loading="lazy" decoding="async">
+
+                <!-- Clickable side navigation -->
+                <div class="crossfade-controls" aria-label="Carousel navigation">
+                  <button type="button" class="cf-nav-btn cf-prev" id="cf-prev-btn"
+                    aria-label="Previous screenshot">←</button>
+                  <button type="button" class="cf-nav-btn cf-next" id="cf-next-btn"
+                    aria-label="Next screenshot">→</button>
+                </div>
+
+                <!-- Indicators / dots -->
+                <div class="crossfade-indicators" role="tablist" aria-label="Screenshot selectors">
+                  <button type="button" class="cf-dot is-active" role="tab" aria-selected="true"
+                    aria-label="Slide 1: Authentication"></button>
+                  <button type="button" class="cf-dot" role="tab" aria-selected="false"
+                    aria-label="Slide 2: Treasury Ledger"></button>
+                  <button type="button" class="cf-dot" role="tab" aria-selected="false"
+                    aria-label="Slide 3: Budget Breakdown"></button>
+                  <button type="button" class="cf-dot" role="tab" aria-selected="false"
+                    aria-label="Slide 4: Student Roster"></button>
+                  <button type="button" class="cf-dot" role="tab" aria-selected="false"
+                    aria-label="Slide 5: Audit Log"></button>
+                </div>
+              </div>
 
               <!-- Internal Right-to-Left Monochrome Shutter Blade -->
               <div class="cf-shutter-blade" id="cf-shutter" aria-hidden="true"></div>
@@ -93,28 +188,6 @@
                 aria-label="Open live system in new tab">
                 <span>LIVE PORTAL</span> ↗
               </a>
-
-              <!-- Clickable side navigation -->
-              <div class="crossfade-controls" aria-label="Carousel navigation">
-                <button type="button" class="cf-nav-btn cf-prev" id="cf-prev-btn"
-                  aria-label="Previous screenshot">←</button>
-                <button type="button" class="cf-nav-btn cf-next" id="cf-next-btn"
-                  aria-label="Next screenshot">→</button>
-              </div>
-
-              <!-- Indicators / dots -->
-              <div class="crossfade-indicators" role="tablist" aria-label="Screenshot selectors">
-                <button type="button" class="cf-dot is-active" role="tab" aria-selected="true"
-                  aria-label="Slide 1: Authentication"></button>
-                <button type="button" class="cf-dot" role="tab" aria-selected="false"
-                  aria-label="Slide 2: Treasury Ledger"></button>
-                <button type="button" class="cf-dot" role="tab" aria-selected="false"
-                  aria-label="Slide 3: Budget Breakdown"></button>
-                <button type="button" class="cf-dot" role="tab" aria-selected="false"
-                  aria-label="Slide 4: Student Roster"></button>
-                <button type="button" class="cf-dot" role="tab" aria-selected="false"
-                  aria-label="Slide 5: Audit Log"></button>
-              </div>
             </div>
           </div>
 

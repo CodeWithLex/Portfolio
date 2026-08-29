@@ -12,7 +12,7 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
   - Name: Lex Matondo (Full legal: Lex Edrick Asherjesse C. Matondo)
   - Role: Computer Engineering (BSCPE) Student, Full-Stack Developer & Photographer
   - University: Cor Jesu College (CJC), Digos City, Davao del Sur, Philippines
-  - Philosophy: "CODE × CREATE" — One person, two disciplines. Developer first; photography is the real second discipline. "I build things. I also photograph them."
+  - Philosophy: "CODE × CREATE": One person, two disciplines. Developer first; photography is the real second discipline. "I build things. I also photograph them."
   - Business & Inquiries Email: codewithlex27@gmail.com
   - Academic / CJC School Email: lexmatondo@g.cjc.edu.ph
   - Location: Digos City, Philippines
@@ -27,10 +27,10 @@ FACTS ABOUT LEX MATONDO (SOURCE OF TRUTH)
 
 • Featured Projects & Live Deployments:
   1. ChemLab System (https://chemlab-system.me | repo: CodeWithLex.github.io):
-     - Chemistry laboratory portal with group login, apparatus borrowing queues, session scheduling (Mon–Sat 30-min slots), QR activity receipts, attendance and ID-deposit logs.
+     - Chemistry laboratory portal with group login, apparatus borrowing queues, session scheduling (Mon - Sat 30-min slots), QR activity receipts, attendance and ID-deposit logs.
   2. COE LGU System (https://www.coelgu-system.engineer | repo: LGU-SYSTEM):
      - College of Engineering official student budget transparency & council finance portal.
-     - Income/expense/donation ledgers in PHP/₱, over-budget warnings, 1.0–5.0 Philippine GPA calculator with PDF export, audit log. Gated to @g.cjc.edu.ph.
+     - Income/expense/donation ledgers in PHP/₱, over-budget warnings, 1.0 - 5.0 Philippine GPA calculator with PDF export, audit log. Gated to @g.cjc.edu.ph.
   3. PMAEE CadetCoach (https://reviewer-coach.onrender.com):
      - AI exam-coaching prep portal for Philippine Military Academy Entrance Examination (Node/Express backend on Render).
   4. eBarangay-Portal (https://github.com/CodeWithLex/eBarangay-Portal):
@@ -362,7 +362,7 @@ export default async function handler(req, res) {
     } else if (query.includes('photo') || query.includes('camera') || query.includes('picture') || query.includes('visual') || query.includes('focal')) {
       fallbackReply = "Lex is also an event and portrait photographer under **Focal Stack (@focalstack.lex)**! He covers weddings, portraits, and christenings, and shoots for his college engineering events and student publication. Check out his work on TikTok (@focalstack.lex) or Facebook (focalstack.lex).";
     } else if (query.includes('who') || query.includes('about') || query.includes('lex') || query.includes('school') || query.includes('college')) {
-      fallbackReply = "Lex (Lex Edrick Asherjesse C. Matondo) is a Computer Engineering (BSCPE) student at Cor Jesu College in Digos City, Philippines. His philosophy is **CODE × CREATE** — building robust software while pursuing visual storytelling through photography at Focal Stack.";
+      fallbackReply = "Lex (Lex Edrick Asherjesse C. Matondo) is a Computer Engineering (BSCPE) student at Cor Jesu College in Digos City, Philippines. His philosophy is **CODE × CREATE**: building robust software while pursuing visual storytelling through photography at Focal Stack.";
     } else if (query.includes('contact') || query.includes('email') || query.includes('social') || query.includes('github')) {
       fallbackReply = "You can connect with Lex on:\n\n• **GitHub:** https://github.com/focalstack-lex\n• **TikTok:** https://www.tiktok.com/@focalstack.lex\n• **Photography FB:** https://www.facebook.com/focalstack.lex/\n• **YouTube:** https://www.youtube.com/@lexmatondo27";
     } else if (!query.includes('lex') && (query.includes('recipe') || query.includes('weather') || query.includes('poem') || query.includes('joke') || query.includes('math') || query.includes('python code'))) {

@@ -1,7 +1,6 @@
 /* ---------------------------------------------------------------------------
-   Lex Matondo — Minimal Editorial Black-and-White Portfolio
-   Monochrome System: #050505, #111111, #F2F2F0, #999999
-   Typography: Inter + JetBrains Mono
+   Lex Matondo · Minimal Editorial Black-and-White Portfolio
+   Monochrome obsidian system with crisp typography and shutter transitions
 --------------------------------------------------------------------------- */
 
 :root {
@@ -3647,7 +3646,7 @@ body.is-presenter-mode .pres-slide.is-active {
 
 /* Floating Tooltip */
 .gh-tooltip {
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   pointer-events: none;
   background: #161616;
@@ -3660,7 +3659,7 @@ body.is-presenter-mode .pres-slide.is-active {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
   opacity: 0;
-  transform: translate(-50%, -100%) translateY(-8px);
+  transform: translate(-50%, -100%) translateY(-6px);
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 

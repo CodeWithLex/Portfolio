@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   Lex Matondo — Minimal Editorial Portfolio Controller
+   Lex Matondo · Minimal Editorial Portfolio Controller
    Mode switching, scroll reveals, photography gallery & crossfade loop
 --------------------------------------------------------------------------- */
 
@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (img) {
           lbImg.src = img.src;
           lbImg.alt = img.alt || caption;
-          lbCap.textContent = meta ? `${caption} — ${meta}` : caption;
+          lbCap.textContent = meta ? `${caption} · ${meta}` : caption;
           lightbox.removeAttribute("hidden");
 
           requestAnimationFrame(() => {
@@ -710,8 +710,8 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const subject = isAcademic
-      ? "Academic / Institutional Inquiry — Cor Jesu College"
-      : "Project Inquiry / Collaboration — Lex Matondo";
+      ? "Academic / Institutional Inquiry · Cor Jesu College"
+      : "Project Inquiry / Collaboration · Lex Matondo";
 
     const body = isAcademic
       ? "Hi Lex,\n\nI am reaching out regarding an academic matter at Cor Jesu College:\n\n"
@@ -1086,6 +1086,13 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.innerHTML = svgMarkup;
 
       // Attach tooltip listeners
+      const hideTooltip = () => {
+        if (tooltip) {
+          tooltip.classList.remove("is-visible");
+          tooltip.setAttribute("aria-hidden", "true");
+        }
+      };
+
       const cells = wrapper.querySelectorAll(".gh-day-cell");
       cells.forEach((cell) => {
         const showTooltip = (e) => {
@@ -1110,16 +1117,10 @@ document.addEventListener("DOMContentLoaded", () => {
             tooltip.classList.add("is-visible");
             tooltip.setAttribute("aria-hidden", "false");
 
-            const rect = cell.getBoundingClientRect();
-            tooltip.style.left = `${rect.left + rect.width / 2}px`;
-            tooltip.style.top = `${rect.top}px`;
-          }
-        };
-
-        const hideTooltip = () => {
-          if (tooltip) {
-            tooltip.classList.remove("is-visible");
-            tooltip.setAttribute("aria-hidden", "true");
+            const cardRect = card.getBoundingClientRect();
+            const cellRect = cell.getBoundingClientRect();
+            tooltip.style.left = `${cellRect.left - cardRect.left + cellRect.width / 2}px`;
+            tooltip.style.top = `${cellRect.top - cardRect.top}px`;
           }
         };
 
@@ -1128,6 +1129,12 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.addEventListener("focus", showTooltip);
         cell.addEventListener("blur", hideTooltip);
       });
+
+      const scrollContainer = card.querySelector(".gh-heatmap-scroll");
+      if (scrollContainer) {
+        scrollContainer.addEventListener("scroll", hideTooltip, { passive: true });
+      }
+      window.addEventListener("scroll", hideTooltip, { passive: true });
     }
 
     // Initialize fetching

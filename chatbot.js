@@ -1,5 +1,5 @@
 /**
- * Lex Matondo Portfolio — AI Chatbot Assistant Widget
+ * Lex Matondo Portfolio · AI Chatbot Assistant Widget
  * Natural, fast, and strict knowledge base about Lex.
  */
 
@@ -11,7 +11,7 @@
     name: "Lex Matondo (Lex Edrick Asherjesse C. Matondo)",
     role: "Computer Engineering (BSCPE) student, Developer & Photographer",
     school: "Cor Jesu College (CJC), Digos City, Davao del Sur, Philippines",
-    philosophy: "CODE × CREATE — One person, two disciplines.",
+    philosophy: "CODE × CREATE: One person, two disciplines.",
     businessEmail: "codewithlex27@gmail.com",
     schoolEmail: "lexmatondo@g.cjc.edu.ph",
     projects: [
@@ -363,7 +363,7 @@
     }
 
     if (q.includes('coe lgu') || q.includes('lgu system') || q.includes('council')) {
-      return `**COE LGU System** (https://www.coelgu-system.engineer)\n\n• Official budget transparency & council finance portal for Cor Jesu College of Engineering\n• Features: Income/expense/donation tracking in PHP/₱, over-budget warnings, 1.0–5.0 Philippine GPA calculator with PDF export, and audit logging`;
+      return `**COE LGU System** (https://www.coelgu-system.engineer)\n\n• Official budget transparency & council finance portal for Cor Jesu College of Engineering\n• Features: Income/expense/donation tracking in PHP/₱, over-budget warnings, 1.0 - 5.0 Philippine GPA calculator with PDF export, and audit logging`;
     }
 
     if (q.includes('cadet') || q.includes('pmaee') || q.includes('cadetcoach')) {

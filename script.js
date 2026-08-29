@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
-   Lex Matondo — Minimal Editorial Landing Controller
-   Smooth 65/35 hover dynamics + Fullscreen expansion wipe on click
+   Lex Matondo · Minimal Editorial Landing Controller
+   Curtain wipe and page transition handler
 --------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -7,7 +7,7 @@
   "business_email": "codewithlex27@gmail.com",
   "school_email": "lexmatondo@g.cjc.edu.ph",
   "email": "codewithlex27@gmail.com",
-  "philosophy": "CODE × CREATE — One person, two disciplines. I build things. I also photograph them.",
+  "philosophy": "CODE × CREATE: One person, two disciplines. I build things. I also photograph them.",
   "journey": "Started coding in September 2024 as a freshman CpE student, progressing to deploying full-stack production portals by 2026.",
   "skills": {
     "languages": [
@@ -57,7 +57,7 @@
       "tagline": "College of Engineering official student financial portal & budget transparency",
       "url": "https://www.coelgu-system.engineer",
       "repo": "https://github.com/CodeWithLex/LGU-SYSTEM",
-      "highlights": "Student council budget ledger in ₱, over-budget detection, 1.0–5.0 Philippine GPA calculator with PDF export, CSV bulk student import, audit logging. Restricted to @g.cjc.edu.ph."
+      "highlights": "Student council budget ledger in ₱, over-budget detection, 1.0 - 5.0 Philippine GPA calculator with PDF export, CSV bulk student import, audit logging. Restricted to @g.cjc.edu.ph."
     },
     {
       "name": "PMAEE CadetCoach",

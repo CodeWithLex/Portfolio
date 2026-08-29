@@ -360,6 +360,14 @@ body[data-mode="create"] .view-tech {
 }
 
 /* View Switcher: Live Video Demo vs Screenshots */
+.btn-text-desktop {
+  display: inline;
+}
+
+.btn-text-mobile {
+  display: none;
+}
+
 .cf-view-toggle {
   position: absolute;
   top: 1rem;
@@ -2884,25 +2892,52 @@ body.is-presenter-mode .pres-slide.is-active {
     white-space: nowrap;
   }
 
+  /* Featured Showcase Responsive Stage */
+  .crossfade-container {
+    aspect-ratio: 16 / 10;
+    min-height: 240px;
+  }
+
+  .cf-view-toggle {
+    top: 0.65rem;
+    left: 0.65rem;
+    padding: 0.2rem;
+    gap: 0.25rem;
+  }
+
+  .cf-view-btn {
+    font-size: 9px;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .crossfade-badge {
+    top: 0.65rem;
+    right: 0.65rem;
+    padding: 0.25rem 0.55rem;
+    font-size: 9px;
+  }
+
+  .cf-video-hud {
+    bottom: 0.65rem;
+    left: 0.65rem;
+    right: 0.65rem;
+    padding: 0.35rem 0.65rem;
+    gap: 0.5rem;
+  }
+
+  .crossfade-indicators {
+    bottom: 0.65rem;
+    right: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+
   /* Make screenshot carousel nav buttons permanently touch-visible on mobile */
   .cf-nav-btn {
     opacity: 0.85 !important;
     pointer-events: auto !important;
-    width: 34px;
-    height: 34px;
-  }
-
-  .crossfade-badge {
-    top: 0.75rem;
-    right: 0.75rem;
-    padding: 0.3rem 0.55rem;
-    font-size: 9.5px;
-  }
-
-  .crossfade-indicators {
-    bottom: 0.75rem;
-    right: 0.75rem;
-    padding: 0.3rem 0.6rem;
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
   }
 
   .archive-item {
@@ -2979,8 +3014,70 @@ body.is-presenter-mode .pres-slide.is-active {
 }
 
 @media (max-width: 580px) {
+  .btn-text-desktop {
+    display: none !important;
+  }
+
+  .btn-text-mobile {
+    display: inline !important;
+  }
+
   .portfolio-container {
     padding: 0 1rem;
+  }
+
+  .crossfade-container {
+    aspect-ratio: 16 / 11;
+    min-height: 225px;
+  }
+
+  .cf-view-toggle {
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.15rem;
+    gap: 0.2rem;
+    background: rgba(5, 5, 5, 0.88);
+  }
+
+  .cf-view-btn {
+    font-size: 8.5px;
+    padding: 0.25rem 0.45rem;
+    letter-spacing: 0.05em;
+  }
+
+  .crossfade-badge {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.48rem;
+    font-size: 8.5px;
+    letter-spacing: 0.06em;
+    background: rgba(5, 5, 5, 0.88);
+  }
+
+  .cf-video-hud {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem 0.55rem;
+    gap: 0.4rem;
+    background: rgba(5, 5, 5, 0.92);
+  }
+
+  .cf-vhud-btn {
+    padding: 0.2rem 0.3rem;
+  }
+
+  .vhud-sound-label {
+    display: none !important;
+  }
+
+  .cf-vhud-time {
+    font-size: 9.5px;
+    min-width: 24px;
+  }
+
+  .cf-vhud-scrub {
+    height: 5px;
   }
 
   .hero-heading {
@@ -3037,6 +3134,50 @@ body.is-presenter-mode .pres-slide.is-active {
 }
 
 @media (max-width: 420px) {
+  .crossfade-container {
+    aspect-ratio: 4 / 3;
+    min-height: 215px;
+  }
+
+  .cf-view-toggle {
+    top: 0.4rem;
+    left: 0.4rem;
+    padding: 0.12rem;
+    gap: 0.15rem;
+  }
+
+  .cf-view-btn {
+    font-size: 7.5px;
+    padding: 0.2rem 0.35rem;
+  }
+
+  .crossfade-badge {
+    top: 0.4rem;
+    right: 0.4rem;
+    padding: 0.2rem 0.35rem;
+    font-size: 7.5px;
+  }
+
+  .crossfade-badge span {
+    display: none;
+  }
+
+  .crossfade-badge::before {
+    content: "LIVE ";
+  }
+
+  .cf-video-hud {
+    bottom: 0.4rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    padding: 0.25rem 0.45rem;
+    gap: 0.35rem;
+  }
+
+  .cf-vhud-btn {
+    padding: 0.15rem 0.25rem;
+  }
+
   .featured-actions {
     display: flex;
     flex-direction: column;
